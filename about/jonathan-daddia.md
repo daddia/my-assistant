@@ -6,6 +6,7 @@ A snapshot of who I am and the context you need to be useful to me in my **perso
 
 - **Name:** Jonathan Daddia
 - **Preferred Name:** Jonno or JD
+- **Date of Birth:** 17/03/1977
 - **Location:** Sydney, NSW (primary), with a working farm on the NSW MidCoast
 - **Mobile:** 0436 433 466
 - **Personal email:** jonathan@daddia.com
@@ -15,15 +16,37 @@ A snapshot of who I am and the context you need to be useful to me in my **perso
 ## Family
 
 - Father of 3 children — they are the centre of my world
-- Family time is non-negotiable; protect weekends, school holidays, kids' events and birthdays
-- [Add partner/co-parent name + preferences if relevant for scheduling, gifts, etc.]
-- [Add kids' names, ages, schools, allergies, key dates if you want me to help with their admin]
+- **Family Time:** is non-negotiable; protect weekends, school holidays, kids' events and birthdays
+- **Partner:** No current partner
+
+- **Children:**
+
+  - **Name:** Amelia Daddia
+  - **Preferred Name:** Millie
+  - **Date of Birth:** 20/03/2013
+  - **School:** Emanuel School, Randwick; Year 7
+
+  - **Name:** Ruby Daddia
+  - **Preferred Name:** Ruby
+  - **Date of Birth:** 14/02/2015
+  - **School:** St Lucy's, Wahroonga; Year 5
+  - **Medical Conditions:** BPAN
+
+  - **Name:** Jamie Daddia
+  - **Preferred Name:** Jamie or Chachi
+  - **Date of Birth:** 20/10/2018
+  - **School:** Mount Sinai College, Maroubra; Year 2
+
+## Farm
+
+- **Name:** Carinya Parc
+- **Address:** 315 Warraba Road, The Branch NSW 2425
 
 ## What I'm about (outside work)
 
 - **Regenerative farming** — slowly revitalising a farm on the MidCoast. Soil health, pasture management, holistic land care, native regeneration. This is a long game and a passion, not a side hustle.
 - **Cooking** — serious home cook. Did work experience at a Gordon Ramsay restaurant in London. Was a finalist on MasterChef (please keep that quiet — not something I lead with). Love seasonal, produce-led cooking; happy nerding out on technique.
-- **NSW Rural Fire Service** — volunteer member (2026–present). Training and callouts take priority when they come up.
+- **NSW Rural Fire Service** — volunteer member with **Booral Brigade** (Lower Hunter Zone), 2026–present. Training and callouts take priority when they come up.
 - **Outdoors** — bush, beach, paddock. I'd rather be outside than inside.
 
 ## How I spend my time
@@ -69,9 +92,6 @@ This is a **personal** assistant, not a work one. Typical asks:
 
 ## Open questions for me to fill in later
 
-- [ ] Partner / co-parent name + preferences
-- [ ] Kids' names, ages, schools, key dates
-- [ ] Farm name + location specifics, key contacts (vet, agronomist, neighbours)
-- [ ] RFS brigade name + key contacts
+- [ ] RFS brigade key contacts (captain, training officer)
 - [ ] Regular service providers (GP, dentist, mechanic, accountant, etc.)
 - [ ] Recurring annual events worth pre-empting (birthdays, anniversaries)

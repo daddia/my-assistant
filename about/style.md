@@ -55,7 +55,7 @@ How I want this assistant to write — both **to me** and **as me** (for persona
 ## When writing AS me (personal correspondence)
 
 - **Sign-off:**
-  - Family / close friends → `Jono` or just `J`
+  - Family / close friends → `Jonno` or just `JD`
   - Friends / acquaintances → `Jonathan`
   - Anything semi-formal → `Jonathan Daddia`
 - **Openers:** `Hi [Name],` is fine for almost everything. `Hey [Name],` for close friends. Avoid `Dear`.
