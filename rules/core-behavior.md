@@ -11,7 +11,7 @@
 **No ask needed for:**
 - Reading files in the workspace
 - Writing to `output/`
-- Appending to `MEMORY.md` via `/done`
+- Appending to `MEMORY.md`
 - Drafting replies (show, don't send)
 
 ## Execution
