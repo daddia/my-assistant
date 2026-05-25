@@ -1,6 +1,6 @@
-# Personal Assistant (repo root)
+# daddia Assistant
 
-This repo manages **multiple Cowork workspaces**. The root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
+Manages **multiple Cowork workspaces**. The root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
 
 ## For Cowork
 

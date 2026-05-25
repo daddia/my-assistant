@@ -1,4 +1,4 @@
-# Claude Cowork Multi-Agent Workspace
+# daddia Multi-Agent Workspace
 
 Version-controlled layout for running multiple **Claude Cowork** assistants from one repo — shared skills, rules, and templates; separate workspaces for personal, work, or demo use.
 
