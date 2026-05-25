@@ -2,7 +2,7 @@
 # Link shared skills into workspace(s) and create runtime directories.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_DEST="${HOME}/.claude-assistant/config"
 
 link_skills() {

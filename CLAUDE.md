@@ -21,7 +21,7 @@ Each workspace has its own `CLAUDE.md` and `context/` files.
 ## Setup
 
 ```bash
-./scripts/install.sh
+./install.sh
 ```
 
 See [README.md](README.md).
