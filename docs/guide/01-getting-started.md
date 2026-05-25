@@ -6,7 +6,7 @@ Install takes about two minutes. You paste a prompt — Claude Code does the res
 
 ```
 Set up my personal assistant workspace from this repo:
-https://github.com/daddia/assistant
+https://github.com/daddia/my-assistant
 
 Clone it and tell me:
 - What workspaces are available
@@ -22,7 +22,7 @@ Claude Code will clone the repo, create your workspace folder, and tell you wher
 
 1. Open **Claude Cowork**
 2. Go to **Settings → folder**
-3. Select your workspace folder (Claude Code will tell you the path — usually something like `~/assistant/workspaces/personal-assistant/`)
+3. Select your workspace folder (Claude Code will tell you the path — usually something like `~/my-assistant/workspaces/personal-assistant/`)
 
 ## Step 3 — Run setup
 

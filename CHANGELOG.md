@@ -1,35 +1,9 @@
-## 2026-05-25 — Plugin structure and README refresh
+# Changelog
 
-- Restructure skills as local plugins: `skills/assistant/` and `skills/productivity/`
-- Each plugin follows Anthropic's format: `.claude-plugin/`, `README.md`, `skills/`
-- Productivity plugin includes `.mcp.json` and `CONNECTORS.md` (Google Workspace default, MS 365 alternative)
-- Remove session skills from README (standup, done, todo-add, etc.) — details live in plugin READMEs
-- README uses my-assistant naming throughout; add Privacy and Security sections
-- Update docs/install.md for agentic install and plugin structure
+All notable changes to this project will be documented in this file.
 
-## 2026-05-25 — Zero-code restructure
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- Removed `shared/` directory — contents redistributed:
-  - `shared/skills/` → flat `skills/` at repo root
-  - `shared/rules/` → `rules/` at repo root
-  - `shared/templates/` → merged into workspace `templates/`
-- Removed all shell scripts (`install.sh`, `install.ps1`, `get.sh`, `get.ps1`) — install is now 100% agentic
-- Added `skills/install/SKILL.md` — agentic install skill (replaces install.sh)
-- Added `skills/setup/SKILL.md` — guided setup with sub-commands:
-  - `/setup:about` → `context/about-me.md`
-  - `/setup:voice` → `context/voice-and-style.md`
-  - `/setup:anti-style` → `context/anti-ai-writing-style.md`
-  - `/setup:working-rules` → `context/working-rules.md`
-- Added `skills/memory-management/SKILL.md` — two-tier memory system (adapted from Anthropic productivity plugin)
-- Added `skills/task-management/SKILL.md` — markdown task tracking (adapted from Anthropic productivity plugin)
-- Renamed `workspaces/example/` → `workspaces/my-assistant/` — self-contained template workspace
-- Renamed workspace context files to canonical names:
-  - `context/style.md` → `context/voice-and-style.md`
-  - `context/rules.md` → `context/working-rules.md`
-  - added `context/anti-ai-writing-style.md`
-- All 9 skills now embedded in `workspaces/my-assistant/.claude/skills/`
+## [0.0.1] - 2026-05-24
 
-## 2026-05-24
-
-- Initial public spec and multi-workspace layout
-- Shared skills: `/done`, `/standup`, `/weekly-review`, `/todo-add`, `/todo-review`
+- Initial public release

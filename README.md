@@ -8,7 +8,7 @@ Paste this into Claude Code:
 
 ```
 Set up my personal assistant workspace from this repo:
-https://github.com/daddia/assistant
+https://github.com/daddia/my-assistant
 
 Clone it and tell me:
 - What workspaces are available

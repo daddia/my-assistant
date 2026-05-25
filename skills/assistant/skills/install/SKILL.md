@@ -15,30 +15,30 @@ User provides the install prompt from the README, or asks to install / set up my
 ## Step 1 — Clone the repo
 
 ```bash
-git clone https://github.com/daddia/assistant ~/assistant
+git clone https://github.com/daddia/my-assistant ~/my-assistant
 ```
 
-If `~/assistant` already exists, ask the user where to clone instead.
+If `~/my-assistant` already exists, ask the user where to clone instead.
 
 ## Step 2 — Create the workspace
 
 The template workspace is at `workspaces/my-assistant/`. Copy it to a workspace with the user's chosen name (default: `personal-assistant`):
 
 ```bash
-cp -R ~/assistant/workspaces/my-assistant ~/assistant/workspaces/personal-assistant
+cp -R ~/my-assistant/workspaces/my-assistant ~/my-assistant/workspaces/personal-assistant
 ```
 
 ## Step 3 — Create runtime directories
 
 ```bash
-mkdir -p ~/assistant/workspaces/personal-assistant/output/daily
-mkdir -p ~/assistant/workspaces/personal-assistant/output/weekly
-mkdir -p ~/assistant/workspaces/personal-assistant/output/drafts
-mkdir -p ~/assistant/workspaces/personal-assistant/inbox
-mkdir -p ~/assistant/workspaces/personal-assistant/projects
-mkdir -p ~/assistant/workspaces/personal-assistant/memory
-touch ~/assistant/workspaces/personal-assistant/MEMORY.md
-touch ~/assistant/workspaces/personal-assistant/TASKS.md
+mkdir -p ~/my-assistant/workspaces/personal-assistant/output/daily
+mkdir -p ~/my-assistant/workspaces/personal-assistant/output/weekly
+mkdir -p ~/my-assistant/workspaces/personal-assistant/output/drafts
+mkdir -p ~/my-assistant/workspaces/personal-assistant/inbox
+mkdir -p ~/my-assistant/workspaces/personal-assistant/projects
+mkdir -p ~/my-assistant/workspaces/personal-assistant/memory
+touch ~/my-assistant/workspaces/personal-assistant/MEMORY.md
+touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 ```
 
 ## Step 4 — Install plugin skills
@@ -46,9 +46,9 @@ touch ~/assistant/workspaces/personal-assistant/TASKS.md
 Copy skills from both plugins into the workspace:
 
 ```bash
-ASSISTANT=~/assistant/skills/assistant/skills
-PRODUCTIVITY=~/assistant/skills/productivity/skills
-DEST=~/assistant/workspaces/personal-assistant/.claude/skills
+ASSISTANT=~/my-assistant/skills/assistant/skills
+PRODUCTIVITY=~/my-assistant/skills/productivity/skills
+DEST=~/my-assistant/workspaces/personal-assistant/.claude/skills
 
 mkdir -p "$DEST"
 cp -R "$ASSISTANT"/* "$DEST"/

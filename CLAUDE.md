@@ -1,6 +1,6 @@
-# daddia-assistant
+# my-assistant
 
-Manages **multiple Cowork workspaces** for **my-assistant**. This root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
+Manages **multiple Cowork workspaces**. This root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
 
 ## For Cowork
 
@@ -13,10 +13,9 @@ Each workspace has its own `CLAUDE.md` and `context/` files.
 
 ## For Claude Code at repo root
 
-- Product spec: `docs/product/spec.md`
-- Research: `docs/product/research.md`
-- Skills (plugins): `skills/assistant/`, `skills/productivity/`
-- Rules: `rules/` (shared behaviour rules)
+- User guide: `docs/guide/`
+- Skills: `skills/assistant/`, `skills/productivity/`
+- Rules: `rules/`
 - Do not commit personal data from `workspaces/personal-assistant/`
 
 ## Install (agentic)
