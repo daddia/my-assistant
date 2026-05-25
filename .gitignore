@@ -1,6 +1,19 @@
-# Workspace state
-workspaces/ */
+# Personal workspaces except the publishable example
+workspaces/*
 !workspaces/example/
+
+# Runtime state (example workspace, if you run it locally)
+workspaces/example/MEMORY.md
+workspaces/example/output/
+workspaces/example/inbox/
+workspaces/example/projects/
+workspaces/example/.claude/skills/
+
+# Local config (instantiated from *.example)
+config/email-policy.md
+config/triage-config.md
+config/calendar-policy.md
+config/goals.yaml
 
 # Secrets
 .env
