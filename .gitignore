@@ -1,6 +1,6 @@
 # Agent workspaces (except the publishable example)
 workspaces/*
-!workspaces/example/
+!workspaces/my-assistant/
 
 # Local config
 config/

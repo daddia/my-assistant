@@ -2,7 +2,7 @@
 
 Technical reference for `install.sh` and manual setup steps.
 
-For the non-technical quick start, see [README.md](../README.md).
+For the non-technical quick start (curl), see [README.md](../README.md).
 
 ---
 
@@ -54,12 +54,12 @@ Safe to re-run. Symlinks and directories already present are skipped. Config tem
 
 ## Adding a new workspace
 
-1. Create the folder: `cp -R workspaces/example workspaces/work`
+1. Create the folder: `cp -R workspaces/my-assistant workspaces/work`
 2. Edit `workspaces/work/context/` files
 3. Run `./install.sh workspaces/work`
 4. Point Cowork at `workspaces/work/`
 
-New workspaces are gitignored automatically (only `workspaces/example/` is tracked).
+New workspaces are gitignored automatically (only `workspaces/my-assistant/` is tracked).
 
 ## Adding a new shared skill
 
