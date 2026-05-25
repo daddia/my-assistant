@@ -1,8 +1,12 @@
-# output
-output/*
+# Workspace state
+workspaces/ */
+!workspaces/example/
 
-# environment variables
+# Secrets
 .env
+.env.local
+*.local.md
 
-# os
+# OS
 .DS_Store
+Thumbs.db
