@@ -134,7 +134,8 @@ Your `workspaces/personal-assistant/` folder never gets committed — it's exclu
 
 ## Read the docs
 
-[docs]()
+[docs](./docs)
+
 ## Licence
 
 MIT Licence. Copyright (c) 2026 daddia.
