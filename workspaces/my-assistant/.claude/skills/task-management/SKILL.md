@@ -1,18 +1,19 @@
 ---
 name: task-management
-description: Maintain a markdown task list (TASKS.md). Activate when the user mentions
-  something they need to do, asks what's on their list, wants to add a task, asks
-  to review tasks, or says "make a note to..." or "don't let me forget...". Adapted
-  from the Anthropic knowledge-work productivity plugin.
+description: Markdown task tracking using TASKS.md. Reference when the user asks
+  about tasks, wants to add or complete tasks, or needs help tracking commitments.
+user-invocable: false
 ---
 
 # Task management
 
-Markdown-based task tracking. One file, always current, readable as plain text.
+Tasks are tracked in `TASKS.md` — a plain markdown file you and my-assistant both read and write.
 
-## The file: `TASKS.md`
+## File location
 
-Located at the workspace root. Format:
+**Always use `TASKS.md` in the workspace root.**
+
+## Format
 
 ```markdown
 # Tasks
@@ -20,13 +21,11 @@ Located at the workspace root. Format:
 ## This week
 
 - [ ] Call plumber about kitchen tap — by Thursday
-- [ ] Reply to school newsletter — no deadline
-- [x] Book dentist for Sarah ✓ 22 May
+- [ ] Reply to school newsletter
 
 ## Upcoming
 
 - [ ] Renew car rego — due June
-- [ ] Research holiday accommodation — July
 
 ## Waiting / blocked
 
@@ -35,42 +34,28 @@ Located at the workspace root. Format:
 ## Someday / maybe
 
 - [ ] Fix the back fence
-- [ ] Set up Notion for meal planning
 ```
 
-## Adding tasks
+Task format: `- [ ] Task description — context, due date`
+Completed: `- [x] ~~Task~~ (date)`
 
-Add naturally — don't require a specific format. Parse what the user says:
+## How to interact
 
-| User says | Claude writes |
-|-----------|---------------|
-| "I need to call the plumber this week" | `- [ ] Call plumber — this week` |
-| "Remind me about the school newsletter" | `- [ ] Reply to school newsletter` |
-| "I need to renew the car rego in June" | `- [ ] Renew car rego — due June` |
+**"What's on my list" / "my tasks":**
+Read `TASKS.md`, summarise This week and Waiting sections, highlight overdue items.
 
-When the user describes multiple tasks in one message, add them all.
+**"Add a task" / "remind me to":**
+Add to This week with context if provided. Tell the user what was added.
 
-## Completing tasks
+**"Done with X" / "finished X":**
+Mark `[x]`, add date, move to a Done section (keep ~1 week, then archive).
 
-When the user says a task is done, mark it `[x]` with the date. Keep completed tasks for one week, then archive to `tasks/archive/YYYY-MM.md`.
+**Extracting tasks from conversation:**
+If the user's message implies a task, note it: "Sounds like you need to follow up on the insurance — want me to add it?"
 
-## `/update` — weekly review
-
-When the user asks to review tasks or runs `/update`:
-1. List everything overdue and ask what happened to each
-2. Move items that slipped to next week or a new date
-3. Ask: "Anything new this week?" and add responses
-4. Identify anything that's been stuck in Waiting for more than 2 weeks and flag it
-
-## When tasks come from conversation
-
-If the user's message implies a task but they haven't explicitly asked you to add it, note it:
-
-"By the way — it sounds like you need to follow up on the insurance. Want me to add it to your task list?"
-
-## What to avoid
+## Conventions
 
 - Don't add tasks without telling the user
-- Don't add vague tasks ("think about holiday") — ask for enough detail to act
-- Don't auto-complete tasks — wait for the user to confirm
-- Don't let TASKS.md exceed 40 active tasks — suggest a review if it does
+- Don't add vague tasks — ask for enough detail to act
+- Don't auto-complete — wait for confirmation
+- Flag if active tasks exceed 40 — suggest a review

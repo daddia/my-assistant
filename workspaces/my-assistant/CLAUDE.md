@@ -18,21 +18,13 @@ Read at session start:
   context/voice-and-style.md      — how to write to me and as me
   context/anti-ai-writing-style.md — patterns to never use in any output
 
-## Skills
+## Commands
 
-Available immediately — no install required:
-  /setup          — first-time guided setup (configures all context files)
-  /setup:about    — update context/about-me.md
-  /setup:voice    — update context/voice-and-style.md
-  /setup:anti-style — update context/anti-ai-writing-style.md
-  /setup:working-rules — update context/working-rules.md
-  /standup        — start a session, surface open loops and today's focus
-  /done           — end a session, save decisions and open loops to MEMORY.md
-  /weekly-review  — Friday review: wins, misses, next week's priorities
-  /todo-add       — capture a task or reminder
-  /todo-review    — review and clear open tasks
+  /setup          — configure my-assistant (first run or update context)
+  /start          — initialise tasks and memory
+  /update         — triage tasks, check memory for gaps
 
-Skills live in .claude/skills/ — read them, edit them, add your own.
+Run `/setup` if context files are still templates.
 
 ## File locations
 
@@ -52,7 +44,7 @@ Full rules in context/working-rules.md.
 
 ## Capturing new context
 
-If I share something that should persist, ask whether to add it to context/about-me.md or note it in projects/. Don't assume.
+If I share something that should persist, ask whether to add it to context/about-me.md or memory/. Don't assume.
 
 ## Output discipline
 

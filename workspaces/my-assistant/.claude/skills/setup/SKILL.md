@@ -1,17 +1,16 @@
 ---
 name: setup
-description: Guide the user through configuring their personal assistant workspace.
-  Activate when the user says "/setup", "set up my assistant", "configure my workspace",
-  or "help me get started". Also handles sub-commands:
-  /setup:about — configure context/about-me.md
-  /setup:voice — configure context/voice-and-style.md
-  /setup:anti-style — configure context/anti-ai-writing-style.md
-  /setup:working-rules — configure context/working-rules.md
+description: Guide the user through configuring my-assistant. Activate when the user
+  says "/setup", "set up my assistant", "configure my workspace", or "help me get
+  started". Also handles sub-commands /setup:about, /setup:voice, /setup:anti-style,
+  /setup:working-rules.
 ---
 
 # Setup
 
-Walks the user through configuring their workspace through conversation — no manual file editing required.
+Walks the user through configuring my-assistant through conversation — no manual file editing required.
+
+> Sub-command details: see [README.md](../../README.md)
 
 ## Sub-commands
 
@@ -55,4 +54,4 @@ Read `commands/working-rules.md` and follow it.
 
 ## On completion
 
-Run `/standup` to verify the workspace reads correctly and summarise what's now set up.
+Summarise what's configured and suggest `/start` to initialise tasks and memory.
