@@ -1,25 +1,10 @@
-# All workspaces except the publishable example
+# Agent workspaces (except the publishable example)
 workspaces/*
 !workspaces/example/
 
-# Runtime state (example workspace, if you run it locally)
-workspaces/example/MEMORY.md
-workspaces/example/output/
-workspaces/example/outputs/
-workspaces/example/inbox/
-workspaces/example/projects/
-workspaces/example/second-brain/
-workspaces/example/.claude/
-
-# Root-level runtime state
-memory/
-MEMORY.md
-
-# Local config — instantiated from config/*.example.* and edited locally
-config/email-policy.md
-config/triage-config.md
-config/calendar-policy.md
-config/goals.yaml
+# Local config
+config/
+!config/*example.*
 
 # Secrets
 .env
