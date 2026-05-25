@@ -69,8 +69,14 @@ If you'd rather do it yourself:
 
 2. **Run the install script**
 
+   macOS / Linux:
    ```bash
    ./install.sh
+   ```
+
+   Windows (PowerShell):
+   ```powershell
+   .\install.ps1
    ```
 
    This links the shared skills into each workspace and creates the runtime folders.
@@ -78,8 +84,13 @@ If you'd rather do it yourself:
 3. **Copy your workspace and fill it in**
 
    ```bash
+   # macOS / Linux
    cp -R workspaces/example workspaces/my-assistant
    ./install.sh workspaces/my-assistant
+
+   # Windows
+   Copy-Item -Recurse workspaces\example workspaces\my-assistant
+   .\install.ps1 workspaces\my-assistant
    ```
 
    Edit the three files in `workspaces/my-assistant/context/`:
@@ -121,13 +132,9 @@ Your `workspaces/personal-assistant/` folder never gets committed — it's exclu
 
 ---
 
-## Docs
+## Read the docs
 
-| | |
-|-|-|
-| [spec.md](docs/product/spec.md) | Full structure — workspace layout, skill format, governance rules |
-| [research.md](docs/product/research.md) | How Cowork actually works — scheduling constraints, connector limits, practitioner patterns |
-
+[docs]()
 ## Licence
 
 MIT Licence. Copyright (c) 2026 daddia.
