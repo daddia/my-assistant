@@ -1,69 +1,74 @@
 # Install reference
 
-Technical reference for `install.sh` and manual setup steps.
+Technical reference for setting up my-assistant.
 
-For the non-technical quick start (curl), see [README.md](../README.md).
+For the quick start, see [README.md](../README.md).
 
 ---
 
-## What install.sh does
+## Agentic install
 
-1. **Symlinks shared skills** — `shared/skills/<category>/<name>/` → `workspaces/<name>/.claude/skills/<name>/`
-2. **Creates runtime directories** — `output/daily`, `output/weekly`, `output/drafts`, `inbox/`, `projects/`
-3. **Touches MEMORY.md** — so skills don't error on first read
-4. **Copies config templates** — `config/*.example.*` → `~/.claude-assistant/config/` (only if not already present)
+Install is handled entirely by Claude Code — no shell scripts. Paste the install prompt from the README, or read and follow `skills/assistant/skills/install/SKILL.md`.
 
-## Usage
+The install skill:
+1. Clones the repo
+2. Copies `workspaces/my-assistant/` to your personal workspace
+3. Creates runtime directories (`output/`, `inbox/`, `projects/`, `memory/`)
+4. Copies plugin skills into `.claude/skills/`
 
-```bash
-# Install all workspaces
-./install.sh
+## Plugin structure
 
-# Install one workspace
-./install.sh workspaces/personal-assistant
+Skills are organised as local plugins (following [Anthropic's plugin format](https://github.com/anthropics/knowledge-work-plugins/tree/main/productivity)):
 
-# Install multiple
-./install.sh workspaces/personal-assistant workspaces/work
+```
+skills/
+  assistant/          ← install, setup, memory
+    .claude-plugin/
+    README.md
+    skills/
+  productivity/       ← start, update, task-management
+    .claude-plugin/
+    .mcp.json
+    CONNECTORS.md
+    README.md
+    skills/
 ```
 
 ## Manual equivalent
 
 ```bash
-WS=workspaces/personal-assistant
+git clone https://github.com/daddia/assistant ~/assistant
+cp -R ~/assistant/workspaces/my-assistant ~/assistant/workspaces/personal-assistant
 
-# Create runtime dirs
-mkdir -p "$WS/output/daily" "$WS/output/weekly" "$WS/output/drafts" "$WS/inbox" "$WS/projects"
-touch "$WS/MEMORY.md"
+WS=~/assistant/workspaces/personal-assistant
+mkdir -p "$WS/output/daily" "$WS/output/weekly" "$WS/output/drafts"
+mkdir -p "$WS/inbox" "$WS/projects" "$WS/memory"
+touch "$WS/MEMORY.md" "$WS/TASKS.md"
 
-# Symlink shared skills
+# Copy plugin skills
 mkdir -p "$WS/.claude/skills"
-for skill in shared/skills/*/*/; do
-  name=$(basename "$skill")
-  ln -sf "$(pwd)/$skill" "$WS/.claude/skills/$name"
-done
-
-# Copy config templates (edit locally, never commit the real files)
-mkdir -p ~/.claude-assistant/config
-cp config/*.example.* ~/.claude-assistant/config/
-# rename each: remove the .example from the filename, then fill in your values
+cp -R ~/assistant/skills/assistant/skills/* "$WS/.claude/skills/"
+cp -R ~/assistant/skills/productivity/skills/* "$WS/.claude/skills/"
 ```
 
-## Re-running
-
-Safe to re-run. Symlinks and directories already present are skipped. Config templates already at `~/.claude-assistant/config/` are not overwritten.
+Then point Cowork at the workspace and run `/setup`.
 
 ## Adding a new workspace
 
-1. Create the folder: `cp -R workspaces/my-assistant workspaces/work`
-2. Edit `workspaces/work/context/` files
-3. Run `./install.sh workspaces/work`
-4. Point Cowork at `workspaces/work/`
+1. Copy the template: `cp -R workspaces/my-assistant workspaces/work`
+2. Run `/setup` in Cowork to configure context
+3. Point Cowork at the new workspace folder
 
 New workspaces are gitignored automatically (only `workspaces/my-assistant/` is tracked).
 
-## Adding a new shared skill
+## Adding a new skill
 
-1. Create `shared/skills/<category>/<skill-name>/SKILL.md`
-2. Re-run `./install.sh` — it will symlink the new skill into all workspaces
+1. Create `skills/<plugin>/skills/<skill-name>/SKILL.md`
+2. Copy into workspace: `cp -R skills/<plugin>/skills/<skill-name> workspaces/<name>/.claude/skills/`
+3. Document in the plugin's `README.md`
 
-See [spec.md](product/spec.md#skillmd-format) for the SKILL.md format.
+See [skills/assistant/README.md](../skills/assistant/README.md) for the SKILL.md format.
+
+## Connectors
+
+The productivity plugin includes a `.mcp.json` with pre-configured MCP servers. Connect tools in Cowork → Settings → Connectors. See [skills/productivity/CONNECTORS.md](../skills/productivity/CONNECTORS.md).

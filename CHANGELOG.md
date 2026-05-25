@@ -1,3 +1,12 @@
+## 2026-05-25 — Plugin structure and README refresh
+
+- Restructure skills as local plugins: `skills/assistant/` and `skills/productivity/`
+- Each plugin follows Anthropic's format: `.claude-plugin/`, `README.md`, `skills/`
+- Productivity plugin includes `.mcp.json` and `CONNECTORS.md` (Google Workspace default, MS 365 alternative)
+- Remove session skills from README (standup, done, todo-add, etc.) — details live in plugin READMEs
+- README uses my-assistant naming throughout; add Privacy and Security sections
+- Update docs/install.md for agentic install and plugin structure
+
 ## 2026-05-25 — Zero-code restructure
 
 - Removed `shared/` directory — contents redistributed:
