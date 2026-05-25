@@ -130,4 +130,4 @@ Your `workspaces/personal-assistant/` folder never gets committed — it's exclu
 
 ## Licence
 
-(c) 2026 daddia. All rights reserved. 
+MIT Licence. Copyright (c) 2026 daddia.
