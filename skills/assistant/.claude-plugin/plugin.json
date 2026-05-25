@@ -1,0 +1,8 @@
+{
+  "name": "assistant",
+  "version": "0.1.0",
+  "description": "Install, configure, and remember context for my-assistant — your personal Claude Cowork workspace.",
+  "author": {
+    "name": "daddia"
+  }
+}

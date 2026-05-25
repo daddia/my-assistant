@@ -1,0 +1,8 @@
+{
+  "name": "productivity",
+  "version": "0.1.0",
+  "description": "Task management, memory, and daily sync — adapted from Anthropic's knowledge-work productivity plugin for personal use.",
+  "author": {
+    "name": "daddia"
+  }
+}
