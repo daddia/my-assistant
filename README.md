@@ -1,6 +1,8 @@
 # AI Assistant ADK
 
-The AI Assistant ADK is a provider-agnostic toolkit designed to help you build AI-powered assistants and agents using popular desktop and cloud agents like Claude Cowork, Claude Managed Agents, Cursor Cloud Agents, etc.
+The **AI Assistant ADK** (Agent Development Kit) is a provider-agnostic toolkit designed to help you build AI-powered assistants and agents using popular desktop and cloud agents like Claude Cowork, Claude Managed Agents, Cursor Cloud Agents, etc.
+
+The kit is plain English — skills, rules, and workspace files you can read and edit without writing application code. No writing code: everything is a conversation with your agent.
 
 To learn more about how to use the AI Assistant ADK, checkout our [Documentation](./docs/).
 
