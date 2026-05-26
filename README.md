@@ -1,6 +1,8 @@
-# my-assistant
+# AI Assistant ADK
 
-A personal AI assistant for Claude Cowork — pre-configured with skills, context, and sensible defaults.
+The AI Assistant ADK is a provider-agnostic toolkit designed to help you build AI-powered assistants and agents using popular desktop and cloud agents like Claude Cowork, Claude Managed Agents, Cursor Cloud Agents, etc.
+
+To learn more about how to use the AI Assistant ADK, checkout our [Documentation](./docs/).
 
 ## Get started
 
@@ -20,18 +22,22 @@ What can you help me with once I'm set up?
 
 Then open Cowork, point it at your workspace, and run `/setup`.
 
-## Guide
+## Use a template (coming soon)
 
-| | |
-|---|---|
-| [What is my-assistant?](docs/guide/00-introduction.md) | Overview and commands |
-| [Get started with my-assistant](docs/guide/01-getting-started.md) | Install in two minutes |
-| [Set up your personal workspace](docs/guide/02-setup-workspace.md) | Configure with `/setup`, memory, and tasks |
-| [Add skills to my-assistant](docs/guide/03-add-skills.md) | Teach my-assistant new abilities |
-| [Connect email, calendar, and chat](docs/guide/04-connect-tools.md) | Optional integrations |
-| [Protect your privacy](docs/guide/05-protect-privacy.md) | Where your data lives |
-| [Establish working rules](docs/guide/06-establish-rules.md) | Draft-don't-send and your boundaries |
+We've built [examples](.) that include AI Assistant ADK for different use cases and scenarios. You can use these templates to get started with your AI-powered assistant.
+
+## Read the docs
+
+To learn more about how to use the AI Assistant ADK, checkout our [Documentation](./docs/).
+
+## Contributing
+
+Contributions to the AI Assistant ADK are welcome and highly appreciated. However, before you jump right into it, we would like you to review our Contribution Guidelines to make sure you have smooth experience contributing to AI Assistant ADK.
+
+## Authors
+
+This library is created by [JD](https://github.com/daddia), with contributions.
 
 ## Licence
 
-[MIT Licence](LICENSE) · Copyright (c) 2026 daddia
+[MIT Licence](LICENSE) · Copyright (c) 2026 daddia.
