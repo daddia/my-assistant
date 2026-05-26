@@ -32,7 +32,7 @@ To learn more about how to use the AI Assistant ADK, checkout our [Documentation
 
 ## Contributing
 
-Contributions to the AI Assistant ADK are welcome and highly appreciated. However, before you jump right into it, we would like you to review our Contribution Guidelines to make sure you have smooth experience contributing to AI Assistant ADK.
+Contributions to the AI Assistant ADK are welcome and highly appreciated. However, before you jump right into it, we would like you to review our [Contribution Guidelines](CONTRIBUTING.md) to make sure you have smooth experience contributing to AI Assistant ADK.
 
 ## Authors
 
