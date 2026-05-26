@@ -1,6 +1,6 @@
-# my-assistant
+# AI Assistant ADK
 
-Manages **multiple Cowork workspaces**. This root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
+**Agent Development Kit** for building provider-agnostic AI assistants. This repo manages **multiple agent workspaces** (e.g. personal, work). This root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
 
 ## For Cowork
 
