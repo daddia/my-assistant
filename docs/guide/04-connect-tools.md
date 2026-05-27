@@ -32,7 +32,7 @@ It always asks before adding anything. Nothing is sent or changed automatically.
 
 ## Without connectors
 
-Run `/update` without the flag. my-assistant reviews your local task list and memory only. Still useful — just no email or calendar scan.
+Run `/productivity:update` without the flag. my-assistant reviews your local task list and memory only. Still useful — just no email or calendar scan.
 
 ## Next
 

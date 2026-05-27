@@ -2,5 +2,17 @@
   "permissions": {
     "allow": [],
     "deny": []
+  },
+  "enabledPlugins": {
+    "assistant@adk": true,
+    "productivity@adk": true
+  },
+  "extraKnownMarketplaces": {
+    "adk": {
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
   }
 }

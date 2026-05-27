@@ -18,15 +18,15 @@ Keep your task list and memory current. Two modes:
 ## Usage
 
 ```
-/update
-/update --comprehensive
+/productivity:update
+/productivity:update --comprehensive
 ```
 
 ## Default mode
 
 ### 1. Load current state
 
-Read `TASKS.md`, `memory/`, and `CLAUDE.md`. If they don't exist, suggest `/start` first.
+Read `TASKS.md`, `memory/`, and `CLAUDE.md`. If they don't exist, suggest `/productivity:start` first.
 
 ### 2. Triage stale items
 

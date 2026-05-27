@@ -14,14 +14,15 @@ Each workspace has its own `CLAUDE.md` and `context/` files.
 ## For Claude Code at repo root
 
 - User guide: `docs/guide/`
-- Skills: `skills/assistant/`, `skills/productivity/`
+- Repo skills: `.claude/skills/` (`/install`, `/setup`)
+- Plugins: `skills/assistant/`, `skills/productivity/` (enabled via `.claude/settings.json`)
 - Rules: `rules/`
 - Do not commit personal data from `workspaces/personal-assistant/`
 
 ## Install (agentic)
 
-When a user asks to install or set up my-assistant, read and follow `skills/assistant/skills/install/SKILL.md`.
+When a user asks to install or set up my-assistant, read and follow `.claude/skills/install/SKILL.md`.
 
 ## Setup (agentic)
 
-When a user runs `/setup` or asks to configure their workspace, read and follow `skills/assistant/skills/setup/SKILL.md`.
+When a user runs `/setup` or asks to configure their workspace, read and follow `.claude/skills/setup/SKILL.md`.

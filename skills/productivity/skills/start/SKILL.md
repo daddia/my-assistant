@@ -56,11 +56,11 @@ my-assistant is ready:
 - Tasks: TASKS.md (X items)
 - Memory: X people, X places, X projects
 
-Use /update to keep things current.
+Use /productivity:update to keep things current.
 ```
 
 ## Notes
 
-- If memory is already initialised, confirm status and suggest `/update`
+- If memory is already initialised, confirm status and suggest `/productivity:update`
 - Don't store credentials or financial account details in memory
 - If a connector isn't available, skip it and note the gap

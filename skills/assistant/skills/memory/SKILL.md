@@ -46,5 +46,5 @@ Load memory files at session start and whenever a task involves a person, place,
 
 - Don't store passwords, credentials, or financial account numbers.
 - Don't store speculation — only confirmed facts.
-- Review and prune stale entries when the user runs `/update`.
+- Review and prune stale entries when the user runs `/productivity:update`.
 - If memory contradicts new information, ask before overwriting.

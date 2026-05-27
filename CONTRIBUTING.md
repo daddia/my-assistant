@@ -51,14 +51,16 @@ To set up the repository on your local machine, follow these steps:
 1. **Fork the Repository**: Make a copy of the repository to your GitHub account.
 2. **Clone the Repository**: Clone your fork locally, e.g. `git clone https://github.com/<your-user>/my-assistant.git`
 3. **Know the layout**:
-   - `skills/assistant/` and `skills/productivity/` — canonical plugin skills (install, setup, tasks, memory, etc.)
+   - `.claude/skills/` — repo-level skills (`install`, `setup`)
+   - `.claude-plugin/marketplace.json` — **adk** marketplace (assistant + productivity plugins)
+   - `skills/assistant/` and `skills/productivity/` — canonical plugin sources
    - `rules/` — shared behaviour referenced from workspace `CLAUDE.md` files
    - `workspaces/my-assistant/` — publishable template workspace (safe to commit; fictional or generic context only)
    - `workspaces/personal-assistant/` — **local only**; gitignored. Never commit real names, household details, or other private data.
    - `config/*.example.*` — example policy templates users copy locally
    - `docs/guide/` — end-user documentation
 
-4. **Create a personal workspace (optional)**: To test install flows, copy the template and install skills as described in [`skills/assistant/skills/install/SKILL.md`](./skills/assistant/skills/install/SKILL.md), or run the README install prompt in Claude Code.
+4. **Create a personal workspace (optional)**: To test install flows, copy the template and follow [`.claude/skills/install/SKILL.md`](./.claude/skills/install/SKILL.md), or run the README install prompt in Claude Code.
 
 ### Using Git Worktrees
 
@@ -73,24 +75,22 @@ Tip: consider automating worktree creation with a shell alias that runs `git wor
 The reference workspace is [`workspaces/my-assistant/`](./workspaces/my-assistant/). Use it to validate changes before opening a PR:
 
 1. **Point your agent at the template workspace** — In Claude Cowork: Settings → folder → select `workspaces/my-assistant/` (or your local copy of `personal-assistant` if you created one for testing).
-2. **Run core commands** — e.g. `/setup`, `/start`, `/update` as documented in [`docs/guide/`](./docs/guide/).
-3. **Test install/setup skills** — From repo root in Claude Code, follow or simulate the flow in [`skills/assistant/skills/install/SKILL.md`](./skills/assistant/skills/install/SKILL.md) when you change install or setup behaviour.
+2. **Run core commands** — e.g. `/setup`, `/productivity:start`, `/productivity:update` as documented in [`docs/guide/`](./docs/guide/).
+3. **Test install/setup skills** — From repo root in Claude Code, follow or simulate the flow in [`.claude/skills/install/SKILL.md`](./.claude/skills/install/SKILL.md) when you change install or setup behaviour.
 
-If you add a new skill under `skills/`, copy it into the template workspace under `workspaces/my-assistant/.claude/skills/<name>/` so the shipped example stays in sync (see Building Packages below).
+If you add a new **plugin** skill, edit `skills/<plugin>/skills/<name>/SKILL.md` only — do not copy into workspace folders. Enable via `.claude/settings.json` and `.claude-plugin/marketplace.json`.
 
 ### Local Development Workflow
 
 #### Building Packages
 
-There are no npm packages to build. The equivalent step is **syncing canonical skills into the publishable workspace template**.
+There are no npm packages to build. Skills and plugins are edited in place:
 
-When you change a skill in `skills/assistant/skills/` or `skills/productivity/skills/`, update the matching copy under:
+- **Repo skills** (`install`, `setup`): `.claude/skills/<name>/SKILL.md` and `.claude/skills/setup/commands/`
+- **Plugin skills**: `skills/assistant/skills/` or `skills/productivity/skills/`
+- **Marketplace**: `.claude-plugin/marketplace.json` lists plugin sources; `.claude/settings.json` enables them for the project
 
-```text
-workspaces/my-assistant/.claude/skills/<skill-name>/SKILL.md
-```
-
-Setup sub-commands live under `skills/assistant/skills/setup/commands/` and `workspaces/my-assistant/.claude/skills/setup/commands/`. Keep those in sync as well.
+When you change a repo skill or plugin skill, test via Claude Code (`/setup`, `/productivity:start`, etc.) — no workspace sync step.
 
 If you change shared behaviour in `rules/`, ensure [`workspaces/my-assistant/CLAUDE.md`](./workspaces/my-assistant/CLAUDE.md) still references the right rule files.
 
@@ -108,7 +108,8 @@ For doc-only PRs, read the changed pages in preview and check links under `docs/
 
 This repo does not use `package.json` dependencies. When you add or extend functionality:
 
-- **New skill** — Add `skills/<plugin>/skills/<name>/SKILL.md` with frontmatter (`name`, `description`), mirror it under `workspaces/my-assistant/.claude/skills/`, and document the command in the relevant plugin README and [`docs/guide/03-add-skills.md`](./docs/guide/03-add-skills.md) if user-facing.
+- **New plugin skill** — Add `skills/<plugin>/skills/<name>/SKILL.md` with frontmatter (`name`, `description`), document in the plugin README and [`docs/guide/03-add-skills.md`](./docs/guide/03-add-skills.md) if user-facing.
+- **New repo skill** — Add `.claude/skills/<name>/SKILL.md` for repo-level flows (`install`, `setup`, etc.).
 - **New rule** — Add under `rules/` and reference it from workspace `CLAUDE.md` files as needed.
 - **New config template** — Add `config/<name>.example.md` or `.yaml` with fictional data only; never commit real VIPs, API keys, or label IDs.
 - **Connectors** — Prefer category-based wording (chat, email, calendar) per [`skills/productivity/CONNECTORS.md`](./skills/productivity/CONNECTORS.md) so skills stay provider-agnostic where possible.

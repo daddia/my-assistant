@@ -46,11 +46,11 @@ Sequence the ADK from a **proven desktop assistant** (Cowork + my-assistant + pr
 
 **Exit criteria**
 
-- [ ] New user completes install → `/setup` → `/start` on desktop Cowork without manual skill editing
+- [ ] New user completes install → `/setup` → `/productivity:start` on desktop Cowork without manual skill editing
 - [ ] `workspaces/personal-assistant/` is gitignored; only template context is committed
 - [ ] Privacy guide states what stays local, what goes to the model provider, and connector opt-in behaviour
 - [ ] Confirmation model documented: no send/book/delete without explicit approval per action
-- [ ] Canonical skills live under `skills/`; template `.claude/skills/` kept in sync for release
+- [x] Canonical skills under `skills/` and `.claude/skills/`; no workspace skill copies to sync
 
 **Out of scope for this phase**
 

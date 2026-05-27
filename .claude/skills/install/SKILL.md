@@ -41,26 +41,26 @@ touch ~/my-assistant/workspaces/personal-assistant/MEMORY.md
 touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 ```
 
-## Step 4 — Install plugin skills
+## Step 4 — Enable plugins
 
-Copy skills from both plugins into the workspace:
+This repo ships two Claude Code plugins via the **adk** marketplace (`.claude-plugin/marketplace.json`):
 
-```bash
-ASSISTANT=~/my-assistant/skills/assistant/skills
-PRODUCTIVITY=~/my-assistant/skills/productivity/skills
-DEST=~/my-assistant/workspaces/personal-assistant/.claude/skills
+- **assistant** — memory (`/assistant:memory`)
+- **productivity** — start, update, task and memory management (`/productivity:start`, `/productivity:update`, …)
 
-mkdir -p "$DEST"
-cp -R "$ASSISTANT"/* "$DEST"/
-cp -R "$PRODUCTIVITY"/* "$DEST"/
-```
+When you open this repo in Claude Code, trust the folder and accept the marketplace prompt to enable both plugins. Defaults are in `.claude/settings.json`.
+
+Repo-level skills `/install` and `/setup` live in `.claude/skills/` at the repo root. Claude Code discovers them from workspace subdirectories automatically (parent walk to repo root).
+
+**Do not** copy skills into `workspaces/<name>/.claude/skills/`. Workspace folders hold context and runtime files only.
 
 ## Step 5 — Tell the user what's ready
 
 Report:
 - Where the workspace is
 - How to open it in Cowork: Settings → folder → select the workspace path
-- What to do next: run `/setup` to configure my-assistant
-- Available plugins: **assistant** (install, setup, memory) and **productivity** (start, update)
+- What to do next: run `/setup` (Claude Code at repo root) to configure context files
+- Available plugins: **assistant** (memory) and **productivity** (start, update)
+- Repo skills: `/install`, `/setup` at repo root `.claude/skills/`
 
 **Do not** attempt to open Cowork, modify system settings, or write to any path outside the workspace.

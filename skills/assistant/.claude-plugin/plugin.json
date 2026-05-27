@@ -1,7 +1,7 @@
 {
   "name": "assistant",
   "version": "0.1.0",
-  "description": "Install, configure, and remember context for my-assistant — your personal Claude Cowork workspace.",
+  "description": "Memory for my-assistant — two-tier context so your personal Claude Cowork workspace remembers people, places, and projects.",
   "author": {
     "name": "daddia"
   }

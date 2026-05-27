@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "adk",
+  "description": "AI Assistant ADK plugins — memory, tasks, and productivity for my-assistant.",
+  "owner": {
+    "name": "daddia"
+  },
+  "plugins": [
+    {
+      "name": "assistant",
+      "source": "./skills/assistant",
+      "description": "Two-tier memory for people, places, and projects."
+    },
+    {
+      "name": "productivity",
+      "source": "./skills/productivity",
+      "description": "Task management, memory sync, and daily updates."
+    }
+  ]
+}

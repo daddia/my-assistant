@@ -20,11 +20,20 @@ Read at session start:
 
 ## Commands
 
-  /setup          — configure my-assistant (first run or update context)
-  /start          — initialise tasks and memory
-  /update         — triage tasks, check memory for gaps
+  /setup                    — configure workspace (repo skill at ../../.claude/skills/setup/)
+  /productivity:start       — initialise tasks and memory
+  /productivity:update      — triage tasks, check memory for gaps
 
-Run `/setup` if context files are still templates.
+Run `/setup` from Claude Code at the repo root if context files are still templates. In Cowork, ask Claude to read `../../.claude/skills/setup/SKILL.md` when configuring context.
+
+## Plugins
+
+Enabled from repo root via `.claude/settings.json` (**adk** marketplace):
+
+- **assistant** — memory (`/assistant:memory`)
+- **productivity** — tasks and sync (`/productivity:start`, `/productivity:update`, …)
+
+Workspace-specific skill overrides (optional): `workspaces/<name>/.claude/skills/<skill-name>/`
 
 ## File locations
 
