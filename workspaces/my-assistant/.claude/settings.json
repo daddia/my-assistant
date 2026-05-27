@@ -1,6 +1,6 @@
 {
   "extraKnownMarketplaces": {
-    "my-assistant": {
+    "assistant-adk": {
       "source": {
         "source": "github",
         "repo": "daddia/my-assistant"
@@ -8,7 +8,7 @@
     }
   },
   "enabledPlugins": {
-    "assistant@my-assistant": true,
-    "productivity@my-assistant": true
+    "assistant@assistant-adk": true,
+    "productivity@assistant-adk": true
   }
 }

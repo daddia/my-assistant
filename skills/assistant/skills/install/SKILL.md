@@ -46,8 +46,8 @@ touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 The workspace is pre-configured to use the `my-assistant` marketplace. Open the workspace in Cowork, then install both plugins:
 
 ```
-/plugin install assistant@my-assistant
-/plugin install productivity@my-assistant
+/plugin install assistant@assistant-adk
+/plugin install productivity@assistant-adk
 ```
 
 Cowork will fetch the plugins directly from `daddia/my-assistant` on GitHub — no local file copying required. Skills stay canonical in the repo and update automatically when the plugins are refreshed.
@@ -55,7 +55,7 @@ Cowork will fetch the plugins directly from `daddia/my-assistant` on GitHub — 
 If Cowork hasn't registered the marketplace yet, add it first:
 
 ```
-/plugin marketplace add daddia/my-assistant
+/plugin marketplace add daddia/my-assistant  # adds as 'assistant-adk'
 ```
 
 ## Step 5 — Tell the user what's ready
