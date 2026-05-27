@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "my-assistant": {
+      "source": {
+        "source": "github",
+        "repo": "daddia/my-assistant"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "assistant@my-assistant": true,
+    "productivity@my-assistant": true
+  }
+}

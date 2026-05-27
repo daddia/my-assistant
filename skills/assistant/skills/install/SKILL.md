@@ -41,18 +41,21 @@ touch ~/my-assistant/workspaces/personal-assistant/MEMORY.md
 touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 ```
 
-## Step 4 — Install plugin skills
+## Step 4 — Install plugins
 
-Copy skills from both plugins into the workspace:
+The workspace is pre-configured to use the `my-assistant` marketplace. Open the workspace in Cowork, then install both plugins:
 
-```bash
-ASSISTANT=~/my-assistant/skills/assistant/skills
-PRODUCTIVITY=~/my-assistant/skills/productivity/skills
-DEST=~/my-assistant/workspaces/personal-assistant/.claude/skills
+```
+/plugin install assistant@my-assistant
+/plugin install productivity@my-assistant
+```
 
-mkdir -p "$DEST"
-cp -R "$ASSISTANT"/* "$DEST"/
-cp -R "$PRODUCTIVITY"/* "$DEST"/
+Cowork will fetch the plugins directly from `daddia/my-assistant` on GitHub — no local file copying required. Skills stay canonical in the repo and update automatically when the plugins are refreshed.
+
+If Cowork hasn't registered the marketplace yet, add it first:
+
+```
+/plugin marketplace add daddia/my-assistant
 ```
 
 ## Step 5 — Tell the user what's ready
@@ -60,7 +63,7 @@ cp -R "$PRODUCTIVITY"/* "$DEST"/
 Report:
 - Where the workspace is
 - How to open it in Cowork: Settings → folder → select the workspace path
-- What to do next: run `/setup` to configure my-assistant
-- Available plugins: **assistant** (install, setup, memory) and **productivity** (start, update)
+- What to do next: install plugins (Step 4), then run `/setup` to configure my-assistant
+- Available plugins: **assistant** (`/setup`, memory) and **productivity** (`/start`, `/update`)
 
 **Do not** attempt to open Cowork, modify system settings, or write to any path outside the workspace.
