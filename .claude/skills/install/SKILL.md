@@ -41,29 +41,27 @@ touch ~/my-assistant/workspaces/personal-assistant/MEMORY.md
 touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 ```
 
-## Step 4 — Install plugins
+## Step 4 — Enable plugins
 
-The workspace is pre-configured to use the `my-assistant` marketplace. Open the workspace in Cowork, then install both plugins:
+This repo ships two Claude Code plugins via the **assistant-adk** marketplace (`.claude-plugin/marketplace.json` at repo root):
 
-```
-/plugin install assistant@assistant-adk
-/plugin install productivity@assistant-adk
-```
+- **assistant** — memory (`/assistant:memory`)
+- **productivity** — start, update, task and memory management (`/productivity:start`, `/productivity:update`, …)
 
-Cowork will fetch the plugins directly from `daddia/my-assistant` on GitHub — no local file copying required. Skills stay canonical in the repo and update automatically when the plugins are refreshed.
+The workspace template includes `.claude/settings.json` (and `.agents/settings.json` for Cursor) with both plugins enabled. It points at the repo root marketplace via `"path": "../.."`.
 
-If Cowork hasn't registered the marketplace yet, add it first:
+When the user opens the **workspace folder** in Claude Code or Cowork, trust the folder and accept the **assistant-adk** marketplace prompt.
 
-```
-/plugin marketplace add daddia/my-assistant  # adds as 'assistant-adk'
-```
+Repo root also has `.claude/settings.json` when working from the full repo. Repo-level skills `/install` and `/setup` live in `.claude/skills/` at the repo root.
+
+**Do not** copy skills into `workspaces/<name>/.claude/skills/`. Workspace folders hold context and runtime files only.
 
 ## Step 5 — Tell the user what's ready
 
 Report:
 - Where the workspace is
 - How to open it in Cowork: Settings → folder → select the workspace path
-- What to do next: install plugins (Step 4), then run `/setup` to configure my-assistant
-- Available plugins: **assistant** (`/setup`, memory) and **productivity** (`/start`, `/update`)
+- What to do next: run `/setup` (Claude Code at repo root) to configure context files
+- Plugins: accept the **assistant-adk** marketplace prompt when opening the workspace (see `.claude/settings.json` in the workspace folder)
 
 **Do not** attempt to open Cowork, modify system settings, or write to any path outside the workspace.

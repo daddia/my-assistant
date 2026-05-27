@@ -38,7 +38,8 @@ This document is the product and architecture source of truth. For practitioner 
 | Portable (ADK core) | Provider-specific (adapter) |
 |-----------------------|-----------------------------|
 | `workspaces/<name>/CLAUDE.md`, `context/*.md` | Cowork: Settings → folder; Global Instructions |
-| `skills/*/skills/<name>/SKILL.md` (canonical source) | Cowork: `.claude/skills/` copies in each workspace |
+| `skills/*/skills/<name>/SKILL.md` (plugin source) | Claude Code: plugins via `.claude/settings.json` + **adk** marketplace |
+| `.claude/skills/<name>/SKILL.md` (repo skills) | Claude Code: parent walk from workspace to repo root |
 | `rules/*.md` | Cursor: `.cursor/rules` or project rules (TBD) |
 | `config/*.example.*` | Connector install via Cowork UI / MCP |
 | `tasks/*.task.md` (prompt + metadata) | Cowork `/schedule` or UI to create schedules |
@@ -56,10 +57,12 @@ This document is the product and architecture source of truth. For practitioner 
 Yes. Skills, rules, templates, workspace structure, and *example* policy files are versioned. Runtime state (`MEMORY.md`, `TASKS.md`, `output/`, `inbox/`, etc.) is not. Policy files with real VIPs, label IDs, and goals are instantiated locally from `*.example` templates.
 
 **How do skills reach a workspace?**  
-Canonical skills live under `skills/assistant/skills/` and `skills/productivity/skills/`. On install, they are **copied** into `workspaces/<name>/.claude/skills/` (see [Installation](#installation)). The publishable template [`workspaces/my-assistant/.claude/skills/`](../../workspaces/my-assistant/.claude/skills/) also includes optional session skills (`/done`, `/standup`, `/weekly-review`, etc.) for continuity workflows. When you change a canonical skill, sync the template workspace copy before release (see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
+Repo-level skills (`install`, `setup`) live in `.claude/skills/`. Plugin skills live under `skills/assistant/skills/` and `skills/productivity/skills/`, enabled project-wide via `.claude-plugin/marketplace.json` and `.claude/settings.json`. **Nothing is copied** into `workspaces/<name>/.claude/skills/` on install. Claude Code discovers repo skills by walking parent directories to the repo root; plugin skills load as `/assistant:*` and `/productivity:*`.
+
+**Local overrides:** optional workspace-only skills in `workspaces/<name>/.claude/skills/<skill-name>/`.
 
 **Can Cowork use a `.claude/` directory in the working folder?**  
-Yes (Cowork adapter). Cowork reads `<workspace>/.claude/skills/` when pointed at a workspace subdirectory. The repo-root [`AGENTS.md`](../../AGENTS.md) / [`CLAUDE.md`](../../CLAUDE.md) applies when Claude Code or Cursor agents run from the repo root, not when Cowork is pointed at a workspace folder.
+Cowork reads `<workspace>/.claude/skills/` when pointed at a workspace subdirectory (for optional overrides only). Repo skills and plugins are loaded from the repo root via Claude Code (`.claude/skills/`, `.claude/settings.json`). The repo-root [`AGENTS.md`](../../AGENTS.md) / [`CLAUDE.md`](../../CLAUDE.md) applies when Claude Code or Cursor agents run from the repo root, not when Cowork is pointed at a workspace folder alone.
 
 **Can tasks be defined in files?**  
 Partially. Cowork does not auto-import `tasks/*.task.md`. Each file is a human-readable spec, verbatim prompt, and rebuild checklist. After cloning on a new machine, recreate schedules in Cowork or use external automation (see [`.task.md` format](#taskmd-format)).
@@ -88,13 +91,16 @@ assistant/                              # git repo root (AI Assistant ADK)
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── AGENTS.md                           # repo-root agent instructions
+├── .claude/
+│   ├── settings.json                   # enabledPlugins + adk marketplace
+│   └── skills/                         # repo-level: install, setup
+├── .claude-plugin/
+│   └── marketplace.json                # adk marketplace manifest
 │
 ├── skills/
-│   ├── assistant/                      # install, setup, memory plugin
+│   ├── assistant/                      # memory plugin
 │   │   ├── .claude-plugin/plugin.json
 │   │   └── skills/
-│   │       ├── install/SKILL.md
-│   │       ├── setup/SKILL.md
 │   │       └── memory/SKILL.md
 │   └── productivity/                   # tasks, memory sync plugin
 │       ├── .claude-plugin/plugin.json
@@ -127,7 +133,6 @@ assistant/                              # git repo root (AI Assistant ADK)
     ├── my-assistant/                   # publishable template (committed)
     │   ├── CLAUDE.md
     │   ├── context/                    # generic placeholders
-    │   ├── .claude/skills/             # shipped skill copies + session skills
     │   ├── tasks/
     │   └── templates/
     │
@@ -148,7 +153,7 @@ workspaces/<name>/
 │   ├── weekly/
 │   └── drafts/
 ├── projects/
-└── .claude/skills/                     # copies from skills/* (and optional extras)
+└── .claude/skills/                     # optional workspace overrides only
 ```
 
 **Legacy `shared/`:** an older layout (`shared/skills/`, `shared/rules/`, `shared/templates/`) may still exist in the repo during migration. New work should use `skills/`, `rules/`, and workspace `templates/` — not add new content under `shared/` unless explicitly consolidating.
@@ -182,7 +187,7 @@ config/
 !config/*example.*
 ```
 
-**Personal use:** copy `workspaces/my-assistant/` → `workspaces/personal-assistant/`, run install (below), run `/setup` in Cowork, replace `context/` with your real details. Keep the personal workspace gitignored.
+**Personal use:** copy `workspaces/my-assistant/` → `workspaces/personal-assistant/`, run install (below), run `/setup` from Claude Code at repo root, replace `context/` with your real details. Keep the personal workspace gitignored.
 
 ---
 
@@ -190,12 +195,12 @@ config/
 
 ### Agentic install (recommended)
 
-Paste the README install prompt into **Claude Code** (or any agent with repo access). It follows [`skills/assistant/skills/install/SKILL.md`](../../skills/assistant/skills/install/SKILL.md):
+Paste the README install prompt into **Claude Code** (or any agent with repo access). It follows [`.claude/skills/install/SKILL.md`](../../.claude/skills/install/SKILL.md):
 
 1. Clone `https://github.com/daddia/my-assistant`
 2. Copy `workspaces/my-assistant/` → `workspaces/personal-assistant/` (or another name)
 3. Create runtime dirs (`output/`, `inbox/`, `projects/`, `memory/`, `MEMORY.md`, `TASKS.md`)
-4. Copy plugin skills into `workspaces/<name>/.claude/skills/`
+4. Trust the repo folder and enable **adk** plugins (assistant + productivity) — preconfigured in `.claude/settings.json`
 
 ### Manual install
 
@@ -206,21 +211,16 @@ WS=$REPO/workspaces/personal-assistant
 cp -R $REPO/workspaces/my-assistant $WS
 mkdir -p $WS/output/{daily,weekly,drafts} $WS/inbox $WS/projects $WS/memory
 touch $WS/MEMORY.md $WS/TASKS.md
-
-ASSISTANT=$REPO/skills/assistant/skills
-PRODUCTIVITY=$REPO/skills/productivity/skills
-DEST=$WS/.claude/skills
-mkdir -p "$DEST"
-cp -R "$ASSISTANT"/* "$DEST"/
-cp -R "$PRODUCTIVITY"/* "$DEST"/
 ```
+
+Open the repo in Claude Code and accept the **adk** marketplace prompt to enable plugins.
 
 ### Point the runtime at the workspace
 
 - **Cowork:** Settings → folder → `workspaces/personal-assistant/` (not repo root).
 - **Claude Code at repo root:** uses `AGENTS.md` for install/setup skills; workspace work happens inside the workspace folder when Cowork or a subagent is pointed there.
 
-Then run **`/setup`** in Cowork to populate `context/` through conversation.
+Then run **`/setup`** from Claude Code at the repo root to populate `context/` through conversation.
 
 ---
 
@@ -335,10 +335,10 @@ Does not send email or edit context/ without confirmation.
 
 | Command | Plugin | Purpose |
 |---------|--------|---------|
-| `/setup` | assistant | Guided context configuration |
-| `/start` | productivity | Initialise tasks and memory |
-| `/update` | productivity | Triage tasks, memory gaps |
-| `/done`, `/standup`, `/weekly-review` | template extras | Session continuity (in template `.claude/skills/`) |
+| `/setup` | repo (`.claude/skills/`) | Guided context configuration |
+| `/productivity:start` | productivity | Initialise tasks and memory |
+| `/productivity:update` | productivity | Triage tasks, memory gaps |
+| `/assistant:memory` | assistant | Two-tier memory management |
 
 ---
 
@@ -378,9 +378,9 @@ Each folder under `workspaces/` is a separate assistant project (separate Cowork
 | **work** (optional) | Professional context, separate policies |
 | **example** (optional) | Legacy demo persona if retained |
 
-**Skill updates:** edit canonical files under `skills/`, then copy into each workspace's `.claude/skills/` (or re-run install steps). The template `workspaces/my-assistant/.claude/skills/` must stay in sync for releases.
+**Skill updates:** edit plugin skills under `skills/` or repo skills under `.claude/skills/`. No workspace sync step. Reload plugins in Claude Code with `/reload-plugins` if needed.
 
-**Local overrides:** place a skill only in `workspaces/<name>/.claude/skills/<skill-name>/` to override the copied version for that workspace.
+**Local overrides:** place a skill only in `workspaces/<name>/.claude/skills/<skill-name>/` for workspace-specific behaviour.
 
 **Policy files:** instantiate `config/*.example.*` locally; reference the right policy from each workspace `CLAUDE.md` when email/calendar skills are enabled.
 
@@ -390,7 +390,8 @@ Each folder under `workspaces/` is a separate assistant project (separate Cowork
 
 | Use case | Solution |
 |----------|----------|
-| Core ADK flows (install, setup, tasks) | `skills/assistant/`, `skills/productivity/` |
+| Repo flows (install, setup) | `.claude/skills/` at repo root |
+| Core ADK plugin flows (memory, tasks) | `skills/assistant/`, `skills/productivity/` via **adk** marketplace |
 | Workspace-specific override | `workspaces/<name>/.claude/skills/<name>/` |
 | Bundle skills + MCP for distribution | `.claude-plugin/plugin.json` + `.mcp.json` per plugin |
 | Anthropic marketplace | Install via Cowork UI (optional) |
@@ -437,7 +438,7 @@ Product definition: [product.md](./product.md).
 2. Run install → `workspaces/personal-assistant/` with skills copied.
 3. Optional: paste [Global Instructions](#global-instructions) into Cowork.
 4. Open Cowork → folder → your workspace.
-5. Run `/setup`, then `/start`.
+5. Run `/setup`, then `/productivity:start`.
 6. Copy and fill `config/*.example.*` locally when adding email/calendar skills.
 
 For scheduling caveats and connector limits, see [research.md](./research.md).

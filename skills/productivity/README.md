@@ -14,9 +14,9 @@ Local copy — no blackbox plugin install. Edit and fine-tune the skills directl
 
 | Command | What it does |
 |---------|--------------|
-| `/start` | Initialise tasks and memory on first run |
-| `/update` | Triage stale tasks, check memory for gaps |
-| `/update --comprehensive` | Deep scan email, calendar, chat for missed todos |
+| `/productivity:start` | Initialise tasks and memory on first run |
+| `/productivity:update` | Triage stale tasks, check memory for gaps |
+| `/productivity:update --comprehensive` | Deep scan email, calendar, chat for missed todos |
 
 ## Skills
 
@@ -48,17 +48,17 @@ See [CONNECTORS.md](CONNECTORS.md) for details.
 ### Getting started
 
 ```
-You: /start
+You: /productivity:start
 
 Claude: [Creates TASKS.md and memory/ if missing]
         [Asks about household, priorities, recurring commitments]
-        my-assistant is ready. Use /update to keep things current.
+        my-assistant is ready. Use /productivity:update to keep things current.
 ```
 
 ### Morning sync
 
 ```
-You: /update --comprehensive
+You: /productivity:update --comprehensive
 
 Claude: [Scans email, calendar, chat if connected]
         [Flags: "Plumber callback due today — still open"]

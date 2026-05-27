@@ -55,7 +55,7 @@ Changed jobs, new partner, different writing preferences? Update just the part t
 - Deeper files it loads when relevant (extended profiles, recurring commitments)
 - Session notes so nothing gets lost between conversations
 
-**Tasks** — your to-do list in plain markdown. Add tasks naturally ("remind me to call the plumber") or run `/update` to review what's open.
+**Tasks** — your to-do list in plain markdown. Add tasks naturally ("remind me to call the plumber") or run `/productivity:update` to review what's open.
 
 **Output** — where my-assistant writes drafts, summaries, and plans. Your context and memory files stay separate — my-assistant doesn't overwrite them without asking.
 
@@ -67,7 +67,7 @@ Changed jobs, new partner, different writing preferences? Update just the part t
 
 **Adding a task** — say it naturally: "I need to renew the car rego in June." my-assistant adds it to your list.
 
-**Reviewing tasks** — run `/update` to triage overdue items and catch gaps in memory.
+**Reviewing tasks** — run `/productivity:update` to triage overdue items and catch gaps in memory.
 
 **Ending a session** — my-assistant saves anything worth remembering. Pick up where you left off next time.
 

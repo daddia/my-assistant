@@ -20,7 +20,7 @@ No coding required.
 Three steps:
 
 1. **Install** — paste a prompt into Claude Code. It sets up your workspace.
-2. **Setup** — run `/setup` in Cowork. my-assistant asks questions and saves your answers.
+2. **Setup** — run `/setup` from Claude Code at the repo root. my-assistant asks questions and saves your answers in your workspace.
 3. **Use** — ask for help. my-assistant reads your context and memory each session.
 
 ## What you can do
@@ -28,8 +28,8 @@ Three steps:
 | Command | When to use it |
 |---------|----------------|
 | `/setup` | First time, or when you want to update who you are and how you write |
-| `/start` | Initialise your task list and memory |
-| `/update` | Review open tasks and catch anything you've missed |
+| `/productivity:start` | Initialise your task list and memory |
+| `/productivity:update` | Review open tasks and catch anything you've missed |
 
 ## Next
 

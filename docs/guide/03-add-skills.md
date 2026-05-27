@@ -2,7 +2,7 @@
 
 Skills teach my-assistant how to do specific things — weekly reviews, meal planning, trip research, whatever you need.
 
-Built-in skills cover install, setup, tasks, and memory. You can add your own.
+Built-in skills cover install, setup, tasks, and memory via repo skills (`.claude/skills/`) and plugins (`/assistant:*`, `/productivity:*`). You can add your own.
 
 ## What is a skill?
 
@@ -24,11 +24,13 @@ It creates the skill file and installs it in your workspace.
 
 ## Add a skill yourself
 
-If you want to write one directly, create a folder in your workspace:
+If you want to write one directly, create a folder in your workspace for a **workspace-only override**:
 
 ```
-.claude/skills/weekly-review/SKILL.md
+workspaces/<name>/.claude/skills/weekly-review/SKILL.md
 ```
+
+Or add a skill to a plugin under `skills/<plugin>/skills/` and enable it via the **adk** marketplace.
 
 A skill file has two parts:
 

@@ -46,8 +46,8 @@ When the user confirms new information:
 
 ## Used by
 
-- `/start` — bootstrap memory on first run
-- `/update` — fill gaps found during task triage
+- `/productivity:start` — bootstrap memory on first run
+- `/productivity:update` — fill gaps found during task triage
 - `/update --comprehensive` — suggest new memories from activity scan
 
 See also: assistant plugin `memory` skill for day-to-day memory updates.

@@ -26,20 +26,22 @@ Claude Code will clone the repo, create your workspace folder, and tell you wher
 
 ## Step 3 — Run setup
 
-In Cowork, type:
+From **Claude Code at the repo root** (recommended), type:
 
 ```
 /setup
 ```
 
-my-assistant walks you through a short conversation — your name, household, how you write, and what it can do on your behalf. No files to edit manually.
+Claude walks you through a short conversation — your name, household, how you write, and what it can do on your behalf. Context files are written in your workspace folder.
+
+In **Cowork** (workspace folder only), ask Claude to follow `../../.claude/skills/setup/SKILL.md` if `/setup` is not available.
 
 ## You're done
 
 Once setup finishes, try:
 
 ```
-/start
+/productivity:start
 ```
 
 This initialises your task list and memory. Then just ask for help — "what's on my list this week?", "draft a message to the school", "remind me to book the dentist".

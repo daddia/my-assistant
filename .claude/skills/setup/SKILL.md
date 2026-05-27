@@ -10,7 +10,7 @@ description: Guide the user through configuring my-assistant. Activate when the 
 
 Walks the user through configuring my-assistant through conversation — no manual file editing required.
 
-> Sub-command details: see [README.md](../../README.md)
+> Sub-command details: see [skills/assistant/README.md](../../../skills/assistant/README.md)
 
 ## Sub-commands
 
@@ -54,4 +54,4 @@ Read `commands/working-rules.md` and follow it.
 
 ## On completion
 
-Summarise what's configured and suggest `/start` to initialise tasks and memory.
+Summarise what's configured and suggest `/productivity:start` to initialise tasks and memory.
