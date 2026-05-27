@@ -4,11 +4,11 @@
     "deny": []
   },
   "enabledPlugins": {
-    "assistant@adk": true,
-    "productivity@adk": true
+    "assistant@assistant-adk": true,
+    "productivity@assistant-adk": true
   },
   "extraKnownMarketplaces": {
-    "adk": {
+    "assistant-adk": {
       "source": {
         "source": "directory",
         "path": "../.."

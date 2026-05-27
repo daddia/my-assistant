@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "adk",
+  "name": "assistant-adk",
   "description": "AI Assistant ADK plugins — memory, tasks, and productivity for my-assistant.",
   "owner": {
     "name": "daddia"
