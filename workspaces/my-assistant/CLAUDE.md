@@ -28,12 +28,12 @@ Run `/setup` from Claude Code at the repo root if context files are still templa
 
 ## Plugins
 
-Enabled from repo root via `.claude/settings.json` (**adk** marketplace):
+Plugins are enabled in **this folder** via `.claude/settings.json` (points at the **adk** marketplace in the repo root):
 
 - **assistant** — memory (`/assistant:memory`)
 - **productivity** — tasks and sync (`/productivity:start`, `/productivity:update`, …)
 
-Workspace-specific skill overrides (optional): `workspaces/<name>/.claude/skills/<skill-name>/`
+On first open in Claude Code or Cowork, trust the folder and accept the **adk** marketplace prompt. If slash commands are unavailable, read skills directly from `../../skills/productivity/skills/` or `../../skills/assistant/skills/`.
 
 ## File locations
 

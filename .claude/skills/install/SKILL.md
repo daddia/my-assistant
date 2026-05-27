@@ -43,14 +43,16 @@ touch ~/my-assistant/workspaces/personal-assistant/TASKS.md
 
 ## Step 4 — Enable plugins
 
-This repo ships two Claude Code plugins via the **adk** marketplace (`.claude-plugin/marketplace.json`):
+This repo ships two Claude Code plugins via the **adk** marketplace (`.claude-plugin/marketplace.json` at repo root):
 
 - **assistant** — memory (`/assistant:memory`)
 - **productivity** — start, update, task and memory management (`/productivity:start`, `/productivity:update`, …)
 
-When you open this repo in Claude Code, trust the folder and accept the marketplace prompt to enable both plugins. Defaults are in `.claude/settings.json`.
+The workspace template includes `.claude/settings.json` (and `.agents/settings.json` for Cursor) with both plugins enabled. It points at the repo root marketplace via `"path": "../.."`.
 
-Repo-level skills `/install` and `/setup` live in `.claude/skills/` at the repo root. Claude Code discovers them from workspace subdirectories automatically (parent walk to repo root).
+When the user opens the **workspace folder** in Claude Code or Cowork, trust the folder and accept the **adk** marketplace prompt.
+
+Repo root also has `.claude/settings.json` when working from the full repo. Repo-level skills `/install` and `/setup` live in `.claude/skills/` at the repo root.
 
 **Do not** copy skills into `workspaces/<name>/.claude/skills/`. Workspace folders hold context and runtime files only.
 
@@ -60,7 +62,6 @@ Report:
 - Where the workspace is
 - How to open it in Cowork: Settings → folder → select the workspace path
 - What to do next: run `/setup` (Claude Code at repo root) to configure context files
-- Available plugins: **assistant** (memory) and **productivity** (start, update)
-- Repo skills: `/install`, `/setup` at repo root `.claude/skills/`
+- Plugins: accept the **adk** marketplace prompt when opening the workspace (see `.claude/settings.json` in the workspace folder)
 
 **Do not** attempt to open Cowork, modify system settings, or write to any path outside the workspace.
