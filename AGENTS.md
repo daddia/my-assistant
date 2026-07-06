@@ -29,10 +29,10 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | (natural language) |
-| Introduces a person, project, or shorthand | `skills/memory/SKILL.md` | (natural language) |
+| Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | (natural language) |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
 | Wants to set up scheduled tasks | `skills/schedules/SKILL.md` | `/my-assistant:schedules` |
-| Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory/SKILL.md` | `/my-assistant:update` |
+| Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory-management/SKILL.md` | `/my-assistant:update` |
 
 Skills auto-fire on the situations described in their `description`. Commands are explicit entry points the user types.
 

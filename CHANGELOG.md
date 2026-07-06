@@ -11,7 +11,7 @@ Complete restructure from the multi-workspace ADK into a single installable **my
 ### Added
 
 - **Single plugin package** — `.claude-plugin/plugin.json` and a single-plugin `marketplace.json` installable from the GitHub URL. Root `.mcp.json` connector suggestions.
-- **12 skills** — setup-interview, inbox-triage, reply-drafting, follow-up-tracker, calendar-manager, meeting-prep, meeting-follow-up, daily-brief, task-management, memory, weekly-review, schedules.
+- **12 skills** — setup-interview, inbox-triage, reply-drafting, follow-up-tracker, calendar-manager, meeting-prep, meeting-follow-up, daily-brief, task-management, memory-management, weekly-review, schedules.
 - **7 commands** — `/my-assistant:setup`, `:inbox`, `:brief`, `:prep`, `:update`, `:review`, `:schedules`.
 - **3 named + schedulable agents** and **3 managed-agent cookbooks** (`agent.yaml`) for headless, always-on deployment.
 - **Profile-based personalisation** at `~/.claude/plugins/config/my-assistant/profile.md`, outside the plugin so `/plugin update` never overwrites it; loaded via a `SessionStart` hook.

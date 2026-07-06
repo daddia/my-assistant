@@ -23,7 +23,7 @@ My Assistant ships as one plugin with **12 skills**, **7 commands**, and package
 - **meeting-follow-up** — turns pasted notes or a transcript into a summary, actions, and follow-up drafts
 - **daily-brief** — the morning briefing
 - **task-management** — `TASKS.md` (Active / Waiting On / Someday / Done)
-- **memory** — two-tier memory that decodes your shorthand
+- **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
 - **setup-interview** / **schedules** — onboarding and automation
 

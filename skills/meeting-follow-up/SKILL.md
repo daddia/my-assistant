@@ -28,7 +28,7 @@ We don't join calls or record — we work from what the user brings. Say so if t
 1. **Summary** — 3–5 lines: what was discussed, what was decided. No filler.
 2. **Action items** — a clean list with owner and due date where stated. Separate *the user's* actions from others'.
 3. **Follow-up drafts** — for each thread that needs one (recap to attendees, a promised doc, a next-step email), a draft in the user's voice. Draft only.
-4. **Task + memory offers** — offer to add the user's actions to `TASKS.md` (via `task-management`) and to save any durable new facts about people/projects (via `memory`).
+4. **Task + memory offers** — offer to add the user's actions to `TASKS.md` (via `task-management`) and to save any durable new facts about people/projects (via `memory-management`).
 
 ## Output shape
 

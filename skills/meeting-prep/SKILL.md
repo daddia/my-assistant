@@ -17,7 +17,7 @@ Load key people, VIP tiers, and voice. Load `memory/` for anything already known
 
 For each upcoming meeting (from `~~calendar`, or a meeting the user names/pastes):
 
-1. **Who** — attendees, their role and company. Pull from `memory/people.md`, the profile's key people, and any `~~notes`/`~~drive` context. If external and unknown, say so plainly rather than inventing a bio.
+1. **Who** — attendees, their role and company. Pull from `memory/people/`, `memory/glossary.md`, the profile's key people, and any `~~notes`/`~~drive` context. If external and unknown, say so plainly rather than inventing a bio.
 2. **What** — the meeting's purpose, from the invite, the thread that spawned it, and related docs.
 3. **Last contact** — when the user last spoke to this person and about what (from `~~email` history or memory). One line.
 4. **Prep needed** — the 1–3 things the user should have ready: a decision to make, a doc to bring, a question to ask, an open thread to close.
@@ -48,7 +48,7 @@ No calendar? The user pastes the invite or names the meeting; you prep from memo
 - Contract/thread status → `follow-up-tracker`
 - Times/conflicts → `calendar-manager`
 - After the meeting → `meeting-follow-up`
-- New facts learned about an attendee → offer to save via `memory`
+- New facts learned about an attendee → offer to save via `memory-management`
 
 ## Rules
 
