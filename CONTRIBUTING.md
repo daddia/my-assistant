@@ -29,7 +29,7 @@ my-assistant/
 ├── hooks/hooks.json, load-profile.sh                # SessionStart profile load (config + workspace)
 ├── rules/      core-behaviour.md, untrusted-content.md, file-safety.md
 ├── config/     profile.template.md                  # copied to the user's profile on setup
-└── docs/       guide/, product/
+└── docs/       guide/
 ```
 
 **User data never lives in the plugin.** Personalisation goes to `~/.claude/plugins/config/my-assistant/profile.md`; tasks and memory live in the user's working folder. Never commit real names, contacts, or private data.
