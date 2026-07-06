@@ -40,6 +40,25 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 
 Skills auto-fire on the situations described in their `description`. Commands are explicit entry points the user types.
 
+## Command routing
+
+Commands use **domain nouns + verb arguments** for multi-job domains, and **workflow commands** for curated rituals. Parse `$ARGUMENTS` in each command file; default verbs apply when omitted.
+
+| Command | Verb(s) | Skill(s) |
+|---------|---------|----------|
+| `/assistant:setup` | — | `setup-interview` |
+| `/assistant:inbox` | `triage` (default) · `sweep` | `inbox-triage` (+ `email-drafting` on triage) |
+| `/assistant:email` | `draft` (default) · `review` | `email-drafting` · `follow-up-tracking` |
+| `/assistant:tasks` | `add` · `review` (default) · `sync` | `task-management` |
+| `/assistant:memory` | `add` (default) · `prune` | `memory-management` |
+| `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
+| `/assistant:prep` | — | `meeting-prep` (+ `calendar-scheduling`, `follow-up-tracking`) |
+| `/assistant:update` | `--comprehensive` flag | `task-management` + `follow-up-tracking` + `memory-management` |
+| `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
+| `/assistant:schedules` | — | `schedule-setup` |
+
+Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
+
 ## Visual dashboard
 
 `skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view) and browsing/editing `CLAUDE.md` + `memory/`. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.

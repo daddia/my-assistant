@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Plugin command prefix** — `/my-assistant:` → `/assistant:` (plugin registers as `assistant`; profile path unchanged at `~/.claude/plugins/config/my-assistant/`).
+- **Skill names** — `{domain}-{job}` convention: `email-drafting`, `follow-up-tracking`, `calendar-scheduling`, `schedule-setup`.
+- **Domain commands** — noun + verb arguments: `/assistant:inbox [triage|sweep]`, `/assistant:email [draft|review]`, `/assistant:tasks [add|review|sync]`, `/assistant:memory [add|prune]`.
+- **Command routing table** — documented in `AGENTS.md` and `docs/guide/03-skills-and-commands.md`.
+
+### Fixed
+
+- **`.gitignore`** — anchor `TASKS.md` and `MEMORY.md` to repo root so `commands/tasks.md` and `commands/memory.md` are not excluded on case-insensitive filesystems.
+
 ## [1.0.0] - 2026-07-06
 
 Complete restructure from the multi-workspace ADK into a single installable **my-assistant** plugin — your AI chief of staff. No backward compatibility with the 0.1.x layout.

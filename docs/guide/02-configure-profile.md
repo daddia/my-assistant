@@ -1,6 +1,6 @@
 # Configure your profile
 
-Your **profile** is the single file that makes My Assistant sound like you and respect your rules. It's created by `/my-assistant:setup` and read at the start of every session.
+Your **profile** is the single file that makes My Assistant sound like you and respect your rules. It's created by `/assistant:setup` and read at the start of every session.
 
 ## Where it lives
 
@@ -13,7 +13,7 @@ Outside the plugin directory — so `/plugin update` overwrites plugin files but
 ## Run setup
 
 ```
-/my-assistant:setup
+/assistant:setup
 ```
 
 Pick the 2-minute quick-start or the full 10-minute interview. It walks eight sections, one at a time, confirming each before writing.
@@ -38,7 +38,7 @@ Pick the 2-minute quick-start or the full 10-minute interview. It walks eight se
 
 ## Update later
 
-Re-run `/my-assistant:setup` to adjust any section, or just correct the assistant mid-work — when a durable convention emerges (a new VIP, a tone tweak), it proposes a profile change and shows you the diff before writing.
+Re-run `/assistant:setup` to adjust any section, or just correct the assistant mid-work — when a durable convention emerges (a new VIP, a tone tweak), it proposes a profile change and shows you the diff before writing.
 
 ## Next
 

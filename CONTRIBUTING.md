@@ -46,7 +46,7 @@ Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/gui
 
 - **Manifests** — `.cursor-plugin/plugin.json` and `.claude-plugin/plugin.json` declare the same `skills`, `commands`, `agents`, `hooks`, `rules`, and `mcpServers` paths. Keep them in lockstep when those directories change.
 - **New/edited skill** — `skills/<name>/SKILL.md` with `name` + `description` frontmatter. Descriptions must be explicit — Cowork under-triggers on weak ones. Keep a skill to one job; chain via documentation, not duplicated logic. Prefer `~~category` connector wording over product names.
-- **New command** — `commands/<name>.md`; keep it a thin entry point that points at the relevant skill.
+- **New command** — `commands/<name>.md`; keep it a thin entry point that points at the relevant skill(s). Domain commands take verb arguments (`/assistant:inbox triage`); workflow commands are curated rituals (`/assistant:brief`). See the routing table in `AGENTS.md`.
 - **New rule** — under `rules/`; reference it from `AGENTS.md`.
 - **Connector suggestion** — add to `.mcp.json` and document in `CONNECTORS.md`.
 - **Guardrails** — any change must preserve draft-don't-send, untrusted-content handling, and the autonomy tiers in [`rules/core-behaviour.md`](./rules/core-behaviour.md) and [`rules/untrusted-content.md`](./rules/untrusted-content.md).

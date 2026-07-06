@@ -31,9 +31,9 @@ Claude's Gmail connector can read and draft but **cannot send**. That's exactly 
 Once connected:
 
 ```
-/my-assistant:inbox                 # triages your real inbox
-/my-assistant:brief                 # pulls today's real calendar + unread
-/my-assistant:update --comprehensive # scans email/calendar/chat for missed todos
+/assistant:inbox triage          # triages your real inbox
+/assistant:brief                 # pulls today's real calendar + unread
+/assistant:update --comprehensive # scans email/calendar/chat for missed todos
 ```
 
 It always asks before adding a task or a memory, and never sends or books automatically.

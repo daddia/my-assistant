@@ -4,18 +4,31 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 
 ## Commands (you type these)
 
+### Workflow commands — curated rituals
+
 | Command | Does |
 |---------|------|
-| `/my-assistant:setup` | Onboarding interview → writes your profile |
-| `/my-assistant:inbox` | Triage mail + draft replies |
-| `/my-assistant:email` | Draft a reply or review what's awaiting a response |
-| `/my-assistant:brief` | Morning briefing |
-| `/my-assistant:prep` | Pre-meeting briefs |
-| `/my-assistant:update` | Sync tasks + memory (`--comprehensive` scans connectors) |
-| `/my-assistant:review` | Weekly review |
-| `/my-assistant:schedules` | Set up scheduled tasks |
+| `/assistant:setup` | Onboarding interview → writes your profile |
+| `/assistant:brief` | Morning briefing |
+| `/assistant:prep` | Pre-meeting briefs |
+| `/assistant:update` | Sync tasks + memory + follow-ups (`--comprehensive` scans connectors) |
+| `/assistant:review` | Weekly review |
+| `/assistant:schedules` | Set up scheduled tasks |
+
+### Domain commands — noun + verb arguments
+
+| Command | Verbs | Does |
+|---------|-------|------|
+| `/assistant:inbox` | `triage` (default) · `sweep` | Full triage + drafts, or lighter bucket-and-archive pass |
+| `/assistant:email` | `draft` (default) · `review` | Draft one reply, or review what's awaiting a response |
+| `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
+| `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
+
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:tasks add`, `/assistant:memory prune`.
 
 ## Skills (fire on their own)
+
+Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-per-skill explosion.
 
 - **inbox-triage** + **email-drafting** — bucket mail, draft in your voice
 - **follow-up-tracking** — drafts nudges for threads gone cold

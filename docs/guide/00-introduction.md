@@ -21,20 +21,32 @@ No coding required.
 ## How it works
 
 1. **Install** the plugin (Cowork, Claude Code, or Cursor → Plugins → add this repo's marketplace).
-2. **Setup** — run `/my-assistant:setup`. A short interview writes your profile.
+2. **Setup** — run `/assistant:setup`. A short interview writes your profile.
 3. **Use** — ask for help, or let skills fire as you work. Add scheduled tasks for hands-off mornings.
 
 ## The commands
 
+### Workflow rituals
+
 | Command | When to use it |
 |---------|----------------|
-| `/my-assistant:setup` | First run, or to update who you are and how you write |
-| `/my-assistant:inbox` | Triage mail and draft replies |
-| `/my-assistant:brief` | Morning briefing |
-| `/my-assistant:prep` | Prep for today's meetings |
-| `/my-assistant:update` | Sync tasks and memory (`--comprehensive` scans connectors) |
-| `/my-assistant:review` | Weekly review |
-| `/my-assistant:schedules` | Set up recurring scheduled tasks |
+| `/assistant:setup` | First run, or to update who you are and how you write |
+| `/assistant:brief` | Morning briefing |
+| `/assistant:prep` | Prep for today's meetings |
+| `/assistant:update` | Sync tasks, memory, and follow-ups (`--comprehensive` scans connectors) |
+| `/assistant:review` | Weekly review |
+| `/assistant:schedules` | Set up recurring scheduled tasks |
+
+### Domain commands (verb arguments)
+
+| Command | When to use it |
+|---------|----------------|
+| `/assistant:inbox triage` | Triage mail and draft replies (default) |
+| `/assistant:inbox sweep` | Lighter bucket-and-archive pass |
+| `/assistant:email draft` | Draft one reply without full triage |
+| `/assistant:email review` | Review what's awaiting a response |
+| `/assistant:tasks` | Add, review, or sync tasks (`add` · `review` · `sync`) |
+| `/assistant:memory` | Remember or prune context (`add` · `prune`) |
 
 ## Next
 

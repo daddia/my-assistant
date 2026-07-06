@@ -18,7 +18,7 @@ It needs your explicit approval to:
 - Create, move, or delete calendar events
 - Delete files
 
-Set during `/my-assistant:setup`; adjust anytime by re-running it.
+Set during `/assistant:setup`; adjust anytime by re-running it.
 
 ## Graduated autonomy
 
@@ -43,4 +43,4 @@ If you set scope to personal-only, anything work-shaped is flagged before it pro
 
 ## If something feels wrong
 
-Re-run `/my-assistant:setup` and tell it what it should never do without asking. It follows those rules every session. Full detail: [`rules/core-behaviour.md`](../../rules/core-behaviour.md).
+Re-run `/assistant:setup` and tell it what it should never do without asking. It follows those rules every session. Full detail: [`rules/core-behaviour.md`](../../rules/core-behaviour.md).

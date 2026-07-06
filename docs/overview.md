@@ -66,7 +66,7 @@ Set in the profile, enforced by `rules/core-behaviour.md`. Default **Tier 1 (Dra
 
 | Surface | Where it runs | Use |
 |---------|---------------|-----|
-| **Scheduled tasks** (`skills/schedules`) | Local desktop (machine must be awake) | Default: morning brief, inbox sweeps, follow-up watcher, weekly review |
+| **Scheduled tasks** (`skills/schedule-setup`) | Local desktop (machine must be awake) | Default: morning brief, inbox sweeps, follow-up watcher, weekly review |
 | **Managed-agent cookbooks** (`managed-agents/`) | Anthropic infra (immune to sleeping laptop) | Advanced/optional; the critical always-on jobs |
 
 Same prompts and skills feed both — one source, two surfaces.

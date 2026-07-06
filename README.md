@@ -8,28 +8,40 @@ It **drafts everything for your review and never sends, books, or spends on your
 
 ## What it does
 
+### Workflow commands
+
 | Job | Command |
 |-----|---------|
-| Configure it to you (10-min interview) | `/my-assistant:setup` |
-| Triage the inbox + draft replies | `/my-assistant:inbox` |
-| Morning briefing | `/my-assistant:brief` |
-| Prep for today's meetings | `/my-assistant:prep` |
-| Sync tasks + memory | `/my-assistant:update` |
-| Weekly review | `/my-assistant:review` |
-| Set up scheduled tasks | `/my-assistant:schedules` |
+| Configure it to you (10-min interview) | `/assistant:setup` |
+| Morning briefing | `/assistant:brief` |
+| Prep for today's meetings | `/assistant:prep` |
+| Sync tasks + memory + follow-ups | `/assistant:update` |
+| Weekly review | `/assistant:review` |
+| Set up scheduled tasks | `/assistant:schedules` |
 
-Plus skills that fire on their own as you work: follow-up tracking, calendar drafting, meeting follow-up from pasted notes, task capture, and two-tier memory that decodes your shorthand ("ask todd re oracle").
+### Domain commands (noun + verb)
+
+| Job | Command |
+|-----|---------|
+| Triage inbox + draft replies | `/assistant:inbox triage` (default) |
+| Lighter inbox sweep | `/assistant:inbox sweep` |
+| Draft one reply | `/assistant:email draft` |
+| Review what's awaiting a response | `/assistant:email review` |
+| Add / review / sync tasks | `/assistant:tasks add` · `review` · `sync` |
+| Remember or prune context | `/assistant:memory add` · `prune` |
+
+Plus skills that fire on their own as you work: calendar scheduling, meeting follow-up from pasted notes, and two-tier memory that decodes your shorthand ("ask todd re oracle").
 
 ## Install
 
-**Claude Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **my-assistant**.
+**Claude Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **assistant**.
 
 **Cursor:** Settings → Plugins → Add plugin → paste `https://github.com/daddia/my-assistant`, then install **My Assistant**.
 
 Then run:
 
 ```
-/my-assistant:setup
+/assistant:setup
 ```
 
 A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. It writes a **profile** to `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin, so `/plugin update` never overwrites it.
@@ -40,7 +52,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 ## Always-on options
 
-- **Scheduled tasks** (`/my-assistant:schedules`) — morning briefing, inbox sweeps, follow-up watcher, weekly review. Run locally; the machine must be awake.
+- **Scheduled tasks** (`/assistant:schedules`) — morning briefing, inbox sweeps, follow-up watcher, weekly review. Run locally; the machine must be awake.
 - **Managed-agent cookbooks** ([`managed-agents/`](./managed-agents/)) — the same jobs on Anthropic's infrastructure, immune to a sleeping laptop. Advanced/optional.
 
 ## Visual dashboard
