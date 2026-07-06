@@ -31,7 +31,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/my-assistant:prep` |
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
-| Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | (natural language) |
+| Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | (natural language) |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
 | Wants to set up scheduled tasks | `skills/schedule-setup/SKILL.md` | `/my-assistant:schedules` |

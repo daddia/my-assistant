@@ -2,7 +2,7 @@
 # ~/.claude/plugins/config/my-assistant/profile.md
 
 # Local runtime state if developing against a working folder
-TASKS.md
+/TASKS.md
 MEMORY.md
 memory/
 brief-*.md

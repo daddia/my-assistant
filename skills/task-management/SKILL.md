@@ -1,8 +1,9 @@
 ---
 name: task-management
 description: Track tasks and commitments in TASKS.md. Activate when the user mentions
-  a task or todo, says "add a task", "what's on my list", "remind me to", "I'm done
-  with X", or when another skill surfaces an action item to capture.
+  a task or todo, says "/assistant:tasks add", "/assistant:tasks review", "/assistant:tasks sync",
+  "add a task", "what's on my list", "remind me to", "I'm done with X", or when another
+  skill surfaces an action item to capture.
 ---
 
 # Task management
