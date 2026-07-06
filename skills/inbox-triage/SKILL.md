@@ -1,18 +1,25 @@
 ---
 name: inbox-triage
 description: Sort recent email into needs-reply / FYI / marketing / VIP buckets and
-  summarise long threads. Activate when the user says "/my-assistant:inbox", "triage
-  my inbox", "sweep my mail", "what needs a reply", or asks what's in their inbox.
-  Works on a connected mailbox or on pasted threads.
+  summarise long threads. Activate when the user says "/assistant:inbox", "/assistant:inbox triage",
+  "/assistant:inbox sweep", "triage my inbox", "sweep my mail", "what needs a reply",
+  or asks what's in their inbox. Works on a connected mailbox or on pasted threads.
 ---
 
 # Inbox triage
 
 Turn a full inbox into a short, ranked list of what actually needs the user — and hand off to `email-drafting` for the replies. This is the wedge that matches Fyxer and Superhuman; do it well and fast.
 
+## Modes
+
+Invoked via `/assistant:inbox triage` (default) or `/assistant:inbox sweep`:
+
+- **Triage** — full pass: bucket, summarise, and hand needs-reply + VIP to `email-drafting`.
+- **Sweep** — lighter pass: bucket and summarise only; propose labels/archives; skip reply drafting unless a Tier 1 VIP needs immediate attention.
+
 ## Read the profile first
 
-Load `~/.claude/plugins/config/my-assistant/profile.md` for VIP tiers, email policy (reply threshold, auto-archive senders, labels), and voice. If there's no profile, use sensible defaults and mention that `/my-assistant:setup` will sharpen the buckets.
+Load `~/.claude/plugins/config/my-assistant/profile.md` for VIP tiers, email policy (reply threshold, auto-archive senders, labels), and voice. If there's no profile, use sensible defaults and mention that `/assistant:setup` will sharpen the buckets.
 
 ## Standalone vs connected
 
