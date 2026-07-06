@@ -1,6 +1,6 @@
 # What is My Assistant?
 
-**My Assistant** is a single plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that acts as your AI chief of staff. It knows who you are, how you write, and what you want handled — so you stop repeating yourself every session.
+**My Assistant** is a single plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that acts as your AI chief of staff. It knows who you are, how you write, and what you want handled — so you stop repeating yourself every session.
 
 ## Who is it for?
 
@@ -20,7 +20,7 @@ No coding required.
 
 ## How it works
 
-1. **Install** the plugin (Cowork or Claude Code → Plugins → add this repo's marketplace).
+1. **Install** the plugin (Cowork, Claude Code, or Cursor → Plugins → add this repo's marketplace).
 2. **Setup** — run `/my-assistant:setup`. A short interview writes your profile.
 3. **Use** — ask for help, or let skills fire as you work. Add scheduled tasks for hands-off mornings.
 

@@ -35,7 +35,7 @@ No skill sends email, books a meeting, or spends money. They prepare; you act. T
 
 ## Extending it
 
-The plugin's skills live in `skills/<name>/SKILL.md` — plain markdown. Fork the repo to add your own, or ask Claude to draft a new skill. Don't edit installed plugin files directly; they're replaced on `/plugin update`. Your data belongs in the profile or your working folder.
+The plugin's skills live in `skills/<name>/SKILL.md` — plain markdown. Fork the repo to add your own, or ask the assistant to draft a new skill. Don't edit installed plugin files directly; they're replaced on plugin update. Your data belongs in the profile or your working folder.
 
 ## Next
 

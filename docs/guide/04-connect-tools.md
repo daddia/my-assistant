@@ -4,7 +4,9 @@ My Assistant works without any connections — every skill runs on content you p
 
 ## How to connect
 
-In Cowork: **Settings → Connectors**. Sign in to the services you use.
+**Cowork:** **Settings → Connectors**. Sign in to the services you use.
+
+**Cursor:** enable the MCP servers bundled in the plugin (Slack, Microsoft 365, Notion, Atlassian, Linear, monday.com) via **Settings → MCP**, or connect your own MCP server in the same category. Gmail, Google Calendar, and Google Drive are native Cowork connectors only — in Cursor, paste email threads and calendar items, or connect an MCP provider for `~~email` / `~~calendar`.
 
 ## What you can connect
 

@@ -2,7 +2,7 @@
 
 **Your AI chief of staff for inbox, calendar, and follow-ups.**
 
-One installable plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
+One installable plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
 
 It **drafts everything for your review and never sends, books, or spends on your behalf.** You glance, edit, and send. That's the whole promise.
 
@@ -22,7 +22,9 @@ Plus skills that fire on their own as you work: follow-up tracking, calendar dra
 
 ## Install
 
-**In Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **my-assistant**. It appears in both chat and Cowork.
+**Claude Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **my-assistant**.
+
+**Cursor:** Settings → Plugins → Add plugin → paste `https://github.com/daddia/my-assistant`, then install **My Assistant**.
 
 Then run:
 

@@ -1,6 +1,6 @@
 # My Assistant — product strategy & architecture
 
-**My Assistant** is a single installable plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that acts as an AI chief of staff: inbox triage, reply drafting in the user's voice, follow-up tracking, meeting prep and follow-up, a daily briefing, scheduling drafts, tasks, and two-tier memory. It **drafts everything and never sends, books, or spends** on the user's behalf.
+**My Assistant** is a single installable plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that acts as an AI chief of staff: inbox triage, reply drafting in the user's voice, follow-up tracking, meeting prep and follow-up, a daily briefing, scheduling drafts, tasks, and two-tier memory. It **drafts everything and never sends, books, or spends** on the user's behalf.
 
 This document is the product and architecture source of truth. End-user setup is in the [user guide](./guide/00-introduction.md) and [README](../README.md).
 
@@ -30,8 +30,11 @@ Honest gaps vs SaaS, and how we handle them:
 ```
 my-assistant/                     # repo root = the plugin
 ├── .claude-plugin/
-│   ├── plugin.json               # manifest
-│   └── marketplace.json          # single-plugin marketplace (install via GitHub URL)
+│   ├── plugin.json               # Claude manifest
+│   └── marketplace.json          # Claude marketplace (install via GitHub URL)
+├── .cursor-plugin/
+│   ├── plugin.json               # Cursor manifest (skills, commands, agents, hooks, rules, MCP)
+│   └── marketplace.json          # Cursor marketplace
 ├── .mcp.json                     # connector suggestions (Slack, MS365, Notion, Jira, Linear, monday)
 ├── CLAUDE.md  →  @AGENTS.md
 ├── AGENTS.md                     # orchestration: trigger→skill map, draft-don't-send rule

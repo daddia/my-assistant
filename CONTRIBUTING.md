@@ -5,8 +5,7 @@ Thanks for your interest in contributing! Bug reports, enhancement ideas, doc fi
 ## Reporting bugs
 
 1. **Check the [issue tracker](https://github.com/daddia/my-assistant/issues)** for an existing report.
-2. **Open a new issue** with a clear title, what you expected, what happened, and steps to reproduce.
-3. Include which **runtime** you used (Claude Cowork, Claude Code) and which **connectors** (if any) were active.
+2. **Open a new issue** with a clear title, what you expected, what happened, and steps to reproduce. Include which **runtime** you used (Claude Cowork, Claude Code, or Cursor) and which **connectors** (if any) were active.
 
 ## Suggesting enhancements
 
@@ -18,7 +17,8 @@ This is one plugin — file-based, no build step.
 
 ```
 my-assistant/
-├── .claude-plugin/plugin.json, marketplace.json   # manifests
+├── .claude-plugin/plugin.json, marketplace.json   # Claude manifests
+├── .cursor-plugin/plugin.json, marketplace.json   # Cursor manifests
 ├── .mcp.json                                        # connector suggestions
 ├── AGENTS.md  (CLAUDE.md → @AGENTS.md)              # orchestration
 ├── CONNECTORS.md                                    # ~~category placeholders
@@ -38,7 +38,7 @@ my-assistant/
 
 - **Git** — clone, branch, open PRs.
 - **A text editor** — Markdown and YAML.
-- **A runtime (recommended)** — Claude Cowork or Claude Code, to exercise skills as users do.
+- **A runtime (recommended)** — Claude Cowork, Claude Code, or Cursor, to exercise skills as users do.
 
 Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/guide/00-introduction.md) before your first change.
 

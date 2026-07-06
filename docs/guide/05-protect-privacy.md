@@ -8,9 +8,9 @@ Your personal details — identity, voice, VIP tiers, policies — live in your 
 
 Your tasks (`TASKS.md`) and memory (`memory/`) are likewise plain files in your working folder.
 
-## What Claude sees
+## What the assistant sees
 
-When you use Cowork or Claude Code, Claude reads your profile and working files to understand context. Those are sent to Anthropic as part of your conversation — the same as pasting text into any Claude chat. See [Anthropic's privacy policy](https://www.anthropic.com/privacy).
+When you use Cowork, Claude Code, or Cursor, the agent reads your profile and working files to understand context. That content is sent to the model provider as part of your conversation — the same as pasting text into a chat. See [Anthropic's privacy policy](https://www.anthropic.com/privacy) (Cowork / Claude Code) and [Cursor's privacy policy](https://cursor.com/privacy) (Cursor).
 
 ## Connectors are read-and-draft only
 

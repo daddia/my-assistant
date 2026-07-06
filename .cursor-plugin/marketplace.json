@@ -1,0 +1,15 @@
+{
+  "name": "my-assistant",
+  "owner": {
+    "name": "daddia",
+    "url": "https://github.com/daddia"
+  },
+  "plugins": [
+    {
+      "name": "my-assistant",
+      "displayName": "My Assistant",
+      "source": "./",
+      "description": "Triage the inbox, draft replies in your voice, track follow-ups, prep meetings, run a morning briefing, and manage tasks. Drafts everything; never sends."
+    }
+  ]
+}
