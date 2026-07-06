@@ -26,7 +26,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` + `skills/email-drafting/SKILL.md` | `/assistant:inbox triage` (default) |
 | Wants a lighter inbox pass / archive sweep | `skills/inbox-triage/SKILL.md` | `/assistant:inbox sweep` |
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:email draft` or within inbox triage |
-| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | (within update) |
+| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | (within prep/brief) |
 | Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/my-assistant:prep` |
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |

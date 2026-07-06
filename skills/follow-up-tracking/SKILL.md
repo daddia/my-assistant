@@ -2,8 +2,8 @@
 name: follow-up-tracking
 description: Track sent mail awaiting a reply and draft polite nudges when it goes
   cold. Activate when the user asks "what am I waiting on", "anything gone quiet",
-  "who hasn't replied", during /my-assistant:update, or on a follow-up schedule.
-  Drafts nudges only — never sends.
+  "who hasn't replied", "/assistant:email review", during /assistant:update, or on a
+  follow-up schedule. Drafts nudges only — never sends.
 ---
 
 # Follow-up tracking
