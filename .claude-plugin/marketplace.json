@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "my-assistant",
+      "name": "assistant",
       "source": "./",
       "description": "Triage the inbox, draft replies in your voice, track follow-ups, prep meetings, run a morning briefing, and manage tasks. Drafts everything; never sends."
     }

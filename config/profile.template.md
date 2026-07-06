@@ -96,4 +96,4 @@ Ban the AI tells. Write like you on your best day, never like a generic assistan
 
 ---
 
-*Update any section anytime by running `/my-assistant:setup`, or ask the assistant to propose a change when a new convention emerges — it will show you the diff before writing.*
+*Update any section anytime by running `/assistant:setup`, or ask the assistant to propose a change when a new convention emerges — it will show you the diff before writing.*

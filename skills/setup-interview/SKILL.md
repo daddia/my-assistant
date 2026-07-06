@@ -1,7 +1,7 @@
 ---
 name: setup-interview
-description: Onboarding interview for my-assistant. Activate when the user says
-  "/my-assistant:setup", "set me up", "configure my assistant", "help me get started",
+description: Onboarding interview for the assistant plugin. Activate when the user says
+  "/assistant:setup", "set me up", "configure my assistant", "help me get started",
   or when no profile exists at ~/.claude/plugins/config/my-assistant/profile.md.
   Writes the personalisation profile that every other skill reads.
 ---
@@ -42,7 +42,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words. After writing, summarise what's captured and point them at the wedge:
 
-> "You're set up. Try `/my-assistant:inbox` to triage your mail, or `/my-assistant:brief` for a morning briefing. Re-run `/my-assistant:setup` anytime to adjust."
+> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 

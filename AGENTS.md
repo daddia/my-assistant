@@ -15,14 +15,14 @@ This file orchestrates the plugin: it maps what the user asks for to the skill t
 Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` (created by the setup interview from `config/profile.template.md`). It is read at session start and is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
 - If the profile exists, read it first and treat it as the source of truth about the user.
-- If it does not exist, the plugin still works with pasted content — offer `/my-assistant:setup` to make it sharper.
+- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper.
 - In Cowork, the profile may instead live in a workspace folder the user has open; check there too.
 
 ## Trigger → skill map
 
 | The user… | Skill | Command |
 |-----------|-------|---------|
-| Wants to configure the assistant / first run | `skills/setup-interview/SKILL.md` | `/my-assistant:setup` |
+| Wants to configure the assistant / first run | `skills/setup-interview/SKILL.md` | `/assistant:setup` |
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` | `/my-assistant:inbox` |
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | (within inbox) |
 | Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | (within update) |
