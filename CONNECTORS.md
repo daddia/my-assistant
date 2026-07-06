@@ -10,12 +10,12 @@ Every skill is **standalone-first**: it works with content you paste in, and get
 
 | Category | Placeholder | Default | Alternatives |
 |----------|-------------|---------|--------------|
-| Email | `~~email` | Gmail (native) | Microsoft 365 |
-| Calendar | `~~calendar` | Google Calendar (native) | Microsoft 365 |
-| Drive | `~~drive` | Google Drive (native) | Microsoft 365 (OneDrive) |
+| Email | `~~email` | Gmail | Microsoft 365 |
+| Calendar | `~~calendar` | Google Calendar | Microsoft 365 |
+| Drive | `~~drive` | Google Drive | Microsoft 365 (OneDrive) |
 | Chat | `~~chat` | Slack | Microsoft Teams, Discord |
 | Notes / knowledge | `~~notes` | Notion | Confluence, Guru |
-| Tasks / work | `~~tasks` | — | Jira, Linear, monday.com, Asana, ClickUp |
+| Tasks / work | `~~tasks` | GitHub | Jira, Linear, monday.com, Asana, ClickUp |
 
 ## Native integrations (no MCP install needed)
 
@@ -25,7 +25,18 @@ Gmail, Google Calendar, and Google Drive are native Cowork connectors. Connect t
 
 ## MCP connectors (bundled suggestions)
 
-`.mcp.json` pre-configures suggestions for Slack, Microsoft 365, Notion, Atlassian (Jira/Confluence), Linear, and monday.com. Any MCP server in the right category works — the skills never hard-code a product.
+`.mcp.json` pre-configures one default MCP server per category:
+
+| Category | Server | Endpoint |
+|----------|--------|----------|
+| Email | Gmail | `https://gmailmcp.googleapis.com/mcp/v1` |
+| Calendar | Google Calendar | `https://calendarmcp.googleapis.com/mcp/v1` |
+| Drive | Google Drive | `https://drivemcp.googleapis.com/mcp/v1` |
+| Chat | Slack | `https://mcp.slack.com/mcp` |
+| Notes | Notion | `https://mcp.notion.com/mcp` |
+| Tasks | GitHub | `https://api.githubcopilot.com/mcp/` |
+
+Any MCP server in the right category works — the skills never hard-code a product. OAuth is handled when you connect; no credentials are bundled in the repo.
 
 ## Without connectors
 
