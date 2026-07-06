@@ -6,7 +6,7 @@ Each cookbook is an `agent.yaml` (model, system prompt, tools, MCP servers, skil
 
 ## When to use these
 
-Start with desktop scheduled tasks (`/my-assistant:schedules`). Move a job here when it misses because the machine was asleep more than about once a week, or when reliability genuinely matters (a briefing you plan the day around).
+Start with desktop scheduled tasks (`/assistant:schedules`). Move a job here when it misses because the machine was asleep more than about once a week, or when reliability genuinely matters (a briefing you plan the day around).
 
 ## Cost (rough, from early-adopter reporting — not a price sheet)
 

@@ -2,7 +2,7 @@
 name: daily-brief
 description: A short, scannable morning briefing — today's calendar, priority unread,
   follow-ups going cold, and what needs attention. Activate when the user says
-  "/my-assistant:brief", "morning briefing", "what's my day look like", or on a
+  "/assistant:brief", "morning briefing", "what's my day look like", or on a
   morning schedule.
 ---
 

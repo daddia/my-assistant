@@ -28,14 +28,14 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:email draft` or within inbox triage |
 | Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | (within prep/brief) |
-| Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/my-assistant:prep` |
+| Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/assistant:prep` |
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
-| Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
+| Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | `/assistant:memory add` · `prune` |
-| Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
-| Wants to set up scheduled tasks | `skills/schedule-setup/SKILL.md` | `/my-assistant:schedules` |
-| Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory-management/SKILL.md` | `/my-assistant:update` |
+| Wants a weekly review | `skills/weekly-review/SKILL.md` | `/assistant:review` |
+| Wants to set up scheduled tasks | `skills/schedule-setup/SKILL.md` | `/assistant:schedules` |
+| Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/follow-up-tracking/SKILL.md` + `skills/memory-management/SKILL.md` | `/assistant:update` |
 | Wants a visual editor for tasks or memory | `skills/dashboard.html` | (open in browser) |
 
 Skills auto-fire on the situations described in their `description`. Commands are explicit entry points the user types.

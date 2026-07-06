@@ -1,7 +1,7 @@
 ---
 name: weekly-review
 description: A Friday review of the week — wins, open loops, stale tasks, and setup
-  for next week. Activate when the user says "/my-assistant:review", "weekly review",
+  for next week. Activate when the user says "/assistant:review", "weekly review",
   "wrap up my week", or on a Friday-afternoon schedule.
 ---
 

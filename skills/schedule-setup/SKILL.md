@@ -2,7 +2,7 @@
 name: schedule-setup
 description: Walk the user through creating the packaged Cowork scheduled tasks
   (morning briefing, inbox sweep, meeting-prep watcher, follow-up watcher, weekly
-  review). Activate on "/my-assistant:schedules", "set up my scheduled tasks",
+  review). Activate on "/assistant:schedules", "set up my scheduled tasks",
   "automate my briefing", or "run this every morning".
 ---
 
@@ -29,45 +29,41 @@ Three honest caveats — say them up front:
 Each weekday at 8am, give me a short, scannable briefing: today's
 calendar with attendees, important unread emails or messages, follow-ups
 going cold, and anything needing my attention before noon. Read my
-profile at ~/.claude/plugins/config/my-assistant/profile.md first. Use
-the my-assistant daily-brief skill. Keep it under 400 words. Save it as
-brief-YYYY-MM-DD.md.
+profile at ~/.claude/plugins/config/my-assistant/profile.md first. Run
+/assistant:brief. Keep it under 400 words. Save it as brief-YYYY-MM-DD.md.
 ```
 Cron: `0 8 * * 1-5`
 
 ### Inbox sweep — weekdays 8:00am, 12:00pm, 4:00pm
 ```
 Triage new mail since the last sweep into needs-reply / FYI / marketing /
-VIP using the my-assistant inbox-triage skill and my profile. Draft
-replies (do not send) for needs-reply and VIP in my voice. Summarise long
-threads. List what you drafted and what you propose archiving.
+VIP using /assistant:inbox sweep and my profile. Summarise long threads.
+List what you propose archiving.
 ```
 Cron: `0 8,12,16 * * 1-5`
 
 ### Meeting-prep watcher — weekdays 7:00am
 ```
-For each meeting today with an external attendee, produce a one-paragraph
-prep brief using the my-assistant meeting-prep skill: who they are, what
-they do, our last contact, and what I should prepare. Read my profile and
-memory first.
+For each meeting today with an external attendee, run /assistant:prep:
+who they are, what they do, our last contact, and what I should prepare.
+Read my profile and memory first.
 ```
 Cron: `0 7 * * 1-5`
 
 ### Follow-up watcher — daily 5:00pm
 ```
-Check mail I sent that's awaiting a reply using the my-assistant
-follow-up-tracking skill. For anything silent 3+ business days, draft a
-polite nudge (do not send) in my voice and list it. Cross-check the
-Waiting On section of TASKS.md.
+Check mail I sent that's awaiting a reply using /assistant:email review.
+For anything silent 3+ business days, draft a polite nudge (do not send)
+in my voice and list it. Cross-check the Waiting On section of TASKS.md.
 ```
 Cron: `0 17 * * *`
 
 ### Weekly review — Friday 4:00pm
 ```
-Run the my-assistant weekly-review skill: summarise the week — what
-closed, open loops, stale tasks (untouched 14+ days), and what to line up
-for Monday. Update TASKS.md and prune stale memory with my confirmation.
-Save as review-YYYY-MM-DD.md. Keep it scannable.
+Run /assistant:review: summarise the week — what closed, open loops,
+stale tasks (untouched 14+ days), and what to line up for Monday. Update
+TASKS.md and prune stale memory with my confirmation. Save as
+review-YYYY-MM-DD.md. Keep it scannable.
 ```
 Cron: `0 16 * * 5`
 
