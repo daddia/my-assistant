@@ -1,10 +1,11 @@
-# User profile / personalisation — never committed (lives outside the plugin)
-# ~/.claude/plugins/config/my-assistant/profile.md
+# Gitignore for my-assistant
 
 # Local runtime state if developing against a working folder
 /TASKS.md
 /MEMORY.md
 memory/
+reviews/
+*.local.md
 brief-*.md
 review-*.md
 drafts/
@@ -13,8 +14,13 @@ output/
 # Secrets
 .env
 .env.local
-*.local.md
+!.env.example
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary files
+*.tmp
+temp/
+tmp/
