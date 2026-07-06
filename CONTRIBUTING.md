@@ -1,136 +1,72 @@
-# Contributing to the AI Assistant ADK
+# Contributing to My Assistant
 
-We deeply appreciate your interest in contributing to our repository! Whether you're reporting bugs, suggesting enhancements, improving docs, or submitting pull requests, your contributions help improve the project for everyone.
+Thanks for your interest in contributing! Bug reports, enhancement ideas, doc fixes, and pull requests all help.
 
-## Reporting Bugs
+## Reporting bugs
 
-If you've encountered a bug in the project, we encourage you to report it to us. Please follow these steps:
+1. **Check the [issue tracker](https://github.com/daddia/my-assistant/issues)** for an existing report.
+2. **Open a new issue** with a clear title, what you expected, what happened, and steps to reproduce.
+3. Include which **runtime** you used (Claude Cowork, Claude Code) and which **connectors** (if any) were active.
 
-1. **Check the Issue Tracker**: Before submitting a new bug report, please check our [issue tracker](https://github.com/daddia/my-assistant/issues) to see if the bug has already been reported. If it has, you can add to the existing report.
-2. **Create a New Issue**: If the bug hasn't been reported, create a new issue. Provide a clear title and a detailed description of the bug. Include any relevant logs, error messages, and steps to reproduce the issue.
-3. **Label Your Issue**: If possible, label your issue as a `bug` so it's easier for maintainers to identify.
+## Suggesting enhancements
 
-When reporting issues with skills or workspace behavior, include which **provider** you used (e.g. Claude Cowork, Claude Code, Cursor) and the workspace path you pointed the agent at.
+Check the tracker, then open an issue describing the change and the benefit. Enhancements might include new skills, sharper skill descriptions, better guardrails, or connector coverage.
 
-## Suggesting Enhancements
+## Repository layout
 
-We're always looking for suggestions to make our project better. If you have an idea for an enhancement, please:
+This is one plugin — file-based, no build step.
 
-1. **Check the Issue Tracker**: Similar to bug reports, please check if someone else has already suggested the enhancement. If so, feel free to add your thoughts to the existing issue.
-2. **Create a New Issue**: If your enhancement hasn't been suggested yet, create a new issue. Provide a detailed description of your suggested enhancement and how it would benefit the project.
+```
+my-assistant/
+├── .claude-plugin/plugin.json, marketplace.json   # manifests
+├── .mcp.json                                        # connector suggestions
+├── AGENTS.md  (CLAUDE.md → @AGENTS.md)              # orchestration
+├── CONNECTORS.md                                    # ~~category placeholders
+├── commands/   *.md                                 # 7 slash commands
+├── skills/     <name>/SKILL.md                      # 12 skills
+├── agents/     *.md                                 # named + schedulable agents
+├── managed-agents/ <name>/agent.yaml                # headless cookbooks
+├── hooks/hooks.json                                 # SessionStart profile load
+├── rules/      core-behaviour.md, file-safety.md
+├── config/     profile.template.md                  # copied to the user's profile on setup
+└── docs/       guide/, product/
+```
 
-Enhancements might include new skills, rules, workspace templates, provider-agnostic patterns, or documentation for building assistants on other platforms.
+**User data never lives in the plugin.** Personalisation goes to `~/.claude/plugins/config/my-assistant/profile.md`; tasks and memory live in the user's working folder. Never commit real names, contacts, or private data.
 
-## Improving Documentation
+## Development environment
 
-Documentation is crucial for understanding and using our project effectively.
-You can find the user guide under [`docs`](./docs/).
+- **Git** — clone, branch, open PRs.
+- **A text editor** — Markdown and YAML.
+- **A runtime (recommended)** — Claude Cowork or Claude Code, to exercise skills as users do.
 
-To fix smaller typos, you can edit the code directly in GitHub or use GitHub.dev (press `.` on a file in GitHub).
+Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/guide/00-introduction.md) before your first change.
 
-If you want to make larger changes, please check out the Code Contributions section below.
+## Making changes
 
-## Code Contributions
+- **New/edited skill** — `skills/<name>/SKILL.md` with `name` + `description` frontmatter. Descriptions must be explicit — Cowork under-triggers on weak ones. Keep a skill to one job; chain via documentation, not duplicated logic. Prefer `~~category` connector wording over product names.
+- **New command** — `commands/<name>.md`; keep it a thin entry point that points at the relevant skill.
+- **New rule** — under `rules/`; reference it from `AGENTS.md`.
+- **Connector suggestion** — add to `.mcp.json` and document in `CONNECTORS.md`.
+- **Guardrails** — any change must preserve draft-don't-send and the autonomy tiers in [`rules/core-behaviour.md`](./rules/core-behaviour.md).
 
-We welcome your contributions to our code and documentation. Here's how you can contribute:
+## Testing
 
-### Environment Setup
+Validate in an agent session, not a unit-test runner:
 
-AI Assistant ADK development is **file-based** — there is no build or package manager for the core repo. You need:
+1. Install the plugin locally (add this repo as a directory marketplace, or point Claude Code at it).
+2. Trigger the change via its slash command or a natural-language phrase matching the skill `description`.
+3. Confirm drafts/outputs land in the right place and that no skill sends, books, or spends. Check behaviour against [`rules/core-behaviour.md`](./rules/core-behaviour.md) and [`rules/file-safety.md`](./rules/file-safety.md).
 
-- **Git** — to clone, branch, and open pull requests
-- **A text editor** — for Markdown, YAML, and skill files
-- **An agent runtime (recommended)** — [Claude Cowork](https://claude.com/product/cowork), Claude Code, or Cursor, to exercise skills and workspaces the way users do
+For doc-only PRs, preview the changed pages and check links under `docs/`.
 
-Optional: read [`AGENTS.md`](./AGENTS.md) (repo root) and [`docs/guide/00-introduction.md`](./docs/guide/00-introduction.md) before your first change.
+## Submitting pull requests
 
-### Setting Up the Repository Locally
+1. **Branch** with a descriptive name (`feat/meeting-followup-skill`, `docs/readme`).
+2. **Privacy check** — no real profiles, `.env`, or `*.local.md` in the commit.
+3. **Changelog** — add a short entry under `[Unreleased]` in [`CHANGELOG.md`](./CHANGELOG.md) for user-visible changes.
+4. **Commit** clearly and descriptively.
+5. **Open the PR** with a clear title and description; link related issues. Suggested prefixes: `feat(skills):`, `fix(docs):`, `chore:`.
+6. **Respond to review** feedback.
 
-To set up the repository on your local machine, follow these steps:
-
-1. **Fork the Repository**: Make a copy of the repository to your GitHub account.
-2. **Clone the Repository**: Clone your fork locally, e.g. `git clone https://github.com/<your-user>/my-assistant.git`
-3. **Know the layout**:
-   - `.claude/skills/` — repo-level skills (`install`, `setup`)
-   - `.claude-plugin/marketplace.json` — **adk** marketplace (assistant + productivity plugins)
-   - `skills/assistant/` and `skills/productivity/` — canonical plugin sources
-   - `rules/` — shared behaviour referenced from workspace `CLAUDE.md` files
-   - `workspaces/my-assistant/` — publishable template workspace (safe to commit; fictional or generic context only)
-   - `workspaces/personal-assistant/` — **local only**; gitignored. Never commit real names, household details, or other private data.
-   - `config/*.example.*` — example policy templates users copy locally
-   - `docs/guide/` — end-user documentation
-
-4. **Create a personal workspace (optional)**: To test install flows, copy the template and follow [`.claude/skills/install/SKILL.md`](./.claude/skills/install/SKILL.md), or run the README install prompt in Claude Code.
-
-### Using Git Worktrees
-
-If you work on multiple branches in parallel using [git worktrees](https://git-scm.com/docs/git-worktree), each worktree is a full clone of the repo. No extra setup script is required.
-
-Remember that `workspaces/personal-assistant/` and local `config/` (without `.example` in the name) are gitignored in every worktree — your personal files stay on disk only in the worktree where you created them.
-
-Tip: consider automating worktree creation with a shell alias that runs `git worktree add` and opens the new directory in your editor.
-
-### Running the Examples
-
-The reference workspace is [`workspaces/my-assistant/`](./workspaces/my-assistant/). Use it to validate changes before opening a PR:
-
-1. **Point your agent at the template workspace** — In Claude Cowork: Settings → folder → select `workspaces/my-assistant/` (or your local copy of `personal-assistant` if you created one for testing).
-2. **Run core commands** — e.g. `/setup`, `/productivity:start`, `/productivity:update` as documented in [`docs/guide/`](./docs/guide/).
-3. **Test install/setup skills** — From repo root in Claude Code, follow or simulate the flow in [`.claude/skills/install/SKILL.md`](./.claude/skills/install/SKILL.md) when you change install or setup behaviour.
-
-If you add a new **plugin** skill, edit `skills/<plugin>/skills/<name>/SKILL.md` only — do not copy into workspace folders. Enable via `.claude/settings.json` and `.claude-plugin/marketplace.json`.
-
-### Local Development Workflow
-
-#### Building Packages
-
-There are no npm packages to build. Skills and plugins are edited in place:
-
-- **Repo skills** (`install`, `setup`): `.claude/skills/<name>/SKILL.md` and `.claude/skills/setup/commands/`
-- **Plugin skills**: `skills/assistant/skills/` or `skills/productivity/skills/`
-- **Marketplace**: `.claude-plugin/marketplace.json` lists plugin sources; `.claude/settings.json` enables them for the project
-
-When you change a repo skill or plugin skill, test via Claude Code (`/setup`, `/productivity:start`, etc.) — no workspace sync step.
-
-If you change shared behaviour in `rules/`, ensure [`workspaces/my-assistant/CLAUDE.md`](./workspaces/my-assistant/CLAUDE.md) still references the right rule files.
-
-#### Testing Packages
-
-Validate changes in an agent session rather than a unit-test runner:
-
-1. Open the workspace you updated (template or personal copy).
-2. Trigger the skill via its slash command or a natural-language phrase that matches the skill `description` in the YAML frontmatter.
-3. Confirm file outputs land in the expected paths (`context/`, `TASKS.md`, `memory/`, `output/`, etc.) and that the agent follows confirmation rules in [`rules/core-behavior.md`](./rules/core-behavior.md) and [`rules/file-safety.md`](./rules/file-safety.md).
-
-For doc-only PRs, read the changed pages in preview and check links under `docs/`.
-
-#### Adding package dependencies
-
-This repo does not use `package.json` dependencies. When you add or extend functionality:
-
-- **New plugin skill** — Add `skills/<plugin>/skills/<name>/SKILL.md` with frontmatter (`name`, `description`), document in the plugin README and [`docs/guide/03-add-skills.md`](./docs/guide/03-add-skills.md) if user-facing.
-- **New repo skill** — Add `.claude/skills/<name>/SKILL.md` for repo-level flows (`install`, `setup`, etc.).
-- **New rule** — Add under `rules/` and reference it from workspace `CLAUDE.md` files as needed.
-- **New config template** — Add `config/<name>.example.md` or `.yaml` with fictional data only; never commit real VIPs, API keys, or label IDs.
-- **Connectors** — Prefer category-based wording (chat, email, calendar) per [`skills/productivity/CONNECTORS.md`](./skills/productivity/CONNECTORS.md) so skills stay provider-agnostic where possible.
-
-### Submitting Pull Requests
-
-We greatly appreciate your pull requests. Here are the steps to submit them:
-
-1. **Create a New Branch**: Initiate your changes in a fresh branch. It's recommended to name the branch in a manner that signifies the changes you're implementing (e.g. `docs/readme-adk`, `feat/weekly-review-skill`).
-2. **Privacy check**: Do not include `workspaces/personal-assistant/`, filled-in `config/` files, `.env`, or `*.local.md` in your commit. The template workspace must use generic or fictional content only.
-3. **Changelog**: For user-visible changes, add a short entry under `[Unreleased]` or the next version in [`CHANGELOG.md`](./CHANGELOG.md).
-4. **Commit Your Changes**: Ensure your commits are succinct and clear, detailing what modifications have been made and the reasons behind them. We don't require a specific commit message format, but please be descriptive.
-5. **Push the Changes to Your GitHub Repository**: After committing your changes, push them to your fork.
-6. **Open a Pull Request**: Propose your changes for review. Furnish a clear title and description of your contributions. Link any relevant issues your PR resolves. Suggested PR title prefixes:
-   - `fix(docs): …` or `fix(skills): …`
-   - `feat(skills): …` or `feat(workspace): …`
-   - `chore: …`
-7. **Respond to Feedback**: Stay receptive to and address any feedback or alteration requests from the project maintainers.
-
-Thank you for contributing to the AI Assistant ADK! Your efforts help improve the project for everyone.
-
-## Learn More
-
-We have additional contributor documentation in the [contributing/](./contributing/) folder.
+Thank you for contributing!

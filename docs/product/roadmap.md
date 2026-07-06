@@ -1,145 +1,97 @@
 ---
 type: Roadmap
-domain: ai-assistant-adk
-version: '0.1'
+domain: my-assistant
+version: '1.0'
 owner: JD
 status: Active
-last_updated: 2026-05-27
-parent_product: product.md
+last_updated: 2026-07-06
 related:
-  - product.md
   - strategy.md
   - ../guide/05-protect-privacy.md
 ---
 
-# Roadmap — AI Assistant ADK
+# Roadmap — My Assistant
 
-Delivery roadmap for the [AI Assistant ADK](./product.md) (Agent Development Kit). Phases are **Now → Next → Future**: outcome-based, with testable exit criteria — not an epic backlog.
+Delivery roadmap for the [My Assistant](./strategy.md) plugin. Phases are **Now → Next → Future**: outcome-based, with testable exit criteria.
 
-## 1. Roadmap intent
+## 1. Intent
 
-Sequence the ADK from a **proven desktop assistant** (Cowork + my-assistant + privacy baseline) to **multi-runtime and cloud-capable** delivery, then to a **broader kit** others can fork for many assistant shapes.
+Ship a trustworthy **single plugin** that covers the full executive-assistant surface (inbox, replies, follow-ups, meetings, briefing, tasks, memory) draft-first on Cowork and Claude Code — then extend connector coverage and the always-on managed-agent path, then broaden into a forkable kit.
 
 ## 2. Sequencing logic
 
-1. **Desktop first** — local files, user-controlled folder, minimal moving parts; proves install, setup, skills, and governance before cloud complexity.
-2. **One reference workspace** — my-assistant must work end-to-end before adding more examples or providers.
-3. **Security and privacy early** — gitignore, rules, and user-facing privacy docs are part of Now, not deferred to Next.
-4. **Providers and hosting after proof** — cloud runtimes and alternate adapters build on portable artifacts already validated on desktop.
+1. **One plugin, full surface first** — all EA jobs under one install and one profile before adding breadth.
+2. **Draft-first and privacy early** — draft-don't-send, file-safety, and profile-outside-plugin are part of Now, not deferred.
+3. **Standalone before connectors** — every skill works on pasted content; connectors supercharge.
+4. **Desktop scheduling before managed agents** — prove the jobs locally, then offer the always-on cloud surface for the critical ones.
 
 ## 3. Phases
 
-### Phase 1 — Now (desktop, Cowork, my-assistant)
+### Phase 1 — Now (v1: the plugin)
 
-**Objective:** Ship a trustworthy **desktop** reference assistant on **Claude Cowork** using the **my-assistant** template, with clear **security and privacy** defaults.
+**Objective:** Ship the one-install My Assistant plugin with the full EA surface, draft-first, on Cowork and Claude Code.
 
-**In flight**
+**Delivered**
 
 | Area | Delivery |
 |------|----------|
-| Runtime | Claude Cowork on desktop (folder pointed at user workspace) |
-| Install | Claude Code agentic install + README quick start |
-| Reference workspace | `workspaces/my-assistant/` template; `personal-assistant` gitignored |
-| Plugins | `skills/assistant`, `skills/productivity` copied into workspace |
-| ADK positioning | README, strategy, CONTRIBUTING aligned on Agent Development Kit |
-| Security & privacy | `rules/file-safety`, `rules/core-behavior`; guide [05-protect-privacy](../guide/05-protect-privacy.md); no personal data in Git |
+| Packaging | Single plugin: `plugin.json` + single-plugin `marketplace.json`; installable via GitHub URL |
+| Skills | 12 skills (setup, inbox-triage, reply-drafting, follow-up-tracker, calendar-manager, meeting-prep, meeting-follow-up, daily-brief, task-management, memory, weekly-review, schedules) |
+| Commands | 7 (`setup`, `brief`, `inbox`, `prep`, `update`, `review`, `schedules`) |
+| Agents | 3 named + schedulable agents; 3 managed-agent cookbooks |
+| Personalisation | Profile at `~/.claude/plugins/config/my-assistant/`, survives `/plugin update`; `SessionStart` hook loads it |
+| Guardrails | `rules/core-behaviour` (draft-don't-send, 4 autonomy tiers), `rules/file-safety` |
+| Connectors | `.mcp.json` suggestions + `CONNECTORS.md`; native Gmail/Calendar/Drive; standalone fallback |
 
 **Exit criteria**
 
-- [ ] New user completes install → `/setup` → `/productivity:start` on desktop Cowork without manual skill editing
-- [ ] `workspaces/personal-assistant/` is gitignored; only template context is committed
-- [ ] Privacy guide states what stays local, what goes to the model provider, and connector opt-in behaviour
-- [ ] Confirmation model documented: no send/book/delete without explicit approval per action
-- [x] Canonical skills under `skills/` and `.claude/skills/`; no workspace skill copies to sync
+- [x] One install exposes all 7 commands and 12 skills under the `my-assistant` namespace
+- [x] `/my-assistant:setup` writes a profile outside the plugin directory
+- [x] Every skill works standalone (pasted content) and degrades gracefully without connectors
+- [x] No skill sends, books, or spends; confirmation model documented
+- [x] Packaged scheduled-task prompts shipped with machine-awake + tool-preapproval caveats
 
 **Out of scope for this phase**
 
-- Cloud-hosted or always-on agent runtimes
-- Cursor / Managed Agents / third-party adapter documentation beyond stubs
-- Multiple published example workspaces (beyond my-assistant)
-- Automated scheduling layer independent of Cowork UI
+- Live meeting bot / call recording (we compete on prep + follow-up)
+- Auto-send of any kind
 
 ---
 
-### Phase 2 — Next (cloud, providers, examples, stronger privacy)
+### Phase 2 — Next (connectors, managed agents, examples)
 
-**Objective:** Extend the ADK beyond **desktop Cowork** — **cloud-capable** operation, **additional providers**, more **assistant examples**, and **enhanced** security and privacy guidance.
-
-**In flight**
+**Objective:** Harden connector coverage and the always-on path; validate voice/anti-style quality against real use.
 
 | Area | Delivery |
 |------|----------|
-| Cloud | Documented path for cloud / managed agent runtimes (API or hosted Cowork-class execution) |
-| Providers | At least one non-Cowork adapter (e.g. Cursor rules + skills path, or Claude Managed Agents) |
-| Examples | Additional assistant templates (use cases beyond personal my-assistant) |
-| Security & privacy | Hardened docs, config patterns, and rules for cloud + multi-provider (secrets, data residency, connector scope) |
+| Managed agents | Documented deployment of the three cookbooks to a managed-agent environment (vault OAuth, burst schedules) |
+| Connectors | Validate `~~email`/`~~calendar`/`~~chat` across Gmail, Microsoft 365, and Slack end-to-end |
+| Autonomy | Tier 2/3 rollout guidance with the "edits fewer than ~1 in 5 drafts" benchmark |
+| Quality | Voice-sample workflow (`voice/`) and anti-style regression checks |
 
 **Exit criteria**
 
-- [ ] Documented “cloud running” setup: what runs where, what data leaves the machine, and required secrets handling
-- [ ] One additional provider adapter doc with parity list (install, workspace folder, skills location)
-- [ ] ≥1 new example workspace committed (fictional/generic context) with README pointer from main README
-- [ ] Privacy/security docs updated for cloud and connectors (threat model summary, checklist for forkers)
-- [ ] Provider-agnostic skill wording validated on second runtime (smoke test checklist passed)
-
-**Out of scope for this phase**
-
-- Full template marketplace or private plugin registry
-- Provider-agnostic cron/automation replacing all runtime schedulers
-- Enterprise SSO or team admin console
+- [ ] One managed-agent cookbook deployed and running on a burst schedule with drafts landing
+- [ ] Inbox triage + reply drafting validated on a second email provider
+- [ ] Documented path to raise a user from Tier 1 → Tier 2 safely
 
 ---
 
 ### Phase 3 — Future (kit at scale)
 
-**Objective:** Mature the ADK as a **forkable platform** — template gallery, scheduling abstraction, and team distribution — without collapsing back into a single product.
-
 **Direction (not committed scope)**
 
-- Template gallery for verticals (work, family ops, research, etc.)
-- Provider-agnostic schedule / automation layer backed by `tasks/*.task.md`
-- Team distribution via plugins (`.claude-plugin` / MCP bundles)
-- Consolidate legacy `shared/` into canonical `skills/` and `rules/`
+- Template variants for different roles (founder, IC, family ops)
+- Provider-agnostic scheduling abstraction
+- Richer memory tooling and shorthand learning
 
-**Exit criteria (to be refined when Next completes)**
+**Exit criteria (refined when Next completes)**
 
-- [ ] Roadmap reviewed; Future broken into phased backlog with owners
 - [ ] Next phase exit criteria all met
+- [ ] Future broken into a phased backlog with owners
 
-**Out of scope until replanned**
+## 4. Review cadence
 
-- Commercial hosting product
-- Compliance certifications (SOC2, etc.) unless explicitly sponsored
-
-## 4. Milestones
-
-| Milestone | Phase | Customer-visible? | Notes |
-|-----------|-------|-------------------|-------|
-| ADK README + strategy published | Now | Yes (GitHub) | Agent Development Kit positioning |
-| Desktop install + `/setup` path verified | Now | Yes | Cowork folder + Claude Code install |
-| Privacy guide + gitignore enforced | Now | Yes | Personal workspace never committed |
-| Cloud adapter doc published | Next | Yes (docs) | Defines data boundary for cloud run |
-| Second provider adapter published | Next | Yes (docs) | e.g. Cursor or Managed Agents |
-| Second example workspace shipped | Next | Yes | Beyond my-assistant |
-| Future scope replanned | Future | Internal | After Next gate |
-
-## 5. Cross-domain dependencies
-
-| Dependency | Owner | Gates | Current status |
-|------------|-------|-------|----------------|
-| Anthropic Cowork desktop stability | Anthropic | Now — folder + skills UX | In use |
-| Claude Code for agentic install | Anthropic | Now — README install prompt | In use |
-| Provider APIs for cloud phase | TBD per provider | Next — cloud running | Not started |
-| `daddia/skills` tooling (e.g. write-roadmap) | JD | Docs/product hygiene | Available |
-
-## 6. Out of scope for this roadmap cycle
-
-- Story-level backlog / epic acceptance criteria in `roadmap.md` (use a separate backlog if needed)
-- Implementation modules or stack choices (see [strategy.md](./strategy.md))
-- Commercial pricing or GTM strategy
-
-## 7. Review cadence
-
-- **Weekly (active Now work):** progress against Now exit criteria; blockers on install/setup/privacy
-- **Pre-phase-gate:** all exit criteria checked before starting Next
-- **Quarterly:** revisit Future; adjust Next if provider landscape shifts
+- **Weekly (active Now/Next work):** progress against exit criteria; draft-quality issues
+- **Pre-phase-gate:** all exit criteria checked before starting the next phase
+- **Quarterly:** revisit Future; adjust for platform changes (Cowork scheduling, Managed Agents API)

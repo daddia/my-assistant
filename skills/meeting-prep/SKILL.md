@@ -1,0 +1,56 @@
+---
+name: meeting-prep
+description: Produce a pre-meeting brief — who's in the room, what they do, last
+  contact, and what to prepare. Activate when the user says "/my-assistant:prep",
+  "prep me for my next meeting", "who am I meeting", or on a meeting-prep schedule.
+---
+
+# Meeting prep
+
+Walk into every meeting knowing who's across the table and what it's about. This is the plugin's answer to a notetaker — we compete on *prep and follow-up*, not on joining the call.
+
+## Read the profile first
+
+Load key people, VIP tiers, and voice. Load `memory/` for anything already known about the attendees.
+
+## What it does
+
+For each upcoming meeting (from `~~calendar`, or a meeting the user names/pastes):
+
+1. **Who** — attendees, their role and company. Pull from `memory/people.md`, the profile's key people, and any `~~notes`/`~~drive` context. If external and unknown, say so plainly rather than inventing a bio.
+2. **What** — the meeting's purpose, from the invite, the thread that spawned it, and related docs.
+3. **Last contact** — when the user last spoke to this person and about what (from `~~email` history or memory). One line.
+4. **Prep needed** — the 1–3 things the user should have ready: a decision to make, a doc to bring, a question to ask, an open thread to close.
+
+Keep each brief to a tight paragraph plus a short prep list. A day of meetings should fit on one screen.
+
+## Output shape
+
+```
+Meeting prep — Tue 8 Jul
+
+10:00  Acme quarterly review (Sam Lee, VP Ops; Priya Rao, our side)
+  Who:  Sam runs Acme ops, your main contact since Feb. Priya = your lead.
+  What: Review Q2 delivery, agree Q3 scope.
+  Last: Emailed Sam 4 Jul re contract (awaiting reply — see follow-ups).
+  Prep: Bring revised deck. Decision: sign off Q3 scope or defer. Ask: renewal timing.
+
+14:00  1:1 — Dana (direct report)
+  ...
+```
+
+## Standalone
+
+No calendar? The user pastes the invite or names the meeting; you prep from memory, the profile, and any pasted context.
+
+## Hand-offs
+
+- Contract/thread status → `follow-up-tracker`
+- Times/conflicts → `calendar-manager`
+- After the meeting → `meeting-follow-up`
+- New facts learned about an attendee → offer to save via `memory`
+
+## Rules
+
+- Don't fabricate a person's background. Unknown is "external contact, no prior context on file".
+- Read-only: prep never books, sends, or edits the calendar.

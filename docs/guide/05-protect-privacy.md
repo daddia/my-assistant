@@ -2,36 +2,32 @@
 
 Where your data lives and who can see it.
 
-## Your data stays on your computer
+## Your profile stays on your machine
 
-Your personal details — family, preferences, writing style — live in your workspace folder. They're files on your machine, like documents in a folder.
+Your personal details — identity, voice, VIP tiers, policies — live in your profile at `~/.claude/plugins/config/my-assistant/profile.md`, a file on your computer. It is **not** part of the plugin and is never uploaded to GitHub. Only a blank `config/profile.template.md` ships with the repo.
 
-Your personal workspace is never uploaded to GitHub. Only a blank template ships with the repo.
+Your tasks (`TASKS.md`) and memory (`memory/`) are likewise plain files in your working folder.
 
 ## What Claude sees
 
-When you use Cowork, Claude reads your workspace files to understand context. Those files are sent to Anthropic as part of your conversation — the same as pasting text into any Claude chat.
+When you use Cowork or Claude Code, Claude reads your profile and working files to understand context. Those are sent to Anthropic as part of your conversation — the same as pasting text into any Claude chat. See [Anthropic's privacy policy](https://www.anthropic.com/privacy).
 
-See [Anthropic's privacy policy](https://www.anthropic.com/privacy) for how they handle data.
+## Connectors are read-and-draft only
 
-## Connectors are optional
+Without connectors, My Assistant only sees your local files. When you connect a service, it can *read* from it (and create Gmail drafts) — it still won't send messages, book, or change anything without your approval each time.
 
-Without connected email, calendar, or chat, my-assistant only sees what's in your workspace folder. Nothing is fetched from external services.
-
-When you do connect a service, my-assistant can *read* from it during `/update --comprehensive`. It still won't send messages or make changes without your approval each time.
-
-## What my-assistant won't do without asking
+## What it won't do without asking
 
 - Send emails or messages
 - Make bookings or purchases
-- Change calendar events
-- Share your workspace anywhere
+- Create, move, or delete calendar events
+- Delete files or share your data anywhere
 
-It drafts. You decide what goes out.
+It drafts. You decide what goes out. Full rules: [`rules/core-behaviour.md`](../../rules/core-behaviour.md) and [`rules/file-safety.md`](../../rules/file-safety.md).
 
-## If you sync your workspace
+## What not to store
 
-If you copy your workspace to iCloud, Dropbox, or another machine, your personal files go with it. Treat it like any folder with private notes.
+Never put passwords, PINs, 2FA codes, or full account numbers in your profile, tasks, or memory. These files are plain text on disk — treat them like a notes app.
 
 ## Next
 

@@ -1,0 +1,57 @@
+# Managed agent cookbook — inbox triage
+# Beta: managed-agents-2026-04-01. Deploy to a managed-agent environment.
+# Draft-only: never sends, books, or spends.
+
+name: my-assistant-inbox-triage
+version: "1.0.0"
+description: >
+  Sweeps the inbox on a burst schedule, buckets mail into
+  needs-reply / FYI / marketing / VIP, drafts replies in the user's
+  voice, and posts a digest. Never sends.
+
+model: claude-fable-5
+
+# Burst schedule — cheap, avoids continuous polling.
+schedule: "0 8,12,16 * * 1-5"
+
+system_prompt: |
+  You are the user's inbox-triage chief of staff. Every run:
+    1. Read the profile (mounted at /config/profile.md) for VIP tiers,
+       email policy, voice, and autonomy tier.
+    2. Follow the my-assistant inbox-triage skill to bucket new mail
+       since the last sweep.
+    3. Follow the reply-drafting skill to draft replies for needs-reply
+       and VIP items in the user's voice. DRAFT ONLY — never send.
+    4. Summarise long threads.
+    5. Post a digest to chat: what you drafted, what you propose archiving.
+  Hard rules: draft-only at every autonomy tier; never mark a Tier 1 VIP
+  read without confirmation; apply labels/archives only at Tier 2+.
+
+tools:
+  - email.read
+  - email.draft        # draft-only; no send scope requested
+  - email.label
+  - chat.post
+
+mcp_servers:
+  - name: email
+    # OAuth via environment vault — do not inline secrets.
+    credential: ${vault.email_oauth}
+  - name: chat
+    credential: ${vault.chat_oauth}
+
+skills:
+  - inbox-triage
+  - reply-drafting
+
+files:
+  - source: config/profile.md      # user profile, mounted read-only
+    mount: /config/profile.md
+    mode: read
+
+steering_examples:
+  - input: "Newsletter from substack.com, no action needed."
+    output: "Bucket: marketing. Propose archive. No draft."
+  - input: "Client asks to move Thursday's call."
+    output: "Bucket: VIP/needs-reply. Draft a reply offering 2-3 slots
+             (hand scheduling to calendar-manager). Draft only."

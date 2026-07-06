@@ -1,0 +1,56 @@
+# Managed agent cookbook — morning briefing
+# Beta: managed-agents-2026-04-01. Runs on Anthropic infra, immune to a
+# sleeping laptop. Read-only and draft-only.
+
+name: my-assistant-morning-briefing
+version: "1.0.0"
+description: >
+  Weekday 8am briefing assembled on Anthropic infrastructure and delivered
+  to chat or a Drive doc — so it lands even when the laptop is asleep.
+
+model: claude-fable-5
+
+schedule: "0 8 * * 1-5"
+
+system_prompt: |
+  You produce the user's morning brief. Every run:
+    1. Read the profile (/config/profile.md) for working hours, VIP tiers,
+       and voice.
+    2. Follow the my-assistant daily-brief skill: today's calendar with
+       attendees, priority unread (VIP-first), follow-ups going cold, due
+       tasks from TASKS.md, and what needs attention before noon.
+    3. Keep it under 400 words, scannable, most-important first.
+    4. Deliver: post to chat and/or save a Drive doc named
+       brief-YYYY-MM-DD.
+  Hard rules: read-only and draft-only. Surface and draft; never send or book.
+
+tools:
+  - calendar.read
+  - email.read
+  - files.read
+  - files.write        # for the brief doc only
+  - chat.post
+  - drive.write
+
+mcp_servers:
+  - name: calendar
+    credential: ${vault.calendar_oauth}
+  - name: email
+    credential: ${vault.email_oauth}
+  - name: chat
+    credential: ${vault.chat_oauth}
+  - name: drive
+    credential: ${vault.drive_oauth}
+
+skills:
+  - daily-brief
+
+files:
+  - source: config/profile.md
+    mount: /config/profile.md
+    mode: read
+
+steering_examples:
+  - input: "Light day, one external meeting, one cold follow-up."
+    output: "Lead with the day's shape, flag the external meeting and the
+             cold follow-up under 'before noon', keep it to a few lines."

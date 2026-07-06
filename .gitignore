@@ -1,10 +1,14 @@
-# Agent workspaces (except the publishable example)
-workspaces/*
-!workspaces/my-assistant/
+# User profile / personalisation — never committed (lives outside the plugin)
+# ~/.claude/plugins/config/my-assistant/profile.md
 
-# Local config
-config/
-!config/*example.*
+# Local runtime state if developing against a working folder
+TASKS.md
+MEMORY.md
+memory/
+brief-*.md
+review-*.md
+drafts/
+output/
 
 # Secrets
 .env

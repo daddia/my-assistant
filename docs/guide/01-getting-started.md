@@ -1,51 +1,42 @@
-# Get started with my-assistant
+# Get started
 
-Install takes about two minutes. You paste a prompt — Claude Code does the rest.
+Install takes a couple of minutes.
 
-## Step 1 — Paste this into Claude Code
+## Step 1 — Install the plugin
+
+In **Cowork** or **Claude Code**: Customize → Plugins → **add a marketplace from a GitHub URL** and paste:
 
 ```
-Set up my personal assistant workspace from this repo:
 https://github.com/daddia/my-assistant
-
-Clone it and tell me:
-- What workspaces are available
-- What skills I have and what they do
-- How to point Cowork at my workspace
-
-What can you help me with once I'm set up?
 ```
 
-Claude Code will clone the repo, create your workspace folder, and tell you where everything is.
+Then install **my-assistant** from that marketplace. It shows up in both chat and Cowork. (You can also upload the plugin as a zip, or add the repo as a local directory marketplace during development.)
 
-## Step 2 — Open Cowork
-
-1. Open **Claude Cowork**
-2. Go to **Settings → folder**
-3. Select your workspace folder (Claude Code will tell you the path — usually something like `~/my-assistant/workspaces/personal-assistant/`)
-
-## Step 3 — Run setup
-
-From **Claude Code at the repo root** (recommended), type:
+## Step 2 — Run setup
 
 ```
-/setup
+/my-assistant:setup
 ```
 
-Claude walks you through a short conversation — your name, household, how you write, and what it can do on your behalf. Context files are written in your workspace folder.
+A short conversation captures your identity, writing voice, anti-AI style, working rules and autonomy tier, VIP tiers, and email/calendar policy. Choose the 2-minute quick-start or the full 10-minute interview.
 
-In **Cowork** (workspace folder only), ask Claude to follow `../../.claude/skills/setup/SKILL.md` if `/setup` is not available.
-
-## You're done
-
-Once setup finishes, try:
+Your answers are written to a **profile** at:
 
 ```
-/productivity:start
+~/.claude/plugins/config/my-assistant/profile.md
 ```
 
-This initialises your task list and memory. Then just ask for help — "what's on my list this week?", "draft a message to the school", "remind me to book the dentist".
+This lives *outside* the plugin, so updating the plugin never overwrites your personalisation.
+
+## Step 3 — Try the wedge
+
+```
+/my-assistant:inbox      # triage + draft replies
+/my-assistant:brief      # morning briefing
+```
+
+No connectors yet? Paste an email thread or your calendar — every skill works standalone.
 
 ## Next
 
-[Set up your personal workspace →](02-setup-workspace.md)
+[Configure your profile →](02-setup-workspace.md) · [Connect your tools →](04-connect-tools.md)

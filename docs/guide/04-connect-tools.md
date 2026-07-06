@@ -1,38 +1,44 @@
 # Connect email, calendar, and chat
 
-my-assistant works without any connections — everything runs from files on your computer. Connect email, calendar, or chat if you want it to scan for tasks and reminders you've missed.
+My Assistant works without any connections — every skill runs on content you paste. Connect your tools and it works directly against your real inbox, calendar, and messages.
 
 ## How to connect
 
-In Cowork: **Settings → Connectors**. Choose the services you use and sign in.
+In Cowork: **Settings → Connectors**. Sign in to the services you use.
 
 ## What you can connect
 
-| Tool | What my-assistant can do with it |
-|------|----------------------------------|
-| **Gmail** | Spot action items in recent email |
-| **Google Calendar** | See what's coming up, flag prep needed |
-| **Google Drive** | Read shared documents |
-| **Slack** | Scan messages for commitments you made |
-| **Microsoft 365** | Email, calendar, and OneDrive (alternative to Google) |
+| Tool | What My Assistant does with it |
+|------|-------------------------------|
+| **Gmail** (native, draft-only) | Read mail, triage, create reply drafts — never sends |
+| **Google Calendar** (native) | See your schedule, prep meetings, propose times |
+| **Google Drive** (native) | Read shared documents for meeting prep |
+| **Slack** | Scan messages, post digests you've opted into |
+| **Notion** | Notes and knowledge lookups |
+| **Microsoft 365** | Email, calendar, OneDrive (alternative to Google) |
+| **Jira / Linear / monday** | Task and work-item context |
 
-You don't need all of these. Connect what you actually use.
+Connect only what you use. The plugin refers to tools by category (`~~email`, `~~calendar`, `~~chat`, …) so any provider in that category works — see [`CONNECTORS.md`](../../CONNECTORS.md).
+
+## Gmail is draft-only — by design
+
+Claude's Gmail connector can read and draft but **cannot send**. That's exactly how My Assistant operates: it drafts, you send. The limitation and the design are the same thing.
 
 ## Using connectors
 
-Once connected, run:
+Once connected:
 
 ```
-/update --comprehensive
+/my-assistant:inbox                 # triages your real inbox
+/my-assistant:brief                 # pulls today's real calendar + unread
+/my-assistant:update --comprehensive # scans email/calendar/chat for missed todos
 ```
 
-my-assistant scans your recent activity and suggests tasks or memories you might have missed — "You said you'd call the plumber in an email Tuesday — want me to add that?"
-
-It always asks before adding anything. Nothing is sent or changed automatically.
+It always asks before adding a task or a memory, and never sends or books automatically.
 
 ## Without connectors
 
-Run `/productivity:update` without the flag. my-assistant reviews your local task list and memory only. Still useful — just no email or calendar scan.
+Everything still runs — paste a thread, your agenda, or work from `TASKS.md` and memory alone. Skills skip any missing connector and note the gap rather than failing.
 
 ## Next
 

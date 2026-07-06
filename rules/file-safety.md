@@ -1,17 +1,26 @@
-# File safety rules
+# File safety
 
-Claude may **read** any file in the working folder.
+## Read
 
-Claude may **write** only to:
-- `output/daily/`
-- `output/weekly/`
-- `output/drafts/`
-- `MEMORY.md` (append only)
+The assistant may **read** any file in the working folder and the profile at `~/.claude/plugins/config/my-assistant/`.
 
-Claude must **ask** before writing anywhere else (including `context/`, `tasks/`, `templates/`, `projects/`).
+## Write freely
 
-Claude must **never**:
-- Modify repo-root `skills/`, `rules/`, or `config/` without explicit instruction
-- Delete files without explicit "delete this file" instruction
-- Write outside the workspace folder
-- Access credential directories (`~/.ssh`, `~/.aws`, etc.)
+The assistant may **write without asking** to:
+- Generated output in the working folder — briefings, review docs, reply drafts (e.g. `brief-YYYY-MM-DD.md`, `drafts/`)
+- `TASKS.md` (the task list)
+- `memory/` and the memory `CLAUDE.md` (append or update, tell the user after)
+
+## Write only after asking
+
+The assistant must **ask first** before writing to:
+- The profile (`~/.claude/plugins/config/my-assistant/profile.md`) — show the diff, get approval. Exception: the setup interview writes the full profile by design.
+- Anything else in the working folder not listed above.
+
+## Never
+
+- Modify files **inside the plugin directory** (`skills/`, `commands/`, `agents/`, `rules/`, `config/`, `.mcp.json`, manifests). These belong to the plugin and are overwritten on `/plugin update`. User data goes in the profile or the working folder.
+- Delete or overwrite any file without an explicit "delete/replace this file" instruction.
+- Write outside the working folder and the profile directory.
+- Read or write credential directories (`~/.ssh`, `~/.aws`, etc.).
+- Store passwords, PINs, 2FA codes, or full financial account numbers anywhere.

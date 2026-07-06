@@ -1,45 +1,50 @@
-# AI Assistant ADK
+# My Assistant
 
-The **AI Assistant ADK** (Agent Development Kit) is a provider-agnostic toolkit designed to help you build AI-powered assistants and agents using popular desktop and cloud agents like Claude Cowork, Claude Managed Agents, Cursor Cloud Agents, etc.
+**Your AI chief of staff for inbox, calendar, and follow-ups.**
 
-The kit is plain English — skills, rules, and workspace files you can read and edit without writing application code. No writing code: everything is a conversation with your agent.
+One installable plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
 
-To learn more about how to use the AI Assistant ADK, checkout our [Documentation](./docs/).
+It **drafts everything for your review and never sends, books, or spends on your behalf.** You glance, edit, and send. That's the whole promise.
 
-## Get started
+## What it does
 
-Paste this into Claude Code:
+| Job | Command |
+|-----|---------|
+| Configure it to you (10-min interview) | `/my-assistant:setup` |
+| Triage the inbox + draft replies | `/my-assistant:inbox` |
+| Morning briefing | `/my-assistant:brief` |
+| Prep for today's meetings | `/my-assistant:prep` |
+| Sync tasks + memory | `/my-assistant:update` |
+| Weekly review | `/my-assistant:review` |
+| Set up scheduled tasks | `/my-assistant:schedules` |
+
+Plus skills that fire on their own as you work: follow-up tracking, calendar drafting, meeting follow-up from pasted notes, task capture, and two-tier memory that decodes your shorthand ("ask todd re oracle").
+
+## Install
+
+**In Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **my-assistant**. It appears in both chat and Cowork.
+
+Then run:
 
 ```
-Set up my personal assistant workspace from this repo:
-https://github.com/daddia/my-assistant
-
-Clone it and tell me:
-- What workspaces are available
-- What skills I have and what they do
-- How to point Cowork at my workspace
-
-What can you help me with once I'm set up?
+/my-assistant:setup
 ```
 
-Then open Cowork, point it at your workspace, and run `/setup`.
+A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. It writes a **profile** to `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin, so `/plugin update` never overwrites it.
 
-## Use a template (coming soon)
+## Works on day one, sharper with connectors
 
-We've built [examples](.) that include AI Assistant ADK for different use cases and scenarios. You can use these templates to get started with your AI-powered assistant.
+Every skill is standalone-first: paste an email thread or your calendar and it just works. Connect Gmail, Google Calendar, Slack, Notion, or Microsoft 365 (Cowork → Settings → Connectors) and it works directly against your accounts. Gmail is **draft-only** by design — which is exactly how this plugin operates. See [`CONNECTORS.md`](./CONNECTORS.md).
 
-## Read the docs
+## Always-on options
 
-To learn more about how to use the AI Assistant ADK, checkout our [Documentation](./docs/).
+- **Scheduled tasks** (`/my-assistant:schedules`) — morning briefing, inbox sweeps, follow-up watcher, weekly review. Run locally; the machine must be awake.
+- **Managed-agent cookbooks** ([`managed-agents/`](./managed-agents/)) — the same jobs on Anthropic's infrastructure, immune to a sleeping laptop. Advanced/optional.
 
-## Contributing
+## How it's built
 
-Contributions to the AI Assistant ADK are welcome and highly appreciated. However, before you jump right into it, we would like you to review our [Contribution Guidelines](CONTRIBUTING.md) to make sure you have smooth experience contributing to AI Assistant ADK.
-
-## Authors
-
-This library is created by [JD](https://github.com/daddia), with contributions.
+Plain English — skills, rules, and a profile you can read and edit. No application code. See [`AGENTS.md`](./AGENTS.md) for the trigger→skill map and [the docs](./docs/) for the full guide.
 
 ## Licence
 
-[MIT Licence](LICENSE) · Copyright (c) 2026 daddia.
+[MIT](LICENSE) · Copyright (c) 2026 daddia.

@@ -1,460 +1,87 @@
-# AI Assistant ADK — Product strategy & architecture
+# My Assistant — product strategy & architecture
 
-The **AI Assistant ADK** (Agent Development Kit) is a provider-agnostic toolkit for building AI-powered personal and team assistants. You version skills, rules, workspace layout, and context in Git; each **workspace** is a separate assistant project (personal, work, side project, etc.) that any supported agent runtime can load.
+**My Assistant** is a single installable plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that acts as an AI chief of staff: inbox triage, reply drafting in the user's voice, follow-up tracking, meeting prep and follow-up, a daily briefing, scheduling drafts, tasks, and two-tier memory. It **drafts everything and never sends, books, or spends** on the user's behalf.
 
-This document is the product and architecture source of truth. For practitioner patterns and research notes, see [research.md](./research.md). For end-user setup, see the [user guide](../guide/00-introduction.md) and [README](../../README.md).
-
----
-
-## Product vision
-
-**What we are building**
-
-- Not a single shipped assistant product, but a **kit** others fork and adapt.
-- **Portable artifacts** — workspaces, `context/`, skills (`SKILL.md`), `rules/`, config examples, task specs — that work across runtimes where possible.
-- **Provider adapters** — runtime-specific setup (folder picker, global instructions, scheduling UI, connector wiring).
-
-**Who it is for**
-
-- Builders who want a structured starting point for Cowork-, Claude Code-, or Cursor-style agents.
-- People who care about privacy (local files, gitignored personal workspaces) and repeatable behaviour (skills + rules in version control).
-
-**Reference implementation (v0)**
-
-- **Template workspace:** [`workspaces/my-assistant/`](../../workspaces/my-assistant/) — publishable, fictional/generic context; safe to commit.
-- **Bundled plugins:** [`skills/assistant/`](../../skills/assistant/) (install, setup, memory) and [`skills/productivity/`](../../skills/productivity/) (start, update, tasks, memory sync).
-- **Primary runtime today:** [Claude Cowork](https://claude.com/product/cowork) and Claude Code (install prompt in README). Additional providers are planned, not fully documented yet.
-
-**Naming**
-
-- **ADK** — Agent Development Kit.
-- **AI Assistant ADK** — the repo and toolkit brand (ADK focused on assistant/agent workflows).
-- **my-assistant** — the default template workspace and GitHub repo name (`daddia/my-assistant`); users copy it to `personal-assistant` or other workspace names locally.
+This document is the product and architecture source of truth. End-user setup is in the [user guide](../guide/00-introduction.md) and [README](../../README.md).
 
 ---
 
-## Portable vs provider-specific
+## Positioning
 
-| Portable (ADK core) | Provider-specific (adapter) |
-|-----------------------|-----------------------------|
-| `workspaces/<name>/CLAUDE.md`, `context/*.md` | Cowork: Settings → folder; Global Instructions |
-| `skills/*/skills/<name>/SKILL.md` (plugin source) | Claude Code: plugins via `.claude/settings.json` + **adk** marketplace |
-| `.claude/skills/<name>/SKILL.md` (repo skills) | Claude Code: parent walk from workspace to repo root |
-| `rules/*.md` | Cursor: `.cursor/rules` or project rules (TBD) |
-| `config/*.example.*` | Connector install via Cowork UI / MCP |
-| `tasks/*.task.md` (prompt + metadata) | Cowork `/schedule` or UI to create schedules |
-| `TASKS.md`, `MEMORY.md`, `memory/`, `output/` | Managed Agents / Cloud Agents APIs (TBD) |
+- **One plugin, many skills** — modelled on the Vercel plugin (one install; `skills/`, `commands/`, `agents/`, one `.mcp.json`) and Anthropic's knowledge-work plugins, not a marketplace of separate plugins.
+- **"Your AI chief of staff for inbox, calendar and follow-ups."** An executive/personal assistant, not a team workflow tool.
+- **Draft-first as the core promise.** It prepares; you approve. This matches Cowork's draft-only Gmail connector and the SaaS norm (Fyxer never sends).
+- **Zero-config-usable, sharper after a 10-minute setup interview.**
 
-**Design goal:** keep skill instructions and connector references **category-based** (chat, email, calendar) so the same skill text survives provider changes. See [`skills/productivity/CONNECTORS.md`](../../skills/productivity/CONNECTORS.md).
+## Competitive frame
 
-**Honest scope (v0):** install and setup flows are documented for Claude Code + Cowork. Other providers should reuse the same files where their runtimes read Markdown skills and project instructions; adapter docs will grow over time.
+The canonical EA job list, benchmarked against Fyxer and Superhuman: inbox triage, reply drafting in voice, follow-up tracking, meeting prep + follow-up, scheduling, daily briefing, task capture, memory/context. My Assistant covers all of these in v1.
+
+Honest gaps vs SaaS, and how we handle them:
+
+- **No live meeting bot.** We compete on *prep* and *post-meeting follow-up from pasted notes/transcripts* (Granola/Fireflies/Otter output), not on joining calls.
+- **Sweep-cadence, not instant drafts.** 3×/day inbox sweeps + managed-agent bursts get close; the review step is the safety feature.
+- **Draft-only, never sends.** Framed as trust, and it matches the platform.
+
+---
+
+## Architecture
+
+```
+my-assistant/                     # repo root = the plugin
+├── .claude-plugin/
+│   ├── plugin.json               # manifest
+│   └── marketplace.json          # single-plugin marketplace (install via GitHub URL)
+├── .mcp.json                     # connector suggestions (Slack, MS365, Notion, Jira, Linear, monday)
+├── CLAUDE.md  →  @AGENTS.md
+├── AGENTS.md                     # orchestration: trigger→skill map, draft-don't-send rule
+├── CONNECTORS.md                 # ~~category placeholders, native vs MCP
+├── commands/                     # 7 explicit slash commands
+├── skills/                       # 12 auto-firing skills
+├── agents/                       # 3 named + schedulable agents (cron frontmatter)
+├── managed-agents/               # 3 headless CMA cookbooks (agent.yaml)
+├── hooks/hooks.json              # SessionStart: load the profile if present
+├── rules/                        # core-behaviour, file-safety
+└── config/profile.template.md    # copied to ~/.claude/plugins/config/my-assistant/ on setup
+```
+
+### Personalisation survives updates
+
+All user personalisation lives in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin directory, so `/plugin update` overwrites plugin files but never the profile. The setup interview writes it; a `SessionStart` hook loads it; every skill reads it. When a durable convention emerges mid-work, skills propose a profile diff and ask before writing.
+
+### Connector-agnostic
+
+Skills reference connectors by category (`~~email`, `~~calendar`, `~~chat`, `~~notes`, `~~tasks`, `~~drive`). Gmail, Google Calendar, and Google Drive are native Cowork connectors (Gmail draft-only); the rest are MCP suggestions in `.mcp.json`. Every skill is **standalone-first** — works on pasted content, supercharged by a connector.
+
+### Graduated autonomy
+
+Set in the profile, enforced by `rules/core-behaviour.md`. Default **Tier 1 (Draft)**. Tiers 0–3 range from suggest-only to notify-after; "send", "book", and "spend" are never automatic at any tier.
+
+---
+
+## The two always-on surfaces
+
+| Surface | Where it runs | Use |
+|---------|---------------|-----|
+| **Scheduled tasks** (`skills/schedules`) | Local desktop (machine must be awake) | Default: morning brief, inbox sweeps, follow-up watcher, weekly review |
+| **Managed-agent cookbooks** (`managed-agents/`) | Anthropic infra (immune to sleeping laptop) | Advanced/optional; the critical always-on jobs |
+
+Same prompts and skills feed both — one source, two surfaces.
 
 ---
 
 ## Design decisions
 
-**Should config live in Git?**  
-Yes. Skills, rules, templates, workspace structure, and *example* policy files are versioned. Runtime state (`MEMORY.md`, `TASKS.md`, `output/`, `inbox/`, etc.) is not. Policy files with real VIPs, label IDs, and goals are instantiated locally from `*.example` templates.
+**Why one plugin, not a marketplace?** Consumers install one thing; every capability rides one namespace, one `.mcp.json`, one profile. Proven manageable at 25 skills by the Vercel plugin.
 
-**How do skills reach a workspace?**  
-Repo-level skills (`install`, `setup`) live in `.claude/skills/`. Plugin skills live under `skills/assistant/skills/` and `skills/productivity/skills/`, enabled project-wide via `.claude-plugin/marketplace.json` and `.claude/settings.json`. **Nothing is copied** into `workspaces/<name>/.claude/skills/` on install. Claude Code discovers repo skills by walking parent directories to the repo root; plugin skills load as `/assistant:*` and `/productivity:*`.
+**Why draft-only?** It's the platform reality (Gmail connector can't send) and the trust model users expect. We lean into it.
 
-**Local overrides:** optional workspace-only skills in `workspaces/<name>/.claude/skills/<skill-name>/`.
+**Why a profile outside the plugin?** So updates never wipe personalisation — the single biggest failure mode for config-in-plugin designs.
 
-**Can Cowork use a `.claude/` directory in the working folder?**  
-Cowork reads `<workspace>/.claude/skills/` when pointed at a workspace subdirectory (for optional overrides only). Repo skills and plugins are loaded from the repo root via Claude Code (`.claude/skills/`, `.claude/settings.json`). The repo-root [`AGENTS.md`](../../AGENTS.md) / [`CLAUDE.md`](../../CLAUDE.md) applies when Claude Code or Cursor agents run from the repo root, not when Cowork is pointed at a workspace folder alone.
-
-**Can tasks be defined in files?**  
-Partially. Cowork does not auto-import `tasks/*.task.md`. Each file is a human-readable spec, verbatim prompt, and rebuild checklist. After cloning on a new machine, recreate schedules in Cowork or use external automation (see [`.task.md` format](#taskmd-format)).
-
-**Can schedules be defined in code?**  
-Not natively in Cowork. For reliable scheduling, use external cron (GitHub Actions, server, etc.) with the task prompt. The `tasks/` directory remains the source of truth.
-
-**Global Instructions vs CLAUDE.md vs context files** (Cowork adapter)
-
-| Layer | Location | Purpose |
-|-------|----------|---------|
-| **Global Instructions** | Settings → Cowork → Global Instructions | Short, universal rules across all workspaces. Under ~20 lines. |
-| **CLAUDE.md** | `workspaces/<name>/CLAUDE.md` | Workspace-specific: role, tools, paths, confirmation policy, commands. |
-| **context/** | `workspaces/<name>/context/*.md` | Identity, voice, rules. Long-form reference; loaded when relevant. |
+**Why standalone-first skills?** Useful on day one before any OAuth; the Anthropic house rule.
 
 ---
 
-## Directory tree
+## Roadmap
 
-Current canonical layout (target state for contributors):
-
-```
-assistant/                              # git repo root (AI Assistant ADK)
-│
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── AGENTS.md                           # repo-root agent instructions
-├── .claude/
-│   ├── settings.json                   # enabledPlugins + adk marketplace
-│   └── skills/                         # repo-level: install, setup
-├── .claude-plugin/
-│   └── marketplace.json                # adk marketplace manifest
-│
-├── skills/
-│   ├── assistant/                      # memory plugin
-│   │   ├── .claude-plugin/plugin.json
-│   │   └── skills/
-│   │       └── memory/SKILL.md
-│   └── productivity/                   # tasks, memory sync plugin
-│       ├── .claude-plugin/plugin.json
-│       ├── .mcp.json
-│       ├── CONNECTORS.md
-│       └── skills/
-│           ├── start/SKILL.md
-│           ├── update/SKILL.md
-│           ├── task-management/SKILL.md
-│           └── memory-management/SKILL.md
-│
-├── rules/                              # shared behaviour (referenced from CLAUDE.md)
-│   ├── core-behavior.md
-│   ├── file-safety.md
-│   └── tone.md
-│
-├── config/                             # example templates only in Git
-│   ├── email-policy.example.md
-│   ├── triage-config.example.md
-│   ├── calendar-policy.example.md
-│   └── goals.example.yaml
-│
-├── docs/
-│   ├── guide/                          # end-user documentation
-│   └── product/
-│       ├── strategy.md                 # this file
-│       └── research.md
-│
-└── workspaces/
-    ├── my-assistant/                   # publishable template (committed)
-    │   ├── CLAUDE.md
-    │   ├── context/                    # generic placeholders
-    │   ├── tasks/
-    │   └── templates/
-    │
-    ├── example/                        # optional legacy demo (if present)
-    └── personal-assistant/             # local only — gitignored
-```
-
-**Runtime directories** (created at install, gitignored for personal workspaces):
-
-```
-workspaces/<name>/
-├── MEMORY.md                           # cross-session continuity
-├── TASKS.md                            # markdown task list (productivity plugin)
-├── memory/                             # extended memory store
-├── inbox/
-├── output/
-│   ├── daily/
-│   ├── weekly/
-│   └── drafts/
-├── projects/
-└── .claude/skills/                     # optional workspace overrides only
-```
-
-**Legacy `shared/`:** an older layout (`shared/skills/`, `shared/rules/`, `shared/templates/`) may still exist in the repo during migration. New work should use `skills/`, `rules/`, and workspace `templates/` — not add new content under `shared/` unless explicitly consolidating.
-
----
-
-## Publication and privacy
-
-Designed for **public distribution**. Nothing committed under `workspaces/my-assistant/` or `config/*.example.*` should contain real names, contact details, financial data, or other private information.
-
-**Safe to commit**
-
-- `skills/`, `rules/`, `docs/`, root `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`
-- `config/*.example.*` — placeholders only
-- `workspaces/my-assistant/` — template context and demo content only
-
-**Never commit**
-
-- `workspaces/personal-assistant/` or any filled-in personal workspace (enforced via `.gitignore`)
-- Populated `config/` without `.example` in the filename
-- Real `MEMORY.md`, `output/`, `inbox/`, `projects/` from your personal machine
-- `.env`, secrets, `*.local.md`
-
-**Current `.gitignore` pattern:**
-
-```gitignore
-workspaces/*
-!workspaces/my-assistant/
-
-config/
-!config/*example.*
-```
-
-**Personal use:** copy `workspaces/my-assistant/` → `workspaces/personal-assistant/`, run install (below), run `/setup` from Claude Code at repo root, replace `context/` with your real details. Keep the personal workspace gitignored.
-
----
-
-## Installation
-
-### Agentic install (recommended)
-
-Paste the README install prompt into **Claude Code** (or any agent with repo access). It follows [`.claude/skills/install/SKILL.md`](../../.claude/skills/install/SKILL.md):
-
-1. Clone `https://github.com/daddia/my-assistant`
-2. Copy `workspaces/my-assistant/` → `workspaces/personal-assistant/` (or another name)
-3. Create runtime dirs (`output/`, `inbox/`, `projects/`, `memory/`, `MEMORY.md`, `TASKS.md`)
-4. Trust the repo folder and enable **adk** plugins (assistant + productivity) — preconfigured in `.claude/settings.json`
-
-### Manual install
-
-```bash
-REPO=~/my-assistant
-WS=$REPO/workspaces/personal-assistant
-
-cp -R $REPO/workspaces/my-assistant $WS
-mkdir -p $WS/output/{daily,weekly,drafts} $WS/inbox $WS/projects $WS/memory
-touch $WS/MEMORY.md $WS/TASKS.md
-```
-
-Open the repo in Claude Code and accept the **adk** marketplace prompt to enable plugins.
-
-### Point the runtime at the workspace
-
-- **Cowork:** Settings → folder → `workspaces/personal-assistant/` (not repo root).
-- **Claude Code at repo root:** uses `AGENTS.md` for install/setup skills; workspace work happens inside the workspace folder when Cowork or a subagent is pointed there.
-
-Then run **`/setup`** from Claude Code at the repo root to populate `context/` through conversation.
-
----
-
-## Cowork adapter
-
-### Global Instructions
-
-Paste into **Settings → Cowork → Global Instructions**. Applies to every Cowork session.
-
-```
-Before every task, read these files from the working folder if they exist:
-  context/about-me.md
-  context/working-rules.md
-  context/voice-and-style.md
-  context/anti-ai-writing-style.md
-  MEMORY.md (if it has content)
-
-Output rules:
-  Write all finished artefacts to output/{daily,weekly,drafts}/ only.
-  Never write to context/, tasks/, templates/, or the workspace root except TASKS.md and MEMORY.md as defined by skills.
-
-Confirmation required before:
-  Sending any email or message
-  Deleting any file
-  Creating or modifying a calendar event
-  Submitting any form or making any purchase
-
-No confirmation needed for:
-  Applying Gmail labels (if connected)
-  Creating draft replies (shown, not sent)
-  Reading any file in the working folder
-  Writing to output/
-
-After I approve a plan, execute it fully without further check-ins.
-```
-
-Adjust if a workspace does not use email or calendar connectors.
-
-### Recreating scheduled tasks
-
-See [`.task.md` format](#taskmd-format). Cowork does not read these files automatically; use them as specs when rebuilding schedules on a new machine.
-
----
-
-## Workspace CLAUDE.md
-
-Each workspace has a root `CLAUDE.md` (not only under `.claude/`). It defines scope, role, which `context/` files to load, slash commands, and output paths.
-
-See [`workspaces/my-assistant/CLAUDE.md`](../../workspaces/my-assistant/CLAUDE.md) for the reference template. Reference shared rules from the repo:
-
-```markdown
-## Behavioural rules
-Read and apply (from repo root when path is known):
-  rules/core-behavior.md
-  rules/file-safety.md
-```
-
-If `@` imports are unavailable, the agent should read those files explicitly before the first task.
-
----
-
-## Context files
-
-The **my-assistant** template uses four files (populated by `/setup`):
-
-| File | Contents |
-|------|----------|
-| `about-me.md` | Identity, household, priorities, what you want help with |
-| `working-rules.md` | Scope, privacy, acting on your behalf, safety |
-| `voice-and-style.md` | How to write to you and as you |
-| `anti-ai-writing-style.md` | Banned phrases and patterns |
-
-Keep `about-me.md` focused (~2,000 words max). Session-specific state belongs in `MEMORY.md` and `memory/`.
-
-Older workspaces may use `rules.md` / `style.md`; new templates should prefer the four-file model above.
-
----
-
-## SKILL.md format
-
-Canonical skills live in:
-
-- `skills/assistant/skills/<name>/SKILL.md`
-- `skills/productivity/skills/<name>/SKILL.md`
-
-Folder name maps to slash command where the runtime supports it: `setup/` → `/setup`.
-
-```markdown
----
-name: weekly-review
-description: Run a structured weekly review. Use when the user says "weekly review"
-  or "wrap up the week".
----
-
-# Weekly review
-
-## When to activate
-...
-
-## What this skill does NOT do
-Does not send email or edit context/ without confirmation.
-```
-
-**Conventions**
-
-- Descriptions must be explicit — Cowork under-triggers on weak descriptions.
-- Keep `SKILL.md` under ~300 lines; use `references/` for depth.
-- One skill, one job. Chain via documentation, not duplicated logic.
-- Prefer connector **categories** over product names in skill text.
-
-**Bundled commands (reference workspace)**
-
-| Command | Plugin | Purpose |
-|---------|--------|---------|
-| `/setup` | repo (`.claude/skills/`) | Guided context configuration |
-| `/productivity:start` | productivity | Initialise tasks and memory |
-| `/productivity:update` | productivity | Triage tasks, memory gaps |
-| `/assistant:memory` | assistant | Two-tier memory management |
-
----
-
-## .task.md format
-
-Each scheduled task can have one file under `workspaces/<name>/tasks/`. YAML frontmatter supports rebuild checklists; the body is the verbatim prompt.
-
-```markdown
----
-name: weekly-review
-description: Friday afternoon review
-schedule: "0 16 * * 5"
-skill: /weekly-review
-enabled: true
-output: output/weekly/{{date}}-review.md
----
-
-## Scheduled task prompt
-
-Run /weekly-review. Save output to output/weekly/YYYY-MM-DD-review.md.
-
-## How to recreate in Cowork
-
-/schedule "Every Friday at 4pm: run /weekly-review and save to output/weekly/YYYY-MM-DD-review.md"
-```
-
----
-
-## Multi-workspace patterns
-
-Each folder under `workspaces/` is a separate assistant project (separate Cowork folder, separate context).
-
-| Workspace | Use case |
-|-----------|----------|
-| **my-assistant** | Published template; fork for new assistants |
-| **personal-assistant** | Local personal life (gitignored) |
-| **work** (optional) | Professional context, separate policies |
-| **example** (optional) | Legacy demo persona if retained |
-
-**Skill updates:** edit plugin skills under `skills/` or repo skills under `.claude/skills/`. No workspace sync step. Reload plugins in Claude Code with `/reload-plugins` if needed.
-
-**Local overrides:** place a skill only in `workspaces/<name>/.claude/skills/<skill-name>/` for workspace-specific behaviour.
-
-**Policy files:** instantiate `config/*.example.*` locally; reference the right policy from each workspace `CLAUDE.md` when email/calendar skills are enabled.
-
----
-
-## Plugins vs skills
-
-| Use case | Solution |
-|----------|----------|
-| Repo flows (install, setup) | `.claude/skills/` at repo root |
-| Core ADK plugin flows (memory, tasks) | `skills/assistant/`, `skills/productivity/` via **adk** marketplace |
-| Workspace-specific override | `workspaces/<name>/.claude/skills/<name>/` |
-| Bundle skills + MCP for distribution | `.claude-plugin/plugin.json` + `.mcp.json` per plugin |
-| Anthropic marketplace | Install via Cowork UI (optional) |
-
-This repo ships **local plugins** (Markdown skills, no black-box install). Convert or publish to a marketplace when distributing to a team. See [research.md](./research.md).
-
----
-
-## Governance
-
-**Primary safety rule:** agents write finished work to `output/` only unless a skill explicitly allows `TASKS.md` / `MEMORY.md` updates. Encoded in Cowork Global Instructions and [`rules/file-safety.md`](../../rules/file-safety.md).
-
-**Graduated autonomy**
-
-1. Week 1 — approve every external action.
-2. Week 2 — auto-approve labels and drafts; confirm sends.
-3. Week 3+ — auto-approve `output/` writes; never auto-approve sends, deletes, or calendar mutations.
-
-**MEMORY.md** — append-only where skills define it; prune periodically; promote stable facts into `context/about-me.md` or `working-rules.md`.
-
-**Audit trail** — dated files under `output/daily/` and `output/weekly/`.
-
-**CHANGELOG.md** — record user-visible releases at repo root; use this file's changelog for major architecture shifts.
-
----
-
-## Roadmap (product)
-
-Phased delivery (**Now → Next → Future**) is maintained in [roadmap.md](./roadmap.md). Summary:
-
-| Phase | Focus |
-|-------|--------|
-| **Now** | Desktop Cowork, my-assistant template, install/setup plugins, security & privacy baseline |
-| **Next** | Cloud running, additional providers, more example assistants, enhanced security & privacy |
-| **Future** | Template gallery, scheduling abstraction, team plugin distribution |
-
-Product definition: [product.md](./product.md).
-
----
-
-## Getting started (quick path)
-
-1. Clone the repo (or use the README prompt in Claude Code).
-2. Run install → `workspaces/personal-assistant/` with skills copied.
-3. Optional: paste [Global Instructions](#global-instructions) into Cowork.
-4. Open Cowork → folder → your workspace.
-5. Run `/setup`, then `/productivity:start`.
-6. Copy and fill `config/*.example.*` locally when adding email/calendar skills.
-
-For scheduling caveats and connector limits, see [research.md](./research.md).
-
----
-
-## Changelog (architecture)
-
-```markdown
-## 2026-05-27
-- Repositioned as AI Assistant ADK (provider-agnostic toolkit)
-- Canonical layout: skills/assistant, skills/productivity, rules/, workspaces/my-assistant
-- Agentic install via install skill; scripts/install.sh deprecated
-- Context model: four files (about-me, working-rules, voice-and-style, anti-ai-writing-style)
-- Cowork-specific guidance labeled as adapter
-
-## 2026-05-25
-- Initial spec (Claude Cowork multi-agent workspace; shared/, workspaces/example)
-```
+See [roadmap.md](./roadmap.md). v1 ships the full EA surface as one plugin; Next covers wider connector validation and the managed-agent deployment path; Future covers a template gallery and richer scheduling.

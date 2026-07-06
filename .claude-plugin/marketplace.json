@@ -1,20 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "assistant-adk",
-  "description": "AI Assistant ADK plugins — memory, tasks, and productivity for my-assistant.",
+  "name": "my-assistant",
+  "description": "My Assistant — your AI chief of staff for inbox, calendar and follow-ups. One install, many skills.",
   "owner": {
-    "name": "daddia"
+    "name": "daddia",
+    "url": "https://github.com/daddia"
   },
   "plugins": [
     {
-      "name": "assistant",
-      "source": "./skills/assistant",
-      "description": "Two-tier memory for people, places, and projects."
-    },
-    {
-      "name": "productivity",
-      "source": "./skills/productivity",
-      "description": "Task management, memory sync, and daily updates."
+      "name": "my-assistant",
+      "source": "./",
+      "description": "Triage the inbox, draft replies in your voice, track follow-ups, prep meetings, run a morning briefing, and manage tasks. Drafts everything; never sends."
     }
   ]
 }

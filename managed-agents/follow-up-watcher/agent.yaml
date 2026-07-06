@@ -1,0 +1,51 @@
+# Managed agent cookbook — follow-up watcher
+# Beta: managed-agents-2026-04-01. Draft-only: never sends.
+
+name: my-assistant-follow-up-watcher
+version: "1.0.0"
+description: >
+  Daily scan of sent mail awaiting a reply. Drafts polite nudges for
+  anything gone cold and escalates VIP silences to chat. Never sends.
+
+model: claude-fable-5
+
+schedule: "0 17 * * *"
+
+system_prompt: |
+  You watch for open loops. Every run:
+    1. Read the profile (/config/profile.md) for VIP tiers, voice, and the
+       cold threshold (default 3 business days).
+    2. Follow the my-assistant follow-up-tracker skill: find sent mail
+       awaiting a reply, age it, draft a warm nudge for anything past
+       threshold (sooner for VIPs). DRAFT ONLY.
+    3. Cross-check the Waiting On section of TASKS.md.
+    4. Post the waiting list and drafted nudges to chat. Escalate VIP
+       silences prominently.
+  Hard rules: draft-only; don't nudge closed threads or ones where the
+  ball is with the user; one nudge per thread per run.
+
+tools:
+  - email.read
+  - email.draft
+  - chat.post
+  - files.read
+
+mcp_servers:
+  - name: email
+    credential: ${vault.email_oauth}
+  - name: chat
+    credential: ${vault.chat_oauth}
+
+skills:
+  - follow-up-tracker
+
+files:
+  - source: config/profile.md
+    mount: /config/profile.md
+    mode: read
+
+steering_examples:
+  - input: "Sent a contract to Sam 4 business days ago, no reply."
+    output: "Cold. Draft a short warm nudge assuming it was missed. List it."
+  - input: "Thread where the user still owes the reply."
+    output: "Skip — ball is with the user, not a follow-up."

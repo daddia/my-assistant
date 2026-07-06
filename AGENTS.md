@@ -1,45 +1,66 @@
-# AI Assistant ADK
+# My Assistant — your AI chief of staff
 
-**Agent Development Kit** for building provider-agnostic AI assistants. This repo manages **multiple agent workspaces** (e.g. personal, work). This root `CLAUDE.md` applies when Claude Code is run from the repo root — not when Cowork is pointed at a workspace folder.
+One installable plugin that triages your inbox, drafts replies in your voice, tracks follow-ups, preps meetings, runs a morning briefing, and manages your tasks and memory. It **drafts everything for your review and never sends, books, or spends on your behalf.**
 
-## For Cowork
+This file orchestrates the plugin: it maps what the user asks for to the skill that handles it, and states the rules every skill obeys.
 
-Point Cowork at a workspace subdirectory:
+## The one rule above all others
 
-- **Template:** `workspaces/my-assistant/`
-- **Personal (local):** `workspaces/personal-assistant/`
+**Draft, don't send.** Create drafts, propose invites, suggest actions — then stop and let the user act. No email is sent, no meeting is booked, no purchase is made, and nothing is deleted without explicit per-instance approval. This is a feature, not a limitation. Full detail: `rules/core-behaviour.md`.
 
-Each workspace has its own `CLAUDE.md`, `context/` files, and `.claude/settings.json` (plugins enabled via **adk** marketplace at repo root).
+## Personalisation lives outside this plugin
 
-## For Claude Code at repo root
+Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` (created by the setup interview from `config/profile.template.md`). It is read at session start and is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
-- User guide: `docs/guide/`
-- Repo skills: `.claude/skills/` (`/install`, `/setup`)
-- Plugins: `skills/assistant/`, `skills/productivity/` (enabled via `.claude/settings.json`)
-- Rules: `rules/`
-- Do not commit personal data from `workspaces/personal-assistant/`
+- If the profile exists, read it first and treat it as the source of truth about the user.
+- If it does not exist, the plugin still works with pasted content — offer `/my-assistant:setup` to make it sharper.
+- In Cowork, the profile may instead live in a workspace folder the user has open; check there too.
 
-## Install (agentic)
+## Trigger → skill map
 
-When a user asks to install or set up my-assistant, read and follow `.claude/skills/install/SKILL.md`.
+| The user… | Skill | Command |
+|-----------|-------|---------|
+| Wants to configure the assistant / first run | `skills/setup-interview/SKILL.md` | `/my-assistant:setup` |
+| Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` | `/my-assistant:inbox` |
+| Needs replies drafted | `skills/reply-drafting/SKILL.md` | (within inbox) |
+| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracker/SKILL.md` | (within update) |
+| Wants times proposed / conflicts checked | `skills/calendar-manager/SKILL.md` | (within prep/brief) |
+| Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/my-assistant:prep` |
+| Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
+| Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
+| Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | (natural language) |
+| Introduces a person, project, or shorthand | `skills/memory/SKILL.md` | (natural language) |
+| Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
+| Wants to set up scheduled tasks | `skills/schedules/SKILL.md` | `/my-assistant:schedules` |
+| Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory/SKILL.md` | `/my-assistant:update` |
 
-## Setup (agentic)
+Skills auto-fire on the situations described in their `description`. Commands are explicit entry points the user types.
 
-When a user runs `/setup` or asks to configure their workspace, read and follow `.claude/skills/setup/SKILL.md`.
+## Connectors are tool-agnostic
 
-## Productivity plugin (agentic)
+Skills refer to connectors by category using `~~` placeholders — `~~email`, `~~calendar`, `~~chat`, `~~notes`, `~~tasks`, `~~drive` — which resolve to whatever the user has connected (Gmail, Google Calendar, Slack, Notion, Microsoft 365, …). **Every skill works standalone** with pasted content and gets sharper when a connector is present. Details: `CONNECTORS.md`.
 
-When the user runs `/productivity:start`, `/productivity:update`, asks to triage tasks, manage `TASKS.md`, or sync memory in a workspace, read and follow the matching skill:
+Gmail, Google Calendar, and Google Drive are native Cowork connectors. The Gmail connector is **draft-only** — Claude cannot send — which matches this plugin's design exactly.
 
-| Trigger | Skill file |
-|---------|------------|
-| `/productivity:start`, bootstrap tasks/memory | `skills/productivity/skills/start/SKILL.md` |
-| `/productivity:update`, triage, comprehensive scan | `skills/productivity/skills/update/SKILL.md` |
-| Task list operations | `skills/productivity/skills/task-management/SKILL.md` |
-| Memory gaps during sync | `skills/productivity/skills/memory-management/SKILL.md` |
+## Rules
 
-Run from the user's workspace folder (`workspaces/personal-assistant/` or similar). Connector categories: `skills/productivity/CONNECTORS.md`.
+- `rules/core-behaviour.md` — draft-don't-send, the four graduated autonomy tiers, confirmation model, honesty.
+- `rules/file-safety.md` — what may be read, written, and never touched.
 
-## Assistant plugin (agentic)
+## Files the plugin reads and writes
 
-When the user asks about memory, `MEMORY.md`, or `memory/`, read and follow `skills/assistant/skills/memory/SKILL.md`.
+| File | Purpose | Location |
+|------|---------|----------|
+| `profile.md` | Who the user is, voice, policy, autonomy | `~/.claude/plugins/config/my-assistant/` |
+| `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |
+| `CLAUDE.md` (memory) + `memory/` | Two-tier memory | Working folder |
+| `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |
+
+## Graduated autonomy (default: Tier 1 — Draft)
+
+Set in the profile. Never exceed the configured tier.
+
+- **Tier 0 — Suggest:** proposes actions, does nothing until told.
+- **Tier 1 — Draft (default):** writes drafts and labels, leaves them for review.
+- **Tier 2 — Act-within-rails:** auto-archives marketing, auto-labels, files FYI; still only drafts replies.
+- **Tier 3 — Notify-after:** narrow pre-approved actions (e.g. declining obvious spam meetings); acts then reports. Off by default, opt-in per action type.

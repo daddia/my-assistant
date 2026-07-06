@@ -1,52 +1,46 @@
 # Establish working rules
 
-How my-assistant keeps you in control.
+How My Assistant keeps you in control.
 
 ## Draft, don't send
 
-By default, my-assistant can:
+By default My Assistant can:
 
 - Research and summarise
-- Plan and draft
-- Remind you and track tasks
-- Write files to your output folder
+- Triage, plan, and draft (emails, invites, nudges, recaps)
+- Track tasks and follow-ups
+- Write briefings and reviews to your working folder
 
 It needs your explicit approval to:
 
 - Send emails or messages
-- Make bookings
-- Spend money
-- Change your calendar
+- Make bookings or spend money
+- Create, move, or delete calendar events
 - Delete files
 
-This is set in your working rules during `/setup`. You can tighten or loosen them anytime with `/setup:working-rules`.
+Set during `/my-assistant:setup`; adjust anytime by re-running it.
 
-## What not to store
+## Graduated autonomy
 
-Don't put these in your workspace files:
+Your profile sets an **autonomy tier** (default Tier 1). The plugin never operates above it:
 
-- Passwords or PINs
-- Bank account numbers
-- API keys or recovery codes
+| Tier | Behaviour |
+|------|-----------|
+| 0 — Suggest | Proposes actions; does nothing until told |
+| **1 — Draft** (default) | Writes drafts and labels; leaves them for review |
+| 2 — Act-within-rails | Auto-archives marketing, auto-labels, files FYI; still only drafts replies |
+| 3 — Notify-after | Narrow pre-approved actions (e.g. declining spam meetings); acts then reports. Opt-in |
 
-Your workspace files are plain text on disk — not encrypted. Treat them like a notes app.
+"Send", "book", and "spend" are never automatic at any tier. Raise your tier only after a week of good drafts.
 
-## Separate work and personal
+## Proposing changes to your rules
 
-Keep work and home in different workspaces. The default template is scoped to personal life. If you ask something work-related, my-assistant flags it and checks before proceeding.
+When a durable pattern emerges — a new VIP, a changed reply threshold, a tone correction you keep making — the assistant proposes a profile update and shows you the exact diff before writing. Only the setup interview writes your profile without asking.
 
-## Connected services
+## Separate scopes
 
-When you connect Gmail, Slack, or other tools in Cowork, you sign in through Anthropic's connector system. Check what permissions you're granting in Cowork settings before connecting.
-
-Connecting a service lets my-assistant *read* during sync — it does not let it send or write on your behalf without approval per action.
+If you set scope to personal-only, anything work-shaped is flagged before it proceeds (and vice versa). Keep distinct contexts in distinct profiles/working folders.
 
 ## If something feels wrong
 
-Update your working rules:
-
-```
-/setup:working-rules
-```
-
-Tell my-assistant what it should never do without asking. It follows those rules every session.
+Re-run `/my-assistant:setup` and tell it what it should never do without asking. It follows those rules every session. Full detail: [`rules/core-behaviour.md`](../../rules/core-behaviour.md).
