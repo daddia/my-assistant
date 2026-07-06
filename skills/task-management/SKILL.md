@@ -9,6 +9,8 @@ description: Track tasks and commitments in TASKS.md. Activate when the user men
 
 Tasks live in `TASKS.md` — one plain markdown file the user and the assistant both read and write. No app, no lock-in.
 
+**Visual editor:** `skills/dashboard.html` (open in Chrome or Edge) provides a board/list UI for the same `TASKS.md` — drag between sections, inline edit, auto-save. Point it at the working folder's `TASKS.md`.
+
 ## Location
 
 `TASKS.md` in the working folder. Create it from the template below if missing.

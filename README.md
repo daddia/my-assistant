@@ -43,9 +43,13 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 - **Scheduled tasks** (`/my-assistant:schedules`) — morning briefing, inbox sweeps, follow-up watcher, weekly review. Run locally; the machine must be awake.
 - **Managed-agent cookbooks** ([`managed-agents/`](./managed-agents/)) — the same jobs on Anthropic's infrastructure, immune to a sleeping laptop. Advanced/optional.
 
+## Visual dashboard
+
+Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md` and a browser for `CLAUDE.md` + `memory/`. Point it at your working folder — the same files the assistant reads and writes.
+
 ## How it's built
 
-Plain English — skills, rules, and a profile you can read and edit. No application code. See [`AGENTS.md`](./AGENTS.md) for the trigger→skill map and [the docs](./docs/) for the full guide.
+Plain English — skills, rules, and a profile you can read and edit. See [`AGENTS.md`](./AGENTS.md) for the trigger→skill map and [the docs](./docs/) for the full guide.
 
 ## Licence
 

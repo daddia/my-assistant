@@ -29,6 +29,16 @@ My Assistant ships as one plugin with **12 skills**, **7 commands**, and package
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.
 
+## Visual dashboard
+
+[`skills/dashboard.html`](../../skills/dashboard.html) is a browser UI for your working-folder files — no slash command needed.
+
+1. Open the file in **Chrome or Edge** (uses the File System Access API).
+2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between Active / Waiting On / Someday / Done; auto-saves.
+3. **Memory tab** — open your working folder to browse and edit `CLAUDE.md` and files under `memory/`.
+
+The assistant and the dashboard share the same files, so edits in either place stay in sync.
+
 ## Everything drafts, nothing sends
 
 No skill sends email, books a meeting, or spends money. They prepare; you act. This is set in `rules/core-behaviour.md` and enforced by your autonomy tier.

@@ -18,6 +18,7 @@ Complete restructure from the multi-workspace ADK into a single installable **my
 - **Graduated autonomy** (Tiers 0–3, default Draft) and the draft-don't-send guarantee in `rules/core-behaviour.md`.
 - **Packaged scheduled-task prompts** with machine-awake and tool-preapproval caveats.
 - Root `CONNECTORS.md`; `config/profile.template.md`.
+- **Visual dashboard** (`skills/dashboard.html`) — browser UI for `TASKS.md` (board/list) and two-tier memory (`CLAUDE.md`, `memory/`).
 
 ### Changed
 

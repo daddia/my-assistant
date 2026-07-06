@@ -40,7 +40,7 @@ my-assistant/                     # repo root = the plugin
 ├── AGENTS.md                     # orchestration: trigger→skill map, draft-don't-send rule
 ├── CONNECTORS.md                 # ~~category placeholders, native vs MCP
 ├── commands/                     # 7 explicit slash commands
-├── skills/                       # 12 auto-firing skills
+├── skills/                       # 12 auto-firing skills + dashboard.html
 ├── agents/                       # 3 named + schedulable agents (cron frontmatter)
 ├── managed-agents/               # 3 headless CMA cookbooks (agent.yaml)
 ├── hooks/hooks.json              # SessionStart: load the profile if present
@@ -70,6 +70,10 @@ Set in the profile, enforced by `rules/core-behaviour.md`. Default **Tier 1 (Dra
 | **Managed-agent cookbooks** (`managed-agents/`) | Anthropic infra (immune to sleeping laptop) | Advanced/optional; the critical always-on jobs |
 
 Same prompts and skills feed both — one source, two surfaces.
+
+### Visual dashboard
+
+`skills/dashboard.html` — a browser UI (Chrome/Edge) for the working folder's `TASKS.md` and two-tier memory. No server; uses the File System Access API. Complements chat-based task and memory skills.
 
 ---
 

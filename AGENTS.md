@@ -33,8 +33,13 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
 | Wants to set up scheduled tasks | `skills/schedules/SKILL.md` | `/my-assistant:schedules` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory-management/SKILL.md` | `/my-assistant:update` |
+| Wants a visual editor for tasks or memory | `skills/dashboard.html` | (open in browser) |
 
 Skills auto-fire on the situations described in their `description`. Commands are explicit entry points the user types.
+
+## Visual dashboard
+
+`skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view) and browsing/editing `CLAUDE.md` + `memory/`. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.
 
 ## Connectors are tool-agnostic
 
@@ -55,6 +60,7 @@ Gmail, Google Calendar, and Google Drive are native Cowork connectors. The Gmail
 | `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |
 | `CLAUDE.md` (memory) + `memory/` | Two-tier memory | Working folder |
 | `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |
+| `skills/dashboard.html` | Visual task + memory editor (read-only in plugin; open in browser) | Plugin directory |
 
 ## Graduated autonomy (default: Tier 1 — Draft)
 

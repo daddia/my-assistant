@@ -94,6 +94,8 @@ All memory files live in the **working folder** — the directory where `TASKS.m
 - **Working memory:** `CLAUDE.md` in the working folder
 - **Deep memory:** `memory/` subdirectory
 
+**Visual editor:** `skills/dashboard.html` (open in Chrome or Edge) — Memory tab opens the working folder to browse and edit `CLAUDE.md` and `memory/` files.
+
 Per `rules/file-safety.md`: the assistant may write to `memory/` and the memory `CLAUDE.md` without asking; tell the user what was added or changed.
 
 ## Working memory format (CLAUDE.md)
