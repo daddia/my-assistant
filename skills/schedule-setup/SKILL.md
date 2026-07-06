@@ -1,12 +1,12 @@
 ---
-name: schedules
+name: schedule-setup
 description: Walk the user through creating the packaged Cowork scheduled tasks
   (morning briefing, inbox sweep, meeting-prep watcher, follow-up watcher, weekly
   review). Activate on "/my-assistant:schedules", "set up my scheduled tasks",
   "automate my briefing", or "run this every morning".
 ---
 
-# Schedules
+# Schedule setup
 
 Turn the plugin's recurring jobs into Cowork scheduled tasks. Each block below is copy-paste ready. Walk the user through picking which they want, then help them create each one.
 
@@ -56,7 +56,7 @@ Cron: `0 7 * * 1-5`
 ### Follow-up watcher — daily 5:00pm
 ```
 Check mail I sent that's awaiting a reply using the my-assistant
-follow-up-tracker skill. For anything silent 3+ business days, draft a
+follow-up-tracking skill. For anything silent 3+ business days, draft a
 polite nudge (do not send) in my voice and list it. Cross-check the
 Waiting On section of TASKS.md.
 ```

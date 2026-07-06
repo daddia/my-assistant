@@ -318,7 +318,7 @@ When the user asks "who is X" or "what does X mean":
 |-----------------|-----------------|
 | **meeting-prep** | Decode attendees; offer to save new facts after prep |
 | **meeting-follow-up** | Resolve names in notes; offer to save people/projects/decisions |
-| **inbox-triage** / **reply-drafting** | Decode thread shorthand; match senders to `memory/people/` |
+| **inbox-triage** / **email-drafting** | Decode thread shorthand; match senders to `memory/people/` |
 | **task-management** | Decode task entities ("PSR for oracle" → real names) |
 | **weekly-review** | Prune stale or contradictory entries with user confirmation |
 | **`/my-assistant:update`** | Decode task entities against memory; surface gaps to fill |

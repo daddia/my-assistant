@@ -24,16 +24,16 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 |-----------|-------|---------|
 | Wants to configure the assistant / first run | `skills/setup-interview/SKILL.md` | `/my-assistant:setup` |
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` | `/my-assistant:inbox` |
-| Needs replies drafted | `skills/reply-drafting/SKILL.md` | (within inbox) |
-| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracker/SKILL.md` | (within update) |
-| Wants times proposed / conflicts checked | `skills/calendar-manager/SKILL.md` | (within prep/brief) |
+| Needs replies drafted | `skills/email-drafting/SKILL.md` | (within inbox) |
+| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | (within update) |
+| Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | (within prep/brief) |
 | Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/my-assistant:prep` |
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | (natural language) |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | (natural language) |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
-| Wants to set up scheduled tasks | `skills/schedules/SKILL.md` | `/my-assistant:schedules` |
+| Wants to set up scheduled tasks | `skills/schedule-setup/SKILL.md` | `/my-assistant:schedules` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory-management/SKILL.md` | `/my-assistant:update` |
 | Wants a visual editor for tasks or memory | `skills/dashboard.html` | (open in browser) |
 

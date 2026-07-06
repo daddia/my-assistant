@@ -1,12 +1,12 @@
 ---
-name: calendar-manager
+name: calendar-scheduling
 description: Propose meeting times, check conflicts, and draft invites and scheduling
   replies. Activate when the user asks to schedule something, find a time, check for
   conflicts, or draft an invite. Proposes and drafts only — never books, moves, or
   declines without approval.
 ---
 
-# Calendar manager
+# Calendar scheduling
 
 Do the scheduling legwork — find the slots, spot the clashes, draft the offer — and stop short of booking. The user confirms; you never auto-book.
 

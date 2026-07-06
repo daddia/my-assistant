@@ -16,7 +16,7 @@ Load goals/priorities (to judge what mattered), voice, and working hours.
 ## What it does
 
 1. **Wins** — what closed this week. Pull from `TASKS.md` Done, and from the week's briefs/follow-ups if present.
-2. **Open loops** — Active tasks and `follow-up-tracker` items still outstanding, most-important first.
+2. **Open loops** — Active tasks and `follow-up-tracking` items still outstanding, most-important first.
 3. **Stale** — tasks untouched 14+ days and follow-ups long cold. Present each for triage: still relevant? reschedule? move to Someday? drop?
 4. **Memory prune** — surface stale or contradictory memory entries to confirm or remove.
 5. **Next week** — what to line up for Monday: upcoming meetings needing prep (hand to `meeting-prep`), deadlines from goals, top 3 priorities.
@@ -44,7 +44,7 @@ Next week
 
 ## Scheduled use
 
-Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `skills/schedules/SKILL.md`.
+Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `skills/schedule-setup/SKILL.md`.
 
 ## Rules
 

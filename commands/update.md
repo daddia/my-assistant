@@ -4,7 +4,7 @@ description: Sync your tasks and memory — triage stale tasks, surface follow-u
 argument-hint: "[--comprehensive]"
 ---
 
-Sync tasks and memory. Follow `skills/task-management/SKILL.md`, `skills/follow-up-tracker/SKILL.md`, and `skills/memory-management/SKILL.md`.
+Sync tasks and memory. Follow `skills/task-management/SKILL.md`, `skills/follow-up-tracking/SKILL.md`, and `skills/memory-management/SKILL.md`.
 
 **Default:** read `TASKS.md`, `memory/`, and working memory. Triage stale/overdue tasks (present each — done? reschedule? Someday?). Surface follow-ups gone cold. Decode task entities against memory and ask about gaps.
 

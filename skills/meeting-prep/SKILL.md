@@ -45,8 +45,8 @@ No calendar? The user pastes the invite or names the meeting; you prep from memo
 
 ## Hand-offs
 
-- Contract/thread status → `follow-up-tracker`
-- Times/conflicts → `calendar-manager`
+- Contract/thread status → `follow-up-tracking`
+- Times/conflicts → `calendar-scheduling`
 - After the meeting → `meeting-follow-up`
 - New facts learned about an attendee → offer to save via `memory-management`
 

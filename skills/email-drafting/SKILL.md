@@ -1,11 +1,11 @@
 ---
-name: reply-drafting
+name: email-drafting
 description: Draft email and message replies in the user's own voice. Activate when
   triaging needs-reply mail, when the user says "draft a reply", "respond to this",
   or pastes a message they need to answer. Creates drafts only — never sends.
 ---
 
-# Reply drafting
+# Email drafting
 
 Write the reply the user would have written on their best day — then leave it as a draft for them to glance at and send. Never send.
 

@@ -45,8 +45,8 @@ The four sections mirror the productivity model: **Active / Waiting On / Someday
 - **"What's on my list":** read `TASKS.md`, summarise Active and Waiting On, surface overdue items first.
 - **"Add a task" / "remind me to":** add to Active with context; tell the user what was added.
 - **"I'm done with X":** mark `[x]`, date it, move to Done.
-- **From another skill:** when `inbox-triage`, `meeting-follow-up`, or `follow-up-tracker` surfaces an action, offer to capture it — don't add silently.
-- **Blocked-on items:** put in Waiting On; this is the same list `follow-up-tracker` reads.
+- **From another skill:** when `inbox-triage`, `meeting-follow-up`, or `follow-up-tracking` surfaces an action, offer to capture it — don't add silently.
+- **Blocked-on items:** put in Waiting On; this is the same list `follow-up-tracking` reads.
 
 ## Conventions
 

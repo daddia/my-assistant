@@ -8,7 +8,7 @@ description: Sort recent email into needs-reply / FYI / marketing / VIP buckets 
 
 # Inbox triage
 
-Turn a full inbox into a short, ranked list of what actually needs the user — and hand off to `reply-drafting` for the replies. This is the wedge that matches Fyxer and Superhuman; do it well and fast.
+Turn a full inbox into a short, ranked list of what actually needs the user — and hand off to `email-drafting` for the replies. This is the wedge that matches Fyxer and Superhuman; do it well and fast.
 
 ## Read the profile first
 
@@ -57,7 +57,7 @@ Marketing (6) — propose archive
 Respect the profile's tier (default Tier 1):
 
 - **Tier 0:** list buckets only, do nothing.
-- **Tier 1 (default):** create reply drafts for needs-reply + VIP (hand to `reply-drafting`); propose labels and archives in the report but don't apply.
+- **Tier 1 (default):** create reply drafts for needs-reply + VIP (hand to `email-drafting`); propose labels and archives in the report but don't apply.
 - **Tier 2:** additionally apply labels and archive marketing that matches the exact-sender list; still only drafts replies.
 - **Tier 3:** as Tier 2, plus any narrow pre-approved auto-actions; report what was done.
 
@@ -69,6 +69,6 @@ For any thread over ~5 messages, add a two-line summary (what's being decided, w
 
 ## Hand-offs
 
-- Replies → `reply-drafting`
-- Sent-but-silent items the sweep surfaces → note for `follow-up-tracker`
+- Replies → `email-drafting`
+- Sent-but-silent items the sweep surfaces → note for `follow-up-tracking`
 - Action items that aren't email replies → offer to add to `TASKS.md` via `task-management`

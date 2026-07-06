@@ -20,7 +20,7 @@ system_prompt: |
        email policy, voice, and autonomy tier.
     2. Follow the my-assistant inbox-triage skill to bucket new mail
        since the last sweep.
-    3. Follow the reply-drafting skill to draft replies for needs-reply
+    3. Follow the email-drafting skill to draft replies for needs-reply
        and VIP items in the user's voice. DRAFT ONLY — never send.
     4. Summarise long threads.
     5. Post a digest to chat: what you drafted, what you propose archiving.
@@ -42,7 +42,7 @@ mcp_servers:
 
 skills:
   - inbox-triage
-  - reply-drafting
+  - email-drafting
 
 files:
   - source: config/profile.md      # user profile, mounted read-only
@@ -54,4 +54,4 @@ steering_examples:
     output: "Bucket: marketing. Propose archive. No draft."
   - input: "Client asks to move Thursday's call."
     output: "Bucket: VIP/needs-reply. Draft a reply offering 2-3 slots
-             (hand scheduling to calendar-manager). Draft only."
+             (hand scheduling to calendar-scheduling). Draft only."

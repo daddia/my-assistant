@@ -15,7 +15,7 @@ system_prompt: |
   You watch for open loops. Every run:
     1. Read the profile (/config/profile.md) for VIP tiers, voice, and the
        cold threshold (default 3 business days).
-    2. Follow the my-assistant follow-up-tracker skill: find sent mail
+    2. Follow the my-assistant follow-up-tracking skill: find sent mail
        awaiting a reply, age it, draft a warm nudge for anything past
        threshold (sooner for VIPs). DRAFT ONLY.
     3. Cross-check the Waiting On section of TASKS.md.
@@ -37,7 +37,7 @@ mcp_servers:
     credential: ${vault.chat_oauth}
 
 skills:
-  - follow-up-tracker
+  - follow-up-tracking
 
 files:
   - source: config/profile.md

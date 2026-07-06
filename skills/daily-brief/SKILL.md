@@ -18,9 +18,9 @@ Load working hours, VIP tiers, and voice (the brief is written *to* the user, in
 
 Pull from whatever is connected; degrade gracefully when something's missing.
 
-1. **Today's calendar** — meetings with times and attendees; flag anything external or VIP; note gaps and any conflict/no-buffer issues (hand detail to `calendar-manager`).
+1. **Today's calendar** — meetings with times and attendees; flag anything external or VIP; note gaps and any conflict/no-buffer issues (hand detail to `calendar-scheduling`).
 2. **Priority unread** — top items from `~~email`/`~~chat` that need the user today, VIP-first (hand triage to `inbox-triage`). Don't list everything — just what matters before noon.
-3. **Follow-ups going cold** — from `follow-up-tracker`: what's silent past threshold.
+3. **Follow-ups going cold** — from `follow-up-tracking`: what's silent past threshold.
 4. **Due tasks** — from `TASKS.md`: due or overdue today (via `task-management`).
 5. **Needs attention before noon** — the 1–3 things that will hurt if missed.
 
@@ -51,7 +51,7 @@ Quiet otherwise. Have a good one.
 
 ## Scheduled use
 
-When run as a scheduled task, save output to `brief-YYYY-MM-DD.md` in the working folder so there's a history. See `skills/schedules/SKILL.md` for the packaged 8am prompt and the machine-awake caveat.
+When run as a scheduled task, save output to `brief-YYYY-MM-DD.md` in the working folder so there's a history. See `skills/schedule-setup/SKILL.md` for the packaged 8am prompt and the machine-awake caveat.
 
 ## Standalone
 
