@@ -3,7 +3,7 @@
 
 # Local runtime state if developing against a working folder
 /TASKS.md
-MEMORY.md
+/MEMORY.md
 memory/
 brief-*.md
 review-*.md

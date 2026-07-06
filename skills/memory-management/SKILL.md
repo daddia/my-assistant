@@ -3,8 +3,8 @@ name: memory-management
 description: Two-tier memory that decodes shorthand, acronyms, nicknames, and internal
   language so the assistant understands requests like a colleague would. Activate when
   the user introduces a person, project, or term ("remember that", "X means Y", "who is
-  Todd"), during /my-assistant:update, or when another skill surfaces a durable fact
-  to save. CLAUDE.md for working memory, memory/ for the full knowledge base.
+  Todd"), during /assistant:update, "/assistant:memory add", "/assistant:memory prune",
+  or when another skill surfaces a durable fact to save. CLAUDE.md for working memory, memory/ for the full knowledge base.
 user-invocable: false
 ---
 
@@ -32,7 +32,7 @@ Without memory, that request is meaningless. With memory, the assistant knows:
 
 | Layer | File | What lives here |
 |-------|------|-----------------|
-| **Profile** | `~/.claude/plugins/config/my-assistant/profile.md` | Identity, voice, VIP tiers, email/calendar policy, autonomy — written by `/my-assistant:setup` |
+| **Profile** | `~/.claude/plugins/config/my-assistant/profile.md` | Identity, voice, VIP tiers, email/calendar policy, autonomy — written by `/assistant:setup` |
 | **Working memory** | `CLAUDE.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
 | **Deep memory** | `memory/` in the working folder | Full glossary, people profiles, project detail, company context |
 
@@ -321,16 +321,18 @@ When the user asks "who is X" or "what does X mean":
 | **inbox-triage** / **email-drafting** | Decode thread shorthand; match senders to `memory/people/` |
 | **task-management** | Decode task entities ("PSR for oracle" → real names) |
 | **weekly-review** | Prune stale or contradictory entries with user confirmation |
-| **`/my-assistant:update`** | Decode task entities against memory; surface gaps to fill |
-| **`/my-assistant:update --comprehensive`** | Scan `~~email`, `~~calendar`, `~~chat`, `~~drive` for new people/projects not yet in memory — present each for the user to add, never auto-add |
+| **`/assistant:update`** | Decode task entities against memory; surface gaps to fill |
+| **`/assistant:update --comprehensive`** | Scan `~~email`, `~~calendar`, `~~chat`, `~~drive` for new people/projects not yet in memory — present each for the user to add, never auto-add |
+| **`/assistant:memory add`** | Explicit capture of people, projects, or terms |
+| **`/assistant:memory prune`** | Demote stale entries; propose removals with confirmation |
 
 When another skill surfaces a durable fact, **offer** to save it — don't add silently.
 
 ## Bootstrapping
 
-- **No profile yet?** Offer `/my-assistant:setup` — captures identity, voice, and key people into the profile.
+- **No profile yet?** Offer `/assistant:setup` — captures identity, voice, and key people into the profile.
 - **Empty memory?** Start with `CLAUDE.md` and `memory/glossary.md` from what the user tells you in conversation.
-- **Fill gaps from activity:** `/my-assistant:update` decodes existing tasks against memory and asks about unknowns. Add `--comprehensive` to scan connected sources for people and projects worth remembering.
+- **Fill gaps from activity:** `/assistant:update` decodes existing tasks against memory and asks about unknowns. Add `--comprehensive` to scan connected sources for people and projects worth remembering.
 
 No connectors? Memory still works from conversation, pasted threads, and meeting notes.
 

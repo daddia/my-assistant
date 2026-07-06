@@ -32,7 +32,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/my-assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
-| Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | (natural language) |
+| Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | `/assistant:memory add` · `prune` |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/my-assistant:review` |
 | Wants to set up scheduled tasks | `skills/schedule-setup/SKILL.md` | `/my-assistant:schedules` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/memory-management/SKILL.md` | `/my-assistant:update` |
