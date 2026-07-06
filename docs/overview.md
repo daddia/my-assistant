@@ -30,7 +30,7 @@ Honest gaps vs SaaS, and how we handle them:
 ```
 my-assistant/                     # repo root = the plugin
 ├── .claude-plugin/
-│   ├── plugin.json               # Claude manifest
+│   ├── plugin.json               # Claude manifest (skills, commands, agents, hooks, rules, MCP)
 │   └── marketplace.json          # Claude marketplace (install via GitHub URL)
 ├── .cursor-plugin/
 │   ├── plugin.json               # Cursor manifest (skills, commands, agents, hooks, rules, MCP)
@@ -39,18 +39,18 @@ my-assistant/                     # repo root = the plugin
 ├── CLAUDE.md  →  @AGENTS.md
 ├── AGENTS.md                     # orchestration: trigger→skill map, draft-don't-send rule
 ├── CONNECTORS.md                 # ~~category placeholders, native vs MCP
-├── commands/                     # 7 explicit slash commands
-├── skills/                       # 12 auto-firing skills + dashboard.html
+├── commands/                     # explicit slash commands
+├── skills/                       # auto-firing skills + dashboard.html
 ├── agents/                       # 3 named + schedulable agents (cron frontmatter)
 ├── managed-agents/               # 3 headless CMA cookbooks (agent.yaml)
-├── hooks/hooks.json              # SessionStart: load the profile if present
+├── hooks/hooks.json              # SessionStart: load profile from config or workspace
 ├── rules/                        # core-behaviour, untrusted-content, file-safety
 └── config/profile.template.md    # copied to ~/.claude/plugins/config/my-assistant/ on setup
 ```
 
 ### Personalisation survives updates
 
-All user personalisation lives in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin directory, so `/plugin update` overwrites plugin files but never the profile. The setup interview writes it; a `SessionStart` hook loads it; every skill reads it. When a durable convention emerges mid-work, skills propose a profile diff and ask before writing.
+All user personalisation lives in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin directory, so `/plugin update` overwrites plugin files but never the profile. In Cowork, the profile may instead live as `profile.md` in a workspace folder you keep open. The setup interview writes it; a `SessionStart` hook loads it from either location; every skill reads it. When a durable convention emerges mid-work, skills propose a profile diff and ask before writing.
 
 ### Connector-agnostic
 

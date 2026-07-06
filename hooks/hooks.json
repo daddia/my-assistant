@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat \"$HOME/.claude/plugins/config/my-assistant/profile.md\" 2>/dev/null || echo 'assistant: no profile found. Run /assistant:setup to create one. The plugin still works with pasted content.'"
+            "command": "PROFILE_CONFIG=\"$HOME/.claude/plugins/config/my-assistant/profile.md\"; if [ -f \"$PROFILE_CONFIG\" ]; then cat \"$PROFILE_CONFIG\"; elif [ -f ./profile.md ]; then cat ./profile.md; else echo 'assistant: no profile found at ~/.claude/plugins/config/my-assistant/profile.md or profile.md in your open workspace. Run /assistant:setup to create one. The plugin still works with pasted content.'; fi"
           }
         ]
       }

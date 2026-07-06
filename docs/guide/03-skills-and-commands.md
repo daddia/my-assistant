@@ -1,6 +1,6 @@
 # Skills and commands
 
-My Assistant ships as one plugin with **12 skills**, **7 commands**, and packaged agents. Skills fire automatically when your request matches; commands are explicit entry points you type.
+My Assistant ships as one plugin with skills in `skills/`, commands in `commands/`, and packaged agents in `agents/`. Skills fire automatically when your request matches; commands are explicit entry points you type.
 
 ## Commands (you type these)
 
@@ -8,6 +8,7 @@ My Assistant ships as one plugin with **12 skills**, **7 commands**, and package
 |---------|------|
 | `/my-assistant:setup` | Onboarding interview → writes your profile |
 | `/my-assistant:inbox` | Triage mail + draft replies |
+| `/my-assistant:email` | Draft a reply or review what's awaiting a response |
 | `/my-assistant:brief` | Morning briefing |
 | `/my-assistant:prep` | Pre-meeting briefs |
 | `/my-assistant:update` | Sync tasks + memory (`--comprehensive` scans connectors) |
@@ -16,16 +17,16 @@ My Assistant ships as one plugin with **12 skills**, **7 commands**, and package
 
 ## Skills (fire on their own)
 
-- **inbox-triage** + **reply-drafting** — bucket mail, draft in your voice
-- **follow-up-tracker** — drafts nudges for threads gone cold
-- **calendar-manager** — proposes times, checks conflicts, drafts invites
+- **inbox-triage** + **email-drafting** — bucket mail, draft in your voice
+- **follow-up-tracking** — drafts nudges for threads gone cold
+- **calendar-scheduling** — proposes times, checks conflicts, drafts invites
 - **meeting-prep** — who / what / last contact / what to prepare
 - **meeting-follow-up** — turns pasted notes or a transcript into a summary, actions, and follow-up drafts
 - **daily-brief** — the morning briefing
 - **task-management** — `TASKS.md` (Active / Waiting On / Someday / Done)
 - **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
-- **setup-interview** / **schedules** — onboarding and automation
+- **setup-interview** / **schedule-setup** — onboarding and automation
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.
 

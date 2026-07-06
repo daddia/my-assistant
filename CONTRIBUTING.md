@@ -22,11 +22,11 @@ my-assistant/
 ├── .mcp.json                                        # connector suggestions
 ├── AGENTS.md  (CLAUDE.md → @AGENTS.md)              # orchestration
 ├── CONNECTORS.md                                    # ~~category placeholders
-├── commands/   *.md                                 # 7 slash commands
-├── skills/     <name>/SKILL.md                      # 12 skills
+├── commands/   *.md                                 # slash commands
+├── skills/     <name>/SKILL.md                      # auto-firing skills (+ dashboard.html)
 ├── agents/     *.md                                 # named + schedulable agents
 ├── managed-agents/ <name>/agent.yaml                # headless cookbooks
-├── hooks/hooks.json                                 # SessionStart profile load
+├── hooks/hooks.json, load-profile.sh                # SessionStart profile load (config + workspace)
 ├── rules/      core-behaviour.md, untrusted-content.md, file-safety.md
 ├── config/     profile.template.md                  # copied to the user's profile on setup
 └── docs/       guide/, product/
@@ -44,6 +44,7 @@ Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/gui
 
 ## Making changes
 
+- **Manifests** — `.cursor-plugin/plugin.json` and `.claude-plugin/plugin.json` declare the same `skills`, `commands`, `agents`, `hooks`, `rules`, and `mcpServers` paths. Keep them in lockstep when those directories change.
 - **New/edited skill** — `skills/<name>/SKILL.md` with `name` + `description` frontmatter. Descriptions must be explicit — Cowork under-triggers on weak ones. Keep a skill to one job; chain via documentation, not duplicated logic. Prefer `~~category` connector wording over product names.
 - **New command** — `commands/<name>.md`; keep it a thin entry point that points at the relevant skill.
 - **New rule** — under `rules/`; reference it from `AGENTS.md`.

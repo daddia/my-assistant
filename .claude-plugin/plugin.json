@@ -17,5 +17,11 @@
     "executive-assistant",
     "inbox",
     "cowork"
-  ]
+  ],
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "hooks": "./hooks/hooks.json",
+  "rules": "./rules/",
+  "mcpServers": "./.mcp.json"
 }
