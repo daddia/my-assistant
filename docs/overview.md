@@ -2,7 +2,7 @@
 
 **My Assistant** is a single installable plugin for [Claude Cowork](https://claude.com/product/cowork) and Claude Code that acts as an AI chief of staff: inbox triage, reply drafting in the user's voice, follow-up tracking, meeting prep and follow-up, a daily briefing, scheduling drafts, tasks, and two-tier memory. It **drafts everything and never sends, books, or spends** on the user's behalf.
 
-This document is the product and architecture source of truth. End-user setup is in the [user guide](../guide/00-introduction.md) and [README](../../README.md).
+This document is the product and architecture source of truth. End-user setup is in the [user guide](./guide/00-introduction.md) and [README](../README.md).
 
 ---
 
@@ -84,4 +84,4 @@ Same prompts and skills feed both — one source, two surfaces.
 
 ## Roadmap
 
-See [roadmap.md](./roadmap.md). v1 ships the full EA surface as one plugin; Next covers wider connector validation and the managed-agent deployment path; Future covers a template gallery and richer scheduling.
+See [roadmap.md](./product/roadmap.md). v1 ships the full EA surface as one plugin; Next covers wider connector validation and the managed-agent deployment path; Future covers a template gallery and richer scheduling.
