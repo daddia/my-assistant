@@ -4,7 +4,7 @@
 
 One installable plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
 
-It **drafts everything for your review and never sends, books, or spends on your behalf.** You glance, edit, and send. That's the whole promise.
+It **drafts everything for your review and never sends, books, or spends on your behalf.** Instructions buried in emails, invites, or pasted docs are never obeyed — they're surfaced for you to confirm. You glance, edit, and send. That's the whole promise.
 
 ## What it does
 

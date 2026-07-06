@@ -44,7 +44,7 @@ my-assistant/                     # repo root = the plugin
 ├── agents/                       # 3 named + schedulable agents (cron frontmatter)
 ├── managed-agents/               # 3 headless CMA cookbooks (agent.yaml)
 ├── hooks/hooks.json              # SessionStart: load the profile if present
-├── rules/                        # core-behaviour, file-safety
+├── rules/                        # core-behaviour, untrusted-content, file-safety
 └── config/profile.template.md    # copied to ~/.claude/plugins/config/my-assistant/ on setup
 ```
 

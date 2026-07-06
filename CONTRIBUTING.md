@@ -27,7 +27,7 @@ my-assistant/
 ├── agents/     *.md                                 # named + schedulable agents
 ├── managed-agents/ <name>/agent.yaml                # headless cookbooks
 ├── hooks/hooks.json                                 # SessionStart profile load
-├── rules/      core-behaviour.md, file-safety.md
+├── rules/      core-behaviour.md, untrusted-content.md, file-safety.md
 ├── config/     profile.template.md                  # copied to the user's profile on setup
 └── docs/       guide/, product/
 ```
@@ -48,7 +48,7 @@ Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/gui
 - **New command** — `commands/<name>.md`; keep it a thin entry point that points at the relevant skill.
 - **New rule** — under `rules/`; reference it from `AGENTS.md`.
 - **Connector suggestion** — add to `.mcp.json` and document in `CONNECTORS.md`.
-- **Guardrails** — any change must preserve draft-don't-send and the autonomy tiers in [`rules/core-behaviour.md`](./rules/core-behaviour.md).
+- **Guardrails** — any change must preserve draft-don't-send, untrusted-content handling, and the autonomy tiers in [`rules/core-behaviour.md`](./rules/core-behaviour.md) and [`rules/untrusted-content.md`](./rules/untrusted-content.md).
 
 ## Testing
 

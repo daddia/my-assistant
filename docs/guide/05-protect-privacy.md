@@ -23,7 +23,9 @@ Without connectors, My Assistant only sees your local files. When you connect a 
 - Create, move, or delete calendar events
 - Delete files or share your data anywhere
 
-It drafts. You decide what goes out. Full rules: [`rules/core-behaviour.md`](../../rules/core-behaviour.md) and [`rules/file-safety.md`](../../rules/file-safety.md).
+It drafts. You decide what goes out. Instructions inside emails, invites, or pasted docs are never obeyed — they're surfaced for you to confirm. Your inbox can't hijack your assistant.
+
+Full rules: [`rules/core-behaviour.md`](../../rules/core-behaviour.md), [`rules/untrusted-content.md`](../../rules/untrusted-content.md), and [`rules/file-safety.md`](../../rules/file-safety.md).
 
 ## What not to store
 
