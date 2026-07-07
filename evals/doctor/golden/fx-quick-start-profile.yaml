@@ -1,0 +1,48 @@
+fixture_id: fx-quick-start-profile
+version: "0.1"
+generated_at: "2026-07-08T08:05:00+10:00"
+platform_hint: cowork
+working_folder: evals/doctor/fixtures/fx-quick-start-profile/working
+profile_path: evals/doctor/fixtures/profiles/fx-quick-start-profile.md
+summary:
+  pass: 5
+  warn: 3
+  fail: 0
+  skip: 0
+mode: post-setup-subset
+results:
+  - check_id: profile-exists
+    category: profile
+    status: pass
+    message: Profile found
+  - check_id: profile-readable
+    category: profile
+    status: pass
+    message: Profile readable
+  - check_id: profile-sections-complete
+    category: profile
+    status: warn
+    message: VIP tiers still use template placeholders
+    fix_ref: /assistant:setup
+  - check_id: profile-word-count
+    category: profile
+    status: pass
+    message: Under 2,000 words
+  - check_id: profile-optional-sections
+    category: profile
+    status: warn
+    message: Calendar policy and goals still thin
+    fix_ref: /assistant:setup
+  - check_id: working-folder-identified
+    category: working-folder
+    status: pass
+    message: Working folder resolved
+  - check_id: tasks-md-present
+    category: working-folder
+    status: pass
+    message: TASKS.md present
+  - check_id: memory-scaffold
+    category: working-folder
+    status: warn
+    message: memory/ directory not found
+    fix_ref: /assistant:memory add

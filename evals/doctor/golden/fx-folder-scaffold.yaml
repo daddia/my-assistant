@@ -1,0 +1,35 @@
+fixture_id: fx-folder-scaffold
+version: "0.1"
+generated_at: "2026-07-08T08:15:00+10:00"
+platform_hint: cowork
+working_folder: evals/doctor/fixtures/fx-folder-scaffold/working
+profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+summary:
+  pass: 2
+  warn: 3
+  fail: 0
+  skip: 0
+results:
+  - check_id: profile-exists
+    category: profile
+    status: pass
+    message: Profile found
+  - check_id: working-folder-identified
+    category: working-folder
+    status: pass
+    message: Working folder resolved
+  - check_id: tasks-md-present
+    category: working-folder
+    status: warn
+    message: TASKS.md not found — suggest scaffold
+    fix_ref: /assistant:tasks add
+  - check_id: memory-scaffold
+    category: working-folder
+    status: warn
+    message: memory/ directory not found
+    fix_ref: /assistant:memory add
+  - check_id: claude-md-present
+    category: working-folder
+    status: warn
+    message: CLAUDE.md not found
+    fix_ref: /assistant:memory add

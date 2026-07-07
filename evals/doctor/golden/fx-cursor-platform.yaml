@@ -1,0 +1,30 @@
+fixture_id: fx-cursor-platform
+version: "0.1"
+generated_at: "2026-07-08T08:30:00+10:00"
+platform_hint: cursor
+working_folder: evals/doctor/fixtures/fx-cursor-platform/working
+profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+summary:
+  pass: 1
+  warn: 2
+  fail: 0
+  skip: 1
+results:
+  - check_id: platform-inferred
+    category: platform
+    status: pass
+    message: Platform hint cursor
+  - check_id: platform-cursor-local-schedules
+    category: platform
+    status: warn
+    message: Critical job morning-briefing on local — consider cloud-code or managed
+    fix_ref: docs/guide/07-always-on-reliability.md
+  - check_id: platform-cowork-schedules
+    category: platform
+    status: skip
+    message: Not on Cowork — skipped
+  - check_id: schedule-critical-local-misses
+    category: always-on
+    status: warn
+    message: morning-briefing on local with miss_count_7d >= 2
+    fix_ref: docs/guide/07-always-on-reliability.md#decision-tree

@@ -1,0 +1,29 @@
+fixture_id: fx-schedule-missed-local
+version: "0.1"
+generated_at: "2026-07-08T08:25:00+10:00"
+platform_hint: cowork
+working_folder: evals/doctor/fixtures/fx-schedule-missed-local/working
+profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+summary:
+  pass: 3
+  warn: 1
+  fail: 0
+  skip: 0
+results:
+  - check_id: schedule-ledger-present
+    category: always-on
+    status: pass
+    message: Schedule health ledger found
+  - check_id: schedule-health-valid
+    category: always-on
+    status: pass
+    message: Ledger matches schema
+  - check_id: schedule-catalog-jobs-match
+    category: always-on
+    status: pass
+    message: All job_ids exist in catalog
+  - check_id: schedule-critical-local-misses
+    category: always-on
+    status: warn
+    message: morning-briefing on local with miss_count_7d >= 2
+    fix_ref: docs/guide/07-always-on-reliability.md#decision-tree

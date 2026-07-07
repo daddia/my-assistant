@@ -1,0 +1,28 @@
+fixture_id: fx-schedule-healthy
+version: "0.1"
+generated_at: "2026-07-08T08:20:00+10:00"
+platform_hint: cowork
+working_folder: evals/doctor/fixtures/fx-schedule-healthy/working
+profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+summary:
+  pass: 4
+  warn: 0
+  fail: 0
+  skip: 0
+results:
+  - check_id: schedule-ledger-present
+    category: always-on
+    status: pass
+    message: Schedule health ledger found
+  - check_id: schedule-health-valid
+    category: always-on
+    status: pass
+    message: Ledger matches schema
+  - check_id: schedule-catalog-jobs-match
+    category: always-on
+    status: pass
+    message: All job_ids exist in catalog
+  - check_id: schedule-critical-local-misses
+    category: always-on
+    status: pass
+    message: No critical local miss escalation

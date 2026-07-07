@@ -1,0 +1,121 @@
+fixture_id: fx-full-profile
+version: "0.1"
+generated_at: "2026-07-08T08:10:00+10:00"
+platform_hint: cowork
+working_folder: evals/doctor/fixtures/fx-full-profile/working
+profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+summary:
+  pass: 19
+  warn: 0
+  fail: 0
+  skip: 8
+results:
+  - check_id: plugin-manifest-present
+    category: plugin
+    status: pass
+    message: Plugin manifest found
+  - check_id: plugin-skills-present
+    category: plugin
+    status: pass
+    message: Skills directory present
+  - check_id: plugin-commands-present
+    category: plugin
+    status: pass
+    message: Commands directory present
+  - check_id: plugin-hooks-session-start
+    category: plugin
+    status: pass
+    message: SessionStart hook configured
+  - check_id: plugin-rules-present
+    category: plugin
+    status: pass
+    message: Core rules present
+  - check_id: plugin-doctor-checklist
+    category: plugin
+    status: pass
+    message: Doctor checklist and schema present
+  - check_id: profile-exists
+    category: profile
+    status: pass
+    message: Profile found
+  - check_id: profile-readable
+    category: profile
+    status: pass
+    message: Profile readable
+  - check_id: profile-sections-complete
+    category: profile
+    status: pass
+    message: Required profile sections filled
+  - check_id: profile-word-count
+    category: profile
+    status: pass
+    message: Under 2,000 words
+  - check_id: profile-optional-sections
+    category: profile
+    status: pass
+    message: Optional sections filled
+  - check_id: working-folder-identified
+    category: working-folder
+    status: pass
+    message: Working folder resolved
+  - check_id: tasks-md-present
+    category: working-folder
+    status: pass
+    message: TASKS.md present
+  - check_id: memory-scaffold
+    category: working-folder
+    status: pass
+    message: memory/ directory present
+  - check_id: claude-md-present
+    category: working-folder
+    status: pass
+    message: CLAUDE.md present
+  - check_id: schedule-ledger-present
+    category: always-on
+    status: skip
+    message: No scheduled jobs configured — optional
+    fix_ref: /assistant:schedules
+  - check_id: schedule-health-valid
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: schedule-catalog-jobs-match
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: schedule-critical-local-misses
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: connector-email-advisory
+    category: connectors
+    status: pass
+    message: Email connected or paste-only confirmed
+  - check_id: connector-calendar-advisory
+    category: connectors
+    status: pass
+    message: Calendar connected or paste-only confirmed
+  - check_id: connector-chat-advisory
+    category: connectors
+    status: skip
+    message: User declined connector survey
+  - check_id: connector-drive-notes-tasks-advisory
+    category: connectors
+    status: skip
+    message: User declined connector survey
+  - check_id: platform-inferred
+    category: platform
+    status: pass
+    message: Platform hint cowork
+  - check_id: platform-cursor-local-schedules
+    category: platform
+    status: skip
+    message: Not on Cursor — skipped
+  - check_id: platform-cowork-schedules
+    category: platform
+    status: pass
+    message: Local Cowork schedules viable
+  - check_id: platform-unknown-skip
+    category: platform
+    status: skip
+    message: Platform known — skipped

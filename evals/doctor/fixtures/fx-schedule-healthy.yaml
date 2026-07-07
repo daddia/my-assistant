@@ -1,0 +1,8 @@
+fixture_id: fx-schedule-healthy
+description: Healthy schedule-health ledger — no escalation signals
+profile_file: evals/doctor/fixtures/profiles/fx-full-profile.md
+working_folder: evals/doctor/fixtures/fx-schedule-healthy/working
+schedule_health_file: evals/doctor/fixtures/fx-schedule-healthy/working/schedule-health/index.yaml
+platform_hint: cowork
+connectors_connected: [email]
+doctor_mode: full

@@ -1,0 +1,21 @@
+version: "0.1"
+updated_at: "2026-07-08T09:45:00+10:00"
+jobs:
+  morning-briefing:
+    surface: local
+    cadence: "0 8 * * 1-5"
+    last_run_at: "2026-07-07T08:01:00+10:00"
+    last_run_status: success
+    expected_artifact: brief-2026-07-07.md
+    artifact_present: true
+    miss_count_7d: 1
+    notes: "laptop asleep — user on local surface"
+  inbox-sweep:
+    surface: local
+    cadence: "0 8,12,16 * * 1-5"
+    last_run_at: "2026-07-08T08:12:00+10:00"
+    last_run_status: success
+    expected_artifact: null
+    artifact_present: null
+    miss_count_7d: 0
+    notes: null

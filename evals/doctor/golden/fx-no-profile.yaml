@@ -1,0 +1,77 @@
+fixture_id: fx-no-profile
+version: "0.1"
+generated_at: "2026-07-08T08:00:00+10:00"
+platform_hint: unknown
+working_folder: evals/doctor/fixtures/fx-no-profile/working
+profile_path: null
+summary:
+  pass: 1
+  warn: 3
+  fail: 1
+  skip: 10
+results:
+  - check_id: profile-exists
+    category: profile
+    status: fail
+    message: No profile found
+    fix_ref: /assistant:setup
+  - check_id: profile-readable
+    category: profile
+    status: skip
+    message: Profile missing — skipped
+  - check_id: profile-sections-complete
+    category: profile
+    status: skip
+    message: Profile missing — skipped
+  - check_id: profile-word-count
+    category: profile
+    status: skip
+    message: Profile missing — skipped
+  - check_id: profile-optional-sections
+    category: profile
+    status: skip
+    message: Profile missing — skipped
+  - check_id: working-folder-identified
+    category: working-folder
+    status: pass
+    message: Working folder resolved
+  - check_id: tasks-md-present
+    category: working-folder
+    status: warn
+    message: TASKS.md not found
+    fix_ref: /assistant:tasks add
+  - check_id: memory-scaffold
+    category: working-folder
+    status: warn
+    message: memory/ directory not found
+    fix_ref: /assistant:memory add
+  - check_id: claude-md-present
+    category: working-folder
+    status: warn
+    message: CLAUDE.md not found
+    fix_ref: /assistant:memory add
+  - check_id: schedule-ledger-present
+    category: always-on
+    status: skip
+    message: No scheduled jobs configured — optional
+    fix_ref: /assistant:schedules
+  - check_id: schedule-health-valid
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: schedule-catalog-jobs-match
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: schedule-critical-local-misses
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: platform-inferred
+    category: platform
+    status: skip
+    message: Platform unknown — re-run after stating platform
+  - check_id: platform-unknown-skip
+    category: platform
+    status: skip
+    message: Platform checks skipped

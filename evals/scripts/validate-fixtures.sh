@@ -51,6 +51,8 @@ for dir in \
   "${EVALS_DIR}/connectors/golden" \
   "${EVALS_DIR}/connectors/rubric" \
   "${EVALS_DIR}/starter-profiles" \
+  "${EVALS_DIR}/doctor/fixtures" \
+  "${EVALS_DIR}/doctor/golden" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -75,6 +77,9 @@ require_file "${EVALS_DIR}/feedback/manifest.yaml"
 require_file "${EVALS_DIR}/connectors/manifest.yaml"
 require_file "${REPO_ROOT}/config/starter-profiles/manifest.yaml"
 require_file "${REPO_ROOT}/examples/before-after/manifest.yaml"
+require_file "${REPO_ROOT}/config/doctor-checklist.yaml"
+require_file "${REPO_ROOT}/config/doctor-report.schema.yaml"
+require_file "${EVALS_DIR}/doctor/manifest.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -867,6 +872,151 @@ else
   errors << "missing examples/before-after/manifest.yaml"
 end
 
+# --- install doctor (MA10) ---
+DOCTOR_STATUSES = %w[pass warn fail skip].freeze
+DOCTOR_PLATFORMS = %w[cowork cursor claude-code unknown].freeze
+MIN_DOCTOR_CHECKS = 20
+
+doctor_checklist_path = repo_root.join('config/doctor-checklist.yaml')
+doctor_check_ids = Set.new
+doctor_category_ids = Set.new
+if doctor_checklist_path.file?
+  doctor_doc = YAML.load_file(doctor_checklist_path) || {}
+  categories = doctor_doc['categories'] || []
+  categories.each do |cat|
+    cid = cat['id']
+    doctor_category_ids.add(cid) if cid
+  end
+  checks = doctor_doc['checks'] || []
+  errors << "doctor-checklist.yaml: 'checks' must be a list" unless checks.is_a?(Array)
+  if checks.length < MIN_DOCTOR_CHECKS
+    errors << "doctor-checklist.yaml lists #{checks.length} checks; minimum is #{MIN_DOCTOR_CHECKS}"
+  end
+  checks.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "doctor-checklist.yaml: checks[#{i}] must be a mapping"
+      next
+    end
+    cid = entry['id']
+    cat = entry['category']
+    errors << "doctor-checklist.yaml: checks[#{i}] missing 'id'" if cid.nil? || cid.empty?
+    doctor_check_ids.add(cid) if cid
+    errors << "doctor-checklist.yaml: check '#{cid}' unknown category '#{cat}'" if cat && !doctor_category_ids.include?(cat)
+    errors << "doctor-checklist.yaml: check '#{cid}' missing fix_ref" if entry['fix_ref'].nil? || entry['fix_ref'].empty?
+  end
+else
+  errors << "missing config/doctor-checklist.yaml"
+end
+
+doctor_fixtures = []
+doctor_manifest_path = evals_dir.join('doctor/manifest.yaml')
+golden_check_ids = Set.new
+if doctor_manifest_path.file?
+  doctor_manifest = YAML.load_file(doctor_manifest_path) || {}
+  doctor_fixtures = doctor_manifest['fixtures'] || []
+  errors << "doctor/manifest.yaml: 'fixtures' must be a list" unless doctor_fixtures.is_a?(Array)
+
+  doctor_ids = Set.new
+  doctor_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "doctor/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    errors << "doctor/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "doctor/manifest.yaml: duplicate fixture id '#{fid}'" if doctor_ids.include?(fid)
+    doctor_ids.add(fid) if fid
+
+    if fpath.nil? || fpath.empty?
+      errors << "doctor/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      unless resolved.file?
+        errors << "missing doctor fixture file: #{resolved}"
+      else
+        fixture = YAML.load_file(resolved) || {}
+        gfid = fixture['fixture_id']
+        errors << "doctor fixture #{File.basename(fpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+        wf = fixture['working_folder']
+        if wf && !wf.empty?
+          wf_path = resolve_eval_path(evals_dir, repo_root, wf)
+          errors << "missing doctor working folder: #{wf_path}" unless wf_path.directory?
+        end
+        pfile = fixture['profile_file']
+        if pfile && !pfile.empty?
+          ppath = resolve_eval_path(evals_dir, repo_root, pfile)
+          errors << "missing doctor profile file: #{ppath}" unless ppath.file?
+        end
+      end
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "doctor/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing doctor golden file: #{golden_resolved}"
+        next
+      end
+
+      golden = YAML.load_file(golden_resolved) || {}
+      gfid = golden['fixture_id']
+      errors << "doctor golden #{File.basename(gpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+
+      errors << "doctor golden #{File.basename(gpath)} missing version" unless golden['version']
+      hint = golden['platform_hint']
+      errors << "doctor golden #{File.basename(gpath)} invalid platform_hint '#{hint}'" if hint && !DOCTOR_PLATFORMS.include?(hint)
+
+      summary = golden['summary']
+      if summary.nil? || !summary.is_a?(Hash)
+        errors << "doctor golden #{File.basename(gpath)} missing 'summary' mapping"
+      end
+
+      results = golden['results']
+      if results.nil? || !results.is_a?(Array)
+        errors << "doctor golden #{File.basename(gpath)} missing 'results' list"
+      else
+        tallies = Hash.new(0)
+        results.each_with_index do |row, j|
+          unless row.is_a?(Hash)
+            errors << "doctor golden #{File.basename(gpath)} results[#{j}] must be a mapping"
+            next
+          end
+          check_id = row['check_id']
+          status = row['status']
+          golden_check_ids.add(check_id) if check_id
+          errors << "doctor golden #{File.basename(gpath)} results[#{j}] invalid status '#{status}'" if status && !DOCTOR_STATUSES.include?(status)
+          tallies[status] += 1 if status
+          errors << "doctor golden #{File.basename(gpath)} results[#{j}] missing message" if row['message'].nil? || row['message'].empty?
+        end
+        if summary.is_a?(Hash)
+          DOCTOR_STATUSES.each do |st|
+            expected = tallies[st]
+            actual = summary[st]
+            if actual != expected
+              errors << "doctor golden #{File.basename(gpath)} summary.#{st} is #{actual.inspect}; expected #{expected} from results"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  if doctor_fixtures.length < 7
+    errors << "doctor/manifest.yaml must list at least 7 fixtures; got #{doctor_fixtures.length}"
+  end
+else
+  errors << "missing doctor/manifest.yaml"
+end
+
+doctor_check_ids.each do |cid|
+  unless golden_check_ids.include?(cid)
+    errors << "doctor-checklist check_id '#{cid}' not referenced by any golden report"
+  end
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
@@ -879,7 +1029,9 @@ fb_count = fb_fixtures&.length || 0
 conn_count = conn_fixtures&.length || 0
 starter_count = starter_profiles&.length || 0
 ba_count = before_after_demos&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{conn_count} connector fixtures, #{starter_count} starter profiles, #{ba_count} before-after demos, #{EXPECTED_JOB_IDS.length} catalog jobs"
+doctor_count = doctor_fixtures&.length || 0
+doctor_check_count = doctor_check_ids&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{conn_count} connector fixtures, #{starter_count} starter profiles, #{ba_count} before-after demos, #{doctor_count} doctor fixtures (#{doctor_check_count} checks), #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"
