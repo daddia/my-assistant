@@ -61,7 +61,9 @@ Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, bri
 
 ## Visual dashboard
 
-`skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view) and browsing/editing `CLAUDE.md` + `memory/`. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.
+`skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view), browsing/editing `CLAUDE.md` + `memory/`, and browsing pending approvals in the **Review** tab. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.
+
+See [`docs/review-queue/README.md`](docs/review-queue/README.md) for the file-based review queue — six approval streams, schema, fixtures, and dashboard workflow.
 
 ## Connectors are tool-agnostic
 

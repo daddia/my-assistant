@@ -54,3 +54,15 @@ Gaps to fill: attach the deck.
 - One draft per thread; if there are several plausible responses (accept vs decline), offer the two shortest options rather than one long hedge.
 - Don't over-explain or pad. A three-line reply that lands beats a paragraph that hedges.
 - Flag anything that commits the user (a deadline, a spend, a promise) so they notice before sending.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) for every draft.
+
+**Queue writing:**
+
+- Write a `reply-draft` item to `review-queue/index.yaml` for each draft produced.
+- **Always** create a local mirror at `drafts/reply-*.md` in the working folder — even when a Gmail draft is created via `~~email`.
+- Set `external_ref` to the connector draft id when present (e.g. Gmail draft id).
+
+Append the observability footer when queue items are written.

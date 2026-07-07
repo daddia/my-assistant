@@ -1,0 +1,183 @@
+# Review queue schema — machine-readable item shape for review-queue/index.yaml
+#
+# Authoritative contract for skills and the dashboard Review tab.
+# Working-folder location: {working-folder}/review-queue/index.yaml
+# Never write queue files under the plugin directory (see rules/file-safety.md).
+#
+# Validation: compare fixture items in docs/review-queue/fixtures/sample-index.yaml
+# against this schema; run yamllint on fixture files or use the manual checklist in README.md.
+
+version: "0.1"
+
+# ---------------------------------------------------------------------------
+# Queue types (exactly six)
+# ---------------------------------------------------------------------------
+queue_types:
+  - reply-draft        # Email/message reply not yet sent
+  - archive-proposal   # Threads/senders proposed for archive
+  - follow-up-nudge    # Cold-thread nudge draft
+  - memory-suggestion  # New/changed CLAUDE.md or memory/ entry
+  - profile-diff       # Change to profile.md
+  - calendar-proposal  # Proposed times, invite draft, or focus block
+
+# ---------------------------------------------------------------------------
+# Item fields
+# ---------------------------------------------------------------------------
+item_fields:
+  id:
+    required: true
+    type: string
+    pattern: "^rq-[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$"
+    description: Stable slug, e.g. rq-2026-07-08-reply-priya-deck
+
+  type:
+    required: true
+    type: enum
+    enum: [reply-draft, archive-proposal, follow-up-nudge, memory-suggestion, profile-diff, calendar-proposal]
+    description: One of the six queue types above
+
+  status:
+    required: true
+    type: enum
+    enum: [pending, approved, dismissed, expired]
+    description: Lifecycle state; skills append pending; user resolves in chat or by editing index
+
+  created_at:
+    required: true
+    type: date
+    format: ISO-8601
+    description: Date the item was created (YYYY-MM-DD)
+
+  source_skill:
+    required: true
+    type: string
+    description: Skill that created the item (e.g. inbox-triage, memory-management)
+
+  title:
+    required: true
+    type: string
+    min_length: 1
+    description: One-line user-facing summary
+
+  source_path:
+    required: true
+    type: string
+    description: Path relative to working folder for full content (drafts/, pending-memory/, pending-profile/, review-queue/)
+
+  approval_prompt:
+    required: true
+    type: string
+    min_length: 1
+    description: Single sentence — what the user must decide
+
+  autonomy_tier:
+    required: true
+    type: integer
+    minimum: 0
+    maximum: 3
+    description: Autonomy tier active when the item was created (0 Suggest … 3 Notify-after)
+
+  priority:
+    required: false
+    type: enum
+    enum: [high, normal, low]
+    description: VIP / due-today bump
+
+  external_ref:
+    required: false
+    type: string
+    description: Connector handle, e.g. Gmail draft id
+
+  related_ids:
+    required: false
+    type: array
+    items: string
+    description: Links to thread id, task line, meeting id, or other queue item ids
+
+  resolved_at:
+    required: false
+    type: date
+    format: ISO-8601
+    description: Set when user approves or dismisses
+
+# ---------------------------------------------------------------------------
+# Index file shape
+# ---------------------------------------------------------------------------
+index:
+  root_key: items
+  type: array
+  items: item_fields
+
+# ---------------------------------------------------------------------------
+# Examples — one item per queue type (pending, Tier 1)
+# ---------------------------------------------------------------------------
+examples:
+  - id: rq-2026-07-08-reply-priya-deck
+    type: reply-draft
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: inbox-triage
+    title: Reply to Priya — board deck feedback
+    source_path: drafts/reply-priya-board-update.md
+    approval_prompt: Review and send this reply when ready.
+    autonomy_tier: 1
+    priority: high
+    external_ref: gmail-draft-abc123
+    related_ids: [01-vip-board-update]
+
+  - id: rq-2026-07-08-archive-marketing
+    type: archive-proposal
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: inbox-triage
+    title: Archive 4 marketing threads from today's triage
+    source_path: review-queue/archives-2026-07-08.yaml
+    approval_prompt: Confirm these threads can be archived.
+    autonomy_tier: 1
+    priority: normal
+
+  - id: rq-2026-07-08-followup-acme
+    type: follow-up-nudge
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: follow-up-tracking
+    title: Nudge Acme on contract renewal (14 days cold)
+    source_path: drafts/follow-up-acme-contract.md
+    approval_prompt: Send this follow-up or dismiss if no longer needed.
+    autonomy_tier: 1
+    priority: normal
+    related_ids: [04-needs-reply-contract-renewal]
+
+  - id: rq-2026-07-08-memory-priya
+    type: memory-suggestion
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: meeting-follow-up
+    title: Add Priya prefers deck reviews 48h before board
+    source_path: pending-memory/priya-board-context.md
+    approval_prompt: Approve adding this to memory/people/priya.md.
+    autonomy_tier: 1
+    priority: normal
+
+  - id: rq-2026-07-08-profile-vip-tier
+    type: profile-diff
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: memory-management
+    title: Promote Jordan Lee to VIP tier 1
+    source_path: pending-profile/vip-tier-jordan.diff
+    approval_prompt: Apply this profile change or edit in setup.
+    autonomy_tier: 1
+    priority: low
+
+  - id: rq-2026-07-08-calendar-sync
+    type: calendar-proposal
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: calendar-scheduling
+    title: Propose times for team sync with design
+    source_path: drafts/calendar-team-sync.md
+    approval_prompt: Pick a slot and send the invite manually.
+    autonomy_tier: 1
+    priority: normal
+    related_ids: [25-scheduling-team-sync]

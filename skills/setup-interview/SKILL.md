@@ -49,3 +49,14 @@ Fill the template section by section from their answers. Leave clear placeholder
 - Never store passwords, PINs, 2FA codes, or full account numbers.
 - If a profile already exists, don't overwrite blindly — ask whether to update specific sections and show the diff.
 - Everything works standalone; connectors just make it sharper. Don't block setup on OAuth.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing post-setup profile changes.
+
+**Queue writing:**
+
+- The **initial full profile write** during setup is **exempt** from `profile-diff` queue items — the user is actively answering interview questions.
+- **Post-setup profile change proposals** use queue type `profile-diff` via the standard diff flow in `pending-profile/`.
+
+Use the four-part frame when showing profile diffs after setup.

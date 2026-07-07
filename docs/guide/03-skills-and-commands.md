@@ -50,8 +50,13 @@ Every skill is **standalone-first**: paste content and it works; connect a tool 
 1. Open the file in **Chrome or Edge** (uses the File System Access API).
 2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between Active / Waiting On / Someday / Done; auto-saves.
 3. **Memory tab** — open your working folder to browse and edit `CLAUDE.md` and files under `memory/`.
+4. **Review tab** — browse `review-queue/index.yaml` pending items grouped by type; open `source_path` files (read-only — approve in Gmail/chat/calendar).
 
 The assistant and the dashboard share the same files, so edits in either place stay in sync.
+
+### Review queue and approval frame
+
+Skills that produce reviewable work use a four-part **approval frame** in chat: *What I found · What I drafted · What I recommend · What needs your approval* (`rules/approval-frame.md`). Pending items are written to `review-queue/index.yaml` in your working folder. Full docs: [`docs/review-queue/README.md`](../../docs/review-queue/README.md).
 
 ## Everything drafts, nothing sends
 

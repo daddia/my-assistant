@@ -62,3 +62,11 @@ Draft nudge — Re: Acme contract (to Sam)
 - Escalate VIP silences to `~~chat` only if the user has asked for that; otherwise just surface in the list.
 - Don't nudge threads the user explicitly closed, or where the ball is in *their* court.
 - One nudge per thread per run; don't re-draft a nudge the user already sent.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when surfacing cold threads with nudge drafts.
+
+**Queue type:** `follow-up-nudge` — cold-thread nudge drafts use `source_path` under `drafts/follow-up-*.md`.
+
+Append the observability footer when queue items are written.

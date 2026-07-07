@@ -1,0 +1,14 @@
+# INTENTIONALLY BROKEN — invalid YAML for dashboard/parser error-path testing.
+# Do not use as a working review-queue index.
+# Expected behaviour: docs/review-queue/README.md § Error-path fixtures
+
+items:
+  - id: rq-2026-07-08-reply-broken
+    type: reply-draft
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: inbox-triage
+    title: "Unclosed string in title field
+    source_path: drafts/missing-close-quote.md
+    approval_prompt: This file should not parse.
+    autonomy_tier: 1

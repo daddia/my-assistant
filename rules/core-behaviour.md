@@ -53,6 +53,7 @@ Only the setup interview writes a full profile. When a durable convention surfac
 - Lists and tables for operational content; short paragraphs otherwise.
 - Flag assumptions: "I'm assuming X — say so if that's wrong."
 - Default short. Long form only when asked or genuinely needed.
+- When a skill produces reviewable work, use the four-part approval frame in [`approval-frame.md`](approval-frame.md): What I found · What I drafted · What I recommend · What needs your approval.
 
 ## Honesty
 

@@ -57,7 +57,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 ## Visual dashboard
 
-Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md` and a browser for `CLAUDE.md` + `memory/`. Point it at your working folder — the same files the assistant reads and writes.
+Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md`, a browser for `CLAUDE.md` + `memory/`, and a **Review** tab for pending approvals. Point it at your working folder — the same files the assistant reads and writes. See the [review queue docs](./docs/review-queue/README.md).
 
 ## How it's built
 

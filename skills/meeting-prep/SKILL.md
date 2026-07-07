@@ -54,3 +54,11 @@ No calendar? The user pastes the invite or names the meeting; you prep from memo
 
 - Don't fabricate a person's background. Unknown is "external contact, no prior context on file".
 - Read-only: prep never books, sends, or edits the calendar.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when prep surfaces schedule proposals or draft replies.
+
+Calendar-related proposals that need user action use queue type `calendar-proposal` with `source_path` under `drafts/calendar-*.md`. Reply drafts from prep hand off to `email-drafting` queue conventions (`reply-draft`).
+
+Append the observability footer when queue items are written.
