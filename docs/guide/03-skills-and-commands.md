@@ -23,9 +23,10 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:email` | `draft` (default) · `review` | Draft one reply, or review what's awaiting a response |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
 | `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
+| `/assistant:calendar` | `protect` (default) · `schedule` | Scan for buffer/prep/follow-up gaps and draft block proposals, or find meeting times |
 | `/assistant:meeting` | `follow-up` (default) | Import notetaker export or notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:calendar protect`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
 
 ## Skills (fire on their own)
 
@@ -33,7 +34,7 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 
 - **inbox-triage** + **email-drafting** — bucket mail, draft in your voice
 - **follow-up-tracking** — drafts nudges for threads gone cold
-- **calendar-scheduling** — proposes times, checks conflicts, drafts invites
+- **calendar-scheduling** — proposes times, checks conflicts, drafts invites; **protect mode** scans for buffer/prep/follow-up gaps and drafts calendar block proposals (user creates events manually)
 - **meeting-prep** — who / what / last contact / what to prepare
 - **meeting-follow-up** — imports Granola/Fireflies/Otter/Google Meet exports (or hand-typed notes) into structured extraction, recap drafts, and queue items. **Does not join calls** — paste what your notetaker captured.
 - **daily-brief** — the morning briefing

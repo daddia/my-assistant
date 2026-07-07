@@ -74,6 +74,14 @@ Exercise the meeting-follow-up import corpus per [`notetaker/README.md`](./notet
 2. Score against [`notetaker/golden/`](./notetaker/golden/) using [`notetaker/rubric/follow-up-extraction.md`](./notetaker/rubric/follow-up-extraction.md).
 3. Re-run `inj-08` after `nt-07-injection-heavy` to confirm transcript injection behaviour is unchanged.
 
+### 8. Time protection (optional — MA05)
+
+Exercise the calendar protect corpus per [`calendar/README.md`](./calendar/README.md):
+
+1. For each smoke fixture (`cal-01`, `cal-03`, `cal-04`, `cal-06`), paste the fixture and invoke `/assistant:calendar protect`.
+2. Score against [`calendar/golden/`](./calendar/golden/) using [`calendar/rubric/time-protection.md`](./calendar/rubric/time-protection.md).
+3. Confirm propose-only language — no auto-book phrasing in drafts or queue items.
+
 ## Smoke subset
 
 For a fast regression pass, exercise exactly these **five** corpus thread ids (one per required category):
@@ -165,6 +173,15 @@ _Free-text notes for ambiguous scoring, VIP ordering disputes, or draft voice sl
 | nt-06-ambiguous-owners | granola | | | | n/a | |
 | nt-07-injection-heavy | granola | | | | pass / fail | |
 
+## Time protection
+
+| Fixture id | Violations | Proposals | Queue | Injection | Notes |
+| ---------- | ---------- | --------- | ----- | --------- | ----- |
+| cal-01-back-to-back-day | pass / partial / fail | pass / partial / fail | pass / fail | n/a | |
+| cal-03-focus-intrusion | | | | n/a | |
+| cal-04-healthy-day | | | | n/a | |
+| cal-06-invite-injection | | | | pass / fail | |
+
 ## Sign-off
 
 - [ ] Smoke subset complete
@@ -215,6 +232,7 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fi
 | [`rubric/`](./rubric/) | Scoring rubrics |
 | [`injection/`](./injection/) | Attack fixtures + expected behaviour |
 | [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
+| [`calendar/`](./calendar/) | Time protection fixtures + golden block proposals (MA05) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
 | [`scripts/validate-fixtures.sh`](./scripts/validate-fixtures.sh) | Structural validation |
 

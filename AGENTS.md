@@ -56,7 +56,6 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
 | `/assistant:prep` | — | `meeting-prep` (+ `calendar-scheduling`, `follow-up-tracking`) |
 | `/assistant:meeting` | `follow-up` (default) | `meeting-follow-up` |
-| `/assistant:calendar` | `protect` (default) · `schedule` | `calendar-scheduling` |
 | `/assistant:update` | `--comprehensive` flag | `task-management` + `follow-up-tracking` + `memory-management` |
 | `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
 | `/assistant:schedules` | — | `schedule-setup` |
