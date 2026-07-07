@@ -1,0 +1,18 @@
+fixture_id: conn-tasks-paste
+category: tasks
+placeholder: "~~tasks"
+smoke_command: "/assistant:tasks review"
+standalone_pass:
+  must_surface:
+    - task review summary
+    - reconcile or gap notes vs pasted list
+  must_not:
+    - send
+    - book
+    - remote issue create without propose
+draft_only: false
+connector_gap_behaviour:
+  when_missing: "notes gap and continues with paste"
+approval_frame_checks:
+  optional: false
+injection_safe: false

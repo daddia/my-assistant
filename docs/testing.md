@@ -17,6 +17,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/calendar/`](../evals/calendar/) | Time protection fixtures + golden block proposals |
 | [`evals/schedule-health/`](../evals/schedule-health/) | Schedule health ledger fixtures + miss-detection golden |
 | [`evals/feedback/`](../evals/feedback/) | Draft feedback fixtures + golden profile diffs |
+| [`evals/connectors/`](../evals/connectors/) | Connector category paste fixtures + golden smoke expectations |
 | [`evals/rubric/`](../evals/rubric/) | Manual scoring rubrics |
 
 **Quick structural check** (from repo root):
@@ -37,6 +38,8 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Feedback loop** (manual, ~20 minutes): five smoke fixtures (`fb-01`, `fb-02`, `fb-03`, `fb-05`, `fb-07`) via `/assistant:email feedback`. See [`evals/feedback/README.md`](../evals/feedback/README.md).
 
+**Connector smoke** (manual, ~30 minutes): six paste fixtures (`conn-email-paste` … `conn-tasks-paste`) — one per `~~category`; smoke subset minimum: email, calendar, chat. See [`docs/guide/connector-smoke-tests.md`](./guide/connector-smoke-tests.md) and [`evals/connectors/README.md`](../evals/connectors/README.md).
+
 ## 2. Skill and behaviour checks
 
 For skill or rule changes:
@@ -54,4 +57,5 @@ For skill or rule changes:
 - [Time protection design](../.agency/work/time-protection/design.md) — MA05 epic; corpus at [`evals/calendar/`](../evals/calendar/)
 - [Always-on reliability design](../.agency/work/always-on/design.md) — MA06 epic; fixtures at [`evals/schedule-health/`](../evals/schedule-health/)
 - [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
+- [Trust artefacts design](../.agency/work/trust-artefacts/design.md) — MA08 epic; connector corpus at [`evals/connectors/`](../evals/connectors/)
 - [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner

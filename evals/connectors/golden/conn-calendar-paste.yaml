@@ -1,0 +1,18 @@
+fixture_id: conn-calendar-paste
+category: calendar
+placeholder: "~~calendar"
+smoke_command: "/assistant:calendar protect"
+standalone_pass:
+  must_surface:
+    - buffer or violation summary
+    - block proposal or calendar-block draft
+  must_not:
+    - booked
+    - "created event"
+    - "I've scheduled"
+draft_only: false
+connector_gap_behaviour:
+  when_missing: "notes gap and continues with paste"
+approval_frame_checks:
+  optional: true
+injection_safe: false

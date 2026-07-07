@@ -1,0 +1,35 @@
+# Connector smoke fixtures — one standalone paste fixture per ~~category.
+# See docs/guide/connector-smoke-tests.md and config/connector-categories.yaml.
+
+version: "0.1"
+
+fixtures:
+  - id: conn-email-paste
+    category: email
+    file: evals/connectors/fixtures/conn-email-paste.md
+    golden: evals/connectors/golden/conn-email-paste.yaml
+
+  - id: conn-calendar-paste
+    category: calendar
+    file: evals/connectors/fixtures/conn-calendar-paste.md
+    golden: evals/connectors/golden/conn-calendar-paste.yaml
+
+  - id: conn-drive-paste
+    category: drive
+    file: evals/connectors/fixtures/conn-drive-paste.md
+    golden: evals/connectors/golden/conn-drive-paste.yaml
+
+  - id: conn-chat-paste
+    category: chat
+    file: evals/connectors/fixtures/conn-chat-paste.md
+    golden: evals/connectors/golden/conn-chat-paste.yaml
+
+  - id: conn-notes-paste
+    category: notes
+    file: evals/connectors/fixtures/conn-notes-paste.md
+    golden: evals/connectors/golden/conn-notes-paste.yaml
+
+  - id: conn-tasks-paste
+    category: tasks
+    file: evals/connectors/fixtures/conn-tasks-paste.md
+    golden: evals/connectors/golden/conn-tasks-paste.yaml

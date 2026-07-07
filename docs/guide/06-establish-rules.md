@@ -33,6 +33,23 @@ Your profile sets an **autonomy tier** (default Tier 1). The plugin never operat
 
 "Send", "book", and "spend" are never automatic at any tier. Raise your tier only after a week of good drafts.
 
+## Permissions and the review queue
+
+When the assistant drafts something that needs your eyes, it adds a **pending** item to `review-queue/index.yaml` (or shows it in the dashboard **Review** tab). Map queue types to what you are approving:
+
+| Queue type | What it means | Tier 1 behaviour |
+| ---------- | ------------- | ---------------- |
+| `reply-draft` | Email or message reply ready — **you send** from your mail client | Draft in `drafts/` or Gmail drafts |
+| `calendar-proposal` | Buffer block or time offer — **you create** the calendar event | Propose only |
+| `archive-proposal` | Marketing threads proposed for archive | Propose (Tier 2 may auto-apply) |
+| `follow-up-nudge` | Nudge draft for a cold thread | Draft only |
+| `memory-suggestion` | New or changed memory entry | Ask + show diff |
+| `profile-diff` | Profile policy or voice change | Ask + show diff |
+
+Privacy summary table: [Protect your privacy — Permissions at a glance](05-protect-privacy.md#permissions-at-a-glance-tier-1--default). Full matrix: [`security/permissions.md`](../../security/permissions.md). Schema: [`config/review-queue.schema.yaml`](../../config/review-queue.schema.yaml).
+
+Open [`skills/dashboard.html`](../../skills/dashboard.html) in Chrome or Edge, point it at your working folder, and use the **Review** tab to browse pending items.
+
 ## Proposing changes to your rules
 
 When a durable pattern emerges — a new VIP, a changed reply threshold, a tone correction you keep making — the assistant proposes a profile update and shows you the exact diff before writing. Only the setup interview writes your profile without asking.

@@ -42,6 +42,16 @@ It always asks before adding a task or a memory, and never sends or books automa
 
 Everything still runs — paste a thread, your agenda, or work from `TASKS.md` and memory alone. Skills skip any missing connector and note the gap rather than failing.
 
+> **Paste-first verification:** prove each category works without OAuth using [connector smoke tests](connector-smoke-tests.md). Fixtures live in `evals/connectors/fixtures/`; one paste per `~~category`.
+
+## How to verify
+
+| Goal | Where |
+| ---- | ----- |
+| Prove "works with email/calendar/chat…" without live OAuth | [Connector smoke tests](connector-smoke-tests.md) |
+| Category manifest and smoke commands | [`config/connector-categories.yaml`](../../config/connector-categories.yaml) |
+| Product ↔ category mapping | [`CONNECTORS.md`](../../CONNECTORS.md) |
+
 ## Next
 
 [Protect your privacy →](05-protect-privacy.md)

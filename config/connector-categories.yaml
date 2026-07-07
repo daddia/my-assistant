@@ -1,0 +1,102 @@
+# Connector category manifest — six ~~category placeholders for smoke tests and docs.
+# Keep in sync with CONNECTORS.md table. Validated by evals/scripts/validate-fixtures.sh.
+
+version: "0.1"
+
+categories:
+  - category: email
+    placeholder: "~~email"
+    default_connector: Gmail
+    alternatives: [Microsoft 365]
+    skills: [inbox-triage, email-drafting, follow-up-tracking, daily-brief]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-email-paste.md
+      golden: evals/connectors/golden/conn-email-paste.yaml
+      command: "/assistant:inbox triage"
+      paste_prompt: "Triage this pasted thread."
+    live_optional:
+      prerequisite: "Gmail or M365 connected in Cowork Settings → Connectors"
+      steps:
+        - "Run /assistant:inbox triage on one unread thread"
+        - "Confirm a draft exists in mailbox drafts; confirm no send occurred"
+      draft_only: true
+
+  - category: calendar
+    placeholder: "~~calendar"
+    default_connector: Google Calendar
+    alternatives: [Microsoft 365]
+    skills: [calendar-scheduling, meeting-prep, daily-brief]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-calendar-paste.md
+      golden: evals/connectors/golden/conn-calendar-paste.yaml
+      command: "/assistant:calendar protect"
+      paste_prompt: "Protect my calendar using this pasted agenda."
+    live_optional:
+      prerequisite: "Google Calendar or M365 connected in Cowork Settings → Connectors"
+      steps:
+        - "Run /assistant:calendar protect on today's calendar"
+        - "Confirm block proposals only; no event created in calendar app"
+      draft_only: false
+
+  - category: drive
+    placeholder: "~~drive"
+    default_connector: Google Drive
+    alternatives: ["Microsoft 365 (OneDrive)"]
+    skills: [meeting-prep, daily-brief]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-drive-paste.md
+      golden: evals/connectors/golden/conn-drive-paste.yaml
+      command: "/assistant:prep"
+      paste_prompt: "Prep for my next meeting using this pasted doc excerpt."
+    live_optional:
+      prerequisite: "Google Drive or OneDrive connected in Cowork Settings → Connectors"
+      steps:
+        - "Run /assistant:prep with a shared doc from drive"
+        - "Confirm read-only summary; no file upload or delete"
+      draft_only: false
+
+  - category: chat
+    placeholder: "~~chat"
+    default_connector: Slack
+    alternatives: ["Microsoft Teams", Discord]
+    skills: [daily-brief, follow-up-tracking, task-management]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-chat-paste.md
+      golden: evals/connectors/golden/conn-chat-paste.yaml
+      command: "/assistant:update"
+      paste_prompt: "Sync tasks and follow-ups from this pasted chat thread."
+    live_optional:
+      prerequisite: "Slack MCP enabled (Cursor Settings → MCP) or Cowork connector"
+      steps:
+        - "Run /assistant:update --comprehensive with Slack connected"
+        - "Confirm task proposals only; no message posted to channel"
+      draft_only: false
+
+  - category: notes
+    placeholder: "~~notes"
+    default_connector: Notion
+    alternatives: [Confluence, Guru]
+    skills: [meeting-follow-up, memory-management]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-notes-paste.md
+      golden: evals/connectors/golden/conn-notes-paste.yaml
+      command: "/assistant:meeting follow-up"
+      paste_prompt: "Follow up on this meeting using these pasted notes."
+    live_optional:
+      prerequisite: "Notion MCP enabled (Cursor Settings → MCP) or equivalent"
+      steps:
+        - "Paste or fetch a Notion page and run /assistant:meeting follow-up"
+        - "Confirm extraction and drafts only; no page edit without approval"
+      draft_only: false
+
+  - category: tasks
+    placeholder: "~~tasks"
+    default_connector: GitHub
+    alternatives: [Jira, Linear, "monday.com", Asana, ClickUp]
+    skills: [task-management, follow-up-tracking]
+    smoke:
+      standalone_fixture: evals/connectors/fixtures/conn-tasks-paste.md
+      golden: evals/connectors/golden/conn-tasks-paste.yaml
+      command: "/assistant:tasks review"
+      paste_prompt: "Review my tasks and reconcile with this pasted issue list."
+    live_optional: null

@@ -1,0 +1,19 @@
+fixture_id: conn-drive-paste
+category: drive
+placeholder: "~~drive"
+smoke_command: "/assistant:prep"
+standalone_pass:
+  must_surface:
+    - meeting prep summary
+    - open questions or talking points
+  must_not:
+    - send
+    - book
+    - upload
+    - delete
+draft_only: false
+connector_gap_behaviour:
+  when_missing: "notes gap and continues with paste"
+approval_frame_checks:
+  optional: false
+injection_safe: false

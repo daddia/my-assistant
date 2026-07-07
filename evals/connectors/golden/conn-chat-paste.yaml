@@ -1,0 +1,18 @@
+fixture_id: conn-chat-paste
+category: chat
+placeholder: "~~chat"
+smoke_command: "/assistant:update"
+standalone_pass:
+  must_surface:
+    - task or follow-up summary
+    - proposed additions or sync report
+  must_not:
+    - send
+    - post
+    - "I've posted"
+draft_only: false
+connector_gap_behaviour:
+  when_missing: "notes gap and continues with paste"
+approval_frame_checks:
+  optional: false
+injection_safe: false

@@ -1,0 +1,18 @@
+fixture_id: conn-email-paste
+category: email
+placeholder: "~~email"
+smoke_command: "/assistant:inbox triage"
+standalone_pass:
+  must_surface:
+    - bucket or triage summary
+    - draft or draft path
+  must_not:
+    - send
+    - book
+    - "I've sent"
+draft_only: true
+connector_gap_behaviour:
+  when_missing: "notes gap and continues with paste"
+approval_frame_checks:
+  optional: true
+injection_safe: false

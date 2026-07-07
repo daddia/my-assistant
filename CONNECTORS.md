@@ -47,3 +47,14 @@ The plugin degrades gracefully:
 - **No task connector?** Tasks live in `TASKS.md`. Memory lives in `memory/`. Both are plain files you own.
 
 When a connector a skill wants is missing, the skill skips that step and notes the gap rather than failing.
+
+## How to verify
+
+Prove each category without live OAuth:
+
+1. Run the structural check: `LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh`
+2. Follow [docs/guide/connector-smoke-tests.md](docs/guide/connector-smoke-tests.md) — paste `evals/connectors/fixtures/conn-{category}-paste.md`, run the smoke command from [`config/connector-categories.yaml`](config/connector-categories.yaml), score against the golden file.
+
+**Smoke subset:** email, calendar, chat — highest-traffic categories. Live OAuth steps are optional appendix only; standalone paste is authoritative.
+
+Category manifest: [`config/connector-categories.yaml`](config/connector-categories.yaml) · Maintainer corpus: [`evals/connectors/README.md`](evals/connectors/README.md)

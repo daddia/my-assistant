@@ -1,0 +1,105 @@
+# Admin & deployment
+
+For power users, maintainers, and anyone deploying managed agents — not enterprise IT or SOC 2 procurement.
+
+## Who this is for
+
+You need to know **where files live**, **which runtime to pick**, and **how always-on jobs deploy** without reading the full security corpus. End-user privacy basics: [Protect your privacy](05-protect-privacy.md). Deep security: [security/README.md](../../security/README.md).
+
+## Runtimes
+
+My Assistant installs as one plugin on three hosts:
+
+| Runtime | Install path | Notes |
+| ------- | ------------ | ----- |
+| **Claude Cowork** | Customize → Plugins → marketplace from [GitHub URL](https://github.com/daddia/my-assistant) | Native Gmail, Google Calendar, Google Drive connectors |
+| **Claude Code** | Same marketplace; works in terminal and claude.ai/code | Cloud schedules for always-on jobs |
+| **Cursor** | Settings → Plugins → add repo URL | MCP servers for Slack, Notion, GitHub, etc.; paste-first for email/calendar |
+
+Step-by-step install: [Get started](01-getting-started.md).
+
+**Platform caveats**
+
+- Gmail, Google Calendar, and Google Drive are **Cowork-native only**. In Cursor, paste threads and agendas or connect an MCP provider for `~~email` / `~~calendar`.
+- Cursor users without Cowork desktop should use `cloud-code` or `managed` surfaces for jobs that must not miss — see [Always-on reliability](07-always-on-reliability.md).
+
+## Profile location
+
+Personalisation lives **outside** the plugin so `/plugin update` never overwrites it.
+
+| Host | Default path |
+| ---- | ------------ |
+| Cowork / Claude Code | `~/.claude/plugins/config/my-assistant/profile.md` |
+| Cowork workspace | Copy may live in an open workspace folder — plugin checks both |
+
+Created by `/assistant:setup` from `config/profile.template.md`. Never commit real profiles to git.
+
+## Working folder
+
+User-owned directory the assistant reads and writes during sessions:
+
+| Path | Purpose |
+| ---- | ------- |
+| `TASKS.md` | Task board (Active / Waiting On / Someday / Done) |
+| `CLAUDE.md` + `memory/` | Two-tier memory |
+| `drafts/` | Email, calendar, and follow-up drafts |
+| `brief-YYYY-MM-DD.md` | Morning briefings |
+| `review-queue/` | Pending approvals (`index.yaml` per review-queue schema) |
+| `schedule-health/` | Scheduled job heartbeats |
+
+The plugin directory (`skills/`, `rules/`, …) is **read-only** — skills never write there.
+
+## Connectors
+
+Skills use category placeholders (`~~email`, `~~calendar`, …) — not product brands. See [Connect tools](04-connect-tools.md) and [`CONNECTORS.md`](../../CONNECTORS.md).
+
+**Verify connectors work:** [Connector smoke tests](connector-smoke-tests.md) — standalone paste fixtures pass without OAuth.
+
+## Always-on deployment
+
+| Option | Guide |
+| ------ | ----- |
+| Local Cowork schedules | [Always-on reliability](07-always-on-reliability.md) · `/assistant:schedules` |
+| Claude Code cloud schedules | Same chapter — `cloud-code` surface |
+| Managed agents | [`managed-agents/`](../../managed-agents/) cookbooks on Anthropic infrastructure |
+
+Canonical job list: `config/schedule-catalog.yaml`. Health ledger: `{working-folder}/schedule-health/index.yaml`.
+
+## Managed agents
+
+Advanced optional path — same skills, headless deployment:
+
+1. Choose a cookbook under [`managed-agents/`](../../managed-agents/) (e.g. `morning-briefing/agent.yaml`).
+2. Deploy per Anthropic managed-agent docs; connect OAuth via platform vault.
+3. **Cost caveat:** burst schedules are cheap; continuous 24/7 polling is not. See `managed-agents/README.md`.
+
+My Assistant does not host your agents or store connector tokens.
+
+## Maintainer local install
+
+For plugin development:
+
+1. Clone this repo.
+2. Add as a **local marketplace** (Cowork/Code) or point Cursor at the clone.
+3. Run structural validation:
+
+   ```bash
+   LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
+   ```
+
+4. No build step — skills are markdown; dashboard is static HTML.
+
+Proof harness: [`evals/README.md`](../../evals/README.md).
+
+## Upgrade safety
+
+| Action | Safe? |
+| ------ | ----- |
+| `/plugin update` or marketplace pull | ✅ Updates plugin only |
+| Profile overwrite | 🚫 Never — profile is outside plugin dir |
+| Working folder overwrite | 🚫 Never — user-owned paths |
+| Connector credentials in repo | 🚫 Never — OAuth at connect time |
+
+## Next
+
+[Connector smoke tests →](connector-smoke-tests.md) · [Protect your privacy →](05-protect-privacy.md)

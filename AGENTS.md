@@ -93,6 +93,16 @@ Gmail, Google Calendar, and Google Drive are native Cowork connectors. The Gmail
 | `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |
 | `skills/dashboard.html` | Visual task + memory editor (read-only in plugin; open in browser) | Plugin directory |
 
+## Trust documentation
+
+| Doc | Audience |
+|-----|----------|
+| `docs/guide/05-protect-privacy.md` | End users — plain-language privacy |
+| `docs/guide/08-admin-deploy.md` | Deployers — runtimes, paths, managed agents |
+| `docs/guide/connector-smoke-tests.md` | Verifiers — prove each `~~category` without OAuth |
+| `security/README.md` | Security reviewers — index to threat model, data flow, permissions |
+| `config/connector-categories.yaml` | Maintainer manifest — smoke commands and fixture refs |
+
 ## Graduated autonomy (default: Tier 1 — Draft)
 
 Set in the profile. Never exceed the configured tier.

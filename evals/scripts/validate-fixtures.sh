@@ -47,6 +47,9 @@ for dir in \
   "${EVALS_DIR}/feedback/fixtures" \
   "${EVALS_DIR}/feedback/golden" \
   "${EVALS_DIR}/feedback/rubric" \
+  "${EVALS_DIR}/connectors/fixtures" \
+  "${EVALS_DIR}/connectors/golden" \
+  "${EVALS_DIR}/connectors/rubric" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -63,7 +66,12 @@ require_file "${REPO_ROOT}/config/calendar-block-types.yaml"
 require_file "${REPO_ROOT}/config/schedule-catalog.yaml"
 require_file "${REPO_ROOT}/config/schedule-health.schema.yaml"
 require_file "${REPO_ROOT}/config/feedback-signals.yaml"
+require_file "${REPO_ROOT}/config/connector-categories.yaml"
+require_file "${REPO_ROOT}/security/README.md"
+require_file "${REPO_ROOT}/docs/guide/08-admin-deploy.md"
+require_file "${REPO_ROOT}/docs/guide/connector-smoke-tests.md"
 require_file "${EVALS_DIR}/feedback/manifest.yaml"
+require_file "${EVALS_DIR}/connectors/manifest.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -613,6 +621,133 @@ else
   errors << "missing feedback/manifest.yaml"
 end
 
+# --- connector smoke (MA08) ---
+CONNECTOR_CATEGORIES = %w[email calendar drive chat notes tasks].freeze
+DEEP_SECURITY_DOCS = %w[threat-model.md data-flow.md permissions.md].freeze
+
+security_readme = repo_root.join('security/README.md')
+if security_readme.file?
+  text = security_readme.read
+  DEEP_SECURITY_DOCS.each do |doc|
+    errors << "security/README.md must link to #{doc}" unless text.include?(doc)
+  end
+else
+  errors << "missing security/README.md"
+end
+
+conn_manifest_path = repo_root.join('config/connector-categories.yaml')
+conn_fixtures = []
+if conn_manifest_path.file?
+  conn_doc = YAML.load_file(conn_manifest_path) || {}
+  categories = conn_doc['categories'] || []
+  errors << "connector-categories.yaml: 'categories' must be a list" unless categories.is_a?(Array)
+
+  cat_ids = categories.map { |c| c['category'] }.compact
+  if cat_ids.sort != CONNECTOR_CATEGORIES.sort
+    errors << "connector-categories.yaml must list exactly #{CONNECTOR_CATEGORIES.join(', ')}; got #{cat_ids.join(', ')}"
+  end
+
+  categories.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "connector-categories.yaml: categories[#{i}] must be a mapping"
+      next
+    end
+    cat = entry['category']
+    smoke = entry['smoke']
+    if smoke.nil? || !smoke.is_a?(Hash)
+      errors << "connector-categories.yaml: category '#{cat}' missing 'smoke' mapping"
+      next
+    end
+
+    fpath = smoke['standalone_fixture']
+    gpath = smoke['golden']
+    cmd = smoke['command']
+    errors << "connector-categories.yaml: category '#{cat}' missing smoke.standalone_fixture" if fpath.nil? || fpath.empty?
+    errors << "connector-categories.yaml: category '#{cat}' missing smoke.golden" if gpath.nil? || gpath.empty?
+    errors << "connector-categories.yaml: category '#{cat}' missing smoke.command" if cmd.nil? || cmd.empty?
+
+    if fpath && !fpath.empty?
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing connector fixture file: #{resolved}" unless resolved.file?
+      check_pii(evals_dir, resolved, errors) if resolved.file?
+    end
+
+    if gpath && !gpath.empty?
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing connector golden file: #{golden_resolved}"
+      else
+        golden = YAML.load_file(golden_resolved) || {}
+        expected_id = "conn-#{cat}-paste"
+        gfid = golden['fixture_id']
+        errors << "connector golden #{File.basename(gpath)} fixture_id '#{gfid}' expected '#{expected_id}'" if gfid != expected_id
+        errors << "connector golden #{File.basename(gpath)} category '#{golden['category']}' does not match '#{cat}'" if golden['category'] != cat
+
+        standalone = golden['standalone_pass']
+        if standalone.nil? || !standalone.is_a?(Hash)
+          errors << "connector golden #{File.basename(gpath)} missing 'standalone_pass' mapping"
+        else
+          %w[must_surface must_not].each do |key|
+            val = standalone[key]
+            errors << "connector golden #{File.basename(gpath)} standalone_pass.#{key} must be a list" if val && !val.is_a?(Array)
+          end
+        end
+      end
+    end
+
+  live = entry['live_optional']
+  if cat == 'email' && live.is_a?(Hash) && live['draft_only'] != true
+    errors << "connector-categories.yaml: email live_optional.draft_only must be true"
+  end
+  end
+else
+  errors << "missing config/connector-categories.yaml"
+end
+
+conn_eval_manifest_path = evals_dir.join('connectors/manifest.yaml')
+if conn_eval_manifest_path.file?
+  conn_eval = YAML.load_file(conn_eval_manifest_path) || {}
+  conn_fixtures = conn_eval['fixtures'] || []
+  errors << "connectors/manifest.yaml: 'fixtures' must be a list" unless conn_fixtures.is_a?(Array)
+
+  conn_ids = Set.new
+  conn_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "connectors/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    cat = entry['category']
+    errors << "connectors/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "connectors/manifest.yaml: duplicate fixture id '#{fid}'" if conn_ids.include?(fid)
+    conn_ids.add(fid) if fid
+    errors << "connectors/manifest.yaml: fixture '#{fid}' invalid category '#{cat}'" if cat && !CONNECTOR_CATEGORIES.include?(cat)
+    errors << "connectors/manifest.yaml: fixture '#{fid}' id should be conn-#{cat}-paste" if cat && fid != "conn-#{cat}-paste"
+
+    if fpath.nil? || fpath.empty?
+      errors << "connectors/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing connector manifest fixture file: #{resolved}" unless resolved.file?
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "connectors/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      errors << "missing connector manifest golden file: #{golden_resolved}" unless golden_resolved.file?
+    end
+  end
+
+  if conn_fixtures.length != CONNECTOR_CATEGORIES.length
+    errors << "connectors/manifest.yaml lists #{conn_fixtures.length} fixtures; expected #{CONNECTOR_CATEGORIES.length}"
+  end
+else
+  errors << "missing connectors/manifest.yaml"
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
@@ -622,7 +757,8 @@ nt_count = nt_fixtures&.length || 0
 cal_count = cal_fixtures&.length || 0
 sh_count = sh_fixtures&.length || 0
 fb_count = fb_fixtures&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
+conn_count = conn_fixtures&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{conn_count} connector fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"
