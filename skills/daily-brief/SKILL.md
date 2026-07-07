@@ -61,3 +61,11 @@ No connectors? Ask the user to paste their calendar and top unread, or brief fro
 
 - Read-only and draft-only: the brief surfaces and drafts, never sends or books.
 - Short beats complete. If it doesn't change what the user does today, leave it out.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when surfacing items needing attention — especially cold threads and draft-ready VIP items.
+
+Use all four sections when the brief includes reviewable work. When a draft-ready item has a queue id, you may footnote the id in brief prose (e.g. "draft ready — rq-2026-07-08-reply-priya-deck").
+
+Do not write queue items for read-only calendar or FYI sections unless a separate reviewable artefact exists.

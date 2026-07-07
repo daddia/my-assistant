@@ -79,3 +79,14 @@ For any thread over ~5 messages, add a two-line summary (what's being decided, w
 - Replies → `email-drafting`
 - Sent-but-silent items the sweep surfaces → note for `follow-up-tracking`
 - Action items that aren't email replies → offer to add to `TASKS.md` via `task-management`
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) for every triage and sweep report with reviewable work.
+
+**Queue types:**
+
+- **Reply drafts** — when handing off to `email-drafting`, write `reply-draft` items with `source_path` under `drafts/reply-*.md` after the draft file is created.
+- **Archive proposals** — write **one batched** `archive-proposal` item per triage or sweep run when marketing/archive candidates exist. Set `source_path` to `review-queue/archives-YYYY-MM-DD.yaml` listing proposed threads.
+
+Append the observability footer when queue items are written. Tier 2+ auto-archives still create `pending` items with `autonomy_tier` ≥ 2 for audit.
