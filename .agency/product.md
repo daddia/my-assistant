@@ -91,4 +91,4 @@ Same prompts and skills feed both — one source, two surfaces.
 
 ## Roadmap
 
-See [roadmap.md](./product/roadmap.md). v1 ships the full EA surface as one plugin; Next covers wider connector validation and the managed-agent deployment path; Future covers a template gallery and richer scheduling.
+See [roadmap.md](./roadmap.md). v1 ships the full EA surface as one plugin; Next covers wider connector validation and the managed-agent deployment path; Future covers a template gallery and richer scheduling.
