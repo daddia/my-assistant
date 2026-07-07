@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
-- **`.agency/product.md` roadmap link** — `./product/roadmap.md` → `./roadmap.md`.
+- **`.agency/product.md` roadmap link** — fixed dangling roadmap reference to `./roadmap.md`.
 - **`.gitignore`** — anchor `TASKS.md` and `MEMORY.md` to repo root so `commands/tasks.md` and `commands/memory.md` are not excluded on case-insensitive filesystems.
 
 ## [1.0.0] - 2026-07-06
