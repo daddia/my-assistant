@@ -1,0 +1,85 @@
+# Feedback taxonomy and edit-pattern hints for email-feedback skill.
+# Read at runtime by skills/email-feedback/SKILL.md.
+
+feedback_classes:
+  - id: good
+    description: Draft sent as-is or with trivial typo fix
+    profile_action: optional_voice_sample
+    requires_user_final: false
+    max_profile_hunks: 0
+
+  - id: light-edit
+    description: Small tweak — sign-off, one phrase, gap fill
+    profile_action: narrow_tweak
+    requires_user_final: recommended
+    max_profile_hunks: 1
+
+  - id: heavy-rewrite
+    description: Draft reworked substantially before sending
+    profile_action: voice_and_anti_style
+    requires_user_final: true
+    max_profile_hunks: 3
+
+allowed_profile_sections:
+  - voice
+  - anti-style
+
+forbidden_profile_sections:
+  - autonomy
+  - vip
+  - email_policy
+  - calendar_policy
+  - working_rules
+  - money_threshold
+  - off_limits
+
+rubric_dimensions:
+  - voice
+  - brevity
+  - hallucinated_facts
+  - commitment_flags
+  - draft_only
+
+edit_patterns:
+  - pattern_id: corporate_opener_removed
+    description: User removed a banned or corporate opener
+    rubric_dimensions: [voice]
+    typical_sections: [anti-style]
+    confidence_when: opener in draft matches banned_openers list and absent in user_final
+
+  - pattern_id: corporate_speak_removed
+    description: User stripped corporate-speak or banned words
+    rubric_dimensions: [voice]
+    typical_sections: [anti-style]
+    confidence_when: banned word present in draft, absent in user_final
+
+  - pattern_id: direct_warm
+    description: User rewrote stiff language into direct, warm tone
+    rubric_dimensions: [voice]
+    typical_sections: [voice]
+    confidence_when: formal hedging removed; shorter declarative sentences in user_final
+
+  - pattern_id: brevity_trim
+    description: User cut length substantially while preserving meaning
+    rubric_dimensions: [brevity]
+    typical_sections: [voice]
+    confidence_when: user_final sentence count at least 40% below draft
+
+  - pattern_id: signoff_colleague_first_name
+    description: User changed sign-off to first name for colleague
+    rubric_dimensions: [voice]
+    typical_sections: [voice]
+    confidence_when: draft sign-off is formal; user_final uses first name only
+
+  - pattern_id: gap_fill_only
+    description: "Only [[gap: …]] placeholders were filled in"
+    rubric_dimensions: []
+    typical_sections: []
+    confidence_when: diff is limited to gap placeholder replacement
+    profile_action: none
+
+  - pattern_id: banned_phrase_removed
+    description: User removed a specific banned phrase from profile anti-style
+    rubric_dimensions: [voice]
+    typical_sections: [anti-style]
+    confidence_when: phrase listed in profile banned openers/words appears in draft only
