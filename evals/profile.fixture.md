@@ -91,6 +91,9 @@
 
 - **Working hours:** Mon-Fri 09:00-17:30; weekends personal
 - **Meeting defaults:** 30 min default, 15 min buffer, protect 09:00-10:00 for deep work
+- **Prep block:** 15 min before external or Tier 1-2 meetings
+- **Follow-up block:** 15 min after meetings 45 min+ or with decisions
+- **Protected focus window:** Mon-Fri 09:00-10:00 deep work -- do not propose meetings here
 - **Focus-time defence:** Moderate -- suggest alternatives before accepting same-day meetings
 - **May auto-propose:** Times within working hours to Tier 2+ contacts (draft only)
 - **Must always ask:** Any booking, move, or decline

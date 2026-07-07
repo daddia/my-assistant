@@ -84,6 +84,9 @@ Ban the AI tells. Write like you on your best day, never like a generic assistan
 
 - **Working hours:** [Mon–Fri 09:00–17:30; weekends personal]
 - **Meeting defaults:** [e.g. 30 min default, 15 min buffer between meetings, protect 30 min before deep work]
+- **Prep block:** [e.g. 15 min before external or Tier 1–2 meetings]
+- **Follow-up block:** [e.g. 15 min after meetings 45 min+ or with decisions]
+- **Protected focus window:** [e.g. Mon–Fri 09:00–10:00 deep work — do not propose meetings here]
 - **Focus-time defence:** [gentle / moderate / assertive]
 - **May auto-propose:** [e.g. times within working hours to Tier 2+]
 - **Must always ask:** any booking, move, or decline.

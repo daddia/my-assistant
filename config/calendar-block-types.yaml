@@ -1,0 +1,50 @@
+# Calendar block type definitions — declarative hints for calendar-scheduling protect mode.
+# Skills read this at runtime; not executable code. Extend block types here only.
+#
+# Durations resolve from profile §7 (prep_duration, follow_up_duration, meeting buffer)
+# unless overridden per block_type default_duration_minutes.
+
+version: "0.1"
+
+block_types:
+  - block_type: buffer
+    display_name: Buffer
+    purpose: Gap between adjacent meetings
+    default_duration_source: profile.meeting_buffer
+    trigger_heuristics:
+      - Back-to-back meetings (end time equals next start time)
+      - Gap between meetings is less than profile buffer duration
+    calendar_mark: Busy
+    merge_with: [prep]
+
+  - block_type: prep
+    display_name: Prep block
+    purpose: Readiness time before a meeting
+    default_duration_source: profile.prep_duration
+    trigger_heuristics:
+      - External attendee present
+      - VIP tier 1 or 2 attendee
+      - Invite flagged important or contains "review", "quarterly", "board"
+    calendar_mark: Focus time
+    merge_with: [buffer]
+
+  - block_type: follow-up
+    display_name: Follow-up block
+    purpose: Debrief and action capture after a meeting
+    default_duration_source: profile.follow_up_duration
+    trigger_heuristics:
+      - Meeting title contains decision keywords (decision, review, quarterly, board, kickoff)
+      - Meeting duration is 45 minutes or longer
+      - Action items pasted alongside agenda (meeting-follow-up handoff)
+    calendar_mark: Busy
+    merge_with: []
+
+  - block_type: focus-defence
+    display_name: Focus defence
+    purpose: Reclaim protected deep-work window when a meeting intrudes
+    default_duration_source: profile.protected_focus_window
+    trigger_heuristics:
+      - Meeting overlaps protected focus window
+      - Severity scales with focus-time defence level (gentle = report only; moderate = propose buffers; assertive = propose focus-defence blocks)
+    calendar_mark: Focus time
+    merge_with: []
