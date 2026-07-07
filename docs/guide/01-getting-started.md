@@ -52,6 +52,16 @@ This lives *outside* the plugin, so updating the plugin never overwrites your pe
 
 No connectors yet? Paste an email thread or your calendar — every skill works standalone. Try thread [`01-vip-board-update`](../../evals/corpus/threads/01-vip-board-update.md) and compare your draft to the [before/after gallery](../examples/before-after/01-vip-board-update/).
 
+## Step 4 — Run doctor
+
+```
+/assistant:doctor
+```
+
+A scannable health report checks your profile, working folder, scheduled jobs (if configured), connectors (advisory), and platform fit. Each row is **pass**, **warn**, **fail**, or **skip** with a concrete fix — usually `/assistant:setup`, `/assistant:schedules`, or a guide chapter.
+
+Setup runs a short **Setup health** block automatically after writing your profile. Run the full doctor anytime after plugin updates or when something feels off. Add `--save` to write `doctor-report-YYYY-MM-DD.md` to your working folder.
+
 ## Next
 
 [Configure your profile →](02-configure-profile.md) · [Examples gallery →](../../examples/README.md) · [Connect your tools →](04-connect-tools.md)

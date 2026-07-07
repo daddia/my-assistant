@@ -76,9 +76,20 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 ## Writing the profile
 
-Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words. After writing, summarise what's captured and point them at the wedge:
+Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words.
 
-> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
+### Post-setup health check
+
+After the **initial** profile write (starter, quick-start, or full interview — not when updating an existing profile), run the install doctor **subset**:
+
+1. Read and follow `skills/install-doctor/SKILL.md` with `checks: [profile, working-folder]` only.
+2. Render a compact **Setup health** block (≤8 lines): summary counts (`pass` / `warn` / `fail` / `skip`) plus the top fails or warns with `fix_ref` links.
+3. Do **not** block the wedge on warnings — always continue to the handoff below.
+4. Chat-only — do not auto-save `doctor-report-*.md` after setup.
+
+Then summarise what's captured and point them at the wedge:
+
+> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:doctor` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 

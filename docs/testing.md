@@ -18,6 +18,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/schedule-health/`](../evals/schedule-health/) | Schedule health ledger fixtures + miss-detection golden |
 | [`evals/feedback/`](../evals/feedback/) | Draft feedback fixtures + golden profile diffs |
 | [`evals/connectors/`](../evals/connectors/) | Connector category paste fixtures + golden smoke expectations |
+| [`evals/doctor/`](../evals/doctor/) | Install doctor fixtures + golden health reports |
 | [`evals/rubric/`](../evals/rubric/) | Manual scoring rubrics |
 
 **Quick structural check** (from repo root):
@@ -40,6 +41,8 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Connector smoke** (manual, ~30 minutes): six paste fixtures (`conn-email-paste` … `conn-tasks-paste`) — one per `~~category`; smoke subset minimum: email, calendar, chat. See [`docs/guide/connector-smoke-tests.md`](./guide/connector-smoke-tests.md) and [`evals/connectors/README.md`](../evals/connectors/README.md).
 
+**Install doctor** (manual, ~10 minutes): copy a fixture from [`evals/doctor/fixtures/`](../evals/doctor/fixtures/) to a scratch working folder, run `/assistant:doctor`, compare statuses to [`evals/doctor/golden/`](../evals/doctor/golden/). Post-setup: confirm **Setup health** block after `/assistant:setup` quick-start. See [`evals/doctor/README.md`](../evals/doctor/README.md).
+
 ## 2. Skill and behaviour checks
 
 For skill or rule changes:
@@ -58,4 +61,5 @@ For skill or rule changes:
 - [Always-on reliability design](../.agency/work/always-on/design.md) — MA06 epic; fixtures at [`evals/schedule-health/`](../evals/schedule-health/)
 - [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
 - [Trust artefacts design](../.agency/work/trust-artefacts/design.md) — MA08 epic; connector corpus at [`evals/connectors/`](../evals/connectors/)
+- [Onboarding polish design](../.agency/work/onboarding-polish/design.md) — MA10 epic; doctor corpus at [`evals/doctor/`](../evals/doctor/)
 - [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner
