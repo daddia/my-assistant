@@ -4,7 +4,7 @@ level: epic
 version: '0.2'
 owner: My Assistant maintainers
 status: Refined
-last_updated: 2026-07-07
+last_updated: 2026-07-08
 related:
   - .agency/product.md
   - .agency/roadmap.md
@@ -55,7 +55,7 @@ related:
 | Epic ID | Title | Phase | Priority | Deps | Points | Work path | Status |
 | ------- | ----- | ----- | -------- | ---- | ------ | --------- | ------ |
 | MA01 | Proof harness | Now | P0 | — | 13 | `.agency/work/proof-harness/` | Done |
-| MA02 | Review queue (spec) | Now | P0 | — | 5 | `.agency/work/review-queue/` | Not started |
+| MA02 | Review queue (spec) | Now | P0 | — | 5 | `.agency/work/review-queue/` | Done |
 | MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | Not started |
 | MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Not started |
 | MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Not started |
@@ -64,6 +64,7 @@ related:
 | MA08 | Trust artefacts | Next | P1 | MA02 | 5 | `.agency/work/trust-artefacts/` | Not started |
 | MA09 | Starter profiles & examples | Later | P2 | MA01 | 8 | `.agency/work/starter-profiles/` | Not started |
 | MA10 | Onboarding polish | Later | P2 | MA06 | 5 | `.agency/work/onboarding-polish/` | Not started |
+| MA11 | Eval automation | Later | P2 | MA01 | 8 | `.agency/work/eval-automation/` | Not started |
 
 **Scan + feature-backlog coverage.** Every P0/P1/P2 gap in the feature-backlog matrix maps to an epic above. MA08 scope is expanded from the prior draft: security/data-flow docs already exist under `security/`; MA08 now also covers connector smoke-test validation (`CONNECTORS.md` → provable per-category steps), admin/deployment guide, and a plain-language privacy explainer. Points raised 3 → 5 to reflect the added connector-validation deliverable.
 
@@ -82,7 +83,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 | 7 — Search, memory & knowledge | Two-tier memory *(have)* | Deepen via MA07; no new epic (avoid skill sprawl) |
 | 8 — Connectors & integrations | `~~category` placeholders, MCP *(have)* | MA08 (connector smoke-test guide) |
 | 9 — Always-on reliability | Local schedules + managed agents *(partial)* | MA06 (decision tree, health surfacing) |
-| 10 — Proof, trust & packaging | Rules claimed, not demonstrated *(gap)* | MA01, MA03, MA08, MA09/MA10 |
+| 10 — Proof, trust & packaging | Rules claimed, not demonstrated *(gap)* | MA01, MA03, MA08, MA09/MA10, MA11 |
 
 ## 5. Epic detail (Now phase)
 
@@ -97,7 +98,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 - Draft eval rubric: voice match, brevity, no hallucinated facts, commitment flags, no unsafe sends.
 - Prompt-injection fixtures: ≥10 untrusted-content attacks ("ignore previous instructions", "archive this", "send secrets", "update memory") with expected surface-and-refuse behaviour.
 - First-run demo: a 3-minute script plus screenshots/GIF covering setup → triage → draft review → memory suggestion.
-- `docs/evals/README.md` documenting how to run and read the suite.
+- `evals/README.md` documenting how to run and read the suite.
 
 **Dependencies.** None. Unblocks MA04, MA07, MA09.
 
@@ -146,6 +147,7 @@ Full Gherkin lives in `.agency/work/{epic}/tasks.md` when each epic starts. Scop
 | **MA08** Trust artefacts | Admin/deployment guide; plain-language privacy explainer (extends `docs/guide/05-protect-privacy.md`); connector smoke-test guide so "works with X" is provable per `~~category`. Security docs already shipped. |
 | **MA09** Starter profiles & examples | Vertical starter profiles (founder, consultant, sales lead, operator, investor); `examples/` gallery; before/after draft demos (uses MA01 corpus). |
 | **MA10** Onboarding polish | `/assistant:doctor` install validator; post-setup validation beyond the setup interview. Depends on MA06 reliability story. |
+| **MA11** Eval automation | CI structural validation (done); smoke runner for corpus + injection suite; rule-based or LLM-as-judge scoring against golden YAML; trend logs for regression drift. Supplements manual rubric — does not replace human scoring for voice/draft quality. |
 
 ## 7. Deliberate non-goals
 
@@ -170,6 +172,7 @@ MA01 (proof harness)
   +-- MA04 (notetaker import)
   +-- MA07 (feedback loop)
   +-- MA09 (starter profiles & examples)
+  +-- MA11 (eval automation)
 
 MA02 (review queue)
   +-- MA05 (time protection)

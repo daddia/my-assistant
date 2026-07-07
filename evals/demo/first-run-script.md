@@ -100,7 +100,7 @@ Timed walkthrough for visitors: **setup → inbox triage → draft review → me
 
 **Say (closing lines):**
 
-> "That's the wedge: triage in your voice, drafts for review, untrusted instructions surfaced not obeyed. Full eval procedure — corpus, golden files, injection suite — is in [docs/evals/README.md](../README.md)."
+> "That's the wedge: triage in your voice, drafts for review, untrusted instructions surfaced not obeyed. Full eval procedure — corpus, golden files, injection suite — is in [evals/README.md](../README.md)."
 
 **Point visitors to:**
 

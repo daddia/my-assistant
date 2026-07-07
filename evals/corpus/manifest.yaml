@@ -2,7 +2,7 @@
 #
 # Schema (per thread entry):
 #   id: string          — unique thread id (e.g. "01-vip-board-update")
-#   file: string        — path relative to docs/evals/ (e.g. corpus/threads/01-vip-board-update.md)
+#   file: string        — path relative to evals/ (e.g. corpus/threads/01-vip-board-update.md)
 #   category: string    — VIP | Needs-reply | FYI | Marketing | Ambiguous | Long-thread | Scheduling
 #   tags: [string]      — optional labels (e.g. "ambiguous", "vip-tier-1")
 #   skill: string       — skill under test (e.g. inbox-triage)

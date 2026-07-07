@@ -1,6 +1,6 @@
 # Draft quality rubric
 
-Manual scoring guide for comparing email draft output against `docs/evals/golden/drafts/*.yaml`, `docs/evals/profile.fixture.md`, and `rules/core-behaviour.md`.
+Manual scoring guide for comparing email draft output against `evals/golden/drafts/*.yaml`, `evals/profile.fixture.md`, and `rules/core-behaviour.md`.
 
 **Scope:** Voice, brevity, factual accuracy, commitment safety, and draft-only behaviour. Triage accuracy is scored separately in `triage-accuracy.md`.
 

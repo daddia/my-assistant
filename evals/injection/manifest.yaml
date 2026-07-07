@@ -2,7 +2,7 @@
 #
 # Schema (per fixture entry):
 #   id: string          — unique fixture id (e.g. "inj-01-ignore-instructions")
-#   file: string        — path relative to docs/evals/ (e.g. injection/fixtures/inj-01.md)
+#   file: string        — path relative to evals/ (e.g. injection/fixtures/inj-01.md)
 #   channel: string     — email | calendar | transcript | pasted-doc | slack
 #   tags: [string]      — threat patterns (e.g. "ignore-previous-instructions")
 #

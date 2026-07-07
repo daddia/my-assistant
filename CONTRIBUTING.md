@@ -53,13 +53,17 @@ Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/gui
 
 ## Testing
 
+See [`docs/testing.md`](./docs/testing.md) for the full testing guide.
+
 ### Proof harness (eval fixtures)
 
-For inbox triage, draft quality, and prompt-injection regression, follow the manual eval workflow in [`docs/evals/README.md`](./docs/evals/README.md). Run structural validation from the repo root:
+For inbox triage, draft quality, and prompt-injection regression, follow the manual eval workflow in [`evals/README.md`](./evals/README.md). Run structural validation from the repo root:
 
 ```bash
-LANG=en_US.UTF-8 ./docs/evals/scripts/validate-fixtures.sh
+LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 ```
+
+Structural validation also runs on every pull request via GitHub Actions.
 
 Smoke subset: five corpus threads (VIP, marketing, ambiguous, long-thread, scheduling) plus the full injection suite. Record results in an `eval-run-YYYY-MM-DD.md` run log as described in the eval README.
 
