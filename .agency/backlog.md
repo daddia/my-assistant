@@ -57,9 +57,9 @@ related:
 | MA01 | Proof harness | Now | P0 | — | 13 | `.agency/work/proof-harness/` | Done |
 | MA02 | Review queue (spec) | Now | P0 | — | 5 | `.agency/work/review-queue/` | Done |
 | MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | Done |
-| MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Not started |
-| MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Not started |
-| MA06 | Always-on reliability | Next | P1 | — | 5 | `.agency/work/always-on/` | Not started |
+| MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Done |
+| MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Done |
+| MA06 | Always-on reliability | Next | P1 | — | 5 | `.agency/work/always-on/` | Done |
 | MA07 | Feedback loop | Next | P1 | MA01 | 8 | `.agency/work/feedback-loop/` | Not started |
 | MA08 | Trust artefacts | Next | P1 | MA02 | 5 | `.agency/work/trust-artefacts/` | Not started |
 | MA09 | Starter profiles & examples | Later | P2 | MA01 | 8 | `.agency/work/starter-profiles/` | Not started |

@@ -44,3 +44,5 @@ If you set scope to personal-only, anything work-shaped is flagged before it pro
 ## If something feels wrong
 
 Re-run `/assistant:setup` and tell it what it should never do without asking. It follows those rules every session. Full detail: [`rules/core-behaviour.md`](../../rules/core-behaviour.md).
+
+[Always-on reliability →](07-always-on-reliability.md)

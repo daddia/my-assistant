@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Always-on reliability (MA06)** — `config/schedule-catalog.yaml` canonical job catalog (five local jobs, three managed cookbooks); `config/schedule-health.schema.yaml` and working-folder `schedule-health/` ledger; decision tree in `schedule-setup` and `docs/guide/07-always-on-reliability.md`; miss detection in `daily-brief` and optional `weekly-review`; `evals/schedule-health/` fixtures with structural validation.
 - **Notetaker import (MA04)** — `/assistant:meeting follow-up` command; `config/notetaker-formats.yaml` fingerprints for Granola, Fireflies, Otter, and Google Meet; evolved `meeting-follow-up` skill with import mode, structured extraction block, and bot-decline UX; `evals/notetaker/` corpus with seven fixtures, golden extractions, and rubric.
 - **Positioning & roadmap docs** — `.agency/roadmap.md`, `.agency/positioning/positioning.md`, `.agency/positioning/competitors.md`.
 
