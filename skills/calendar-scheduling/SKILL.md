@@ -51,3 +51,11 @@ Draft reply to Sam:
 - Never double-book or offer a slot that breaks a buffer or focus block without flagging it.
 - Match reply formality to the contact's tier.
 - Hand meeting *content* prep to `meeting-prep`, not this skill.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing times or invite drafts.
+
+**Queue type:** `calendar-proposal` — proposed times and invite drafts use `source_path` under `drafts/calendar-*.md`. Queue items and approval prompts must use propose-only language — never imply auto-booking.
+
+Append the observability footer when queue items are written.

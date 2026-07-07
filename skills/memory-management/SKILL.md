@@ -384,3 +384,14 @@ This keeps `CLAUDE.md` fresh and relevant without bloating the profile.
 - Don't delete or overwrite memory entries without confirmation.
 - Don't invent biographies — if someone isn't in memory, say so and offer to learn.
 - Profile changes always need a diff and approval (except during setup).
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing memory or profile changes.
+
+**Queue types:**
+
+- `memory-suggestion` — proposed `CLAUDE.md` or `memory/` writes use `source_path` under `pending-memory/*.md`
+- `profile-diff` — profile changes use `source_path` under `pending-profile/*.diff` or inline diff in the item body
+
+Append the observability footer when queue items are written. Never write profile or memory files without user confirmation.

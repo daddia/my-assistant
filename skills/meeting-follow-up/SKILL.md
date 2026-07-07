@@ -57,3 +57,14 @@ Add your 2 actions to TASKS.md? Save "Acme renewal → Sept" to memory?
 - **Draft only.** Recaps and follow-ups are drafts the user sends.
 - Attribute actions accurately; don't put someone else's task on the user, or vice versa.
 - Don't invent decisions the notes don't support. If the notes are ambiguous, flag it: "unclear who owns the SLA — confirm".
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) for every follow-up report with drafts or memory proposals.
+
+**Queue types:**
+
+- `reply-draft` — follow-up email drafts use `source_path` under `drafts/reply-*.md`
+- `memory-suggestion` — durable facts proposed for memory use `source_path` under `pending-memory/*.md`
+
+Append the observability footer when queue items are written.
