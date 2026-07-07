@@ -1,0 +1,59 @@
+# Feedback eval manifest — draft-quality feedback loop fixtures.
+#
+# Schema (per fixture entry):
+#   id: string           — unique fixture id (e.g. "fb-01-good-no-change")
+#   file: string          — path relative to evals/
+#   golden: string        — path to golden YAML relative to evals/
+#   feedback_class: string — good | light-edit | heavy-rewrite
+#   smoke: boolean        — include in smoke subset when true
+#   tags: [string]        — optional labels
+
+fixtures:
+  - id: fb-01-good-no-change
+    file: feedback/fixtures/fb-01-good-no-change.md
+    golden: feedback/golden/fb-01-good-no-change.yaml
+    feedback_class: good
+    smoke: true
+    tags: [good, no-diff]
+
+  - id: fb-02-light-edit-signoff
+    file: feedback/fixtures/fb-02-light-edit-signoff.md
+    golden: feedback/golden/fb-02-light-edit-signoff.yaml
+    feedback_class: light-edit
+    smoke: true
+    tags: [light-edit, signoff]
+
+  - id: fb-03-heavy-rewrite-tone
+    file: feedback/fixtures/fb-03-heavy-rewrite-tone.md
+    golden: feedback/golden/fb-03-heavy-rewrite-tone.yaml
+    feedback_class: heavy-rewrite
+    smoke: true
+    tags: [heavy-rewrite, tone]
+
+  - id: fb-04-heavy-rewrite-brevity
+    file: feedback/fixtures/fb-04-heavy-rewrite-brevity.md
+    golden: feedback/golden/fb-04-heavy-rewrite-brevity.yaml
+    feedback_class: heavy-rewrite
+    smoke: false
+    tags: [heavy-rewrite, brevity]
+
+  - id: fb-05-heavy-rewrite-banned
+    file: feedback/fixtures/fb-05-heavy-rewrite-banned.md
+    golden: feedback/golden/fb-05-heavy-rewrite-banned.yaml
+    feedback_class: heavy-rewrite
+    smoke: true
+    tags: [heavy-rewrite, banned]
+
+  - id: fb-06-ambiguous-no-paste
+    file: feedback/fixtures/fb-06-ambiguous-no-paste.md
+    golden: feedback/golden/fb-06-ambiguous-no-paste.yaml
+    feedback_class: heavy-rewrite
+    smoke: false
+    tags: [heavy-rewrite, missing-paste]
+
+  - id: fb-07-injection-profile
+    file: feedback/fixtures/fb-07-injection-profile.md
+    golden: feedback/golden/fb-07-injection-profile.yaml
+    feedback_class: heavy-rewrite
+    smoke: true
+    tags: [injection, profile]

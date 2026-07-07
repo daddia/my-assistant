@@ -44,6 +44,9 @@ for dir in \
   "${EVALS_DIR}/calendar/rubric" \
   "${EVALS_DIR}/schedule-health/fixtures" \
   "${EVALS_DIR}/schedule-health/golden" \
+  "${EVALS_DIR}/feedback/fixtures" \
+  "${EVALS_DIR}/feedback/golden" \
+  "${EVALS_DIR}/feedback/rubric" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -59,6 +62,8 @@ require_file "${REPO_ROOT}/config/notetaker-formats.yaml"
 require_file "${REPO_ROOT}/config/calendar-block-types.yaml"
 require_file "${REPO_ROOT}/config/schedule-catalog.yaml"
 require_file "${REPO_ROOT}/config/schedule-health.schema.yaml"
+require_file "${REPO_ROOT}/config/feedback-signals.yaml"
+require_file "${EVALS_DIR}/feedback/manifest.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -482,6 +487,132 @@ else
   errors << "missing schedule-health/manifest.yaml"
 end
 
+# --- feedback loop (MA07) ---
+FEEDBACK_CLASSES = %w[good light-edit heavy-rewrite].freeze
+ALLOWED_PROFILE_SECTIONS = %w[voice anti-style].freeze
+FORBIDDEN_PROFILE_SECTIONS = %w[autonomy vip email_policy calendar_policy working_rules money_threshold off_limits].freeze
+
+signals_path = repo_root.join('config/feedback-signals.yaml')
+if signals_path.file?
+  signals = YAML.load_file(signals_path) || {}
+  class_entries = signals['feedback_classes'] || []
+  class_ids = class_entries.map { |e| e['id'] }.compact
+  if class_ids.sort != FEEDBACK_CLASSES.sort
+    errors << "config/feedback-signals.yaml must list exactly #{FEEDBACK_CLASSES.join(', ')}; got #{class_ids.join(', ')}"
+  end
+  allowed = signals['allowed_profile_sections'] || []
+  if allowed.sort != ALLOWED_PROFILE_SECTIONS.sort
+    errors << "config/feedback-signals.yaml allowed_profile_sections must be #{ALLOWED_PROFILE_SECTIONS.join(', ')}"
+  end
+else
+  errors << "missing config/feedback-signals.yaml"
+end
+
+fb_fixtures = []
+fb_manifest_path = evals_dir.join('feedback/manifest.yaml')
+if fb_manifest_path.file?
+  fb_manifest = YAML.load_file(fb_manifest_path) || {}
+  fb_fixtures = fb_manifest['fixtures'] || []
+  errors << "feedback/manifest.yaml: 'fixtures' must be a list" unless fb_fixtures.is_a?(Array)
+
+  fb_ids = Set.new
+  fb_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "feedback/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    fclass = entry['feedback_class']
+    errors << "feedback/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "feedback/manifest.yaml: duplicate fixture id '#{fid}'" if fb_ids.include?(fid)
+    fb_ids.add(fid) if fid
+    errors << "feedback/manifest.yaml: fixture '#{fid}' invalid feedback_class '#{fclass}'" if fclass && !FEEDBACK_CLASSES.include?(fclass)
+
+    if fpath.nil? || fpath.empty?
+      errors << "feedback/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing feedback fixture file: #{resolved}" unless resolved.file?
+      check_pii(evals_dir, resolved, errors) if resolved.file?
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "feedback/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing feedback golden file: #{golden_resolved}"
+        next
+      end
+
+      golden = YAML.load_file(golden_resolved) || {}
+      gfid = golden['fixture_id']
+      errors << "feedback golden #{File.basename(gpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+
+      gclass = golden['feedback_class']
+      errors << "feedback golden #{File.basename(gpath)} invalid feedback_class '#{gclass}'" if gclass && !FEEDBACK_CLASSES.include?(gclass)
+
+      errors << "feedback golden #{File.basename(gpath)} missing user_final_required" unless golden.key?('user_final_required')
+
+      pdiff = golden['profile_diff_expected']
+      if pdiff.nil? || !pdiff.is_a?(Hash)
+        errors << "feedback golden #{File.basename(gpath)} missing 'profile_diff_expected' mapping"
+      else
+        sections = pdiff['sections']
+        sections&.each do |sec|
+          errors << "feedback golden #{File.basename(gpath)} invalid section '#{sec}'" unless ALLOWED_PROFILE_SECTIONS.include?(sec)
+        end
+        must_not = pdiff['must_not_touch']
+        must_not&.each do |sec|
+          errors << "feedback golden #{File.basename(gpath)} invalid must_not_touch '#{sec}'" unless FORBIDDEN_PROFILE_SECTIONS.include?(sec)
+        end
+      end
+
+      queue = golden['queue_items']
+      if queue.nil? || !queue.is_a?(Hash)
+        errors << "feedback golden #{File.basename(gpath)} missing 'queue_items' mapping"
+      else
+        errors << "feedback golden #{File.basename(gpath)} missing queue_items.profile_diff_min" unless queue.key?('profile_diff_min')
+        errors << "feedback golden #{File.basename(gpath)} missing queue_items.profile_diff_max" unless queue.key?('profile_diff_max')
+      end
+
+      errors << "feedback golden #{File.basename(gpath)} missing voice_sample_expected" unless golden.key?('voice_sample_expected')
+
+      approval = golden['approval_language_checks']
+      if approval
+        %w[must_include must_not_include].each do |key|
+          val = approval[key]
+          errors << "feedback golden #{File.basename(gpath)} approval_language_checks.#{key} must be a list" if val && !val.is_a?(Array)
+        end
+      end
+
+      inj = golden['injection_checks']
+      if inj
+        %w[must_surface must_refuse must_not_write].each do |key|
+          val = inj[key]
+          errors << "feedback golden #{File.basename(gpath)} injection_checks.#{key} must be a list" if val && !val.is_a?(Array)
+        end
+      end
+    end
+  end
+
+  Dir.glob(evals_dir.join('feedback/**/*.diff')).each do |diff_path|
+    text = File.read(diff_path)
+    unless text.match?(/Voice|Anti-style|anti-style|voice/i)
+      errors << "feedback diff #{diff_path.basename} must reference voice or anti-style section markers"
+    end
+    FORBIDDEN_PROFILE_SECTIONS.each do |forbidden|
+      if text.match?(/#{Regexp.escape(forbidden)}/i) || text.match?(/VIP tiers|autonomy tier|Email policy/i)
+        errors << "feedback diff #{diff_path.basename} must not touch forbidden section #{forbidden}"
+      end
+    end
+  end
+else
+  errors << "missing feedback/manifest.yaml"
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
@@ -490,7 +621,8 @@ end
 nt_count = nt_fixtures&.length || 0
 cal_count = cal_fixtures&.length || 0
 sh_count = sh_fixtures&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
+fb_count = fb_fixtures&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"

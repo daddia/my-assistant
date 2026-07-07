@@ -1,0 +1,17 @@
+fixture_id: fb-05-heavy-rewrite-banned
+feedback_class: heavy-rewrite
+user_final_required: true
+profile_diff_expected:
+  required: true
+  sections: [anti-style]
+  must_include_patterns: [banned_phrase_removed, corporate_opener_removed]
+  must_not_touch: [autonomy, vip, email_policy]
+  min_hunks: 1
+  max_hunks: 2
+queue_items:
+  profile_diff_min: 1
+  profile_diff_max: 1
+voice_sample_expected: false
+approval_language_checks:
+  must_include: [profile, approve, diff]
+  must_not_include: [updated your profile, applied automatically]

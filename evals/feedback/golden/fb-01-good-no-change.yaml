@@ -1,0 +1,12 @@
+fixture_id: fb-01-good-no-change
+feedback_class: good
+user_final_required: false
+profile_diff_expected:
+  required: false
+queue_items:
+  profile_diff_min: 0
+  profile_diff_max: 0
+voice_sample_expected: true
+approval_language_checks:
+  must_include: [voice confirmed]
+  must_not_include: [updated your profile, applied automatically]

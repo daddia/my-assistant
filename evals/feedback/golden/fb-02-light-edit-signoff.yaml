@@ -1,0 +1,17 @@
+fixture_id: fb-02-light-edit-signoff
+feedback_class: light-edit
+user_final_required: true
+profile_diff_expected:
+  required: false
+  sections: [voice]
+  must_include_patterns: [signoff_colleague_first_name]
+  must_not_touch: [autonomy, vip, email_policy]
+  min_hunks: 0
+  max_hunks: 1
+queue_items:
+  profile_diff_min: 0
+  profile_diff_max: 1
+voice_sample_expected: false
+approval_language_checks:
+  must_include: [profile]
+  must_not_include: [updated your profile, applied automatically]
