@@ -51,3 +51,9 @@ Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `s
 - Triage interactively — don't auto-drop or auto-reschedule tasks.
 - Update `TASKS.md` and `memory/` only with confirmation (writes to those are allowed, but a review is a good moment to confirm).
 - Read-only on email/calendar; draft-only on any nudge.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when surfacing recommendations that need user decisions.
+
+Use all four sections for actionable recommendations. Do **not** write queue items for read-only review sections (closed items, stale task lists) unless a separate pending approval artefact exists — e.g. a nudge draft or profile diff proposal.

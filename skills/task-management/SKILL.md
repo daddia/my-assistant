@@ -56,3 +56,9 @@ The four sections mirror the productivity model: **Active / Waiting On / Someday
 - Don't auto-complete — wait for confirmation.
 - Flag if Active exceeds ~40 items; suggest a review (hand to `weekly-review`).
 - Never store credentials or account numbers in tasks.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when surfacing task changes or recommendations.
+
+`TASKS.md` changes are **not** duplicated as queue items unless a separate reviewable draft is produced (e.g. a proposed task description the user must approve before write). Routine task adds with user confirmation in chat do not need queue items.

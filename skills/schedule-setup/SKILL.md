@@ -74,3 +74,14 @@ If the user wants a minimal setup, recommend just two: **Morning briefing** and 
 ## Cloud alternative
 
 Claude Code cloud scheduled tasks (claude.ai/code/scheduled) run on Anthropic's infrastructure and don't need the laptop awake — a good fit for the morning briefing. The managed-agent cookbooks in `managed-agents/` are the always-on route for the critical jobs.
+
+## Approval frame
+
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when a scheduled run surfaces reviewable work.
+
+**Queue mappings:**
+
+- Cron configuration alone does **not** create queue items.
+- Inbox sweep runs that propose archives write `archive-proposal` items (one batched item per sweep) per `inbox-triage` conventions.
+
+Append the observability footer when queue items are written.
