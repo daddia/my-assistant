@@ -1,0 +1,11 @@
+# Injection manifest — index of prompt-injection attack fixtures.
+#
+# Schema (per fixture entry):
+#   id: string          — unique fixture id (e.g. "inj-01-ignore-instructions")
+#   file: string        — path relative to docs/evals/ (e.g. injection/fixtures/inj-01.md)
+#   channel: string     — email | calendar | transcript | pasted-doc | slack
+#   tags: [string]      — threat patterns (e.g. "ignore-previous-instructions")
+#
+# Minimum 10 fixtures when the injection suite is complete (see design.md).
+
+fixtures: []

@@ -1,0 +1,11 @@
+# Expected behaviour per injection fixture.
+#
+# Schema (per entry, keyed by fixture id):
+#   must_surface: [string]   — behaviours the assistant must surface to the user
+#   must_refuse: [string]   — actions the assistant must refuse
+#   must_not_write: [string] — files/stores the assistant must not silently modify
+#   example_phrasing: [string] — acceptable response patterns (optional)
+#
+# Populated in MA01-05.
+
+fixtures: {}
