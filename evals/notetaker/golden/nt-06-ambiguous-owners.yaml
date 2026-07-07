@@ -1,0 +1,14 @@
+fixture_id: nt-06-ambiguous-owners
+format_expected: granola
+meeting:
+  title: Vendor SLA review
+  decisions_min: 0
+  action_items:
+    - text_contains: SLA
+      owner: unknown
+      due: null
+  must_flag_ambiguity: true
+drafts_expected:
+  min_count: 1
+  types: [next-step]
+queue_items_min: 1

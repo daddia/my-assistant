@@ -1,0 +1,17 @@
+fixture_id: nt-02-fireflies-client-kickoff
+format_expected: fireflies
+meeting:
+  title: Acme client kickoff
+  decisions_min: 1
+  action_items:
+    - text_contains: recap
+      owner: self
+      due: string
+    - text_contains: MSA
+      owner: other
+      due: string
+  must_flag_ambiguity: false
+drafts_expected:
+  min_count: 1
+  types: [recap]
+queue_items_min: 1

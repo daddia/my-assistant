@@ -1,0 +1,17 @@
+fixture_id: nt-03-otter-standup
+format_expected: otter
+meeting:
+  title: Engineering standup
+  decisions_min: 1
+  action_items:
+    - text_contains: review
+      owner: self
+      due: string
+    - text_contains: metrics
+      owner: other
+      due: string
+  must_flag_ambiguity: false
+drafts_expected:
+  min_count: 1
+  types: [recap, next-step]
+queue_items_min: 1

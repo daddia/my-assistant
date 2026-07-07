@@ -1,0 +1,14 @@
+fixture_id: nt-01-granola-product-sync
+format_expected: granola
+meeting:
+  title: Product sync
+  decisions_min: 1
+  action_items:
+    - text_contains: beta date
+      owner: self
+      due: string
+  must_flag_ambiguity: false
+drafts_expected:
+  min_count: 1
+  types: [recap]
+queue_items_min: 1

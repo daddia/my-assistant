@@ -36,6 +36,9 @@ for dir in \
   "${EVALS_DIR}/golden/drafts" \
   "${EVALS_DIR}/rubric" \
   "${EVALS_DIR}/injection/fixtures" \
+  "${EVALS_DIR}/notetaker/fixtures" \
+  "${EVALS_DIR}/notetaker/golden" \
+  "${EVALS_DIR}/notetaker/rubric" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -44,6 +47,8 @@ done
 require_file "${EVALS_DIR}/corpus/manifest.yaml"
 require_file "${EVALS_DIR}/injection/manifest.yaml"
 require_file "${EVALS_DIR}/injection/expected-behaviour.yaml"
+require_file "${EVALS_DIR}/notetaker/manifest.yaml"
+require_file "${REPO_ROOT}/config/notetaker-formats.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -157,12 +162,121 @@ if threads.length > 0 && golden_count > 0 && golden_count != threads.length
   errors << "golden triage file count (#{golden_count}) does not match corpus (#{threads.length})"
 end
 
+# --- notetaker corpus (MA04) ---
+NOTETAKER_FORMAT_IDS = %w[granola fireflies otter google-meet hand-typed].freeze
+DRAFT_TYPES = %w[recap doc-delivery next-step].freeze
+OWNER_VALUES = %w[self other unknown].freeze
+
+formats_path = repo_root.join('config/notetaker-formats.yaml')
+if formats_path.file?
+  formats_doc = YAML.load_file(formats_path) || {}
+  format_entries = formats_doc['formats'] || []
+  format_ids = format_entries.map { |e| e['format_id'] }.compact
+  if format_ids.sort != NOTETAKER_FORMAT_IDS.sort
+    errors << "config/notetaker-formats.yaml must list exactly #{NOTETAKER_FORMAT_IDS.join(', ')}; got #{format_ids.join(', ')}"
+  end
+else
+  errors << "missing config/notetaker-formats.yaml"
+end
+
+nt_fixtures = []
+notetaker_manifest_path = evals_dir.join('notetaker/manifest.yaml')
+if notetaker_manifest_path.file?
+  notetaker = YAML.load_file(notetaker_manifest_path) || {}
+  nt_fixtures = notetaker['fixtures'] || []
+  errors << "notetaker/manifest.yaml: 'fixtures' must be a list" unless nt_fixtures.is_a?(Array)
+
+  nt_ids = Set.new
+  nt_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "notetaker/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    errors << "notetaker/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "notetaker/manifest.yaml: duplicate fixture id '#{fid}'" if nt_ids.include?(fid)
+    nt_ids.add(fid) if fid
+
+    if fpath.nil? || fpath.empty?
+      errors << "notetaker/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing notetaker fixture file: #{resolved}" unless resolved.file?
+      check_pii(evals_dir, resolved, errors) if resolved.file?
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "notetaker/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing notetaker golden file: #{golden_resolved}"
+        next
+      end
+
+      golden = YAML.load_file(golden_resolved) || {}
+      gfid = golden['fixture_id']
+      errors << "notetaker golden #{File.basename(gpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+
+      fmt = golden['format_expected']
+      errors << "notetaker golden #{File.basename(gpath)} invalid format_expected '#{fmt}'" if fmt && !NOTETAKER_FORMAT_IDS.include?(fmt)
+
+      meeting = golden['meeting']
+      if meeting.nil? || !meeting.is_a?(Hash)
+        errors << "notetaker golden #{File.basename(gpath)} missing 'meeting' mapping"
+      else
+        errors << "notetaker golden #{File.basename(gpath)} missing meeting.decisions_min" unless meeting.key?('decisions_min')
+        errors << "notetaker golden #{File.basename(gpath)} missing meeting.must_flag_ambiguity" unless meeting.key?('must_flag_ambiguity')
+        items = meeting['action_items']
+        errors << "notetaker golden #{File.basename(gpath)} meeting.action_items must be a list" unless items.is_a?(Array)
+        items&.each_with_index do |item, j|
+          next unless item.is_a?(Hash)
+          owner = item['owner']
+          if owner && !OWNER_VALUES.include?(owner) && owner != 'other'
+            errors << "notetaker golden #{File.basename(gpath)} action_items[#{j}] owner must be self, other, or unknown"
+          end
+        end
+      end
+
+      drafts = golden['drafts_expected']
+      if drafts.nil? || !drafts.is_a?(Hash)
+        errors << "notetaker golden #{File.basename(gpath)} missing 'drafts_expected' mapping"
+      else
+        errors << "notetaker golden #{File.basename(gpath)} missing drafts_expected.min_count" unless drafts.key?('min_count')
+        types = drafts['types']
+        if types.nil? || !types.is_a?(Array)
+          errors << "notetaker golden #{File.basename(gpath)} drafts_expected.types must be a list"
+        else
+          types.each do |t|
+            errors << "notetaker golden #{File.basename(gpath)} invalid draft type '#{t}'" unless DRAFT_TYPES.include?(t)
+          end
+        end
+      end
+
+      errors << "notetaker golden #{File.basename(gpath)} missing queue_items_min" unless golden.key?('queue_items_min')
+
+      inj = golden['injection_checks']
+      if inj
+        %w[must_surface must_refuse must_not_write].each do |key|
+          val = inj[key]
+          errors << "notetaker golden #{File.basename(gpath)} injection_checks.#{key} must be a list" if val && !val.is_a?(Array)
+        end
+      end
+    end
+  end
+else
+  errors << "missing notetaker/manifest.yaml"
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
 end
 
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures"
+nt_count = nt_fixtures&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"

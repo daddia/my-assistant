@@ -1,0 +1,11 @@
+fixture_id: nt-04-meet-notes-raw
+format_expected: google-meet
+meeting:
+  title: Northwind roadmap review
+  decisions_min: 0
+  action_items: []
+  must_flag_ambiguity: true
+drafts_expected:
+  min_count: 1
+  types: [recap]
+queue_items_min: 1

@@ -1,0 +1,59 @@
+# Notetaker eval manifest — index of meeting-follow-up import fixtures.
+#
+# Schema (per fixture entry):
+#   id: string           — unique fixture id (e.g. "nt-01-granola-product-sync")
+#   file: string          — path relative to evals/ (e.g. notetaker/fixtures/nt-01-….md)
+#   format: string        — expected format_id from config/notetaker-formats.yaml
+#   golden: string        — path to golden YAML relative to evals/
+#   smoke: boolean        — include in smoke subset when true
+#   tags: [string]        — optional labels (e.g. "injection", "ambiguous")
+
+fixtures:
+  - id: nt-01-granola-product-sync
+    file: notetaker/fixtures/nt-01-granola-product-sync.md
+    format: granola
+    golden: notetaker/golden/nt-01-granola-product-sync.yaml
+    smoke: true
+    tags: [granola, structured]
+
+  - id: nt-02-fireflies-client-kickoff
+    file: notetaker/fixtures/nt-02-fireflies-client-kickoff.md
+    format: fireflies
+    golden: notetaker/golden/nt-02-fireflies-client-kickoff.yaml
+    smoke: false
+    tags: [fireflies, structured]
+
+  - id: nt-03-otter-standup
+    file: notetaker/fixtures/nt-03-otter-standup.md
+    format: otter
+    golden: notetaker/golden/nt-03-otter-standup.yaml
+    smoke: true
+    tags: [otter, standup]
+
+  - id: nt-04-meet-notes-raw
+    file: notetaker/fixtures/nt-04-meet-notes-raw.md
+    format: google-meet
+    golden: notetaker/golden/nt-04-meet-notes-raw.yaml
+    smoke: false
+    tags: [google-meet, sparse]
+
+  - id: nt-05-hand-typed-brain-dump
+    file: notetaker/fixtures/nt-05-hand-typed-brain-dump.md
+    format: hand-typed
+    golden: notetaker/golden/nt-05-hand-typed-brain-dump.yaml
+    smoke: true
+    tags: [hand-typed, baseline]
+
+  - id: nt-06-ambiguous-owners
+    file: notetaker/fixtures/nt-06-ambiguous-owners.md
+    format: granola
+    golden: notetaker/golden/nt-06-ambiguous-owners.yaml
+    smoke: true
+    tags: [ambiguous, owners]
+
+  - id: nt-07-injection-heavy
+    file: notetaker/fixtures/nt-07-injection-heavy.md
+    format: granola
+    golden: notetaker/golden/nt-07-injection-heavy.yaml
+    smoke: true
+    tags: [injection, transcript]

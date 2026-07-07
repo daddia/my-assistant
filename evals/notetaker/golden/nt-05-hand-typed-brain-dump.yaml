@@ -1,0 +1,17 @@
+fixture_id: nt-05-hand-typed-brain-dump
+format_expected: hand-typed
+meeting:
+  title: investor call debrief
+  decisions_min: 0
+  action_items:
+    - text_contains: metrics
+      owner: self
+      due: string
+    - text_contains: email
+      owner: self
+      due: string
+  must_flag_ambiguity: false
+drafts_expected:
+  min_count: 1
+  types: [recap, next-step]
+queue_items_min: 1
