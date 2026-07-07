@@ -75,7 +75,48 @@ After copy, every `source_path` in `index.yaml` must resolve to a real file unde
 3. Switch to the **Review** tab — you should see six queue groups with pending items.
 4. Open any item to confirm `source_path` content matches `title` / `approval_prompt`.
 
-*(Review tab UI ships in MA02-07; until then, open `source_path` files manually to verify fixtures.)*
+## Run a skill and verify queue items
+
+1. Copy MA01 eval fixtures into a test working folder (profile + corpus thread).
+2. Run `/assistant:inbox triage` on `docs/evals/corpus/threads/01-vip-board-update.md`.
+3. Confirm chat output includes all four approval-frame headings (`rules/approval-frame.md`).
+4. Verify `review-queue/index.yaml` gains at least one `pending` `reply-draft` item.
+5. Refresh the dashboard Review tab — new item appears with matching `source_path`.
+6. Confirm no email is sent and no profile file is written without explicit user confirmation.
+
+## Definition of Done (epic MA02)
+
+- [ ] All eight tasks' Gherkin scenarios pass via manual verification
+- [ ] Fixture folder renders all six queue types in dashboard Review tab without console errors
+- [ ] All 12 skills contain an Approval frame subsection linking `rules/approval-frame.md`
+- [ ] No approve/send/book buttons in dashboard; no queue files written under plugin directory
+- [ ] PR reviewed and merged
+
+### Quick verification commands
+
+```bash
+# Schema + fixtures
+LANG=en_US.UTF-8 ./docs/evals/scripts/validate-fixtures.sh
+
+# All skills link approval frame
+grep -l 'approval-frame.md' skills/*/SKILL.md | wc -l   # expect 12
+
+# Entry-point links
+grep -r 'docs/review-queue' AGENTS.md README.md docs/guide/03-skills-and-commands.md
+```
+
+## Manual verification notes (MA01 corpus)
+
+**Thread:** `docs/evals/corpus/threads/01-vip-board-update.md`  
+**Profile:** `docs/evals/profile.fixture.md`
+
+Expected after `/assistant:inbox triage` with queue-writing enabled:
+
+- Chat uses `## What I found`, `## What I drafted`, `## What I recommend`, `## What needs your approval`
+- `review-queue/index.yaml` contains `reply-draft` (and optionally `archive-proposal`) items
+- `drafts/reply-*.md` local mirror exists for each reply draft
+- Footer: `Review queue: +N pending (…) — review-queue/index.yaml`
+- No send/book/write without user confirmation
 
 ## Schema validation checklist
 
@@ -129,4 +170,4 @@ Skills must never create `review-queue/` under the plugin install path. Queue wr
 
 ---
 
-*Scaffold for MA02-01. Run order, DoD checklist, and skill integration steps are completed in MA02-08.*
+See also: [`spec.md`](./spec.md) · [`schema.yaml`](./schema.yaml) · [`rules/approval-frame.md`](../../rules/approval-frame.md)
