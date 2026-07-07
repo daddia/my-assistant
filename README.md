@@ -61,7 +61,7 @@ Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a 
 
 ## How it's built
 
-Plain English — skills, rules, and a profile you can read and edit. See [`AGENTS.md`](./AGENTS.md) for the trigger→skill map and [the docs](./docs/) for the full guide.
+Plain English — skills, rules, and a profile you can read and edit. See [`AGENTS.md`](./AGENTS.md) for the trigger→skill map and [the docs](./docs/) for the full guide. To verify triage, drafts, and injection defence against fixtures, see the [proof harness](./docs/evals/README.md).
 
 ## Licence
 
