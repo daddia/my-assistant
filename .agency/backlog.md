@@ -15,7 +15,7 @@ related:
 # Backlog -- My Assistant
 
 - **Product:** [`.agency/product.md`](./product.md)
-- **Roadmap:** [`.agency/roadmap.md`](./roadmap.md) *(to be created — see MA03)*
+- **Roadmap:** [`.agency/roadmap.md`](./roadmap.md)
 - **Feature research:** [`.agency/research/feature-backlog.md`](./research/feature-backlog.md)
 - **Source scan:** [`.agency/research/2026-07-06-competitor-scan.md`](./research/2026-07-06-competitor-scan.md)
 
@@ -56,7 +56,7 @@ related:
 | ------- | ----- | ----- | -------- | ---- | ------ | --------- | ------ |
 | MA01 | Proof harness | Now | P0 | — | 13 | `.agency/work/proof-harness/` | Done |
 | MA02 | Review queue (spec) | Now | P0 | — | 5 | `.agency/work/review-queue/` | Done |
-| MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | Not started |
+| MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | In progress |
 | MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Not started |
 | MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Not started |
 | MA06 | Always-on reliability | Next | P1 | — | 5 | `.agency/work/always-on/` | Not started |
@@ -132,7 +132,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 
 **Dependencies.** None (but should reflect the epic set defined here).
 
-**Status.** Not started. **Work path:** `.agency/work/positioning-roadmap/`
+**Status.** In progress (validated 2026-07-08: MA03-02 done; MA03-01/04 partial; MA03-03 not started). **Work path:** `.agency/work/positioning-roadmap/`
 
 ## 6. Next & Later phase (summary)
 

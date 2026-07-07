@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **Positioning & roadmap docs** — `.agency/roadmap.md`, `.agency/positioning.md`, `docs/compare-alternatives.md`.
+
 ### Changed
 
 - **Plugin command prefix** — `/my-assistant:` → `/assistant:` (plugin registers as `assistant`; profile path unchanged at `~/.claude/plugins/config/my-assistant/`).
@@ -15,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+- **`.agency/product.md` roadmap link** — `./product/roadmap.md` → `./roadmap.md`.
 - **`.gitignore`** — anchor `TASKS.md` and `MEMORY.md` to repo root so `commands/tasks.md` and `commands/memory.md` are not excluded on case-insensitive filesystems.
 
 ## [1.0.0] - 2026-07-06

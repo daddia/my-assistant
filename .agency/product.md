@@ -8,6 +8,8 @@ This document is the product and architecture source of truth. End-user setup is
 
 ## Positioning
 
+Canonical positioning, ICP, and competitive wedge: [positioning.md](./positioning.md).
+
 - **One plugin, many skills** — modelled on the Vercel plugin (one install; `skills/`, `commands/`, `agents/`, one `.mcp.json`) and Anthropic's knowledge-work plugins, not a marketplace of separate plugins.
 - **"Your AI chief of staff for inbox, calendar and follow-ups."** An executive/personal assistant, not a team workflow tool.
 - **Draft-first as the core promise.** It prepares; you approve. This matches Cowork's draft-only Gmail connector and the SaaS norm (Fyxer never sends).
