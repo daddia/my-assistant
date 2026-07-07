@@ -29,7 +29,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | (within prep/brief) |
 | Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/assistant:prep` |
-| Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | (paste notes) |
+| Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | `/assistant:meeting follow-up` or paste notes |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | `/assistant:memory add` · `prune` |
@@ -53,6 +53,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:memory` | `add` (default) · `prune` | `memory-management` |
 | `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
 | `/assistant:prep` | — | `meeting-prep` (+ `calendar-scheduling`, `follow-up-tracking`) |
+| `/assistant:meeting` | `follow-up` (default) | `meeting-follow-up` |
 | `/assistant:update` | `--comprehensive` flag | `task-management` + `follow-up-tracking` + `memory-management` |
 | `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
 | `/assistant:schedules` | — | `schedule-setup` |

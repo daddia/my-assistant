@@ -23,8 +23,9 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:email` | `draft` (default) · `review` | Draft one reply, or review what's awaiting a response |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
 | `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
+| `/assistant:meeting` | `follow-up` (default) | Import notetaker export or notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:tasks add`, `/assistant:memory prune`.
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
 
 ## Skills (fire on their own)
 
@@ -34,7 +35,7 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 - **follow-up-tracking** — drafts nudges for threads gone cold
 - **calendar-scheduling** — proposes times, checks conflicts, drafts invites
 - **meeting-prep** — who / what / last contact / what to prepare
-- **meeting-follow-up** — turns pasted notes or a transcript into a summary, actions, and follow-up drafts
+- **meeting-follow-up** — imports Granola/Fireflies/Otter/Google Meet exports (or hand-typed notes) into structured extraction, recap drafts, and queue items. **Does not join calls** — paste what your notetaker captured.
 - **daily-brief** — the morning briefing
 - **task-management** — `TASKS.md` (Active / Waiting On / Someday / Done)
 - **memory-management** — two-tier memory that decodes your shorthand

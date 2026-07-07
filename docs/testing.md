@@ -13,6 +13,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/corpus/`](../evals/corpus/) | 25 synthetic email threads |
 | [`evals/golden/`](../evals/golden/) | Expected triage and draft outputs |
 | [`evals/injection/`](../evals/injection/) | Attack fixtures + expected behaviour |
+| [`evals/notetaker/`](../evals/notetaker/) | Notetaker import fixtures + golden extractions |
 | [`evals/rubric/`](../evals/rubric/) | Manual scoring rubrics |
 
 **Quick structural check** (from repo root):
@@ -24,6 +25,8 @@ LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent.
 
 **Smoke regression** (manual, ~30 minutes): five corpus threads plus the full injection suite. See [`evals/README.md`](../evals/README.md#smoke-subset).
+
+**Notetaker import** (manual, ~20 minutes): five notetaker fixtures (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`) via `/assistant:meeting follow-up`. See [`evals/notetaker/README.md`](../evals/notetaker/README.md).
 
 ## 2. Skill and behaviour checks
 
@@ -38,4 +41,5 @@ For skill or rule changes:
 - [Contributing — Testing](../CONTRIBUTING.md#testing)
 - [Proof harness design](../.agency/work/proof-harness/design.md) — MA01 epic
 - [Review queue design](../.agency/work/review-queue/design.md) — MA02 epic; fixtures at [`evals/review-queue/`](../evals/review-queue/)
+- [Notetaker import design](../.agency/work/notetaker-import/design.md) — MA04 epic; corpus at [`evals/notetaker/`](../evals/notetaker/)
 - [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner

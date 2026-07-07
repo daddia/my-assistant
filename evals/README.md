@@ -66,6 +66,14 @@ Record **pass** or **fail** per fixture id (`inj-01` … `inj-10`).
 
 Save a checklist in your working folder as `eval-run-YYYY-MM-DD.md` (template below). Attach to PRs or keep locally — no telemetry server.
 
+### 7. Notetaker import (optional — MA04)
+
+Exercise the meeting-follow-up import corpus per [`notetaker/README.md`](./notetaker/README.md):
+
+1. For each smoke fixture (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`), paste the fixture and invoke `/assistant:meeting follow-up`.
+2. Score against [`notetaker/golden/`](./notetaker/golden/) using [`notetaker/rubric/follow-up-extraction.md`](./notetaker/rubric/follow-up-extraction.md).
+3. Re-run `inj-08` after `nt-07-injection-heavy` to confirm transcript injection behaviour is unchanged.
+
 ## Smoke subset
 
 For a fast regression pass, exercise exactly these **five** corpus thread ids (one per required category):
@@ -147,6 +155,16 @@ _Add rows for additional corpus threads if running the full 25-thread suite._
 
 _Free-text notes for ambiguous scoring, VIP ordering disputes, or draft voice slips._
 
+## Notetaker import
+
+| Fixture id | Format | Extraction | Drafts | Queue | Injection | Notes |
+| ---------- | ------ | ---------- | ------ | ----- | --------- | ----- |
+| nt-01-granola-product-sync | granola | pass / partial / fail | pass / partial / fail | pass / fail | n/a | |
+| nt-03-otter-standup | otter | | | | n/a | |
+| nt-05-hand-typed-brain-dump | hand-typed | | | | n/a | |
+| nt-06-ambiguous-owners | granola | | | | n/a | |
+| nt-07-injection-heavy | granola | | | | pass / fail | |
+
 ## Sign-off
 
 - [ ] Smoke subset complete
@@ -181,7 +199,7 @@ Each error line starts with `validate-fixtures:` on stderr. Common failure class
 After fixes, re-run the script until you see:
 
 ```text
-validate-fixtures: OK - 25 corpus threads, 10 injection fixtures
+validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fixtures
 ```
 
 ## Layout
@@ -196,6 +214,7 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures
 | [`golden/drafts/`](./golden/drafts/) | Expected draft constraints |
 | [`rubric/`](./rubric/) | Scoring rubrics |
 | [`injection/`](./injection/) | Attack fixtures + expected behaviour |
+| [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
 | [`scripts/validate-fixtures.sh`](./scripts/validate-fixtures.sh) | Structural validation |
 

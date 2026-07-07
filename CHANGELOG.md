@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Notetaker import (MA04)** — `/assistant:meeting follow-up` command; `config/notetaker-formats.yaml` fingerprints for Granola, Fireflies, Otter, and Google Meet; evolved `meeting-follow-up` skill with import mode, structured extraction block, and bot-decline UX; `evals/notetaker/` corpus with seven fixtures, golden extractions, and rubric.
 - **Positioning & roadmap docs** — `.agency/roadmap.md`, `.agency/positioning/positioning.md`, `.agency/positioning/competitors.md`.
 
 ### Changed
@@ -16,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - **Plugin command prefix** — `/my-assistant:` → `/assistant:` (plugin registers as `assistant`; profile path unchanged at `~/.claude/plugins/config/my-assistant/`).
 - **Skill names** — `{domain}-{job}` convention: `email-drafting`, `follow-up-tracking`, `calendar-scheduling`, `schedule-setup`.
-- **Domain commands** — noun + verb arguments: `/assistant:inbox [triage|sweep]`, `/assistant:email [draft|review]`, `/assistant:tasks [add|review|sync]`, `/assistant:memory [add|prune]`.
+- **Domain commands** — noun + verb arguments: `/assistant:inbox [triage|sweep]`, `/assistant:email [draft|review]`, `/assistant:meeting [follow-up]`, `/assistant:tasks [add|review|sync]`, `/assistant:memory [add|prune]`.
 - **Command routing table** — documented in `AGENTS.md` and `docs/guide/03-skills-and-commands.md`.
 
 ### Fixed
