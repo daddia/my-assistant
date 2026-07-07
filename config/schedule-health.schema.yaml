@@ -1,0 +1,120 @@
+# Schedule health ledger schema — machine-readable shape for schedule-health/index.yaml
+#
+# Authoritative contract for scheduled-run skills and miss-detection logic.
+# Working-folder location: {working-folder}/schedule-health/index.yaml
+# Never write health files under the plugin directory (see rules/file-safety.md).
+#
+# Validation: compare fixture items in evals/schedule-health/fixtures/*.yaml
+# against this schema; see evals/schedule-health/README.md.
+
+version: "0.1"
+
+# ---------------------------------------------------------------------------
+# Enumerations
+# ---------------------------------------------------------------------------
+surfaces:
+  - local
+  - cloud-code
+  - managed
+
+run_statuses:
+  - success
+  - partial
+  - failed
+  - missed
+
+# ---------------------------------------------------------------------------
+# Per-job entry fields (jobs.{job_id})
+# ---------------------------------------------------------------------------
+job_fields:
+  surface:
+    required: true
+    type: enum
+    enum: [local, cloud-code, managed]
+    description: Deployment surface the user chose during /assistant:schedules
+
+  cadence:
+    required: true
+    type: string
+    description: Cron expression copied from schedule-catalog.yaml at setup time
+
+  last_run_at:
+    required: true
+    type: datetime
+    format: ISO-8601
+  # null when the job has never completed a scheduled run
+
+  last_run_status:
+    required: true
+    type: enum
+    enum: [success, partial, failed, missed]
+
+  expected_artifact:
+    required: false
+    type: string
+    description: Resolved artefact path for the most recent expected run (e.g. brief-2026-07-08.md)
+
+  artifact_present:
+    required: false
+    type: boolean
+    description: Whether expected_artifact exists in the working folder
+
+  miss_count_7d:
+    required: true
+    type: integer
+    minimum: 0
+    description: Rolling counter incremented when miss detection fires on interactive runs
+
+  notes:
+    required: false
+    type: string
+    description: Freeform context (e.g. laptop asleep on local surface)
+
+# ---------------------------------------------------------------------------
+# Index file shape
+# ---------------------------------------------------------------------------
+index:
+  version:
+    required: true
+    type: string
+    description: Schema version, e.g. "0.1"
+
+  updated_at:
+    required: true
+    type: datetime
+    format: ISO-8601
+    description: Timestamp of the last ledger write
+
+  jobs:
+    required: true
+    type: map
+    keys: job_id
+    values: job_fields
+    description: One entry per configured job_id from schedule-catalog.yaml
+
+# ---------------------------------------------------------------------------
+# Examples
+# ---------------------------------------------------------------------------
+examples:
+  version: "0.1"
+  updated_at: "2026-07-08T08:05:00+10:00"
+  jobs:
+    morning-briefing:
+      surface: local
+      cadence: "0 8 * * 1-5"
+      last_run_at: "2026-07-08T08:02:00+10:00"
+      last_run_status: success
+      expected_artifact: brief-2026-07-08.md
+      artifact_present: true
+      miss_count_7d: 0
+      notes: null
+
+    inbox-sweep:
+      surface: managed
+      cadence: "0 8,12,16 * * 1-5"
+      last_run_at: "2026-07-08T12:01:00+10:00"
+      last_run_status: success
+      expected_artifact: null
+      artifact_present: null
+      miss_count_7d: 0
+      notes: null

@@ -1,0 +1,104 @@
+# Canonical always-on job catalog — joins local scheduled tasks and managed-agent cookbooks.
+# Referenced by skills/schedule-setup, schedule-health ledger, and docs/guide/07-always-on-reliability.md.
+# Add jobs here; do not fork prompts elsewhere.
+
+version: "0.1"
+
+jobs:
+  - job_id: morning-briefing
+    title: "Morning briefing"
+    skill: daily-brief
+    command: "/assistant:brief"
+    cron: "0 8 * * 1-5"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#morning-briefing
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+      managed:
+        cookbook: managed-agents/morning-briefing/agent.yaml
+        platform: managed-agents-2026-04-01
+    expected_artifacts:
+      - path_pattern: "brief-{date}.md"
+        required: true
+    reliability_tier: critical
+
+  - job_id: inbox-sweep
+    title: "Inbox sweep"
+    skill: inbox-triage
+    command: "/assistant:inbox sweep"
+    cron: "0 8,12,16 * * 1-5"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#inbox-sweep
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+      managed:
+        cookbook: managed-agents/inbox-triage/agent.yaml
+        platform: managed-agents-2026-04-01
+    expected_artifacts: []
+    reliability_tier: standard
+
+  - job_id: meeting-prep-watcher
+    title: "Meeting-prep watcher"
+    skill: meeting-prep
+    command: "/assistant:prep"
+    cron: "0 7 * * 1-5"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#meeting-prep-watcher
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+    expected_artifacts: []
+    reliability_tier: standard
+
+  - job_id: follow-up-watcher
+    title: "Follow-up watcher"
+    skill: follow-up-tracking
+    command: "/assistant:email review"
+    cron: "0 17 * * *"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#follow-up-watcher
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+      managed:
+        cookbook: managed-agents/follow-up-watcher/agent.yaml
+        platform: managed-agents-2026-04-01
+    expected_artifacts:
+      - path_pattern: "drafts/follow-up-*.md"
+        required: false
+      - path_pattern: "review-queue/index.yaml"
+        queue_type: follow-up-nudge
+        required: false
+    reliability_tier: standard
+
+  - job_id: weekly-review
+    title: "Weekly review"
+    skill: weekly-review
+    command: "/assistant:review"
+    cron: "0 16 * * 5"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#weekly-review
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+    expected_artifacts:
+      - path_pattern: "review-{date}.md"
+        required: true
+    reliability_tier: standard
