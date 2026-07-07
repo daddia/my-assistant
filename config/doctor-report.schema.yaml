@@ -1,0 +1,106 @@
+# Doctor report schema — machine-readable shape for install health reports.
+#
+# Used by skills/install-doctor/SKILL.md and evals/doctor/golden/*.yaml fixtures.
+# Optional user artefact: {working-folder}/doctor-report-YYYY-MM-DD.md (chat render only unless --save).
+#
+# Validation: evals/scripts/validate-fixtures.sh compares golden reports to this contract.
+
+version: "0.1"
+
+statuses:
+  - pass
+  - warn
+  - fail
+  - skip
+
+platform_hints:
+  - cowork
+  - cursor
+  - claude-code
+  - unknown
+
+index:
+  version:
+    required: true
+    type: string
+    description: Schema version, e.g. "0.1"
+
+  generated_at:
+    required: true
+    type: datetime
+    format: ISO-8601
+
+  platform_hint:
+    required: true
+    type: enum
+    enum: [cowork, cursor, claude-code, unknown]
+
+  working_folder:
+    required: false
+    type: string
+    description: Resolved working-folder path, or null when unidentified
+
+  profile_path:
+    required: false
+    type: string
+    description: Resolved profile path, or null when missing
+
+  summary:
+    required: true
+    type: map
+    fields:
+      pass:
+        type: integer
+        minimum: 0
+      warn:
+        type: integer
+        minimum: 0
+      fail:
+        type: integer
+        minimum: 0
+      skip:
+        type: integer
+        minimum: 0
+
+  results:
+    required: true
+    type: list
+    items:
+      check_id:
+        required: true
+        type: string
+      category:
+        required: true
+        type: string
+      status:
+        required: true
+        type: enum
+        enum: [pass, warn, fail, skip]
+      message:
+        required: true
+        type: string
+      detail:
+        required: false
+        type: string
+      fix_ref:
+        required: false
+        type: string
+
+examples:
+  version: "0.1"
+  generated_at: "2026-07-08T08:00:00+10:00"
+  platform_hint: cursor
+  working_folder: /tmp/my-assistant-working
+  profile_path: ~/.claude/plugins/config/my-assistant/profile.md
+  summary:
+    pass: 18
+    warn: 3
+    fail: 1
+    skip: 3
+  results:
+    - check_id: profile-exists
+      category: profile
+      status: pass
+      message: Profile found at ~/.claude/plugins/config/my-assistant/profile.md
+      detail: null
+      fix_ref: null

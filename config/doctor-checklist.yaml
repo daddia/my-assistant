@@ -1,0 +1,160 @@
+# Install doctor checklist — canonical check IDs, categories, and fix routing.
+# Loaded by skills/install-doctor/SKILL.md; validated by evals/scripts/validate-fixtures.sh.
+
+version: "0.1"
+
+categories:
+  - id: plugin
+    title: Plugin install
+  - id: profile
+    title: Profile & personalisation
+  - id: working-folder
+    title: Working folder
+  - id: always-on
+    title: Scheduled jobs & reliability
+  - id: connectors
+    title: Connectors (advisory)
+  - id: platform
+    title: Platform fit
+
+checks:
+  # --- plugin ---
+  - id: plugin-manifest-present
+    category: plugin
+    default_severity_on_fail: fail
+    fix_ref: docs/guide/01-getting-started.md
+
+  - id: plugin-skills-present
+    category: plugin
+    default_severity_on_fail: fail
+    fix_ref: docs/guide/01-getting-started.md
+
+  - id: plugin-commands-present
+    category: plugin
+    default_severity_on_fail: fail
+    fix_ref: docs/guide/01-getting-started.md
+
+  - id: plugin-hooks-session-start
+    category: plugin
+    default_severity_on_fail: warn
+    fix_ref: hooks/hooks.json
+
+  - id: plugin-rules-present
+    category: plugin
+    default_severity_on_fail: fail
+    fix_ref: rules/core-behaviour.md
+
+  - id: plugin-doctor-checklist
+    category: plugin
+    default_severity_on_fail: fail
+    fix_ref: docs/guide/01-getting-started.md
+
+  # --- profile ---
+  - id: profile-exists
+    category: profile
+    default_severity_on_fail: fail
+    fix_ref: /assistant:setup
+
+  - id: profile-readable
+    category: profile
+    default_severity_on_fail: fail
+    fix_ref: /assistant:setup
+
+  - id: profile-sections-complete
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: profile-word-count
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: profile-optional-sections
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  # --- working-folder ---
+  - id: working-folder-identified
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: docs/guide/02-configure-profile.md
+
+  - id: tasks-md-present
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:tasks add
+
+  - id: memory-scaffold
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:memory add
+
+  - id: claude-md-present
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:memory add
+
+  # --- always-on ---
+  - id: schedule-ledger-present
+    category: always-on
+    default_severity_on_fail: skip
+    fix_ref: /assistant:schedules
+
+  - id: schedule-health-valid
+    category: always-on
+    default_severity_on_fail: warn
+    fix_ref: /assistant:schedules
+
+  - id: schedule-catalog-jobs-match
+    category: always-on
+    default_severity_on_fail: warn
+    fix_ref: /assistant:schedules
+
+  - id: schedule-critical-local-misses
+    category: always-on
+    default_severity_on_fail: warn
+    fix_ref: docs/guide/07-always-on-reliability.md#decision-tree
+
+  # --- connectors (advisory) ---
+  - id: connector-email-advisory
+    category: connectors
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/connector-smoke-tests.md
+
+  - id: connector-calendar-advisory
+    category: connectors
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/connector-smoke-tests.md
+
+  - id: connector-chat-advisory
+    category: connectors
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/connector-smoke-tests.md
+
+  - id: connector-drive-notes-tasks-advisory
+    category: connectors
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/connector-smoke-tests.md
+
+  # --- platform ---
+  - id: platform-inferred
+    category: platform
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/01-getting-started.md
+
+  - id: platform-cursor-local-schedules
+    category: platform
+    default_severity_on_fail: warn
+    fix_ref: docs/guide/07-always-on-reliability.md
+
+  - id: platform-cowork-schedules
+    category: platform
+    default_severity_on_fail: skip
+    fix_ref: /assistant:schedules
+
+  - id: platform-unknown-skip
+    category: platform
+    default_severity_on_fail: skip
+    fix_ref: docs/guide/01-getting-started.md

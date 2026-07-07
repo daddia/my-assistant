@@ -1,0 +1,204 @@
+---
+name: install-doctor
+description: Install and setup health check for the assistant plugin. Activate on
+  "/assistant:doctor", "run doctor", "health check", "is my assistant set up correctly",
+  or "diagnose my install". Read-only validator — proposes fixes, never auto-remediates.
+---
+
+# Install doctor
+
+Structured health check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — doctor proposes fixes and routes to commands or guide chapters; it never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
+
+The only optional write: `doctor-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
+
+## Load the checklist
+
+Read `config/doctor-checklist.yaml` from the plugin directory. If missing, stop with an honest error:
+
+> Plugin install incomplete — reinstall from the marketplace. The doctor checklist (`config/doctor-checklist.yaml`) is missing.
+
+Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
+
+## Resolve paths
+
+### Profile
+
+Same order as `hooks/hooks.json`:
+
+1. `~/.claude/plugins/config/my-assistant/profile.md`
+2. `./profile.md` in the open workspace (Cowork or Cursor working folder)
+
+Record the path tried in the report as `profile_path` (or `null`).
+
+### Working folder
+
+1. User-stated path in chat
+2. Open workspace / current working directory in Cowork or Cursor
+3. If still ambiguous, default to cwd with a **warn** on `working-folder-identified` and ask the user to confirm or open their working folder
+
+Never write health or doctor files under the plugin directory (`rules/file-safety.md`).
+
+### Platform hint
+
+Best-effort inference for `platform_hint`:
+
+| Signal | Hint |
+|--------|------|
+| User mentions Cursor, or session is Cursor plugin | `cursor` |
+| Cowork scheduled sidebar or `/schedule` mentioned | `cowork` |
+| Claude Code scheduled tasks mentioned | `claude-code` |
+| None of the above | `unknown` |
+
+When `unknown`, platform-specific checks **skip** with a message to re-run after stating the platform.
+
+## Check logic
+
+### Plugin
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `plugin-manifest-present` | `.claude-plugin/plugin.json` or `.cursor-plugin/plugin.json` exists in plugin root | **fail** |
+| `plugin-skills-present` | `skills/` contains ≥10 skill directories with `SKILL.md` | **fail** |
+| `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
+| `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
+| `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
+| `plugin-doctor-checklist` | `config/doctor-checklist.yaml` and `config/doctor-report.schema.yaml` exist | **fail** |
+
+### Profile
+
+If `profile-exists` **fails**, **skip** all downstream profile checks (`profile-readable`, `profile-sections-complete`, `profile-word-count`, `profile-optional-sections`) with message "Profile missing — skipped."
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `profile-exists` | Profile file found at resolved path | **fail** — fix: `/assistant:setup`; note plugin works with pasted content until then |
+| `profile-readable` | File reads without error | **fail** with path attempted |
+| `profile-sections-complete` | Required sections filled (heuristic below) | **warn** |
+| `profile-word-count` | Under ~2,000 words | **warn** if over |
+| `profile-optional-sections` | Anti-style, calendar policy, goals have real content | **warn** if still template placeholders |
+
+**Section completeness heuristic** — compare against `config/profile.template.md` bracket placeholders (e.g. `[full name]`, `[e.g. Founder, Acme]`) or empty values:
+
+**Required for pass on `profile-sections-complete`:**
+
+1. **Identity** — name, timezone, working hours
+2. **Voice** — one-line voice description (not template quote only)
+3. **Working rules** — autonomy tier explicitly set (not template default line only)
+4. **VIP tiers** — at least one Tier 1 or Tier 2 entry with a real name or address
+5. **Email policy** — reply threshold stated
+
+Sections 3 (anti-style), 7 (calendar policy), 8 (goals) are checked by `profile-optional-sections` — warn if skipped, do not fail post-setup quick-start.
+
+### Working folder
+
+If `working-folder-identified` **warns** (ambiguous), folder file checks may **skip** with "Working folder not confirmed."
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `working-folder-identified` | Path resolved and user context clear | **warn** if defaulted to cwd without confirmation |
+| `tasks-md-present` | `TASKS.md` exists and is readable | **warn** — suggest scaffold or `/assistant:tasks add` |
+| `memory-scaffold` | `memory/` directory exists | **warn** — offer to scaffold empty `memory/` |
+| `claude-md-present` | `CLAUDE.md` exists in working folder | **warn** |
+
+### Always-on
+
+When `{working-folder}/schedule-health/index.yaml` is **absent**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
+
+When ledger **exists**:
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `schedule-ledger-present` | Ledger file exists | **pass** |
+| `schedule-health-valid` | Shape matches `config/schedule-health.schema.yaml` (version, updated_at, jobs map; per-job surface, cadence, last_run_status, miss_count_7d) | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
+| `schedule-catalog-jobs-match` | Every `job_id` in ledger exists in `config/schedule-catalog.yaml` | **warn** |
+| `schedule-critical-local-misses` | No `morning-briefing` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
+
+### Connectors (advisory)
+
+**Ask-first UX** for standalone parity — do not assume OAuth or MCP visibility.
+
+Ask inline: "Which connector categories do you have connected? (email / calendar / chat / drive / notes / tasks — or none / paste-only)"
+
+| check_id | Behaviour |
+|----------|-----------|
+| `connector-email-advisory` | **pass** if email connected or user confirms paste-only; **warn** if unsure; **skip** if user declines to answer |
+| `connector-calendar-advisory` | Same pattern |
+| `connector-chat-advisory` | Same pattern |
+| `connector-drive-notes-tasks-advisory` | **pass** if any of drive/notes/tasks connected or paste-only confirmed; **warn** if gaps noted; **skip** if declined |
+
+Link `docs/guide/connector-smoke-tests.md` for paste smoke steps. Never run live OAuth probes (MA08).
+
+### Platform
+
+| check_id | Behaviour |
+|----------|-----------|
+| `platform-inferred` | **pass** when hint is not `unknown`; **skip** when unknown |
+| `platform-cursor-local-schedules` | When `platform_hint: cursor` and ledger shows critical job (`morning-briefing`) on `local` → **warn** to consider `cloud-code` or `managed` per reliability guide |
+| `platform-cowork-schedules` | When `platform_hint: cowork` → **pass** if local schedules are viable; **skip** otherwise |
+| `platform-unknown-skip` | When `platform_hint: unknown` → **skip** with message to state platform and re-run |
+
+## Post-setup subset
+
+When invoked from `setup-interview` after initial profile write, run **only** profile + working-folder categories:
+
+- `checks: [profile, working-folder]` — skip plugin, always-on, connectors, platform unless user asks for full doctor
+- Render a compact **Setup health** block (≤8 lines): summary counts + top fails/warns with fix refs
+- Do **not** block the wedge CTA on warnings — always offer `/assistant:inbox triage` and `/assistant:brief` after the block
+- Chat-only — no auto-save of `doctor-report-*.md` after setup
+
+## Build and render the report
+
+Aggregate results into `DoctorReport` matching `config/doctor-report.schema.yaml`:
+
+```yaml
+version: "0.1"
+generated_at: <ISO-8601 now>
+platform_hint: <inferred>
+working_folder: <path or null>
+profile_path: <path or null>
+summary: { pass, warn, fail, skip }
+results: [ ... ]
+```
+
+### Markdown output (approval frame)
+
+Use the four-part frame from `rules/approval-frame.md`:
+
+**What I found** — summary line: `Doctor: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
+
+**What I drafted** — "Nothing yet" (doctor does not create drafts).
+
+**What I recommend** — Top 1–3 fixes ranked by severity (fails first, then warns).
+
+**What needs your approval** — Enumerate actions requiring user decision (e.g. run `/assistant:setup`, scaffold `TASKS.md`, upgrade schedule surface). No queue writes unless surfacing an existing review-queue gap.
+
+Then render a **checklist table** grouped by category:
+
+```text
+| Status | Check | Message | Fix |
+|--------|-------|---------|-----|
+| ✅ pass | profile-exists | Profile found | — |
+| ⚠️ warn | profile-sections-complete | VIP tiers thin | /assistant:setup |
+```
+
+Use ✅ pass · ⚠️ warn · ❌ fail · ⏭️ skip in the Status column.
+
+### Optional save (`--save`)
+
+Write `doctor-report-YYYY-MM-DD.md` to the working folder with the same markdown body. If the folder is not writable, render in chat only and note the save failure.
+
+## Error paths
+
+| Condition | Behaviour |
+|-----------|-----------|
+| No profile | `profile-exists` **fail**; downstream profile checks **skip** |
+| Profile unreadable | `profile-exists` **fail** with detail; do not guess contents |
+| Working folder unknown | folder checks **skip**; note assumption |
+| Corrupt schedule ledger | `schedule-health-valid` **warn** |
+| No schedule ledger | always-on checks **skip** (not fail) |
+| Checklist missing | Abort with reinstall message |
+
+Every failure maps to a checklist row with `fix_ref` — no opaque errors.
+
+## Maintainer fixtures
+
+Synthetic states and golden expected reports live in `evals/doctor/`. See `evals/doctor/README.md` for fixture validation.
