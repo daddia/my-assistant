@@ -1,6 +1,6 @@
 # INTENTIONALLY BROKEN — invalid YAML for dashboard/parser error-path testing.
 # Do not use as a working review-queue index.
-# Expected behaviour: docs/review-queue/README.md § Error-path fixtures
+# Expected behaviour: evals/review-queue/README.md
 
 items:
   - id: rq-2026-07-08-reply-broken

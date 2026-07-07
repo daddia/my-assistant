@@ -56,7 +56,7 @@ The assistant and the dashboard share the same files, so edits in either place s
 
 ### Review queue and approval frame
 
-Skills that produce reviewable work use a four-part **approval frame** in chat: *What I found · What I drafted · What I recommend · What needs your approval* (`rules/approval-frame.md`). Pending items are written to `review-queue/index.yaml` in your working folder. Full docs: [`docs/review-queue/README.md`](../../docs/review-queue/README.md).
+Skills that produce reviewable work use a four-part **approval frame** in chat: *What I found · What I drafted · What I recommend · What needs your approval* (`rules/approval-frame.md`). Pending items are written to `review-queue/index.yaml` in your working folder — browse them in the dashboard **Review** tab or approve in chat.
 
 ## Everything drafts, nothing sends
 

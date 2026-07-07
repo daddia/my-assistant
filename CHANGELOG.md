@@ -8,9 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-- **Positioning & roadmap docs** — `.agency/roadmap.md`, `.agency/positioning.md`, `docs/compare-alternatives.md`.
+- **Positioning & roadmap docs** — `.agency/roadmap.md`, `.agency/positioning/positioning.md`, `.agency/positioning/competitors.md`.
 
 ### Changed
+
+- **Positioning docs** — consolidated under `.agency/positioning/` (moved out of public `docs/`; not user-facing). `compare-alternatives.md` merged into `competitors.md`.
 
 - **Plugin command prefix** — `/my-assistant:` → `/assistant:` (plugin registers as `assistant`; profile path unchanged at `~/.claude/plugins/config/my-assistant/`).
 - **Skill names** — `{domain}-{job}` convention: `email-drafting`, `follow-up-tracking`, `calendar-scheduling`, `schedule-setup`.

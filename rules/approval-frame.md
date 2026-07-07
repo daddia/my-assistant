@@ -24,7 +24,7 @@ Explicit, enumerable actions the user must decide on. When a queue item is writt
 
 ## Queue item linkage
 
-When producing reviewable work, append a **pending** item to `{working-folder}/review-queue/index.yaml` per `docs/review-queue/schema.yaml`. Never write queue files under the plugin directory (`rules/file-safety.md`).
+When producing reviewable work, append a **pending** item to `{working-folder}/review-queue/index.yaml` per `config/review-queue.schema.yaml`. Never write queue files under the plugin directory (`rules/file-safety.md`).
 
 Each item needs: `id`, `type`, `status`, `created_at`, `source_skill`, `title`, `source_path`, `approval_prompt`, `autonomy_tier`.
 

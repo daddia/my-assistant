@@ -126,8 +126,8 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 **Key deliverables.**
 
 - `.agency/roadmap.md`: Now/Next/Later derived from this backlog, with competitor-gap rationale and changelog links.
-- `.agency/positioning.md`: one-liner, ICP, alternatives, and "why us" (the "agentic preparation, human authority" wedge).
-- A "compare alternatives" doc: honest My Assistant vs Fyxer / Lindy / Superhuman / Shortwave / Reclaim / Motion — aligned with feature-backlog Part 3 non-goals.
+- `.agency/positioning/positioning.md`: one-liner, ICP, alternatives, and "why us" (the "agentic preparation, human authority" wedge).
+- `.agency/positioning/competitors.md`: honest My Assistant vs Fyxer / Lindy / Superhuman / Shortwave / Reclaim / Motion — aligned with feature-backlog Part 3 non-goals.
 - Fix dangling roadmap reference in `.agency/product.md` (line 94: `./product/roadmap.md` → `./roadmap.md`).
 
 **Dependencies.** None (but should reflect the epic set defined here).

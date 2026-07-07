@@ -37,4 +37,5 @@ For skill or rule changes:
 
 - [Contributing — Testing](../CONTRIBUTING.md#testing)
 - [Proof harness design](../.agency/work/proof-harness/design.md) — MA01 epic
+- [Review queue design](../.agency/work/review-queue/design.md) — MA02 epic; fixtures at [`evals/review-queue/`](../evals/review-queue/)
 - [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner

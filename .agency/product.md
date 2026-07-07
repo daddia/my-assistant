@@ -8,7 +8,7 @@ This document is the product and architecture source of truth. End-user setup is
 
 ## Positioning
 
-Canonical positioning, ICP, and competitive wedge: [positioning.md](./positioning.md).
+Canonical positioning, ICP, and competitive wedge: [positioning.md](./positioning/positioning.md).
 
 - **One plugin, many skills** — modelled on the Vercel plugin (one install; `skills/`, `commands/`, `agents/`, one `.mcp.json`) and Anthropic's knowledge-work plugins, not a marketplace of separate plugins.
 - **"Your AI chief of staff for inbox, calendar and follow-ups."** An executive/personal assistant, not a team workflow tool.

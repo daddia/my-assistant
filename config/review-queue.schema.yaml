@@ -4,8 +4,8 @@
 # Working-folder location: {working-folder}/review-queue/index.yaml
 # Never write queue files under the plugin directory (see rules/file-safety.md).
 #
-# Validation: compare fixture items in docs/review-queue/fixtures/sample-index.yaml
-# against this schema; run yamllint on fixture files or use the manual checklist in README.md.
+# Validation: compare fixture items in evals/review-queue/fixtures/sample-index.yaml
+# against this schema; see evals/review-queue/README.md.
 
 version: "0.1"
 

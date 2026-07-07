@@ -2,7 +2,7 @@
 
 **Your AI chief of staff for inbox, calendar, and follow-ups.**
 
-[Positioning](.agency/positioning.md) · [Compare alternatives](docs/compare-alternatives.md) · [Roadmap](.agency/roadmap.md)
+[Roadmap](.agency/roadmap.md)
 
 One installable plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
 
@@ -59,7 +59,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 ## Visual dashboard
 
-Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md`, a browser for `CLAUDE.md` + `memory/`, and a **Review** tab for pending approvals. Point it at your working folder — the same files the assistant reads and writes. See the [review queue docs](./docs/review-queue/README.md).
+Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md`, a browser for `CLAUDE.md` + `memory/`, and a **Review** tab for pending approvals. Point it at your working folder — the same files the assistant reads and writes.
 
 ## How it's built
 
