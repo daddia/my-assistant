@@ -1,0 +1,18 @@
+# Batched archive proposal — 2026-07-08 triage run
+# Source: inbox-triage (Tier 1 — user must confirm before archive)
+
+proposed_at: "2026-07-08"
+source_skill: inbox-triage
+threads:
+  - id: 16-marketing-saas-promo
+    subject: "50% off Pro plan — limited time"
+    reason: marketing / newsletter
+  - id: 17-marketing-newsletter
+    subject: "Northwind Weekly — June roundup"
+    reason: marketing / newsletter
+  - id: 18-marketing-event-invite
+    subject: "You're invited: SaaS Growth Summit"
+    reason: marketing / event invite
+  - id: 15-marketing-webinar
+    subject: "Live webinar: AI for ops teams"
+    reason: marketing / webinar

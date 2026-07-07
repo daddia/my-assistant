@@ -1,0 +1,76 @@
+# Sample review-queue index — one pending item per queue type.
+# Copy instructions: docs/review-queue/README.md
+#
+# source_path values are relative to the working folder. When validating
+# against repo fixtures, each path resolves under fixtures/sources/.
+
+items:
+  - id: rq-2026-07-08-reply-priya-deck
+    type: reply-draft
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: inbox-triage
+    title: Reply to Priya — board deck feedback
+    source_path: drafts/reply-priya-board-update.md
+    approval_prompt: Review and send this reply when ready.
+    autonomy_tier: 1
+    priority: high
+    external_ref: gmail-draft-abc123
+    related_ids: [01-vip-board-update]
+
+  - id: rq-2026-07-08-archive-marketing
+    type: archive-proposal
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: inbox-triage
+    title: Archive 4 marketing threads from today's triage
+    source_path: review-queue/archives-2026-07-08.yaml
+    approval_prompt: Confirm these threads can be archived.
+    autonomy_tier: 1
+    priority: normal
+
+  - id: rq-2026-07-08-followup-acme
+    type: follow-up-nudge
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: follow-up-tracking
+    title: Nudge Acme on contract renewal (14 days cold)
+    source_path: drafts/follow-up-acme-contract.md
+    approval_prompt: Send this follow-up or dismiss if no longer needed.
+    autonomy_tier: 1
+    priority: normal
+    related_ids: [04-needs-reply-contract-renewal]
+
+  - id: rq-2026-07-08-memory-priya
+    type: memory-suggestion
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: meeting-follow-up
+    title: Add Priya prefers deck reviews 48h before board
+    source_path: pending-memory/priya-board-context.md
+    approval_prompt: Approve adding this to memory/people/priya.md.
+    autonomy_tier: 1
+    priority: normal
+
+  - id: rq-2026-07-08-profile-vip-tier
+    type: profile-diff
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: memory-management
+    title: Promote Jordan Lee to VIP tier 1
+    source_path: pending-profile/vip-tier-jordan.diff
+    approval_prompt: Apply this profile change or edit in setup.
+    autonomy_tier: 1
+    priority: low
+
+  - id: rq-2026-07-08-calendar-sync
+    type: calendar-proposal
+    status: pending
+    created_at: "2026-07-08"
+    source_skill: calendar-scheduling
+    title: Propose times for team sync with design
+    source_path: drafts/calendar-team-sync.md
+    approval_prompt: Pick a slot and send the invite manually.
+    autonomy_tier: 1
+    priority: normal
+    related_ids: [25-scheduling-team-sync]
