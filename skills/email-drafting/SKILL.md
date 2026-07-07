@@ -66,3 +66,17 @@ Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) for every draf
 - Set `external_ref` to the connector draft id when present (e.g. Gmail draft id).
 
 Append the observability footer when queue items are written.
+
+## Post-draft feedback prompt
+
+After presenting a **standalone** draft (via `/assistant:email draft` or a single-thread draft request), append one optional line:
+
+```text
+Sent it? `/assistant:email feedback good` · light edit · heavy rewrite` — helps tune your voice.
+```
+
+**Omit** when:
+
+- User is mid-thread or clearly iterating on the same draft.
+- Draft was produced inside **inbox-triage** batch context (many drafts in one run).
+- User already invoked feedback or dismissed the prompt.
