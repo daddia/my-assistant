@@ -7,11 +7,20 @@ description: A Friday review of the week — wins, open loops, stale tasks, and 
 
 # Weekly review
 
-Close the week cleanly: what got done, what's still open, what's gone stale, and what to line up for Monday. Also the moment to prune tasks and memory.
+Close the week cleanly: what got done, what's still open, what's gone stale, and what to line up for Monday. Also the moment to prune tasks and memory. Catalog entry: `job_id: weekly-review` in `config/schedule-catalog.yaml`.
 
 ## Read the profile first
 
 Load goals/priorities (to judge what mattered), voice, and working hours.
+
+## Schedule health check (optional, interactive Friday runs)
+
+On an **interactive** Friday run after the expected window (**cron 16:00 Friday + 90 minutes = 17:30**), optionally surface a low-priority miss hint for `weekly-review` when:
+
+- `schedule-health/index.yaml` exists and `weekly-review.surface` is `local`
+- `review-{today}.md` is absent and `last_run_at` is stale
+
+Use the same `### Schedule health` block format as `daily-brief`, naming the weekly review job. Suggest `cloud-code` (no managed cookbook for this job). Skip when `surface` is `managed` or `cloud-code`. Max one health block per chat turn; do not block the review.
 
 ## What it does
 
@@ -45,6 +54,13 @@ Next week
 ## Scheduled use
 
 Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `skills/schedule-setup/SKILL.md`.
+
+**Heartbeat:** at end of a scheduled run, update `schedule-health/index.yaml` for `weekly-review`:
+
+- `last_run_at`: now
+- `last_run_status`: `success` if `review-{today}.md` was written; else `partial` or `failed`
+- `expected_artifact`: `review-{today}.md`
+- `artifact_present`: true/false
 
 ## Rules
 
