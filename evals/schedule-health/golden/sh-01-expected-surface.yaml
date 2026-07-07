@@ -1,0 +1,9 @@
+fixture_id: sh-01-healthy-weekday
+health_fixture: evals/schedule-health/fixtures/sh-01-healthy-weekday.yaml
+trigger_skill: daily-brief
+trigger_mode: manual
+must_surface: []
+must_not:
+  - "Missed"
+  - auto-run catch-up
+  - write under plugin directory

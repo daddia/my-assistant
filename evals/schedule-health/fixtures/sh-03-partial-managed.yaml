@@ -1,0 +1,30 @@
+version: "0.1"
+updated_at: "2026-07-08T12:10:00+10:00"
+jobs:
+  morning-briefing:
+    surface: managed
+    cadence: "0 8 * * 1-5"
+    last_run_at: "2026-07-08T08:00:30+00:00"
+    last_run_status: success
+    expected_artifact: brief-2026-07-08.md
+    artifact_present: true
+    miss_count_7d: 0
+    notes: null
+  inbox-sweep:
+    surface: managed
+    cadence: "0 8,12,16 * * 1-5"
+    last_run_at: "2026-07-08T12:01:00+00:00"
+    last_run_status: success
+    expected_artifact: null
+    artifact_present: null
+    miss_count_7d: 0
+    notes: null
+  follow-up-watcher:
+    surface: local
+    cadence: "0 17 * * *"
+    last_run_at: "2026-07-07T17:05:00+10:00"
+    last_run_status: partial
+    expected_artifact: null
+    artifact_present: null
+    miss_count_7d: 0
+    notes: "local 5pm run — machine woke late"

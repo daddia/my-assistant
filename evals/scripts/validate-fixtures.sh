@@ -39,6 +39,8 @@ for dir in \
   "${EVALS_DIR}/notetaker/fixtures" \
   "${EVALS_DIR}/notetaker/golden" \
   "${EVALS_DIR}/notetaker/rubric" \
+  "${EVALS_DIR}/schedule-health/fixtures" \
+  "${EVALS_DIR}/schedule-health/golden" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -48,7 +50,10 @@ require_file "${EVALS_DIR}/corpus/manifest.yaml"
 require_file "${EVALS_DIR}/injection/manifest.yaml"
 require_file "${EVALS_DIR}/injection/expected-behaviour.yaml"
 require_file "${EVALS_DIR}/notetaker/manifest.yaml"
+require_file "${EVALS_DIR}/schedule-health/manifest.yaml"
 require_file "${REPO_ROOT}/config/notetaker-formats.yaml"
+require_file "${REPO_ROOT}/config/schedule-catalog.yaml"
+require_file "${REPO_ROOT}/config/schedule-health.schema.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -270,13 +275,114 @@ else
   errors << "missing notetaker/manifest.yaml"
 end
 
+# --- schedule catalog + health (MA06) ---
+EXPECTED_JOB_IDS = %w[
+  morning-briefing inbox-sweep meeting-prep-watcher follow-up-watcher weekly-review
+].freeze
+SURFACES = %w[local cloud-code managed].freeze
+RUN_STATUSES = %w[success partial failed missed].freeze
+
+catalog_path = repo_root.join('config/schedule-catalog.yaml')
+if catalog_path.file?
+  catalog = YAML.load_file(catalog_path) || {}
+  catalog_jobs = catalog['jobs'] || []
+  catalog_ids = catalog_jobs.map { |j| j['job_id'] }.compact
+  if catalog_ids.sort != EXPECTED_JOB_IDS.sort
+    errors << "config/schedule-catalog.yaml must list exactly #{EXPECTED_JOB_IDS.join(', ')}; got #{catalog_ids.join(', ')}"
+  end
+  catalog_jobs.each do |job|
+    jid = job['job_id']
+    skill = job['skill']
+    errors << "catalog job '#{jid}' missing skill" if skill.nil? || skill.empty?
+    managed = job.dig('surfaces', 'managed', 'cookbook')
+    if managed
+      cookbook_path = repo_root.join(managed)
+      errors << "catalog job '#{jid}' managed cookbook missing: #{managed}" unless cookbook_path.file?
+    end
+  end
+else
+  errors << "missing config/schedule-catalog.yaml"
+end
+
+sh_fixtures = []
+sh_manifest_path = evals_dir.join('schedule-health/manifest.yaml')
+if sh_manifest_path.file?
+  sh_manifest = YAML.load_file(sh_manifest_path) || {}
+  sh_fixtures = sh_manifest['fixtures'] || []
+  errors << "schedule-health/manifest.yaml: 'fixtures' must be a list" unless sh_fixtures.is_a?(Array)
+
+  sh_ids = Set.new
+  sh_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "schedule-health/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    errors << "schedule-health/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "schedule-health/manifest.yaml: duplicate fixture id '#{fid}'" if sh_ids.include?(fid)
+    sh_ids.add(fid) if fid
+
+    if fpath.nil? || fpath.empty?
+      errors << "schedule-health/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing schedule-health fixture file: #{resolved}" unless resolved.file?
+
+      if resolved.file?
+        fixture = YAML.load_file(resolved) || {}
+        jobs = fixture['jobs']
+        if jobs.nil? || !jobs.is_a?(Hash)
+          errors << "schedule-health fixture #{File.basename(fpath)} missing 'jobs' mapping"
+        else
+          jobs.each do |job_id, job_entry|
+            next unless job_entry.is_a?(Hash)
+            surface = job_entry['surface']
+            errors << "schedule-health fixture #{File.basename(fpath)} job '#{job_id}' invalid surface '#{surface}'" if surface && !SURFACES.include?(surface)
+            status = job_entry['last_run_status']
+            errors << "schedule-health fixture #{File.basename(fpath)} job '#{job_id}' invalid last_run_status '#{status}'" if status && !RUN_STATUSES.include?(status)
+            miss = job_entry['miss_count_7d']
+            errors << "schedule-health fixture #{File.basename(fpath)} job '#{job_id}' miss_count_7d must be integer" if miss && !miss.is_a?(Integer)
+          end
+        end
+        errors << "schedule-health fixture #{File.basename(fpath)} missing version" unless fixture.key?('version')
+        errors << "schedule-health fixture #{File.basename(fpath)} missing updated_at" unless fixture.key?('updated_at')
+      end
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "schedule-health/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing schedule-health golden file: #{golden_resolved}"
+        next
+      end
+
+      golden = YAML.load_file(golden_resolved) || {}
+      gfid = golden['fixture_id']
+      errors << "schedule-health golden #{File.basename(gpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+
+      must_surface = golden['must_surface']
+      must_not = golden['must_not']
+      errors << "schedule-health golden #{File.basename(gpath)} must_surface must be a list" if must_surface && !must_surface.is_a?(Array)
+      errors << "schedule-health golden #{File.basename(gpath)} must_not must be a list" if must_not && !must_not.is_a?(Array)
+      errors << "schedule-health golden #{File.basename(gpath)} missing trigger_skill" unless golden['trigger_skill']
+    end
+  end
+else
+  errors << "missing schedule-health/manifest.yaml"
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
 end
 
 nt_count = nt_fixtures&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures"
+sh_count = sh_fixtures&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{sh_count} schedule-health fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"
