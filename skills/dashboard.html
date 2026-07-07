@@ -1147,6 +1147,137 @@
       width: 6px;
     }
 
+    /* Review queue panel */
+    .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      margin-left: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--accent);
+      color: white;
+      border-radius: 9px;
+      line-height: 1;
+    }
+
+    .tab-badge:empty,
+    .tab-badge[data-count="0"] {
+      display: none;
+    }
+
+    .review-content-area {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+      padding: 4px 0;
+    }
+
+    .review-group {
+      margin-bottom: 24px;
+    }
+
+    .review-group-header {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .review-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .review-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .review-item-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .review-item-prompt {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .review-item-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .review-warning {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #b45309;
+      background: #fef3c7;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .review-error-panel {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .review-error-panel h3 {
+      color: #b91c1c;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .review-error-panel pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 12px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .review-source-view {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
     .memory-content-area::-webkit-scrollbar-track {
       background: transparent;
     }
@@ -1202,11 +1333,12 @@
       </svg>
       <div>
         <h1>My Assistant</h1>
-        <div id="filePath" class="file-path">Tasks &amp; memory dashboard</div>
+        <div id="filePath" class="file-path">Tasks, memory &amp; review dashboard</div>
       </div>
       <div class="view-toggle" id="mainTabToggle">
         <button id="tasksTabBtn" class="active">Tasks</button>
         <button id="memoryTabBtn">Memory</button>
+        <button id="reviewTabBtn">Review<span class="tab-badge" id="reviewTabBadge" data-count="0"></span></button>
       </div>
       <div class="view-toggle" id="taskViewToggle">
         <button id="boardViewBtn" class="active">Board</button>
@@ -1247,6 +1379,18 @@
     </div>
   </div>
 
+  <!-- REVIEW TAB PANEL -->
+  <div class="tab-panel" id="reviewPanel">
+    <div id="reviewEmptyState" class="empty-state">
+      <p style="margin-bottom: 8px; font-size: 18px; font-weight: 600; color: var(--text-primary);">Open your working folder</p>
+      <p style="margin-bottom: 24px; font-size: 14px; color: var(--text-muted);">Select the folder that contains <code>review-queue/index.yaml</code> — or copy fixtures from <code>docs/review-queue/fixtures/</code>.</p>
+      <button id="openReviewBtnLarge">Select Folder</button>
+    </div>
+    <div id="reviewMainContent" style="display: none; flex-direction: column; min-height: 0; flex: 1;">
+      <div class="review-content-area" id="reviewContentContainer"></div>
+    </div>
+  </div>
+
   <!-- MODAL (shared for memory) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
@@ -1266,7 +1410,7 @@
 
   <script>
     // ===== SHARED STATE =====
-    let activeMainTab = 'tasks'; // 'tasks' or 'memory'
+    let activeMainTab = 'tasks'; // 'tasks', 'memory', or 'review'
 
     const statusEl = document.getElementById('status');
     const filePathEl = document.getElementById('filePath');
@@ -1280,8 +1424,11 @@
     // ===== MAIN TAB SWITCHING =====
     const tasksTabBtn = document.getElementById('tasksTabBtn');
     const memoryTabBtn = document.getElementById('memoryTabBtn');
+    const reviewTabBtn = document.getElementById('reviewTabBtn');
+    const reviewTabBadge = document.getElementById('reviewTabBadge');
     const tasksPanel = document.getElementById('tasksPanel');
     const memoryPanel = document.getElementById('memoryPanel');
+    const reviewPanel = document.getElementById('reviewPanel');
     const taskViewToggle = document.getElementById('taskViewToggle');
     const openTaskBtn = document.getElementById('openTaskBtn');
     const openMemoryBtn = document.getElementById('openMemoryBtn');
@@ -1292,28 +1439,33 @@
 
       tasksTabBtn.classList.toggle('active', tab === 'tasks');
       memoryTabBtn.classList.toggle('active', tab === 'memory');
+      reviewTabBtn.classList.toggle('active', tab === 'review');
 
       tasksPanel.classList.toggle('active', tab === 'tasks');
       memoryPanel.classList.toggle('active', tab === 'memory');
+      reviewPanel.classList.toggle('active', tab === 'review');
 
-      // Show/hide view toggle for tasks
       taskViewToggle.style.display = tab === 'tasks' ? 'flex' : 'none';
 
-      // Show/hide appropriate buttons
       openTaskBtn.style.display = tab === 'tasks' ? 'inline-flex' : 'none';
-      openMemoryBtn.style.display = tab === 'memory' ? 'inline-flex' : 'none';
+      openMemoryBtn.style.display = (tab === 'memory' || tab === 'review') ? 'inline-flex' : 'none';
       saveBtn.style.display = tab === 'tasks' ? 'inline-flex' : 'none';
 
-      // Update file path display
+      const defaultLabel = 'Tasks, memory & review dashboard';
       if (tab === 'tasks') {
-        filePathEl.textContent = taskFileHandle ? taskFileName : 'Tasks & memory dashboard';
+        filePathEl.textContent = taskFileHandle ? taskFileName : defaultLabel;
       } else {
-        filePathEl.textContent = memoryDirHandle ? memoryDirHandle.name : 'Tasks & memory dashboard';
+        filePathEl.textContent = memoryDirHandle ? memoryDirHandle.name : defaultLabel;
+      }
+
+      if (tab === 'review' && memoryDirHandle) {
+        loadReviewQueue();
       }
     }
 
     tasksTabBtn.addEventListener('click', () => switchMainTab('tasks'));
     memoryTabBtn.addEventListener('click', () => switchMainTab('memory'));
+    reviewTabBtn.addEventListener('click', () => switchMainTab('review'));
 
     // ============================================================
     // ===== TASKS FUNCTIONALITY =====
@@ -2476,6 +2628,269 @@
     });
 
     // ============================================================
+    // ===== REVIEW QUEUE FUNCTIONALITY =====
+    // ============================================================
+
+    const REVIEW_QUEUE_TYPES = [
+      'reply-draft',
+      'archive-proposal',
+      'follow-up-nudge',
+      'memory-suggestion',
+      'profile-diff',
+      'calendar-proposal'
+    ];
+
+    const REVIEW_TYPE_LABELS = {
+      'reply-draft': 'Reply drafts',
+      'archive-proposal': 'Archive proposals',
+      'follow-up-nudge': 'Follow-up nudges',
+      'memory-suggestion': 'Memory suggestions',
+      'profile-diff': 'Profile diffs',
+      'calendar-proposal': 'Calendar proposals'
+    };
+
+    let reviewData = {
+      items: [],
+      parseError: null,
+      rawYaml: null,
+      lastLoaded: null,
+      missingIndex: false
+    };
+
+    const reviewEmptyState = document.getElementById('reviewEmptyState');
+    const reviewMainContent = document.getElementById('reviewMainContent');
+    const reviewContentContainer = document.getElementById('reviewContentContainer');
+
+    function updateReviewBadge() {
+      const pending = reviewData.items.filter(i => i.status === 'pending').length;
+      reviewTabBadge.textContent = pending > 0 ? String(pending) : '';
+      reviewTabBadge.dataset.count = String(pending);
+    }
+
+    function updateReviewStatusBar() {
+      if (reviewData.lastLoaded) {
+        const pending = reviewData.items.filter(i => i.status === 'pending').length;
+        const ts = reviewData.lastLoaded.toLocaleTimeString();
+        statusEl.textContent = `Review: ${pending} pending · loaded ${ts}`;
+        statusEl.classList.add('visible');
+      }
+    }
+
+    function parseReviewIndexYaml(text) {
+      const items = [];
+      const lines = text.split('\n');
+      let i = 0;
+      while (i < lines.length && !lines[i].trim().startsWith('items:')) i++;
+      if (i >= lines.length) return { items: [], error: null };
+
+      let current = null;
+      for (i = i + 1; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+
+        if (trimmed.startsWith('- id:')) {
+          if (current) items.push(current);
+          let idVal = trimmed.slice(5).trim();
+          if (idVal.startsWith('"') && idVal.endsWith('"')) idVal = idVal.slice(1, -1);
+          current = { id: idVal };
+          continue;
+        }
+
+        if (!current) continue;
+
+        const colonIdx = trimmed.indexOf(':');
+        if (colonIdx === -1) continue;
+        const key = trimmed.slice(0, colonIdx).trim();
+        let val = trimmed.slice(colonIdx + 1).trim();
+
+        if (val.startsWith('"') && val.endsWith('"')) {
+          val = val.slice(1, -1);
+        } else if (val.startsWith('[')) {
+          val = val.replace(/^\[|\]$/g, '').split(',').map(s => s.trim().replace(/^"|"$/g, '')).filter(Boolean);
+        } else if (val === 'true' || val === 'false') {
+          val = val === 'true';
+        } else if (/^-?\d+$/.test(val)) {
+          val = parseInt(val, 10);
+        }
+
+        current[key] = val;
+      }
+      if (current) items.push(current);
+      return { items, error: null };
+    }
+
+    function detectYamlSyntaxError(text) {
+      const lines = text.split('\n');
+      for (const line of lines) {
+        const t = line.trim();
+        if (t.includes(': "') && !t.endsWith('"') && !t.endsWith('",')) {
+          return 'Unclosed quoted string in YAML';
+        }
+      }
+      return null;
+    }
+
+    async function readFileFromWorkingFolder(sourcePath) {
+      if (!memoryDirHandle) throw new Error('No working folder selected');
+      const parts = sourcePath.split('/').filter(Boolean);
+      let dir = memoryDirHandle;
+      for (let p = 0; p < parts.length - 1; p++) {
+        dir = await dir.getDirectoryHandle(parts[p]);
+      }
+      const fileHandle = await dir.getFileHandle(parts[parts.length - 1]);
+      const file = await fileHandle.getFile();
+      return await file.text();
+    }
+
+    async function loadReviewQueue() {
+      if (!memoryDirHandle) return;
+
+      reviewData = { items: [], parseError: null, rawYaml: null, lastLoaded: null, missingIndex: false };
+
+      try {
+        const rqDir = await memoryDirHandle.getDirectoryHandle('review-queue');
+        const indexHandle = await rqDir.getFileHandle('index.yaml');
+        const file = await indexHandle.getFile();
+        const text = await file.text();
+        reviewData.rawYaml = text;
+
+        const syntaxErr = detectYamlSyntaxError(text);
+        if (syntaxErr) {
+          reviewData.parseError = syntaxErr;
+        } else {
+          const parsed = parseReviewIndexYaml(text);
+          reviewData.items = parsed.items;
+        }
+
+        reviewData.lastLoaded = new Date();
+        reviewEmptyState.style.display = 'none';
+        reviewMainContent.style.display = 'flex';
+        renderReview();
+        updateReviewBadge();
+        updateReviewStatusBar();
+
+      } catch (e) {
+        if (e.name === 'NotFoundError') {
+          reviewData.missingIndex = true;
+          reviewData.lastLoaded = new Date();
+          reviewEmptyState.style.display = 'none';
+          reviewMainContent.style.display = 'flex';
+          renderReview();
+          updateReviewBadge();
+          updateReviewStatusBar();
+        } else {
+          showStatus('Review error: ' + e.message);
+        }
+      }
+    }
+
+    function renderReview() {
+      if (reviewData.missingIndex) {
+        reviewContentContainer.innerHTML = `
+          <div class="empty-state" style="padding: 40px 20px;">
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">No review queue yet</p>
+            <p style="color: var(--text-muted); font-size: 14px;">Create <code>review-queue/index.yaml</code> or run a skill that produces approvals.</p>
+          </div>`;
+        return;
+      }
+
+      if (reviewData.parseError) {
+        reviewContentContainer.innerHTML = `
+          <div class="review-error-panel">
+            <h3>Could not parse review-queue/index.yaml</h3>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">${escapeHtml(reviewData.parseError)}</p>
+            <pre>${escapeHtml(reviewData.rawYaml || '')}</pre>
+          </div>`;
+        return;
+      }
+
+      const pendingItems = reviewData.items.filter(i => i.status === 'pending');
+      if (pendingItems.length === 0 && reviewData.items.length === 0) {
+        reviewContentContainer.innerHTML = `
+          <div class="empty-state" style="padding: 40px 20px;">
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">No pending items</p>
+            <p style="color: var(--text-muted); font-size: 14px;">Run <code>/assistant:inbox triage</code> or open a brief to generate queue items.</p>
+          </div>`;
+        return;
+      }
+
+      let html = '';
+      const itemsToShow = reviewData.items.filter(i => i.status === 'pending');
+
+      for (const type of REVIEW_QUEUE_TYPES) {
+        const group = itemsToShow.filter(i => i.type === type);
+        if (group.length === 0) continue;
+
+        html += `<div class="review-group" data-type="${type}">
+          <div class="review-group-header">${REVIEW_TYPE_LABELS[type] || type} <span class="count">${group.length}</span></div>`;
+
+        for (const item of group) {
+          html += `
+            <div class="review-item" data-item-id="${escapeHtml(item.id)}" data-source-path="${escapeHtml(item.source_path || '')}">
+              <div class="review-item-title">
+                <span>${escapeHtml(item.title || item.id)}</span>
+                <span class="review-warning" id="warn-${escapeHtml(item.id)}" style="display:none;">Missing file</span>
+              </div>
+              <div class="review-item-prompt">${escapeHtml(item.approval_prompt || '')}</div>
+              <div class="review-item-meta">
+                <span>${escapeHtml(item.created_at || '')}</span>
+                <span>${escapeHtml(item.source_skill || '')}</span>
+                <span>${escapeHtml(item.source_path || '')}</span>
+              </div>
+            </div>`;
+        }
+        html += '</div>';
+      }
+
+      reviewContentContainer.innerHTML = html;
+
+      reviewContentContainer.querySelectorAll('.review-item').forEach(row => {
+        const sourcePath = row.dataset.sourcePath;
+        const itemId = row.dataset.itemId;
+        if (sourcePath) {
+          readFileFromWorkingFolder(sourcePath).catch(() => {
+            const warn = document.getElementById('warn-' + itemId);
+            if (warn) warn.style.display = 'inline-block';
+          });
+        }
+        row.addEventListener('click', () => openReviewSourceModal(itemId, sourcePath));
+      });
+    }
+
+    async function openReviewSourceModal(itemId, sourcePath) {
+      const item = reviewData.items.find(i => i.id === itemId);
+      document.getElementById('modalTitle').textContent = item ? item.title : sourcePath;
+      document.getElementById('modalSave').style.display = 'none';
+
+      try {
+        const content = await readFileFromWorkingFolder(sourcePath);
+        document.getElementById('modalBody').innerHTML = `
+          <div class="review-item-meta" style="margin-bottom: 12px;">
+            <span>${escapeHtml(item?.approval_prompt || '')}</span>
+          </div>
+          <div class="review-source-view">${escapeHtml(content)}</div>`;
+        modalOverlay.classList.add('visible');
+        modalOverlay.dataset.type = 'reviewView';
+      } catch (e) {
+        document.getElementById('modalBody').innerHTML = `
+          <div class="review-error-panel">
+            <h3>Could not open source file</h3>
+            <p style="font-size: 13px;">${escapeHtml(sourcePath)} — ${escapeHtml(e.message)}</p>
+          </div>`;
+        modalOverlay.classList.add('visible');
+        modalOverlay.dataset.type = 'reviewView';
+      }
+    }
+
+    async function loadWorkingFolder() {
+      await loadMemoryDirectory();
+      if (activeMainTab === 'review') {
+        await loadReviewQueue();
+      }
+    }
+
+    // ============================================================
     // ===== MEMORY FUNCTIONALITY =====
     // ============================================================
 
@@ -2617,6 +3032,9 @@
         memoryMainContent.style.display = 'flex';
         filePathEl.textContent = memoryDirHandle.name;
         showStatus('Loaded memory from ' + memoryDirHandle.name);
+        if (activeMainTab === 'review') {
+          await loadReviewQueue();
+        }
 
       } catch (e) {
         if (e.name !== 'AbortError') { showStatus('Error: ' + e.message); }
@@ -3003,6 +3421,8 @@
 
     function closeModal() {
       modalOverlay.classList.remove('visible');
+      document.getElementById('modalSave').style.display = '';
+      delete modalOverlay.dataset.type;
     }
 
     async function saveModal() {
@@ -3076,8 +3496,12 @@
     }
 
     // Memory event listeners
-    openMemoryBtn.addEventListener('click', loadMemoryDirectory);
-    document.getElementById('openMemoryBtnLarge').addEventListener('click', loadMemoryDirectory);
+    openMemoryBtn.addEventListener('click', loadWorkingFolder);
+    document.getElementById('openMemoryBtnLarge').addEventListener('click', loadWorkingFolder);
+    document.getElementById('openReviewBtnLarge').addEventListener('click', async () => {
+      switchMainTab('review');
+      await loadWorkingFolder();
+    });
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalCancel').addEventListener('click', closeModal);
     document.getElementById('modalSave').addEventListener('click', saveModal);
