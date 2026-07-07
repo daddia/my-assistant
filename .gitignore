@@ -8,7 +8,7 @@ reviews/
 *.local.md
 brief-*.md
 review-*.md
-drafts/
+/drafts/
 output/
 
 # Secrets
@@ -24,3 +24,7 @@ Thumbs.db
 *.tmp
 temp/
 tmp/
+
+# Ralph delivery loop (local orchestration state)
+.ralph-loop
+.ralph/

@@ -1,0 +1,25 @@
+id: 05-needs-reply-project-question
+voice_traits:
+  - direct_warm_concise
+  - australian_english
+  - lead_with_answer_or_decision
+  - hi_name_opener_not_dear
+  - colleague_sign_off_alex
+max_sentences: 5
+must_not_contain:
+  - "I hope this finds you well"
+  - "Great question!"
+  - "Certainly!"
+  - "Just wanted to reach out."
+  - "Kind regards"
+  - delve
+  - leverage
+  - robust
+  - "Feel free to reach out!"
+commitment_flags:
+  - no_send_without_approval
+  - no_product_decision_without_user_input_or_placeholder
+must_not_send: true
+required_gaps:
+  - state API rate limit choice among 100 req/min, 500 req/min, or unlimited during beta
+  - acknowledge Wednesday stand-up deadline for engineering and QA

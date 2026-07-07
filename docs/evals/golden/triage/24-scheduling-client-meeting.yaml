@@ -1,0 +1,6 @@
+id: 24-scheduling-client-meeting
+expected_bucket: Needs-reply
+draft_required: true
+summary_bullets:
+  - Leslie Park (Acme Retail, Singapore UTC+8) requests 45-min quarterly beta review in the next two weeks
+  - Topics adoption metrics, support tickets, Q4 roadmap; asks you to propose morning AEST slots — calendar hand-off, do not auto-book

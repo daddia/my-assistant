@@ -1,0 +1,6 @@
+id: 14-fyi-expense-receipt
+expected_bucket: FYI
+draft_required: false
+summary_bullets:
+  - Expensify expense submitted for team lunch 4 Jul (AUD 186.40, River Cafe Melbourne)
+  - Report EXP-2026-7712 pending approval by Taylor Nguyen; automated notification

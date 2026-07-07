@@ -1,0 +1,10 @@
+id: 02-vip-founder-checkin
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 1
+  tier: 1
+  sender: Jordan Kim
+summary_bullets:
+  - Jordan Kim moved investor call to tomorrow 14:00; wants 10 min beforehand on beta numbers and 22 July dry run
+  - Asks if you are free 13:45 tomorrow or prefer a quick huddle after stand-up

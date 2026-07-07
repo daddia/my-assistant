@@ -1,0 +1,6 @@
+id: 06-needs-reply-budget-approval
+expected_bucket: Needs-reply
+draft_required: true
+summary_bullets:
+  - Taylor Nguyen (Finance) needs sign-off on Q3 UX contractor spend AUD 12,000 to PixelCraft Studio (exceeds AUD 500 threshold)
+  - Kickoff 14 Jul, delivery 8 Aug; approval needed by Friday to hold July slot

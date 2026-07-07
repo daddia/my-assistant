@@ -1,0 +1,6 @@
+id: 12-fyi-system-alert
+expected_bucket: FYI
+draft_required: false
+summary_bullets:
+  - Resolved staging API latency spike 6 Jul 06:00-06:22 AEST (P95 peaked 3.4s; auto-scaling delay during load test)
+  - Informational alert only; no reply needed unless recurring issues

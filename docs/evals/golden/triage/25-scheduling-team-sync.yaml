@@ -1,0 +1,10 @@
+id: 25-scheduling-team-sync
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 7
+  tier: 2
+  sender: Sam Patel
+summary_bullets:
+  - Sam Patel needs to move weekly product-engineering sync (usual Thu 14:00 conflicts with board prep)
+  - Offers Wed 9 Jul 10:00, Wed 9 Jul 16:00, or Thu 10 Jul 11:00 — confirm slot for calendar hold; do not auto-book

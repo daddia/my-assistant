@@ -1,0 +1,12 @@
+id: 16-marketing-saas-promo
+expected_bucket: Marketing
+draft_required: false
+archive_proposal:
+  sender: promo@saas-vendor-eval.test
+  action: archive
+  mark_read: true
+  label: null
+  rationale: Exact-sender match in profile auto-archive list
+summary_bullets:
+  - CloudStack Pro 50% off annual plans promotion; code SUMMER50 expires 11 July 2026
+  - SaaS vendor promo; no action required

@@ -1,0 +1,13 @@
+id: 22-long-thread-product-decision
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 4
+  tier: 2
+  sender: Sam Patel
+expected_summary_lines:
+  - "Decision: choose offline mode scope for v2 beta — ship without offline (A), delay beta 4 weeks (B), or enterprise-only feature flag (C)"
+  - "Outstanding: Alex must confirm by EOD Monday; QA is blocked waiting on the call"
+summary_bullets:
+  - Seven-message thread on v2 offline mode; eng estimates 6-8 weeks for full offline vs 2 weeks for enterprise-only flag (option C)
+  - Blue Harbor Logistics needs offline for warehouse floors; Jordan and Sam waiting on Alex's product sign-off

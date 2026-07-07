@@ -1,0 +1,12 @@
+id: 15-marketing-webinar
+expected_bucket: Marketing
+draft_required: false
+archive_proposal:
+  sender: events@conference-eval.test
+  action: archive
+  mark_read: true
+  label: null
+  rationale: Exact-sender match in profile auto-archive list (conference promotional)
+summary_bullets:
+  - Product Leaders Network webinar invite for AI Product Strategy 2026 (Thu 16 Jul 12:00 AEST)
+  - Bulk promotional sender; no reply expected

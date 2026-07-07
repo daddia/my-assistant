@@ -1,0 +1,12 @@
+id: 17-marketing-newsletter
+expected_bucket: Marketing
+draft_required: false
+archive_proposal:
+  sender: newsletters@substack.com
+  action: archive
+  mark_read: false
+  label: "@ToRead"
+  rationale: Exact-sender match in profile auto-archive list with @ToRead label
+summary_bullets:
+  - The Product Brief Substack issue #47 on why roadmaps fail in Q3
+  - Newsletter platform sender; optional read, not a personal reply

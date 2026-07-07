@@ -1,0 +1,10 @@
+id: 01-vip-board-update
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 2
+  tier: 1
+  sender: Morgan Lee
+summary_bullets:
+  - Morgan Lee (board chair) needs your product update section for the 15 July board pack
+  - Draft due to Morgan and Jordan by end of day Thursday 9 July (2-3 pages; metrics, timeline, risks)

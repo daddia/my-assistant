@@ -1,0 +1,13 @@
+id: 23-long-thread-hiring-discussion
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 3
+  tier: 1
+  sender: Jordan Kim
+expected_summary_lines:
+  - "Decision: hire or pass on Priya Sharma for Senior PM; Sam is a yes after reviewing her writing sample"
+  - "Outstanding: Alex owes Jordan a hire/no-hire recommendation; 14 Jul start date still possible if yes"
+summary_bullets:
+  - Six-message hiring thread; Priya submitted redacted PRD; panel feedback compiled by Riley Chen
+  - Jordan Kim (CEO) waiting on Alex's final recommendation to release offer letter

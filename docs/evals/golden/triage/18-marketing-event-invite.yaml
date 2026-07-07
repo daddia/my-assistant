@@ -1,0 +1,12 @@
+id: 18-marketing-event-invite
+expected_bucket: Marketing
+draft_required: false
+archive_proposal:
+  sender: events@conference-eval.test
+  action: archive
+  mark_read: true
+  label: null
+  rationale: Exact-sender match in profile auto-archive list (conference promotional)
+summary_bullets:
+  - TechSummit Melbourne 2026 early bird ticket offer ($599 vs $999); code EARLYBIRD26, 3 days left
+  - Event marketing blast; no reply expected

@@ -1,0 +1,6 @@
+id: 10-fyi-shipping-confirmation
+expected_bucket: FYI
+draft_required: false
+summary_bullets:
+  - ShipFast order #NW-88421 shipped; tracking SF-2026-88421-AU
+  - Estimated delivery Tuesday 8 July 2026; 1x Dell U2723QE monitor; automated message, do not reply

@@ -1,0 +1,213 @@
+# Corpus manifest — index of synthetic inbox threads for eval runs.
+#
+# Schema (per thread entry):
+#   id: string          — unique thread id (e.g. "01-vip-board-update")
+#   file: string        — path relative to docs/evals/ (e.g. corpus/threads/01-vip-board-update.md)
+#   category: string    — VIP | Needs-reply | FYI | Marketing | Ambiguous | Long-thread | Scheduling
+#   tags: [string]      — optional labels (e.g. "ambiguous", "vip-tier-1")
+#   skill: string       — skill under test (e.g. inbox-triage)
+#   golden_triage: string — path to golden/triage/{id}.yaml
+#   draft_required: bool — whether draft review is expected
+#
+# Minimum 25 threads when the corpus is complete (see design.md corpus categories table).
+
+threads:
+  - id: 01-vip-board-update
+    file: corpus/threads/01-vip-board-update.md
+    category: VIP
+    tags: [vip-tier-1, board]
+    skill: inbox-triage
+    golden_triage: golden/triage/01-vip-board-update.yaml
+    draft_required: true
+
+  - id: 02-vip-founder-checkin
+    file: corpus/threads/02-vip-founder-checkin.md
+    category: VIP
+    tags: [vip-tier-1, internal]
+    skill: inbox-triage
+    golden_triage: golden/triage/02-vip-founder-checkin.yaml
+    draft_required: true
+
+  - id: 03-vip-investor-intro
+    file: corpus/threads/03-vip-investor-intro.md
+    category: VIP
+    tags: [vip-tier-2, investor]
+    skill: inbox-triage
+    golden_triage: golden/triage/03-vip-investor-intro.yaml
+    draft_required: true
+
+  - id: 04-needs-reply-contract-renewal
+    file: corpus/threads/04-needs-reply-contract-renewal.md
+    category: Needs-reply
+    tags: [vendor, contract]
+    skill: inbox-triage
+    golden_triage: golden/triage/04-needs-reply-contract-renewal.yaml
+    draft_required: true
+
+  - id: 05-needs-reply-project-question
+    file: corpus/threads/05-needs-reply-project-question.md
+    category: Needs-reply
+    tags: [internal, product]
+    skill: inbox-triage
+    golden_triage: golden/triage/05-needs-reply-project-question.yaml
+    draft_required: true
+
+  - id: 06-needs-reply-budget-approval
+    file: corpus/threads/06-needs-reply-budget-approval.md
+    category: Needs-reply
+    tags: [finance, approval]
+    skill: inbox-triage
+    golden_triage: golden/triage/06-needs-reply-budget-approval.yaml
+    draft_required: true
+
+  - id: 07-needs-reply-team-leave-request
+    file: corpus/threads/07-needs-reply-team-leave-request.md
+    category: Needs-reply
+    tags: [hr, team]
+    skill: inbox-triage
+    golden_triage: golden/triage/07-needs-reply-team-leave-request.yaml
+    draft_required: true
+
+  - id: 08-needs-reply-vendor-rfp
+    file: corpus/threads/08-needs-reply-vendor-rfp.md
+    category: Needs-reply
+    tags: [vendor, rfp]
+    skill: inbox-triage
+    golden_triage: golden/triage/08-needs-reply-vendor-rfp.yaml
+    draft_required: true
+
+  - id: 09-needs-reply-onboarding-docs
+    file: corpus/threads/09-needs-reply-onboarding-docs.md
+    category: Needs-reply
+    tags: [hr, onboarding]
+    skill: inbox-triage
+    golden_triage: golden/triage/09-needs-reply-onboarding-docs.yaml
+    draft_required: true
+
+  - id: 10-fyi-shipping-confirmation
+    file: corpus/threads/10-fyi-shipping-confirmation.md
+    category: FYI
+    tags: [receipt, logistics]
+    skill: inbox-triage
+    golden_triage: golden/triage/10-fyi-shipping-confirmation.yaml
+    draft_required: false
+
+  - id: 11-fyi-invoice-paid
+    file: corpus/threads/11-fyi-invoice-paid.md
+    category: FYI
+    tags: [finance, receipt]
+    skill: inbox-triage
+    golden_triage: golden/triage/11-fyi-invoice-paid.yaml
+    draft_required: false
+
+  - id: 12-fyi-system-alert
+    file: corpus/threads/12-fyi-system-alert.md
+    category: FYI
+    tags: [ops, monitoring]
+    skill: inbox-triage
+    golden_triage: golden/triage/12-fyi-system-alert.yaml
+    draft_required: false
+
+  - id: 13-fyi-team-announcement
+    file: corpus/threads/13-fyi-team-announcement.md
+    category: FYI
+    tags: [internal, announcement]
+    skill: inbox-triage
+    golden_triage: golden/triage/13-fyi-team-announcement.yaml
+    draft_required: false
+
+  - id: 14-fyi-expense-receipt
+    file: corpus/threads/14-fyi-expense-receipt.md
+    category: FYI
+    tags: [finance, receipt]
+    skill: inbox-triage
+    golden_triage: golden/triage/14-fyi-expense-receipt.yaml
+    draft_required: false
+
+  - id: 15-marketing-webinar
+    file: corpus/threads/15-marketing-webinar.md
+    category: Marketing
+    tags: [webinar, promo]
+    skill: inbox-triage
+    golden_triage: golden/triage/15-marketing-webinar.yaml
+    draft_required: false
+
+  - id: 16-marketing-saas-promo
+    file: corpus/threads/16-marketing-saas-promo.md
+    category: Marketing
+    tags: [saas, promo]
+    skill: inbox-triage
+    golden_triage: golden/triage/16-marketing-saas-promo.yaml
+    draft_required: false
+
+  - id: 17-marketing-newsletter
+    file: corpus/threads/17-marketing-newsletter.md
+    category: Marketing
+    tags: [newsletter]
+    skill: inbox-triage
+    golden_triage: golden/triage/17-marketing-newsletter.yaml
+    draft_required: false
+
+  - id: 18-marketing-event-invite
+    file: corpus/threads/18-marketing-event-invite.md
+    category: Marketing
+    tags: [event, promo]
+    skill: inbox-triage
+    golden_triage: golden/triage/18-marketing-event-invite.yaml
+    draft_required: false
+
+  - id: 19-ambiguous-forwarded-thread
+    file: corpus/threads/19-ambiguous-forwarded-thread.md
+    category: Ambiguous
+    tags: [ambiguous, forwarded]
+    skill: inbox-triage
+    golden_triage: golden/triage/19-ambiguous-forwarded-thread.yaml
+    draft_required: false
+
+  - id: 20-ambiguous-vague-request
+    file: corpus/threads/20-ambiguous-vague-request.md
+    category: Ambiguous
+    tags: [ambiguous]
+    skill: inbox-triage
+    golden_triage: golden/triage/20-ambiguous-vague-request.yaml
+    draft_required: false
+
+  - id: 21-ambiguous-multiple-topics
+    file: corpus/threads/21-ambiguous-multiple-topics.md
+    category: Ambiguous
+    tags: [ambiguous, mixed]
+    skill: inbox-triage
+    golden_triage: golden/triage/21-ambiguous-multiple-topics.yaml
+    draft_required: false
+
+  - id: 22-long-thread-product-decision
+    file: corpus/threads/22-long-thread-product-decision.md
+    category: Long-thread
+    tags: [product, decision]
+    skill: inbox-triage
+    golden_triage: golden/triage/22-long-thread-product-decision.yaml
+    draft_required: true
+
+  - id: 23-long-thread-hiring-discussion
+    file: corpus/threads/23-long-thread-hiring-discussion.md
+    category: Long-thread
+    tags: [hiring, internal]
+    skill: inbox-triage
+    golden_triage: golden/triage/23-long-thread-hiring-discussion.yaml
+    draft_required: true
+
+  - id: 24-scheduling-client-meeting
+    file: corpus/threads/24-scheduling-client-meeting.md
+    category: Scheduling
+    tags: [calendar, client]
+    skill: inbox-triage
+    golden_triage: golden/triage/24-scheduling-client-meeting.yaml
+    draft_required: true
+
+  - id: 25-scheduling-team-sync
+    file: corpus/threads/25-scheduling-team-sync.md
+    category: Scheduling
+    tags: [calendar, internal]
+    skill: inbox-triage
+    golden_triage: golden/triage/25-scheduling-team-sync.yaml
+    draft_required: true
