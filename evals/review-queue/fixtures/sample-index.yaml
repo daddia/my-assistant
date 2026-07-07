@@ -1,5 +1,5 @@
 # Sample review-queue index — one pending item per queue type.
-# Copy instructions: docs/review-queue/README.md
+# Copy instructions: evals/review-queue/README.md
 #
 # source_path values are relative to the working folder. When validating
 # against repo fixtures, each path resolves under fixtures/sources/.
