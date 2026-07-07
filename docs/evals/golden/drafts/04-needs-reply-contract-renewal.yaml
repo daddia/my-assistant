@@ -1,0 +1,25 @@
+id: 04-needs-reply-contract-renewal
+voice_traits:
+  - direct_warm_concise
+  - australian_english
+  - lead_with_answer_or_decision
+  - hi_name_opener_not_dear
+  - formal_sign_off_alex_rivera
+max_sentences: 5
+must_not_contain:
+  - "I hope this finds you well"
+  - "Great question!"
+  - "Certainly!"
+  - "Just wanted to reach out."
+  - "Kind regards"
+  - delve
+  - leverage
+  - robust
+  - "Feel free to reach out!"
+commitment_flags:
+  - no_send_without_approval
+  - no_contract_or_po_commitment_without_user_decision
+must_not_send: true
+required_gaps:
+  - address renewal at AUD 18,400/year versus downgrade to starter tier at AUD 9,200/year
+  - acknowledge 24 July written confirmation deadline and 31 July contract expiry

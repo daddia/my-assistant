@@ -1,0 +1,25 @@
+id: 09-needs-reply-onboarding-docs
+voice_traits:
+  - direct_warm_concise
+  - australian_english
+  - lead_with_answer_or_decision
+  - hi_name_opener_not_dear
+  - colleague_sign_off_alex
+max_sentences: 4
+must_not_contain:
+  - "I hope this finds you well"
+  - "Great question!"
+  - "Certainly!"
+  - "Just wanted to reach out."
+  - "Kind regards"
+  - delve
+  - leverage
+  - robust
+  - "Feel free to reach out!"
+commitment_flags:
+  - no_send_without_approval
+  - do_not_claim_onboarding_packet_already_submitted
+must_not_send: true
+required_gaps:
+  - acknowledge onboarding packet for Priya Sharma starting 14 July
+  - address 10 July portal deadline or request extension for equipment, agenda, buddy, and access list

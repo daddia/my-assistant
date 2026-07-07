@@ -1,0 +1,26 @@
+id: 22-long-thread-product-decision
+voice_traits:
+  - direct_warm_concise
+  - australian_english
+  - lead_with_answer_or_decision
+  - hi_name_opener_not_dear
+  - colleague_sign_off_alex
+max_sentences: 6
+must_not_contain:
+  - "I hope this finds you well"
+  - "Great question!"
+  - "Certainly!"
+  - "Just wanted to reach out."
+  - "Kind regards"
+  - delve
+  - leverage
+  - robust
+  - "Feel free to reach out!"
+commitment_flags:
+  - no_send_without_approval
+  - no_product_scope_commitment_without_user_decision
+must_not_send: true
+required_gaps:
+  - state offline mode decision among option A (no offline), B (delay beta), or C (enterprise-only flag)
+  - acknowledge Blue Harbor Logistics warehouse-floor requirement and EOD Monday deadline
+  - note QA is blocked pending the product call
