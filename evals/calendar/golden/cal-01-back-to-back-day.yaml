@@ -1,0 +1,17 @@
+fixture_id: cal-01-back-to-back-day
+violations_expected:
+  - type: buffer
+    count_min: 2
+    between_meetings: [Product standup, Sprint planning]
+  - type: buffer
+    count_min: 1
+    between_meetings: [Design review, "1:1 — Sam Patel"]
+proposals_expected:
+  min_count: 2
+  block_types: [buffer]
+  must_not_contain: [booked, "created event", "I've scheduled"]
+focus_defence_level: moderate
+queue_items_min: 2
+approval_language_checks:
+  must_include: [manually, propose]
+  must_not_include: [auto-book, "scheduled for you"]

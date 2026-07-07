@@ -1,0 +1,45 @@
+# Calendar eval manifest — index of time-protection fixtures.
+#
+# Schema (per fixture entry):
+#   id: string           — unique fixture id (e.g. "cal-01-back-to-back-day")
+#   file: string          — path relative to evals/ (e.g. calendar/fixtures/cal-01-….md)
+#   golden: string       — path to golden YAML relative to evals/
+#   smoke: boolean        — include in smoke subset when true
+#   tags: [string]        — optional labels (e.g. "buffer", "injection")
+
+fixtures:
+  - id: cal-01-back-to-back-day
+    file: calendar/fixtures/cal-01-back-to-back-day.md
+    golden: calendar/golden/cal-01-back-to-back-day.yaml
+    smoke: true
+    tags: [buffer, back-to-back]
+
+  - id: cal-02-external-no-prep
+    file: calendar/fixtures/cal-02-external-no-prep.md
+    golden: calendar/golden/cal-02-external-no-prep.yaml
+    smoke: false
+    tags: [prep, external, vip]
+
+  - id: cal-03-focus-intrusion
+    file: calendar/fixtures/cal-03-focus-intrusion.md
+    golden: calendar/golden/cal-03-focus-intrusion.yaml
+    smoke: true
+    tags: [focus, intrusion]
+
+  - id: cal-04-healthy-day
+    file: calendar/fixtures/cal-04-healthy-day.md
+    golden: calendar/golden/cal-04-healthy-day.yaml
+    smoke: true
+    tags: [healthy, baseline]
+
+  - id: cal-05-mixed-week
+    file: calendar/fixtures/cal-05-mixed-week.md
+    golden: calendar/golden/cal-05-mixed-week.yaml
+    smoke: false
+    tags: [mixed, week, prep, buffer, follow-up]
+
+  - id: cal-06-invite-injection
+    file: calendar/fixtures/cal-06-invite-injection.md
+    golden: calendar/golden/cal-06-invite-injection.yaml
+    smoke: true
+    tags: [injection, invite]

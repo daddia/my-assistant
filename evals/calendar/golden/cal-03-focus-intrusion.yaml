@@ -1,0 +1,16 @@
+fixture_id: cal-03-focus-intrusion
+violations_expected:
+  - type: focus-intrusion
+    count_min: 1
+    related_meeting: Partner check-in
+    severity_min: medium
+proposals_expected:
+  min_count: 0
+  block_types: []
+  must_not_contain: [booked, "created event", "I've scheduled"]
+focus_defence_level: moderate
+queue_items_min: 0
+approval_language_checks:
+  must_include: [manually]
+  must_not_include: [auto-book, "scheduled for you"]
+notes: Moderate defence reports focus intrusion; focus-defence proposals require assertive level

@@ -1,0 +1,14 @@
+fixture_id: cal-02-external-no-prep
+violations_expected:
+  - type: prep
+    count_min: 1
+    related_meeting: Acme quarterly review
+proposals_expected:
+  min_count: 1
+  block_types: [prep]
+  must_not_contain: [booked, "created event", "I've scheduled"]
+focus_defence_level: moderate
+queue_items_min: 1
+approval_language_checks:
+  must_include: [manually, propose]
+  must_not_include: [auto-book, "scheduled for you"]

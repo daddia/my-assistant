@@ -39,6 +39,9 @@ for dir in \
   "${EVALS_DIR}/notetaker/fixtures" \
   "${EVALS_DIR}/notetaker/golden" \
   "${EVALS_DIR}/notetaker/rubric" \
+  "${EVALS_DIR}/calendar/fixtures" \
+  "${EVALS_DIR}/calendar/golden" \
+  "${EVALS_DIR}/calendar/rubric" \
   "${EVALS_DIR}/schedule-health/fixtures" \
   "${EVALS_DIR}/schedule-health/golden" \
   "${EVALS_DIR}/demo/assets" \
@@ -50,8 +53,10 @@ require_file "${EVALS_DIR}/corpus/manifest.yaml"
 require_file "${EVALS_DIR}/injection/manifest.yaml"
 require_file "${EVALS_DIR}/injection/expected-behaviour.yaml"
 require_file "${EVALS_DIR}/notetaker/manifest.yaml"
+require_file "${EVALS_DIR}/calendar/manifest.yaml"
 require_file "${EVALS_DIR}/schedule-health/manifest.yaml"
 require_file "${REPO_ROOT}/config/notetaker-formats.yaml"
+require_file "${REPO_ROOT}/config/calendar-block-types.yaml"
 require_file "${REPO_ROOT}/config/schedule-catalog.yaml"
 require_file "${REPO_ROOT}/config/schedule-health.schema.yaml"
 
@@ -275,6 +280,108 @@ else
   errors << "missing notetaker/manifest.yaml"
 end
 
+# --- calendar corpus (MA05) ---
+CALENDAR_BLOCK_TYPES = %w[buffer prep follow-up focus-defence].freeze
+VIOLATION_TYPES = %w[buffer prep follow-up focus-intrusion].freeze
+
+block_types_path = repo_root.join('config/calendar-block-types.yaml')
+if block_types_path.file?
+  block_doc = YAML.load_file(block_types_path) || {}
+  block_entries = block_doc['block_types'] || []
+  block_type_ids = block_entries.map { |e| e['block_type'] }.compact
+  if block_type_ids.sort != CALENDAR_BLOCK_TYPES.sort
+    errors << "config/calendar-block-types.yaml must list exactly #{CALENDAR_BLOCK_TYPES.join(', ')}; got #{block_type_ids.join(', ')}"
+  end
+else
+  errors << "missing config/calendar-block-types.yaml"
+end
+
+cal_fixtures = []
+calendar_manifest_path = evals_dir.join('calendar/manifest.yaml')
+if calendar_manifest_path.file?
+  calendar = YAML.load_file(calendar_manifest_path) || {}
+  cal_fixtures = calendar['fixtures'] || []
+  errors << "calendar/manifest.yaml: 'fixtures' must be a list" unless cal_fixtures.is_a?(Array)
+
+  cal_ids = Set.new
+  cal_fixtures.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "calendar/manifest.yaml: fixtures[#{i}] must be a mapping"
+      next
+    end
+    fid = entry['id']
+    fpath = entry['file']
+    gpath = entry['golden']
+    errors << "calendar/manifest.yaml: fixtures[#{i}] missing 'id'" if fid.nil? || fid.empty?
+    errors << "calendar/manifest.yaml: duplicate fixture id '#{fid}'" if cal_ids.include?(fid)
+    cal_ids.add(fid) if fid
+
+    if fpath.nil? || fpath.empty?
+      errors << "calendar/manifest.yaml: fixture '#{fid}' missing 'file'"
+    else
+      resolved = resolve_eval_path(evals_dir, repo_root, fpath)
+      errors << "missing calendar fixture file: #{resolved}" unless resolved.file?
+      check_pii(evals_dir, resolved, errors) if resolved.file?
+    end
+
+    if gpath.nil? || gpath.empty?
+      errors << "calendar/manifest.yaml: fixture '#{fid}' missing 'golden'"
+    else
+      golden_resolved = resolve_eval_path(evals_dir, repo_root, gpath)
+      unless golden_resolved.file?
+        errors << "missing calendar golden file: #{golden_resolved}"
+        next
+      end
+
+      golden = YAML.load_file(golden_resolved) || {}
+      gfid = golden['fixture_id']
+      errors << "calendar golden #{File.basename(gpath)} fixture_id '#{gfid}' does not match manifest id '#{fid}'" if gfid != fid
+
+      violations = golden['violations_expected']
+      errors << "calendar golden #{File.basename(gpath)} violations_expected must be a list" unless violations.is_a?(Array)
+      violations&.each_with_index do |vio, j|
+        next unless vio.is_a?(Hash)
+        vtype = vio['type']
+        errors << "calendar golden #{File.basename(gpath)} violations_expected[#{j}] invalid type '#{vtype}'" if vtype && !VIOLATION_TYPES.include?(vtype)
+      end
+
+      proposals = golden['proposals_expected']
+      if proposals.nil? || !proposals.is_a?(Hash)
+        errors << "calendar golden #{File.basename(gpath)} missing 'proposals_expected' mapping"
+      else
+        errors << "calendar golden #{File.basename(gpath)} missing proposals_expected.min_count" unless proposals.key?('min_count')
+        types = proposals['block_types']
+        errors << "calendar golden #{File.basename(gpath)} proposals_expected.block_types must be a list" unless types.is_a?(Array)
+        types&.each do |t|
+          errors << "calendar golden #{File.basename(gpath)} invalid block type '#{t}'" unless CALENDAR_BLOCK_TYPES.include?(t)
+        end
+        must_not = proposals['must_not_contain']
+        errors << "calendar golden #{File.basename(gpath)} proposals_expected.must_not_contain must be a list" if must_not && !must_not.is_a?(Array)
+      end
+
+      errors << "calendar golden #{File.basename(gpath)} missing queue_items_min" unless golden.key?('queue_items_min')
+
+      approval = golden['approval_language_checks']
+      if approval
+        %w[must_include must_not_include].each do |key|
+          val = approval[key]
+          errors << "calendar golden #{File.basename(gpath)} approval_language_checks.#{key} must be a list" if val && !val.is_a?(Array)
+        end
+      end
+
+      inj = golden['injection_checks']
+      if inj
+        %w[must_surface must_refuse must_not_write].each do |key|
+          val = inj[key]
+          errors << "calendar golden #{File.basename(gpath)} injection_checks.#{key} must be a list" if val && !val.is_a?(Array)
+        end
+      end
+    end
+  end
+else
+  errors << "missing calendar/manifest.yaml"
+end
+
 # --- schedule catalog + health (MA06) ---
 EXPECTED_JOB_IDS = %w[
   morning-briefing inbox-sweep meeting-prep-watcher follow-up-watcher weekly-review
@@ -381,8 +488,9 @@ if errors.any?
 end
 
 nt_count = nt_fixtures&.length || 0
+cal_count = cal_fixtures&.length || 0
 sh_count = sh_fixtures&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{sh_count} schedule-health fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"

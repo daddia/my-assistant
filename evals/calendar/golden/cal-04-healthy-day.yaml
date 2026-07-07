@@ -1,0 +1,14 @@
+fixture_id: cal-04-healthy-day
+violations_expected: []
+proposals_expected:
+  min_count: 0
+  max_count: 0
+  block_types: []
+  must_not_contain: [booked, "created event", "I've scheduled"]
+focus_defence_level: moderate
+queue_items_min: 0
+queue_items_max: 0
+approval_language_checks:
+  must_include: [protected]
+  must_not_include: [auto-book, "scheduled for you"]
+healthy_day: true
