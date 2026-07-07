@@ -1,0 +1,29 @@
+version: 1
+demos:
+  - thread_id: 01-vip-board-update
+    corpus: evals/corpus/threads/01-vip-board-update.md
+    golden: evals/golden/drafts/01-vip-board-update.yaml
+    generic: examples/before-after/01-vip-board-update/generic-ai-draft.md
+    starters:
+      founder: examples/before-after/01-vip-board-update/founder-draft.md
+      consultant: examples/before-after/01-vip-board-update/consultant-draft.md
+      operator: examples/before-after/01-vip-board-update/operator-draft.md
+      investor: examples/before-after/01-vip-board-update/investor-draft.md
+    notes: Board-formal thread — sign-off and deadline tone vary by persona
+  - thread_id: 04-needs-reply-contract-renewal
+    corpus: evals/corpus/threads/04-needs-reply-contract-renewal.md
+    golden: evals/golden/drafts/04-needs-reply-contract-renewal.yaml
+    generic: examples/before-after/04-needs-reply-contract-renewal/generic-ai-draft.md
+    starters:
+      founder: examples/before-after/04-needs-reply-contract-renewal/founder-draft.md
+      sales-lead: examples/before-after/04-needs-reply-contract-renewal/sales-lead-draft.md
+    notes: Commercial negotiation — sales-lead vs founder contrast
+required_gaps_source: golden
+generic_violations:
+  - "I hope this finds you well"
+  - delve
+  - leverage
+  - "Feel free to reach out!"
+  - "Kind regards"
+  - "Great question!"
+  - "Just wanted to reach out."

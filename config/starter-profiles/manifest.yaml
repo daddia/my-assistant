@@ -1,0 +1,38 @@
+version: 1
+profiles:
+  - id: founder
+    title: Founder
+    icp: Early-stage CEO or co-founder
+    file: config/starter-profiles/founder.md
+    demo_threads: [01-vip-board-update, 04-needs-reply-contract-renewal]
+  - id: consultant
+    title: Consultant
+    icp: Independent advisor serving multiple clients
+    file: config/starter-profiles/consultant.md
+    demo_threads: [01-vip-board-update, 24-scheduling-client-meeting]
+  - id: sales-lead
+    title: Sales lead
+    icp: Account executive or sales lead
+    file: config/starter-profiles/sales-lead.md
+    demo_threads: [04-needs-reply-contract-renewal, 24-scheduling-client-meeting]
+  - id: operator
+    title: Operator
+    icp: Chief of staff or operations lead
+    file: config/starter-profiles/operator.md
+    demo_threads: [01-vip-board-update, 04-needs-reply-contract-renewal]
+  - id: investor
+    title: Investor
+    icp: Angel or micro-VC investor
+    file: config/starter-profiles/investor.md
+    demo_threads: [01-vip-board-update, 24-scheduling-client-meeting]
+required_sections:
+  - "## 1. Identity"
+  - "## 2. Voice"
+  - "## 3. Anti-style"
+  - "## 4. Working rules & autonomy"
+  - "## 5. VIP tiers"
+  - "## 6. Email policy"
+  - "## 7. Calendar policy"
+  - "## 8. Goals & priorities"
+max_words: 2000
+fictional_only: true
