@@ -1,0 +1,6 @@
+id: 07-needs-reply-team-leave-request
+expected_bucket: Needs-reply
+draft_required: true
+summary_bullets:
+  - Jamie Ortiz requests annual leave 21-25 July (5 days); will hand off beta docs to Priya before leave
+  - Asks for approval; open to adjusting if it clashes with the 22 July dry run

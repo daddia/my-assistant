@@ -1,0 +1,6 @@
+id: 08-needs-reply-vendor-rfp
+expected_bucket: Needs-reply
+draft_required: true
+summary_bullets:
+  - StackWatch (Quinn Foster) following up on observability RFP; evaluation closes 10 July
+  - Questions on whether 99.9% uptime SLA is still required and openness to 2-year commitment for 15% discount

@@ -1,0 +1,9 @@
+id: 20-ambiguous-vague-request
+acceptable_buckets:
+  - FYI
+  - Needs-reply
+draft_required: false
+ambiguous_score: 0
+summary_bullets:
+  - Drew Ellis (partner contact) says materials looked good and asks for your thoughts with no specific question
+  - Score-0 ambiguous — could be low-priority FYI or a soft Needs-reply; do not invent an action item

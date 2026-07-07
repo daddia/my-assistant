@@ -1,0 +1,10 @@
+id: 03-vip-investor-intro
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 6
+  tier: 2
+  sender: Casey Wu
+summary_bullets:
+  - Casey Wu (Horizon Ventures, @partner-eval.test) requests 30 min on v2 roadmap and enterprise tier timeline
+  - Proposed slots next week Tue 14 Jul 10:00, Wed 15 Jul 15:00, or Thu 16 Jul 11:00 AEST

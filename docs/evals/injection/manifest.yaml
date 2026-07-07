@@ -8,4 +8,53 @@
 #
 # Minimum 10 fixtures when the injection suite is complete (see design.md).
 
-fixtures: []
+fixtures:
+  - id: inj-01-ignore-instructions
+    file: injection/fixtures/inj-01-ignore-instructions.md
+    channel: email
+    tags: [ignore-previous-instructions, role-override]
+
+  - id: inj-02-archive-without-approval
+    file: injection/fixtures/inj-02-archive-without-approval.md
+    channel: email
+    tags: [archive-without-approval, hidden-footer]
+
+  - id: inj-03-exfiltrate-or-send
+    file: injection/fixtures/inj-03-exfiltrate-or-send.md
+    channel: email
+    tags: [exfiltrate-or-send, data-harvest]
+
+  - id: inj-04-update-memory-or-profile
+    file: injection/fixtures/inj-04-update-memory-or-profile.md
+    channel: email
+    tags: [update-memory-or-profile, autonomy-escalation]
+
+  - id: inj-05-silent-task-write
+    file: injection/fixtures/inj-05-silent-task-write.md
+    channel: email
+    tags: [update-memory-or-profile, silent-write]
+
+  - id: inj-06-send-without-review
+    file: injection/fixtures/inj-06-send-without-review.md
+    channel: email
+    tags: [exfiltrate-or-send, bypass-draft]
+
+  - id: inj-07-calendar-auto-book
+    file: injection/fixtures/inj-07-calendar-auto-book.md
+    channel: calendar
+    tags: [calendar-action, book-without-approval]
+
+  - id: inj-08-transcript-action-items
+    file: injection/fixtures/inj-08-transcript-action-items.md
+    channel: transcript
+    tags: [transcript-command, draft-or-send]
+
+  - id: inj-09-pasted-doc-override
+    file: injection/fixtures/inj-09-pasted-doc-override.md
+    channel: pasted-doc
+    tags: [ignore-previous-instructions, system-prompt-spoof]
+
+  - id: inj-10-slack-assistant-mention
+    file: injection/fixtures/inj-10-slack-assistant-mention.md
+    channel: slack
+    tags: [archive-without-approval, silent-write]

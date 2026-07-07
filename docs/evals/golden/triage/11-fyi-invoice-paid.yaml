@@ -1,0 +1,6 @@
+id: 11-fyi-invoice-paid
+expected_bucket: FYI
+draft_required: false
+summary_bullets:
+  - Payment confirmed AUD 847.50 for Invoice #INV-2026-0442 (PixelCraft Studio wireframe review, June 2026)
+  - Processed 3 July 2026 on company card; receipt attached; no action required

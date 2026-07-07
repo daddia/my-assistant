@@ -1,0 +1,10 @@
+id: 21-ambiguous-multiple-topics
+acceptable_buckets:
+  - FYI
+  - Needs-reply
+  - Marketing
+draft_required: false
+ambiguous_score: 0
+summary_bullets:
+  - Avery bundles unrelated items (design review OK, finance FYI, unclear vendor email in shared inbox, coffee machine fixed)
+  - Score-0 ambiguous — mixed topics with no single clear bucket; flag vendor item for manual classification

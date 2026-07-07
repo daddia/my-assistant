@@ -1,0 +1,10 @@
+id: 05-needs-reply-project-question
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 5
+  tier: 2
+  sender: Sam Patel
+summary_bullets:
+  - Sam Patel blocked on beta launch checklist; needs product decision on default API rate limits for free-tier beta users
+  - Options 100 req/min, 500 req/min, or unlimited during beta; answer needed by Wednesday stand-up

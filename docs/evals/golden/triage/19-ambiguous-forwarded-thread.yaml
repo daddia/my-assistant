@@ -1,0 +1,9 @@
+id: 19-ambiguous-forwarded-thread
+acceptable_buckets:
+  - FYI
+  - Needs-reply
+draft_required: false
+ambiguous_score: 0
+summary_bullets:
+  - Blake forwarded a vague thread with no clear ask or context ("might have more to share after the 15th")
+  - Score-0 ambiguous — flag for your read; do not guess bucket or draft without clarification
