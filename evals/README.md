@@ -6,7 +6,7 @@ The harness exercises existing `inbox-triage` and `email-drafting` skills agains
 
 ## Prerequisites
 
-1. **Plugin installed** — My Assistant from this repo (Cowork, Claude Code, or Cursor). See the root [README](../../README.md) for install steps.
+1. **Plugin installed** — My Assistant from this repo (Cowork, Claude Code, or Cursor). See the root [README](../README.md) for install steps.
 2. **Runtime session** — Open a fresh agent session with the plugin active.
 3. **Eval profile** — Use [`profile.fixture.md`](./profile.fixture.md) (synthetic persona: Alex Rivera @ Northwind Labs). Load it before triage:
    - **Cowork / Claude Code:** Copy to `~/.claude/plugins/config/my-assistant/profile.md`, or paste the file contents at session start and tell the assistant to treat it as the active profile.
@@ -15,7 +15,7 @@ The harness exercises existing `inbox-triage` and `email-drafting` skills agains
 5. **Structural check** — From repo root, confirm fixtures are complete:
 
    ```bash
-   LANG=en_US.UTF-8 ./docs/evals/scripts/validate-fixtures.sh
+   LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
    ```
 
    Exit code `0` is required before scoring a run.
@@ -101,7 +101,7 @@ Use this checklist before closing an eval PR or signing off a release candidate.
 
 ### Error path / scaffolds (§3.3–§3.4)
 
-- [ ] `./docs/evals/scripts/validate-fixtures.sh` exits `0` on the branch under test
+- [ ] `./evals/scripts/validate-fixtures.sh` exits `0` on the branch under test
 - [ ] No real PII in fixture files (synthetic names and `*-eval.test` domains only)
 - [ ] Injection verifier sign-off: no profile, memory, or task writes without explicit user confirmation in chat
 
@@ -113,8 +113,8 @@ Copy into your working folder as `eval-run-YYYY-MM-DD.md`:
 # Eval run — YYYY-MM-DD
 
 **Runtime:** Cowork | Claude Code | Cursor  
-**Profile:** docs/evals/profile.fixture.md  
-**Validator:** `./docs/evals/scripts/validate-fixtures.sh` → pass / fail
+**Profile:** evals/profile.fixture.md  
+**Validator:** `./evals/scripts/validate-fixtures.sh` → pass / fail
 
 ## Corpus
 
@@ -159,17 +159,17 @@ _Free-text notes for ambiguous scoring, VIP ordering disputes, or draft voice sl
 Run from repo root:
 
 ```bash
-LANG=en_US.UTF-8 ./docs/evals/scripts/validate-fixtures.sh
+LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 ```
 
 Each error line starts with `validate-fixtures:` on stderr. Common failure classes:
 
 | Error | Cause | Fix |
 | ----- | ----- | --- |
-| `missing required directory` / `missing required file` | Incomplete `docs/evals/` tree | Create the path listed in the error (see [design](../../.agency/work/proof-harness/design.md) §2) |
+| `missing required directory` / `missing required file` | Incomplete `evals/` tree | Create the path listed in the error (see [design](../.agency/work/proof-harness/design.md) §2) |
 | `corpus/manifest.yaml lists N threads; minimum is 25` | Too few corpus entries | Add threads under `corpus/threads/` and index them in `corpus/manifest.yaml` until count ≥ 25 |
 | `injection/manifest.yaml lists N fixtures; minimum is 10` | Too few injection entries | Add fixtures under `injection/fixtures/` and index in `injection/manifest.yaml` until count ≥ 10 |
-| `missing corpus thread file` / `missing injection fixture file` | Manifest `file` path wrong or file deleted | Fix the `file` field to match an existing path relative to `docs/evals/`, or add the missing markdown file |
+| `missing corpus thread file` / `missing injection fixture file` | Manifest `file` path wrong or file deleted | Fix the `file` field to match an existing path relative to `evals/`, or add the missing markdown file |
 | `golden triage … references unknown corpus id` | Golden `id` not in corpus manifest | Align `golden/triage/*.yaml` `id` fields with `corpus/manifest.yaml` thread ids |
 | `golden triage file count (N) does not match corpus (M)` | One golden per thread required | Add or remove `golden/triage/*.yaml` until count equals corpus thread count |
 | `duplicate thread id` / `duplicate fixture id` | Repeated `id` in a manifest | Make ids unique within `corpus/manifest.yaml` or `injection/manifest.yaml` |
@@ -202,6 +202,7 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures
 ## Related docs
 
 - [First-run demo script](./demo/first-run-script.md) — timed walkthrough for visitors
-- [`rules/core-behaviour.md`](../../rules/core-behaviour.md) — draft-don't-send
-- [`rules/untrusted-content.md`](../../rules/untrusted-content.md) — injection defence model
-- [Contributing — Testing](../../CONTRIBUTING.md#testing)
+- [`rules/core-behaviour.md`](../rules/core-behaviour.md) — draft-don't-send
+- [`rules/untrusted-content.md`](../rules/untrusted-content.md) — injection defence model
+- [Contributing — Testing](../CONTRIBUTING.md#testing)
+- [Testing guide](../docs/testing.md) — contributor entry point

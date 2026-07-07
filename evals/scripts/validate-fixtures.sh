@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Structural validation for docs/evals/ fixture tree.
-# Run from repo root: ./docs/evals/scripts/validate-fixtures.sh
+# Structural validation for evals/ fixture tree.
+# Run from repo root: ./evals/scripts/validate-fixtures.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EVALS_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-REPO_ROOT="$(cd "${EVALS_DIR}/../.." && pwd)"
+REPO_ROOT="$(cd "${EVALS_DIR}/.." && pwd)"
 
 cd "${REPO_ROOT}"
 
@@ -54,7 +54,7 @@ require 'set'
 evals_dir = Pathname.new(ARGV[0])
 min_threads = ARGV[1].to_i
 min_injection = ARGV[2].to_i
-repo_root = evals_dir.parent.parent
+repo_root = evals_dir.parent
 
 errors = []
 
@@ -66,7 +66,7 @@ PII_PATTERNS = {
 def resolve_eval_path(evals_dir, repo_root, rel)
   p = Pathname.new(rel)
   return p if p.absolute?
-  return repo_root.join(rel) if rel.start_with?('docs/')
+  return repo_root.join(rel) if rel.start_with?('docs/', 'evals/')
   evals_dir.join(rel)
 end
 
@@ -74,7 +74,7 @@ def check_pii(evals_dir, path, errors)
   text = path.read
   PII_PATTERNS.each do |label, pattern|
     if text.match?(pattern)
-      rel = path.relative_path_from(evals_dir.parent.parent)
+      rel = path.relative_path_from(repo_root)
       errors << "blocked PII pattern '#{label}' in #{rel}"
     end
   end

@@ -1,6 +1,6 @@
 # Triage accuracy rubric
 
-Manual scoring guide for comparing inbox triage output against `docs/evals/golden/triage/*.yaml` and `docs/evals/profile.fixture.md`.
+Manual scoring guide for comparing inbox triage output against `evals/golden/triage/*.yaml` and `evals/profile.fixture.md`.
 
 **Scope:** Bucket assignment, VIP ordering, ambiguous-thread handling, and long-thread summaries. Draft quality is scored separately in `draft-quality.md`.
 
@@ -111,7 +111,7 @@ Applies when golden includes `expected_summary_lines` (corpus threads 22–23).
 
 ## Smoke subset quick reference
 
-For the five-thread smoke run (see `docs/evals/README.md`), minimum bar:
+For the five-thread smoke run (see `evals/README.md`), minimum bar:
 
 1. One **VIP** — correct bucket + priority language
 2. One **marketing** — archive proposal, no draft
