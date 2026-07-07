@@ -78,7 +78,7 @@ After copy, every `source_path` in `index.yaml` must resolve to a real file unde
 ## Run a skill and verify queue items
 
 1. Copy MA01 eval fixtures into a test working folder (profile + corpus thread).
-2. Run `/assistant:inbox triage` on `docs/evals/corpus/threads/01-vip-board-update.md`.
+2. Run `/assistant:inbox triage` on `evals/corpus/threads/01-vip-board-update.md`.
 3. Confirm chat output includes all four approval-frame headings (`rules/approval-frame.md`).
 4. Verify `review-queue/index.yaml` gains at least one `pending` `reply-draft` item.
 5. Refresh the dashboard Review tab — new item appears with matching `source_path`.
@@ -96,7 +96,7 @@ After copy, every `source_path` in `index.yaml` must resolve to a real file unde
 
 ```bash
 # Schema + fixtures
-LANG=en_US.UTF-8 ./docs/evals/scripts/validate-fixtures.sh
+LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 
 # All skills link approval frame
 grep -l 'approval-frame.md' skills/*/SKILL.md | wc -l   # expect 12
@@ -107,8 +107,8 @@ grep -r 'docs/review-queue' AGENTS.md README.md docs/guide/03-skills-and-command
 
 ## Manual verification notes (MA01 corpus)
 
-**Thread:** `docs/evals/corpus/threads/01-vip-board-update.md`  
-**Profile:** `docs/evals/profile.fixture.md`
+**Thread:** `evals/corpus/threads/01-vip-board-update.md`  
+**Profile:** `evals/profile.fixture.md`
 
 Expected after `/assistant:inbox triage` with queue-writing enabled:
 
