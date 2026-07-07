@@ -56,7 +56,7 @@ related:
 | ------- | ----- | ----- | -------- | ---- | ------ | --------- | ------ |
 | MA01 | Proof harness | Now | P0 | — | 13 | `.agency/work/proof-harness/` | Done |
 | MA02 | Review queue (spec) | Now | P0 | — | 5 | `.agency/work/review-queue/` | Done |
-| MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | In progress |
+| MA03 | Positioning & roadmap | Now | P0 | — | 5 | `.agency/work/positioning-roadmap/` | Done |
 | MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Not started |
 | MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Not started |
 | MA06 | Always-on reliability | Next | P1 | — | 5 | `.agency/work/always-on/` | Not started |
