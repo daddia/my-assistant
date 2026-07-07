@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Feedback loop (MA07)** — `/assistant:email feedback` command; `config/feedback-signals.yaml` taxonomy and edit-pattern mapping; new `email-feedback` skill for draft-vs-sent diffing and `profile-diff` queue proposals; post-draft feedback prompt in `email-drafting`; `evals/feedback/` corpus with seven fixtures, golden profile diffs, and rubric; docs on how voice learning works.
 - **Time protection (MA05)** — `/assistant:calendar protect` command (default verb); `config/calendar-block-types.yaml` block type model; evolved `calendar-scheduling` skill with protect mode, violation scan, and `drafts/calendar-block-*.md` proposals; brief/prep integration hooks; profile prep/follow-up duration fields; `evals/calendar/` corpus with six fixtures, golden proposals, and rubric.
 - **Always-on reliability (MA06)** — `config/schedule-catalog.yaml` canonical job catalog (five local jobs, three managed cookbooks); `config/schedule-health.schema.yaml` and working-folder `schedule-health/` ledger; decision tree in `schedule-setup` and `docs/guide/07-always-on-reliability.md`; miss detection in `daily-brief` and optional `weekly-review`; `evals/schedule-health/` fixtures with structural validation.
 - **Notetaker import (MA04)** — `/assistant:meeting follow-up` command; `config/notetaker-formats.yaml` fingerprints for Granola, Fireflies, Otter, and Google Meet; evolved `meeting-follow-up` skill with import mode, structured extraction block, and bot-decline UX; `evals/notetaker/` corpus with seven fixtures, golden extractions, and rubric.
@@ -19,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - **Plugin command prefix** — `/my-assistant:` → `/assistant:` (plugin registers as `assistant`; profile path unchanged at `~/.claude/plugins/config/my-assistant/`).
 - **Skill names** — `{domain}-{job}` convention: `email-drafting`, `follow-up-tracking`, `calendar-scheduling`, `schedule-setup`.
-- **Domain commands** — noun + verb arguments: `/assistant:inbox [triage|sweep]`, `/assistant:email [draft|review]`, `/assistant:calendar [protect|schedule]`, `/assistant:meeting [follow-up]`, `/assistant:tasks [add|review|sync]`, `/assistant:memory [add|prune]`.
+- **Domain commands** — noun + verb arguments: `/assistant:inbox [triage|sweep]`, `/assistant:email [draft|review|feedback]`, `/assistant:calendar [protect|schedule]`, `/assistant:meeting [follow-up]`, `/assistant:tasks [add|review|sync]`, `/assistant:memory [add|prune]`.
 - **Command routing table** — documented in `AGENTS.md` and `docs/guide/03-skills-and-commands.md`.
 
 ### Fixed

@@ -20,19 +20,34 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | Command | Verbs | Does |
 |---------|-------|------|
 | `/assistant:inbox` | `triage` (default) · `sweep` | Full triage + drafts, or lighter bucket-and-archive pass |
-| `/assistant:email` | `draft` (default) · `review` | Draft one reply, or review what's awaiting a response |
+| `/assistant:email` | `draft` (default) · `review` · `feedback` | Draft one reply, review what's awaiting a response, or capture draft feedback for voice learning |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
 | `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
 | `/assistant:calendar` | `protect` (default) · `schedule` | Scan for buffer/prep/follow-up gaps and draft block proposals, or find meeting times |
 | `/assistant:meeting` | `follow-up` (default) | Import notetaker export or notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:calendar protect`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
+
+### How voice learning works
+
+After you send a reply draft, rate it with `/assistant:email feedback`:
+
+| Outcome | What happens |
+| ------- | -------------- |
+| **good** | Voice confirmed. Optionally save the sent text as a `voice/` sample — only if you confirm in chat. |
+| **light edit** | Small tweak noted. At most one narrow profile tweak if the pattern looks repeatable. |
+| **heavy rewrite** | Paste what you sent. The assistant diffs against the draft and proposes **voice** and **anti-style** updates. |
+
+Proposals appear in the dashboard **Review** tab as `profile-diff` items (`pending-profile/*.diff`). Nothing writes to `profile.md` without your approval — at any autonomy tier. Instructions embedded in pasted sent mail are surfaced and refused; only what you type in chat is trusted.
+
+There is no automatic learning from Gmail edit detection — explicit feedback keeps the loop reviewable and local-first.
 
 ## Skills (fire on their own)
 
 Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-per-skill explosion.
 
 - **inbox-triage** + **email-drafting** — bucket mail, draft in your voice
+- **email-feedback** — after you send a draft, classify the edit (good / light / heavy) and propose profile voice updates for your approval
 - **follow-up-tracking** — drafts nudges for threads gone cold
 - **calendar-scheduling** — proposes times, checks conflicts, drafts invites; **protect mode** scans for buffer/prep/follow-up gaps and drafts calendar block proposals (user creates events manually)
 - **meeting-prep** — who / what / last contact / what to prepare

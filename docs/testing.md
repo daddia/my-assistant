@@ -16,6 +16,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/notetaker/`](../evals/notetaker/) | Notetaker import fixtures + golden extractions |
 | [`evals/calendar/`](../evals/calendar/) | Time protection fixtures + golden block proposals |
 | [`evals/schedule-health/`](../evals/schedule-health/) | Schedule health ledger fixtures + miss-detection golden |
+| [`evals/feedback/`](../evals/feedback/) | Draft feedback fixtures + golden profile diffs |
 | [`evals/rubric/`](../evals/rubric/) | Manual scoring rubrics |
 
 **Quick structural check** (from repo root):
@@ -34,6 +35,8 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Schedule health** (manual, ~10 minutes): copy `sh-02-missed-morning-brief` fixture to a test working folder, run `/assistant:brief` after 09:30 on a weekday — confirm miss block appears. Repeat with `sh-01-healthy-weekday` — no block. See [`evals/schedule-health/README.md`](../evals/schedule-health/README.md).
 
+**Feedback loop** (manual, ~20 minutes): five smoke fixtures (`fb-01`, `fb-02`, `fb-03`, `fb-05`, `fb-07`) via `/assistant:email feedback`. See [`evals/feedback/README.md`](../evals/feedback/README.md).
+
 ## 2. Skill and behaviour checks
 
 For skill or rule changes:
@@ -50,4 +53,5 @@ For skill or rule changes:
 - [Notetaker import design](../.agency/work/notetaker-import/design.md) — MA04 epic; corpus at [`evals/notetaker/`](../evals/notetaker/)
 - [Time protection design](../.agency/work/time-protection/design.md) — MA05 epic; corpus at [`evals/calendar/`](../evals/calendar/)
 - [Always-on reliability design](../.agency/work/always-on/design.md) — MA06 epic; fixtures at [`evals/schedule-health/`](../evals/schedule-health/)
+- [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
 - [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner
