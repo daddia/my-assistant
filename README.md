@@ -8,6 +8,14 @@ One installable plugin for [Claude Cowork](https://claude.com/product/cowork), C
 
 It **drafts everything for your review and never sends, books, or spends on your behalf.** Instructions buried in emails, invites, or pasted docs are never obeyed — they're surfaced for you to confirm. You glance, edit, and send. That's the whole promise.
 
+## Try it in 3 minutes
+
+1. Browse the [**examples gallery**](./examples/README.md) — pick a persona and see before/after draft demos
+2. Run `/assistant:setup` — choose a **starter profile** (founder, consultant, sales lead, operator, investor) or the blank interview
+3. Paste a demo thread → `/assistant:inbox triage` → compare your draft to the reference
+
+No connectors required. Eval maintainers: see [`evals/demo/first-run-script.md`](./evals/demo/first-run-script.md) (Alex Rivera eval persona).
+
 ## What it does
 
 ### Workflow commands

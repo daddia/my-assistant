@@ -15,7 +15,7 @@ This file orchestrates the plugin: it maps what the user asks for to the skill t
 Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` (created by the setup interview from `config/profile.template.md`). It is read at session start and is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
 - If the profile exists, read it first and treat it as the source of truth about the user.
-- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper.
+- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to the external profile path. Gallery: [`examples/README.md`](examples/README.md).
 - In Cowork, the profile may instead live in a workspace folder the user has open; check there too.
 
 ## Trigger → skill map

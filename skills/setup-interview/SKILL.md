@@ -14,16 +14,52 @@ A 10-minute conversation that produces the user's **profile** — the single fil
 
 Write to `~/.claude/plugins/config/my-assistant/profile.md` — **outside** the plugin directory, so `/plugin update` never overwrites it. Create the directory if needed. Base it on `config/profile.template.md` in the plugin.
 
-In Cowork, if the user prefers, the profile can live in a workspace folder they keep open. Ask which they want; default to the config path.
+In Cowork, if the user prefers, the profile can live in a workspace folder they keep open. Ask which they want; default to the config path. **Starter profiles follow the same path choice** — copy the selected starter to whichever location the user picks.
 
 > This is the only skill that writes the full profile without a diff prompt. Every other skill proposes profile changes and asks first.
 
-## Two paths — offer both
+## Three paths — offer when no profile exists
+
+When **no profile exists** (or the user asks to "start from template"), read `config/starter-profiles/manifest.yaml` and present:
+
+| Option | What happens |
+|--------|----------------|
+| **Starter persona** (five choices) | Copy a vertical ICP profile, optional quick customize, write external profile |
+| **Blank template (full interview)** | Existing eight-section interview below |
+| **Quick-start (2 min)** | Identity + voice one-liner + autonomy tier only (blank path shortcut) |
+
+### Starter selection table
+
+Present all five starters with ICP one-liner from the manifest:
+
+| ID | Title | ICP |
+|----|-------|-----|
+| `founder` | Founder | Early-stage CEO or co-founder |
+| `consultant` | Consultant | Independent advisor |
+| `sales-lead` | Sales lead | Account executive |
+| `operator` | Operator | Chief of staff / ops lead |
+| `investor` | Investor | Angel / micro-VC |
+
+### Starter flow
+
+1. User picks a starter id (or blank / quick-start).
+2. **Unknown id** — list valid ids from manifest; offer blank interview. Do not write a partial profile.
+3. **Missing starter file** — say "Starter unavailable — use blank template" and link to the repo issue tracker. Do not write an empty profile.
+4. Read `config/starter-profiles/{id}.md`.
+5. Offer **Quick customize** (name, company, timezone) OR **Keep as-is for demo**.
+6. **Do not write** until the user confirms customize-or-keep (match interview pacing — no half-written profiles if they abort).
+7. Write the profile to the chosen external path.
+8. Summarize: `Profile: {Title} starter (customized|as-is)`.
+9. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
+
+If user picks **blank** or **quick-start**, continue with the paths below.
+
+## Two paths — when blank or profile exists
 
 - **Quick-start (2 min):** identity + voice one-liner + autonomy tier. Enough to be useful today.
-- **Full interview (10 min):** all eight sections below. Recommend this.
+- **Full interview (10 min):** all eight sections below. Recommend this when not using a starter.
 
-Ask which they'd like, then proceed.
+Ask which they'd like (when not using a starter), then proceed.
 
 ## The interview — eight sections
 
@@ -42,7 +78,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words. After writing, summarise what's captured and point them at the wedge:
 
-> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Re-run `/assistant:setup` anytime to adjust."
+> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 

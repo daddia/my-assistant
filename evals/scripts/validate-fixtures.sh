@@ -50,6 +50,7 @@ for dir in \
   "${EVALS_DIR}/connectors/fixtures" \
   "${EVALS_DIR}/connectors/golden" \
   "${EVALS_DIR}/connectors/rubric" \
+  "${EVALS_DIR}/starter-profiles" \
   "${EVALS_DIR}/demo/assets" \
   "${EVALS_DIR}/scripts"; do
   require_dir "$dir"
@@ -72,6 +73,8 @@ require_file "${REPO_ROOT}/docs/guide/08-admin-deploy.md"
 require_file "${REPO_ROOT}/docs/guide/connector-smoke-tests.md"
 require_file "${EVALS_DIR}/feedback/manifest.yaml"
 require_file "${EVALS_DIR}/connectors/manifest.yaml"
+require_file "${REPO_ROOT}/config/starter-profiles/manifest.yaml"
+require_file "${REPO_ROOT}/examples/before-after/manifest.yaml"
 
 if command -v ruby >/dev/null 2>&1; then
   ruby -ryaml - "${EVALS_DIR}" "${MIN_THREADS}" "${MIN_INJECTION}" <<'RUBY'
@@ -748,6 +751,122 @@ else
   errors << "missing connectors/manifest.yaml"
 end
 
+# --- starter profiles (MA09) ---
+BLOCKED_PERSONAL_DOMAINS = %w[
+  gmail.com yahoo.com hotmail.com outlook.com icloud.com me.com aol.com live.com
+].freeze
+
+starter_manifest_path = repo_root.join('config/starter-profiles/manifest.yaml')
+starter_profiles = []
+if starter_manifest_path.file?
+  starter_doc = YAML.load_file(starter_manifest_path) || {}
+  required_sections = starter_doc['required_sections'] || []
+  max_words = (starter_doc['max_words'] || 2000).to_i
+  starter_profiles = starter_doc['profiles'] || []
+  errors << "starter-profiles/manifest.yaml: 'profiles' must be a list" unless starter_profiles.is_a?(Array)
+
+  expected_ids = %w[founder consultant sales-lead operator investor]
+  found_ids = starter_profiles.map { |p| p['id'] }.compact
+  if found_ids.sort != expected_ids.sort
+    errors << "starter-profiles/manifest.yaml must list exactly #{expected_ids.join(', ')}; got #{found_ids.join(', ')}"
+  end
+
+  starter_profiles.each_with_index do |entry, i|
+    unless entry.is_a?(Hash)
+      errors << "starter-profiles/manifest.yaml: profiles[#{i}] must be a mapping"
+      next
+    end
+    pid = entry['id']
+    fpath = entry['file']
+    if fpath.nil? || fpath.empty?
+      errors << "starter-profiles/manifest.yaml: profile '#{pid}' missing 'file'"
+      next
+    end
+    resolved = repo_root.join(fpath)
+    unless resolved.file?
+      errors << "missing starter profile file: #{resolved}"
+      next
+    end
+
+    text = resolved.read
+    required_sections.each do |sec|
+      errors << "starter profile #{pid} missing section header: #{sec}" unless text.include?(sec)
+    end
+
+    word_count = text.split(/\s+/).length
+    if word_count > max_words
+      errors << "starter profile #{pid} has #{word_count} words; max is #{max_words}"
+    end
+
+    if starter_doc['fictional_only']
+      text.scan(/@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/) do |domain_part|
+        domain = domain_part.delete_prefix('@').downcase
+        next if domain.end_with?('-eval.test') || domain == 'example.com'
+        if BLOCKED_PERSONAL_DOMAINS.include?(domain)
+          errors << "starter profile #{pid} blocked personal email domain @#{domain}"
+        end
+      end
+    end
+  end
+else
+  errors << "missing config/starter-profiles/manifest.yaml"
+end
+
+# --- before/after demos (MA09) ---
+ba_manifest_path = repo_root.join('examples/before-after/manifest.yaml')
+before_after_demos = []
+if ba_manifest_path.file?
+  ba_doc = YAML.load_file(ba_manifest_path) || {}
+  before_after_demos = ba_doc['demos'] || []
+  generic_violations = ba_doc['generic_violations'] || []
+  errors << "before-after/manifest.yaml: 'demos' must be a list" unless before_after_demos.is_a?(Array)
+  errors << "before-after/manifest.yaml: generic_violations must be a list" unless generic_violations.is_a?(Array)
+
+  before_after_demos.each_with_index do |demo, i|
+    unless demo.is_a?(Hash)
+      errors << "before-after/manifest.yaml: demos[#{i}] must be a mapping"
+      next
+    end
+    tid = demo['thread_id']
+    errors << "before-after demo '#{tid}' thread_id not in corpus manifest" if tid && !thread_ids.include?(tid)
+
+    %w[corpus golden generic].each do |key|
+      rel = demo[key]
+      if rel.nil? || rel.empty?
+        errors << "before-after/manifest.yaml: demo '#{tid}' missing '#{key}'"
+        next
+      end
+      path = repo_root.join(rel)
+      errors << "missing before-after #{key} file: #{path}" unless path.file?
+    end
+
+    starters = demo['starters'] || {}
+    errors << "before-after/manifest.yaml: demo '#{tid}' starters must be a mapping" unless starters.is_a?(Hash)
+    if starters.length < 2
+      errors << "before-after demo '#{tid}' must list at least 2 starter drafts; got #{starters.length}"
+    end
+    starters.each do |persona, rel|
+      path = repo_root.join(rel)
+      errors << "missing before-after starter draft (#{persona}): #{path}" unless path.file?
+    end
+
+    generic_rel = demo['generic']
+    if generic_rel && repo_root.join(generic_rel).file?
+      generic_text = repo_root.join(generic_rel).read
+      hits = generic_violations.count { |v| generic_text.include?(v) }
+      if hits < 2
+        errors << "before-after generic draft for '#{tid}' has #{hits} generic_violations hits; need >= 2"
+      end
+    end
+  end
+
+  if before_after_demos.length < 2
+    errors << "before-after/manifest.yaml must list at least 2 demos; got #{before_after_demos.length}"
+  end
+else
+  errors << "missing examples/before-after/manifest.yaml"
+end
+
 if errors.any?
   errors.each { |e| warn "validate-fixtures: #{e}" }
   exit 1
@@ -758,7 +877,9 @@ cal_count = cal_fixtures&.length || 0
 sh_count = sh_fixtures&.length || 0
 fb_count = fb_fixtures&.length || 0
 conn_count = conn_fixtures&.length || 0
-puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{conn_count} connector fixtures, #{EXPECTED_JOB_IDS.length} catalog jobs"
+starter_count = starter_profiles&.length || 0
+ba_count = before_after_demos&.length || 0
+puts "validate-fixtures: OK - #{threads.length} corpus threads, #{fixtures.length} injection fixtures, #{nt_count} notetaker fixtures, #{cal_count} calendar fixtures, #{sh_count} schedule-health fixtures, #{fb_count} feedback fixtures, #{conn_count} connector fixtures, #{starter_count} starter profiles, #{ba_count} before-after demos, #{EXPECTED_JOB_IDS.length} catalog jobs"
 RUBY
 elif python3 -c 'import yaml' 2>/dev/null; then
   err "Ruby not found; install Ruby or PyYAML for Python"

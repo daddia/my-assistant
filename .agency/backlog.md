@@ -25,15 +25,15 @@ related:
 
 **Delivery approach.** Three phases mapped to the scan's P0/P1/P2 and the recommended 30-day plan. **Now** makes the product credible and provable (evals, review-queue spec, positioning + roadmap). **Next** closes feature/operational parity (notetaker import, time protection, always-on reliability, feedback loop, trust + connector artefacts). **Later** adds packaging polish (starter profiles, examples, onboarding validator). Do **not** add generic assistant skills before Now ships — the feature backlog is explicit that the EA jobs already exist (`AGENTS.md` routes 12 skills); they need to be made provable and reviewable.
 
-**Shipped baseline (codebase-validated).** None of MA01–MA10 have started (no `.agency/work/` directories). The v1 surface is real:
+**Shipped baseline (codebase-validated).** MA01–MA09 are **Done** in the repo (see [CHANGELOG](../CHANGELOG.md#unreleased)); MA10–MA11 are **Not started**. Nine epics have `design.md` under `.agency/work/`; Now-phase epics (MA01–MA03) shipped directly into `evals/`, `rules/`, and `.agency/positioning/` without work-folder design artefacts. The v1 surface is real:
 
 - **12 skills** — setup-interview, inbox-triage, email-drafting, follow-up-tracking, calendar-scheduling, meeting-prep, meeting-follow-up, daily-brief, task-management, memory-management, weekly-review, schedule-setup.
 - **10 commands** — `/assistant:setup`, `:inbox`, `:email`, `:tasks`, `:memory`, `:brief`, `:prep`, `:update`, `:review`, `:schedules`.
 - **Trust model** — `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md`; graduated autonomy tiers 0–3 in profile + rules.
 - **Security artefacts** — `security/threat-model.md`, `security/data-flow.md`, `security/permissions.md`.
 - **Always-on surfaces** — local scheduled tasks (`schedule-setup`) + 3 managed-agent cookbooks (`managed-agents/`).
-- **Dashboard** — `skills/dashboard.html` (tasks + memory editor; not yet a review surface).
-- **Partial implementations** — meeting-follow-up accepts pasted notetaker output (MA04); calendar-scheduling respects focus blocks (MA05); `CONNECTORS.md` documents categories but has no smoke-test harness (MA08).
+- **Dashboard** — `skills/dashboard.html` (tasks + memory editor + Review tab for `review-queue/index.yaml`).
+- **Residual partials** — MA10 `/assistant:doctor` not started; MA11 smoke runner not started (CI structural validation only).
 
 **Prerequisites (required).** None external; all epics operate on the existing repo plus synthetic fixtures. No new connector auth is needed for Now-phase work.
 
@@ -60,9 +60,9 @@ related:
 | MA04 | Notetaker import | Next | P1 | MA01 | 8 | `.agency/work/notetaker-import/` | Done |
 | MA05 | Time protection | Next | P1 | MA02 | 8 | `.agency/work/time-protection/` | Done |
 | MA06 | Always-on reliability | Next | P1 | — | 5 | `.agency/work/always-on/` | Done |
-| MA07 | Feedback loop | Next | P1 | MA01 | 8 | `.agency/work/feedback-loop/` | Not started |
-| MA08 | Trust artefacts | Next | P1 | MA02 | 5 | `.agency/work/trust-artefacts/` | Not started |
-| MA09 | Starter profiles & examples | Later | P2 | MA01 | 8 | `.agency/work/starter-profiles/` | Not started |
+| MA07 | Feedback loop | Next | P1 | MA01 | 8 | `.agency/work/feedback-loop/` | Done |
+| MA08 | Trust artefacts | Next | P1 | MA02 | 5 | `.agency/work/trust-artefacts/` | Done |
+| MA09 | Starter profiles & examples | Later | P2 | MA01 | 8 | `.agency/work/starter-profiles/` | Done |
 | MA10 | Onboarding polish | Later | P2 | MA06 | 5 | `.agency/work/onboarding-polish/` | Not started |
 | MA11 | Eval automation | Later | P2 | MA01 | 8 | `.agency/work/eval-automation/` | Not started |
 
@@ -102,7 +102,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 
 **Dependencies.** None. Unblocks MA04, MA07, MA09.
 
-**Status.** Not started. **Work path:** `.agency/work/proof-harness/`
+**Status.** Done (shipped: `evals/` corpus, injection suite, golden YAML, rubrics, `evals/demo/first-run-script.md`, `evals/README.md`). **Work path:** `.agency/work/proof-harness/` *(no design artefact — shipped in-repo)*
 
 ### MA02 -- Review queue (spec)
 
@@ -117,7 +117,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 
 **Dependencies.** None. Informs MA05 (calendar proposals) and MA08 (permission surfacing).
 
-**Status.** Not started. **Work path:** `.agency/work/review-queue/`
+**Status.** Done (shipped: `config/review-queue.schema.yaml`, `rules/approval-frame.md`, approval-frame rollout across 12 skills, `skills/dashboard.html` Review tab, `evals/review-queue/`). **Work path:** `.agency/work/review-queue/` *(no design artefact — shipped in-repo)*
 
 ### MA03 -- Positioning & roadmap
 
@@ -132,7 +132,7 @@ Maps feature-backlog Part 2 epics to delivery epics. `(have)` items are shipped 
 
 **Dependencies.** None (but should reflect the epic set defined here).
 
-**Status.** In progress (validated 2026-07-08: MA03-02 done; MA03-01/04 partial; MA03-03 not started). **Work path:** `.agency/work/positioning-roadmap/`
+**Status.** Done (shipped: `.agency/roadmap.md`, `.agency/positioning/positioning.md`, `.agency/positioning/competitors.md`, product.md roadmap link fixed). **Work path:** `.agency/work/positioning-roadmap/` *(no design artefact — shipped in-repo)*
 
 ## 6. Next & Later phase (summary)
 

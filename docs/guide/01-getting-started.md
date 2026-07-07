@@ -29,7 +29,11 @@ The `.cursor-plugin/` manifest wires up the same skills, commands, agents, hooks
 /assistant:setup
 ```
 
-A short conversation captures your identity, writing voice, anti-AI style, working rules and autonomy tier, VIP tiers, and email/calendar policy. Choose the 2-minute quick-start or the full 10-minute interview.
+A short conversation captures your identity, writing voice, anti-AI style, working rules and autonomy tier, VIP tiers, and email/calendar policy.
+
+**New:** Pick a **starter profile** (founder, consultant, sales lead, operator, investor) for a realistic persona in minutes, or choose the blank template for the full interview. See the [examples gallery](../examples/README.md).
+
+Choose the 2-minute quick-start, a starter persona, or the full 10-minute interview.
 
 Your answers are written to a **profile** at:
 
@@ -46,8 +50,8 @@ This lives *outside* the plugin, so updating the plugin never overwrites your pe
 /assistant:brief         # morning briefing
 ```
 
-No connectors yet? Paste an email thread or your calendar — every skill works standalone.
+No connectors yet? Paste an email thread or your calendar — every skill works standalone. Try thread [`01-vip-board-update`](../../evals/corpus/threads/01-vip-board-update.md) and compare your draft to the [before/after gallery](../examples/before-after/01-vip-board-update/).
 
 ## Next
 
-[Configure your profile →](02-configure-profile.md) · [Connect your tools →](04-connect-tools.md)
+[Configure your profile →](02-configure-profile.md) · [Examples gallery →](../../examples/README.md) · [Connect your tools →](04-connect-tools.md)

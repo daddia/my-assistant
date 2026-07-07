@@ -16,7 +16,25 @@ Outside the plugin directory — so `/plugin update` overwrites plugin files but
 /assistant:setup
 ```
 
-Pick the 2-minute quick-start or the full 10-minute interview. It walks eight sections, one at a time, confirming each before writing.
+Pick the 2-minute quick-start, a **starter profile**, or the full 10-minute interview.
+
+### Starter profiles
+
+Five vertical ICP personas ship in `config/starter-profiles/` — fictional identities only, same eight sections as the template:
+
+| Starter | Best for |
+|---------|----------|
+| Founder | Early-stage CEO / co-founder |
+| Consultant | Independent advisor |
+| Sales lead | Account executive |
+| Operator | Chief of staff / ops lead |
+| Investor | Angel / micro-VC |
+
+During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes to your external profile path — same as a hand-built profile.
+
+Browse [before/after draft demos](../../examples/before-after/) to see generic AI output vs profile-tuned replies. **Evals** still use Alex Rivera ([`evals/profile.fixture.md`](../../evals/profile.fixture.md)); starters are for onboarding.
+
+It walks eight sections, one at a time, confirming each before writing (blank path).
 
 | Section | What it captures |
 |---------|------------------|
@@ -42,4 +60,4 @@ Re-run `/assistant:setup` to adjust any section, or just correct the assistant m
 
 ## Next
 
-[Skills and commands →](03-skills-and-commands.md) · [Connect your tools →](04-connect-tools.md)
+[Examples gallery →](../../examples/README.md) · [Skills and commands →](03-skills-and-commands.md) · [Connect your tools →](04-connect-tools.md)
