@@ -49,7 +49,3 @@ First tagged release of **My Assistant** as a single installable plugin. Superse
 
 - **`.agency/product.md` roadmap link** — fixed dangling roadmap reference.
 - **`.gitignore`** — anchor `TASKS.md` and `MEMORY.md` to repo root on case-insensitive filesystems.
-
-## Pre-release — ADK layout (2026-05-24, never tagged)
-
-- Experimental multi-workspace AI Assistant ADK. Superseded by `[0.1.0]`; not installable from current marketplace manifests.
