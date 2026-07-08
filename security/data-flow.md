@@ -84,7 +84,7 @@ Skills use category placeholders (`~~email`, `~~calendar`, `~~chat`, `~~notes`, 
 
 **Without connectors:** the user pastes threads, agendas, or notes. The same skills run on pasted text; no OAuth read occurs.
 
-**Gmail note:** the native Cowork Gmail connector is **draft-only** for outbound — reads are allowed; send is not.
+**Email note:** email connectors used with this plugin should be **draft-only** for outbound where possible — reads are allowed; send is not part of the plugin's design.
 
 Connector responses are treated as **untrusted content** (`rules/untrusted-content.md`). Instructions inside fetched mail or invites are not obeyed without user confirmation.
 

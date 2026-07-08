@@ -15,7 +15,7 @@ categories:
       command: "/assistant:inbox triage"
       paste_prompt: "Triage this pasted thread."
     live_optional:
-      prerequisite: "Gmail or M365 connected in Cowork Settings → Connectors"
+      prerequisite: "Email MCP provider connected in host settings (e.g. Gmail or M365)"
       steps:
         - "Run /assistant:inbox triage on one unread thread"
         - "Confirm a draft exists in mailbox drafts; confirm no send occurred"
@@ -32,7 +32,7 @@ categories:
       command: "/assistant:calendar protect"
       paste_prompt: "Protect my calendar using this pasted agenda."
     live_optional:
-      prerequisite: "Google Calendar or M365 connected in Cowork Settings → Connectors"
+      prerequisite: "Calendar MCP provider connected in host settings (e.g. Google Calendar or M365)"
       steps:
         - "Run /assistant:calendar protect on today's calendar"
         - "Confirm block proposals only; no event created in calendar app"
@@ -49,7 +49,7 @@ categories:
       command: "/assistant:prep"
       paste_prompt: "Prep for my next meeting using this pasted doc excerpt."
     live_optional:
-      prerequisite: "Google Drive or OneDrive connected in Cowork Settings → Connectors"
+      prerequisite: "Drive MCP provider connected in host settings (e.g. Google Drive or OneDrive)"
       steps:
         - "Run /assistant:prep with a shared doc from drive"
         - "Confirm read-only summary; no file upload or delete"
@@ -66,7 +66,7 @@ categories:
       command: "/assistant:update"
       paste_prompt: "Sync tasks and follow-ups from this pasted chat thread."
     live_optional:
-      prerequisite: "Slack MCP enabled (Cursor Settings → MCP) or Cowork connector"
+      prerequisite: "Slack MCP enabled in host settings"
       steps:
         - "Run /assistant:update --comprehensive with Slack connected"
         - "Confirm task proposals only; no message posted to channel"

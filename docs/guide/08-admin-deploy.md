@@ -12,16 +12,16 @@ My Assistant installs as one plugin on three hosts:
 
 | Runtime | Install path | Notes |
 | ------- | ------------ | ----- |
-| **Claude Cowork** | Customize → Plugins → marketplace from [GitHub URL](https://github.com/daddia/my-assistant) | Native Gmail, Google Calendar, Google Drive connectors |
+| **Claude Cowork** | Customize → Plugins → marketplace from [GitHub URL](https://github.com/daddia/my-assistant) | Install **My Assistant**; connect MCP servers per category in host settings |
 | **Claude Code** | Same marketplace; works in terminal and claude.ai/code | Cloud schedules for always-on jobs |
-| **Cursor** | Settings → Plugins → add repo URL | MCP servers for Slack, Notion, GitHub, etc.; paste-first for email/calendar |
+| **Cursor** | Settings → Plugins → add repo URL | Bundled MCP: Slack, Notion, GitHub; paste-first for email/calendar |
 
 Step-by-step install: [Get started](01-getting-started.md).
 
 **Platform caveats**
 
-- Gmail, Google Calendar, and Google Drive are **Cowork-native only**. In Cursor, paste threads and agendas or connect an MCP provider for `~~email` / `~~calendar`.
-- Cursor users without Cowork desktop should use `cloud-code` or `managed` surfaces for jobs that must not miss — see [Always-on reliability](07-always-on-reliability.md).
+- Email, calendar, and drive categories need an MCP provider in your host or paste-first content — the plugin bundles Slack, Notion, and GitHub MCP suggestions only.
+- Cursor users without always-on desktop should use `cloud-code` or `managed` surfaces for jobs that must not miss — see [Always-on reliability](07-always-on-reliability.md).
 
 ## Profile location
 

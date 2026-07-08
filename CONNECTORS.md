@@ -8,35 +8,28 @@ Every skill is **standalone-first**: it works with content you paste in, and get
 
 ## Connectors for this plugin
 
-| Category | Placeholder | Default | Alternatives |
-|----------|-------------|---------|--------------|
-| Email | `~~email` | Gmail | Microsoft 365 |
-| Calendar | `~~calendar` | Google Calendar | Microsoft 365 |
-| Drive | `~~drive` | Google Drive | Microsoft 365 (OneDrive) |
-| Chat | `~~chat` | Slack | Microsoft Teams, Discord |
-| Notes / knowledge | `~~notes` | Notion | Confluence, Guru |
-| Tasks / work | `~~tasks` | GitHub | Jira, Linear, monday.com, Asana, ClickUp |
+| Category | Placeholder | Examples |
+|----------|-------------|----------|
+| Email | `~~email` | Gmail, Microsoft 365 |
+| Calendar | `~~calendar` | Google Calendar, Microsoft 365 |
+| Drive | `~~drive` | Google Drive, OneDrive |
+| Chat | `~~chat` | Slack, Microsoft Teams, Discord |
+| Notes / knowledge | `~~notes` | Notion, Confluence, Guru |
+| Tasks / work | `~~tasks` | GitHub, Jira, Linear, monday.com, Asana, ClickUp |
 
-## Native integrations (no MCP install needed)
-
-Gmail, Google Calendar, and Google Drive are native Cowork connectors. Connect them in **Cowork → Settings → Connectors**.
-
-**Gmail is draft-only.** Claude can read mail and create drafts, but cannot send. This plugin is built around that: it drafts, you send.
+Connect any MCP server in the right category — skills never hard-code a product. OAuth is handled when you connect; no credentials are bundled in the repo.
 
 ## MCP connectors (bundled suggestions)
 
-`.mcp.json` pre-configures one default MCP server per category:
+`.mcp.json` pre-configures default MCP servers for categories that are not email, calendar, or drive:
 
 | Category | Server | Endpoint |
 |----------|--------|----------|
-| Email | Gmail | `https://gmailmcp.googleapis.com/mcp/v1` |
-| Calendar | Google Calendar | `https://calendarmcp.googleapis.com/mcp/v1` |
-| Drive | Google Drive | `https://drivemcp.googleapis.com/mcp/v1` |
 | Chat | Slack | `https://mcp.slack.com/mcp` |
 | Notes | Notion | `https://mcp.notion.com/mcp` |
 | Tasks | GitHub | `https://api.githubcopilot.com/mcp/` |
 
-Any MCP server in the right category works — the skills never hard-code a product. OAuth is handled when you connect; no credentials are bundled in the repo.
+For `~~email`, `~~calendar`, and `~~drive`, connect an MCP provider in your host's MCP settings, or paste content — the plugin does not bundle Google MCP endpoints.
 
 ## Without connectors
 

@@ -1,30 +1,29 @@
 # Connect email, calendar, and chat
 
-My Assistant works without any connections — every skill runs on content you paste. Connect your tools and it works directly against your real inbox, calendar, and messages.
+My Assistant works without any connections — every skill runs on content you paste. Connect MCP servers in your host and it works directly against your real inbox, calendar, and messages.
 
 ## How to connect
 
-**Cowork:** **Settings → Connectors**. Sign in to the services you use.
+**Cowork / Claude Code:** enable MCP servers in your host settings, or connect your own MCP provider per category.
 
-**Cursor:** enable the MCP servers bundled in the plugin (Slack, Microsoft 365, Notion, Atlassian, Linear, monday.com) via **Settings → MCP**, or connect your own MCP server in the same category. Gmail, Google Calendar, and Google Drive are native Cowork connectors only — in Cursor, paste email threads and calendar items, or connect an MCP provider for `~~email` / `~~calendar`.
+**Cursor:** enable the MCP servers bundled in the plugin (Slack, Notion, GitHub) via **Settings → MCP**, or connect your own MCP server in the same category. For `~~email`, `~~calendar`, and `~~drive`, add an MCP provider or paste content.
 
 ## What you can connect
 
-| Tool | What My Assistant does with it |
-|------|-------------------------------|
-| **Gmail** (native, draft-only) | Read mail, triage, create reply drafts — never sends |
-| **Google Calendar** (native) | See your schedule, prep meetings, propose times |
-| **Google Drive** (native) | Read shared documents for meeting prep |
-| **Slack** | Scan messages, post digests you've opted into |
-| **Notion** | Notes and knowledge lookups |
-| **Microsoft 365** | Email, calendar, OneDrive (alternative to Google) |
-| **Jira / Linear / monday** | Task and work-item context |
+| Category | Examples | What My Assistant does |
+|----------|----------|------------------------|
+| **Email** (`~~email`) | Gmail, Microsoft 365 | Read mail, triage, create reply drafts — never sends |
+| **Calendar** (`~~calendar`) | Google Calendar, Microsoft 365 | See your schedule, prep meetings, propose times |
+| **Drive** (`~~drive`) | Google Drive, OneDrive | Read shared documents for meeting prep |
+| **Chat** (`~~chat`) | Slack, Teams | Scan messages, post digests you've opted into |
+| **Notes** (`~~notes`) | Notion, Confluence | Notes and knowledge lookups |
+| **Tasks** (`~~tasks`) | GitHub, Jira, Linear, monday | Task and work-item context |
 
 Connect only what you use. The plugin refers to tools by category (`~~email`, `~~calendar`, `~~chat`, …) so any provider in that category works — see [`CONNECTORS.md`](../../CONNECTORS.md).
 
-## Gmail is draft-only — by design
+## Draft-only by design
 
-Claude's Gmail connector can read and draft but **cannot send**. That's exactly how My Assistant operates: it drafts, you send. The limitation and the design are the same thing.
+My Assistant **drafts everything for your review and never sends, books, or spends** on your behalf. If your email connector supports draft-only outbound, that matches this plugin exactly.
 
 ## Using connectors
 
