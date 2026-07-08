@@ -10,6 +10,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - _(none)_
 
+## [0.2] - 2026-07-08
+
+### Changed
+
+- **Command conventions** — all 13 slash commands now include Preflight, Plan, Verification, Summary, and Next Steps sections per `commands/_conventions.md`; existing skill routing preserved.
+
+### Fixed
+
+- **`scripts/validate.py`** — section-heading regex (`^#{2,3}`) no longer broken by f-string brace interpolation.
+
 ## [0.1.0] - 2026-07-08
 
 First tagged release of **My Assistant** as a single installable plugin. Supersedes the pre-0.1.0 multi-workspace ADK layout with no backward compatibility.

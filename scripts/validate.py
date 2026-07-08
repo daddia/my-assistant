@@ -297,7 +297,7 @@ class Validator:
 
     def section_heading_present(self, content: str, section_name: str) -> bool:
         pattern = re.compile(
-            rf"^#{2,3}\s+.*{re.escape(section_name).replace(r'\ ', r'\s+')}",
+            rf"^#{{2,3}}\s+.*{re.escape(section_name).replace(r'\ ', r'\s+')}",
             re.MULTILINE | re.IGNORECASE,
         )
         return bool(pattern.search(content))
