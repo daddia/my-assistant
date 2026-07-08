@@ -2,8 +2,6 @@
 
 **Your AI chief of staff for inbox, calendar, and follow-ups.**
 
-[Roadmap](.agency/roadmap.md)
-
 One installable plugin for [Claude Cowork](https://claude.com/product/cowork), Claude Code, and [Cursor](https://cursor.com) that triages your inbox, drafts replies in your voice, tracks follow-ups, preps your meetings, runs a morning briefing, and manages your tasks and memory.
 
 It **drafts everything for your review and never sends, books, or spends on your behalf.** Instructions buried in emails, invites, or pasted docs are never obeyed — they're surfaced for you to confirm. You glance, edit, and send. That's the whole promise.
@@ -87,4 +85,6 @@ To verify triage, drafts, injection defence, and connector categories against fi
 
 ## Licence
 
-[MIT](LICENSE) · Copyright (c) 2026 daddia.
+Released under the [MIT](LICENSE) licence — you're free to use, modify, and distribute this project.
+
+Copyright (c) 2026 Jonathan Daddia
