@@ -16,18 +16,11 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Structural validation
         run: python3 scripts/validate.py --format json
 
-  validate-fixtures:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.3"
-
       - name: Validate eval fixtures
-        run: LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
+        run: python3 scripts/validate_fixtures.py

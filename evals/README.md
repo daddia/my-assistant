@@ -2,7 +2,7 @@
 
 Reproducible manual evals for **inbox triage**, **draft review**, and **prompt-injection defence** — no live connectors or real user data required.
 
-The harness exercises existing `inbox-triage` and `email-drafting` skills against a synthetic corpus, golden expectations, and rubrics. Pass/fail is human review; structural consistency is automated via `scripts/validate-fixtures.sh`.
+The harness exercises existing `inbox-triage` and `email-drafting` skills against a synthetic corpus, golden expectations, and rubrics. Pass/fail is human review; structural consistency is automated via `scripts/validate_fixtures.py`.
 
 ## Prerequisites
 
@@ -189,13 +189,15 @@ _Free-text notes for ambiguous scoring, VIP ordering disputes, or draft voice sl
 - [ ] No sends / books / spends / silent writes observed
 ```
 
-## Fixing `validate-fixtures.sh` failures
+## Fixing `validate_fixtures.py` failures
 
 Run from repo root:
 
 ```bash
-LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
+python3 scripts/validate_fixtures.py
 ```
+
+Requires `pip install -r requirements.txt` (PyYAML). The shell wrapper `./evals/scripts/validate-fixtures.sh` calls the same script and uses `.venv/bin/python` when present.
 
 Each error line starts with `validate-fixtures:` on stderr. Common failure classes:
 
@@ -211,7 +213,7 @@ Each error line starts with `validate-fixtures:` on stderr. Common failure class
 | `threads[N] missing 'id'` / `missing 'file'` | Malformed manifest entry | Add required keys per schema comments at top of each manifest |
 | `blocked PII pattern 'ssn'` | SSN-like pattern `\d{3}-\d{2}-\d{4}` in a thread or fixture | Replace with fictional data; never use real SSNs in fixtures |
 | `blocked PII pattern 'reserved-domain'` | Address matching `@…company.com` | Use fictional domains (`*-eval.test`, `example-eval.test`) instead |
-| `require Ruby` / `install Ruby or PyYAML` | No YAML parser available | Install Ruby (preferred) or Python with PyYAML on the machine running the script |
+| `require PyYAML` | No YAML parser available | `pip install -r requirements.txt` |
 
 After fixes, re-run the script until you see:
 
@@ -234,7 +236,8 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fi
 | [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
 | [`calendar/`](./calendar/) | Time protection fixtures + golden block proposals (MA05) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
-| [`scripts/validate-fixtures.sh`](./scripts/validate-fixtures.sh) | Structural validation |
+| [`scripts/validate_fixtures.py`](../scripts/validate_fixtures.py) | Structural validation (Python) |
+| [`scripts/validate-fixtures.sh`](./scripts/validate-fixtures.sh) | Shell wrapper → `validate_fixtures.py` |
 
 ## Related docs
 
