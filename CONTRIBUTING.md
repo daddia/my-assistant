@@ -40,6 +40,7 @@ my-assistant/
 
 - **Git** — clone, branch, open PRs.
 - **A text editor** — Markdown and YAML.
+- **Python 3.12+** with dev dependencies — `pip install -r requirements.txt` (or create a `.venv` at repo root; the fixture validator uses it automatically).
 - **A runtime (recommended)** — Claude Cowork, Claude Code, or Cursor, to exercise skills as users do.
 
 Read [`AGENTS.md`](./AGENTS.md) and [`docs/guide/00-introduction.md`](./docs/guide/00-introduction.md) before your first change.
@@ -62,8 +63,16 @@ See [`docs/testing.md`](./docs/testing.md) for the full testing guide.
 For inbox triage, draft quality, and prompt-injection regression, follow the manual eval workflow in [`evals/README.md`](./evals/README.md). Run structural validation from the repo root:
 
 ```bash
+python3 scripts/validate_fixtures.py
+```
+
+Or use the shell wrapper (uses `.venv/bin/python` when present):
+
+```bash
 LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 ```
+
+Requires `pip install -r requirements.txt` if PyYAML is not already installed.
 
 Structural validation also runs on every pull request via GitHub Actions.
 
