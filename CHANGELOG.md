@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - _(none)_
 
+## [1.1.0] - 2026-07-08
+
+### Fixed
+
+- **Doctor eval fixtures** — add `.gitkeep` scaffold files for `fx-folder-scaffold` and `fx-no-profile` working directories so structural validation passes on fresh checkouts.
+
 ## [0.2.1] - 2026-07-08
 
 ### Added
