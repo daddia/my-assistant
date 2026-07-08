@@ -42,9 +42,17 @@ Plus skills that fire on their own as you work: calendar scheduling, meeting fol
 
 ## Install
 
-**Claude Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **assistant**.
+**Claude Cowork or Claude Code:** Customize → Plugins → add a marketplace from this repo's GitHub URL (`https://github.com/daddia/my-assistant`), then install **My Assistant**.
 
 **Cursor:** Settings → Plugins → Add plugin → paste `https://github.com/daddia/my-assistant`, then install **My Assistant**.
+
+| What you see | Value |
+|--------------|-------|
+| **Display name** | My Assistant |
+| **Repo & marketplace** | `my-assistant` |
+| **Plugin id** (manifest `name`) | `assistant` |
+| **Profile path** | `~/.claude/plugins/config/my-assistant/profile.md` |
+| **Commands** | `/assistant:*` |
 
 Then run:
 
@@ -56,7 +64,7 @@ A short interview captures who you are, how you write, your VIP tiers, and your 
 
 ## Works on day one, sharper with connectors
 
-Every skill is standalone-first: paste an email thread or your calendar and it just works. Connect Gmail, Google Calendar, Slack, Notion, or Microsoft 365 (Cowork → Settings → Connectors) and it works directly against your accounts. Gmail is **draft-only** by design — which is exactly how this plugin operates. See [`CONNECTORS.md`](./CONNECTORS.md).
+Every skill is standalone-first: paste an email thread or your calendar and it just works. Connect Slack, Notion, GitHub, or your own MCP servers for `~~email`, `~~calendar`, and `~~drive` to work directly against your accounts. See [`CONNECTORS.md`](./CONNECTORS.md).
 
 ## Always-on options
 

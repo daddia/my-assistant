@@ -77,7 +77,14 @@ Schedule health: scheduled runs write heartbeats to `{working-folder}/schedule-h
 
 Skills refer to connectors by category using `~~` placeholders — `~~email`, `~~calendar`, `~~chat`, `~~notes`, `~~tasks`, `~~drive` — which resolve to whatever the user has connected (Gmail, Google Calendar, Slack, Notion, Microsoft 365, …). **Every skill works standalone** with pasted content and gets sharper when a connector is present. Details: `CONNECTORS.md`.
 
-Gmail, Google Calendar, and Google Drive are native Cowork connectors. The Gmail connector is **draft-only** — Claude cannot send — which matches this plugin's design exactly.
+## Naming
+
+| Surface | Value |
+|---------|-------|
+| Display name | **My Assistant** |
+| Repo, marketplace, profile path | `my-assistant` |
+| Plugin manifest `name` | `assistant` |
+| Commands | `/assistant:*` |
 
 ## Rules
 

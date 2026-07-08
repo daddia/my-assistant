@@ -12,7 +12,9 @@ Customize → Plugins → **add a marketplace from a GitHub URL** and paste:
 https://github.com/daddia/my-assistant
 ```
 
-Then install **assistant** from that marketplace. It shows up in both chat and Cowork. (You can also upload the plugin as a zip, or add the repo as a local directory marketplace during development.)
+Then install **My Assistant** from that marketplace. It shows up in both chat and Cowork. (You can also upload the plugin as a zip, or add the repo as a local directory marketplace during development.)
+
+**Naming:** display name **My Assistant** · repo/marketplace `my-assistant` · plugin id `assistant` · commands `/assistant:*` · profile at `~/.claude/plugins/config/my-assistant/profile.md`.
 
 ### Cursor
 
