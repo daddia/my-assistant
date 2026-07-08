@@ -10,6 +10,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - _(none)_
 
+### Changed
+
+- _(none)_
+
+### Fixed
+
+- _(none)_
+
+## [0.2.1] - 2026-07-08
+
+### Added
+
+- **Release skill** — `.claude/skills/release/SKILL.md`, a maintainer-only workflow for gating, version bumping, changelog updates, commit, tag, and push.
+
+### Fixed
+
+- **`scripts/validate_fixtures.py`** — removed the obsolete `evals/scripts` required-directory check left over from the Ruby→Python CI migration, which was failing the fixture gate (and CI) on `main`.
+
 ## [0.2] - 2026-07-08
 
 ### Changed

@@ -56,7 +56,6 @@ REQUIRED_DIRS = [
     EVALS_DIR / "doctor/fixtures",
     EVALS_DIR / "doctor/golden",
     EVALS_DIR / "demo/assets",
-    EVALS_DIR / "scripts",
 ]
 
 REQUIRED_FILES = [
