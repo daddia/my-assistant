@@ -1,6 +1,5 @@
 ---
-description: Draft a reply in your voice, or review what's awaiting a response.
-  Never sends.
+description: Draft a reply in your voice, or review what's awaiting a response. Never sends.
 argument-hint: "[draft|review|feedback]"
 ---
 

@@ -1,6 +1,5 @@
 ---
-description: Morning briefing — today's calendar, priority unread, follow-ups going
-  cold, and what needs your attention before noon.
+description: Morning briefing — today's calendar, priority unread, follow-ups going cold, and what needs your attention before noon.
 ---
 
 ## Preflight

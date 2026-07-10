@@ -1,6 +1,5 @@
 ---
-description: Calendar time protection and scheduling — scan for buffer/prep/follow-up
-  gaps, draft block proposals, or find meeting times. Never books or creates events.
+description: Calendar time protection and scheduling — scan for buffer/prep/follow-up gaps, draft block proposals, or find meeting times. Never books or creates events.
 argument-hint: "[protect | schedule]"
 ---
 

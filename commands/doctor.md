@@ -1,7 +1,5 @@
 ---
-description: Run an install-and-setup health check — profile, working folder, schedules,
-  connectors (advisory), and platform fit. Prints a scannable pass / warn / fail / skip report
-  with concrete fix steps.
+description: Run an install-and-setup health check — profile, working folder, schedules, connectors (advisory), and platform fit. Prints a scannable pass / warn / fail / skip report with concrete fix steps.
 ---
 
 ## Preflight
