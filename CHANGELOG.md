@@ -12,7 +12,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- _(none)_
+
+### Fixed
+
+- _(none)_
+
+## [1.2.1] - 2026-07-10
+
+### Added
+
+- **Before/after demo** — operator contract-renewal draft example in `examples/before-after/04-needs-reply-contract-renewal/`.
+
+### Changed
+
 - **Config filenames** — simplified plugin manifests and schemas under `config/`: `calendar.yaml`, `connectors.yaml`, `schedules.yaml`, `schedules.schema.yaml`, `notetaker.yaml`, `feedback.yaml`, `health.yaml`, `review.schema.yaml` (replacing long hyphenated names).
+- **Health command** — `/assistant:doctor` renamed to `/assistant:health`; `install-doctor` skill and `evals/doctor` corpus renamed to `health-check`.
+- **Meeting commands** — `/assistant:prep` consolidated into `/assistant:meeting prep`; `follow-up` remains the default verb on `/assistant:meeting`.
 
 ### Fixed
 
