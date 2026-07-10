@@ -17,6 +17,7 @@ demos:
     starters:
       founder: examples/before-after/04-needs-reply-contract-renewal/founder-draft.md
       sales-lead: examples/before-after/04-needs-reply-contract-renewal/sales-lead-draft.md
+      operator: examples/before-after/04-needs-reply-contract-renewal/operator-draft.md
     notes: Commercial negotiation — sales-lead vs founder contrast
 required_gaps_source: golden
 generic_violations:
