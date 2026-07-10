@@ -51,7 +51,7 @@ CRITICAL_COMMAND_SECTIONS = ("Preflight", "Verification")
 RECOMMENDED_COMMAND_SECTIONS = ("Plan", "Commands", "Summary", "Next Steps")
 ALL_COMMAND_SECTIONS = CRITICAL_COMMAND_SECTIONS + RECOMMENDED_COMMAND_SECTIONS
 
-TRUST_COMMANDS = frozenset({"inbox", "email", "calendar", "meeting", "brief", "prep", "update"})
+TRUST_COMMANDS = frozenset({"inbox", "email", "calendar", "meeting", "brief", "update"})
 TRUST_PATTERNS = (
     re.compile(r"never\s+send", re.I),
     re.compile(r"draft[- ]only", re.I),

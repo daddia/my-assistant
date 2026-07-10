@@ -1,7 +1,7 @@
-# Doctor report schema — machine-readable shape for install health reports.
+# Health report schema — machine-readable shape for install health reports.
 #
-# Used by skills/install-doctor/SKILL.md and evals/doctor/golden/*.yaml fixtures.
-# Optional user artefact: {working-folder}/doctor-report-YYYY-MM-DD.md (chat render only unless --save).
+# Used by skills/health-check/SKILL.md and evals/health-check/golden/*.yaml fixtures.
+# Optional user artefact: {working-folder}/health-report-YYYY-MM-DD.md (chat render only unless --save).
 #
 # Validation: evals/scripts/validate-fixtures.sh compares golden reports to this contract.
 

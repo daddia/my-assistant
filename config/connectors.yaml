@@ -46,12 +46,12 @@ categories:
     smoke:
       standalone_fixture: evals/connectors/fixtures/conn-drive-paste.md
       golden: evals/connectors/golden/conn-drive-paste.yaml
-      command: "/assistant:prep"
+      command: "/assistant:meeting prep"
       paste_prompt: "Prep for my next meeting using this pasted doc excerpt."
     live_optional:
       prerequisite: "Drive MCP provider connected in host settings (e.g. Google Drive or OneDrive)"
       steps:
-        - "Run /assistant:prep with a shared doc from drive"
+        - "Run /assistant:meeting prep with a shared doc from drive"
         - "Confirm read-only summary; no file upload or delete"
       draft_only: false
 

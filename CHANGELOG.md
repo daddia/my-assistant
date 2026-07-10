@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- **Schedule health ledger path** — working-folder heartbeats now live at `schedules/index.yaml` (was `schedule-health/index.yaml`); docs, skills, doctor fixtures, and schema comments updated.
+- **Schedule health ledger path** — working-folder heartbeats now live at `schedules/index.yaml` (was `schedule-health/index.yaml`); docs, skills, health-check fixtures, and schema comments updated.
 - **Command descriptions** — standardized frontmatter across all 13 slash commands for clearer discovery.
 
 ### Fixed
@@ -62,8 +62,8 @@ First tagged release of **My Assistant** as a single installable plugin. Superse
 ### Added
 
 - **Single plugin package** — `.claude-plugin/plugin.json` and a single-plugin `marketplace.json` installable from the GitHub URL. Root `.mcp.json` connector suggestions (Slack, Notion, GitHub).
-- **14 skills** — setup-interview, inbox-triage, email-drafting, email-feedback, follow-up-tracking, calendar-scheduling, meeting-prep, meeting-follow-up, daily-brief, task-management, memory-management, weekly-review, schedule-setup, install-doctor.
-- **Commands** — `/assistant:setup`, `:inbox`, `:email`, `:calendar`, `:meeting`, `:tasks`, `:memory`, `:brief`, `:prep`, `:update`, `:review`, `:schedules`, `:doctor`.
+- **14 skills** — setup-interview, inbox-triage, email-drafting, email-feedback, follow-up-tracking, calendar-scheduling, meeting-prep, meeting-follow-up, daily-brief, task-management, memory-management, weekly-review, schedule-setup, health-check.
+- **Commands** — `/assistant:setup`, `:inbox`, `:email`, `:calendar`, `:meeting`, `:tasks`, `:memory`, `:brief`, `:prep`, `:update`, `:review`, `:schedules`, `:health`.
 - **3 named + schedulable agents** and **3 managed-agent cookbooks** (`agent.yaml`) for headless, always-on deployment.
 - **Profile-based personalisation** at `~/.claude/plugins/config/my-assistant/profile.md`, outside the plugin so `/plugin update` never overwrites it; loaded via a `SessionStart` hook.
 - **Graduated autonomy** (Tiers 0–3, default Draft) and the draft-don't-send guarantee in `rules/core-behaviour.md`.

@@ -2,8 +2,8 @@ fixture_id: fx-quick-start-profile
 version: "0.1"
 generated_at: "2026-07-08T08:05:00+10:00"
 platform_hint: cowork
-working_folder: evals/doctor/fixtures/fx-quick-start-profile/working
-profile_path: evals/doctor/fixtures/profiles/fx-quick-start-profile.md
+working_folder: evals/health-check/fixtures/fx-quick-start-profile/working
+profile_path: evals/health-check/fixtures/profiles/fx-quick-start-profile.md
 summary:
   pass: 5
   warn: 3

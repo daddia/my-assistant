@@ -1,8 +1,8 @@
 fixture_id: fx-folder-scaffold
 description: Valid profile but working folder missing TASKS.md and memory scaffold
-profile_file: evals/doctor/fixtures/profiles/fx-full-profile.md
-working_folder: evals/doctor/fixtures/fx-folder-scaffold/working
+profile_file: evals/health-check/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-folder-scaffold/working
 schedule_health_file: null
 platform_hint: cowork
 connectors_connected: []
-doctor_mode: full
+health_check_mode: full

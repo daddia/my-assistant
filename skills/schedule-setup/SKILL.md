@@ -99,7 +99,7 @@ Cron: `0 8,12,16 * * 1-5`
 Weekdays 7:00am · `job_id: meeting-prep-watcher` · no managed cookbook — `cloud-code` fallback
 
 ```
-For each meeting today with an external attendee, run /assistant:prep:
+For each meeting today with an external attendee, run /assistant:meeting prep:
 who they are, what they do, our last contact, and what I should prepare.
 Read my profile and memory first.
 ```

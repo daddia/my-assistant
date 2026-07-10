@@ -22,7 +22,6 @@ No connectors required. Eval maintainers: see [`evals/demo/first-run-script.md`]
 |-----|---------|
 | Configure it to you (10-min interview) | `/assistant:setup` |
 | Morning briefing | `/assistant:brief` |
-| Prep for today's meetings | `/assistant:prep` |
 | Sync tasks + memory + follow-ups | `/assistant:update` |
 | Weekly review | `/assistant:review` |
 | Set up scheduled tasks | `/assistant:schedules` |
@@ -37,6 +36,7 @@ No connectors required. Eval maintainers: see [`evals/demo/first-run-script.md`]
 | Review what's awaiting a response | `/assistant:email review` |
 | Add / review / sync tasks | `/assistant:tasks add` · `review` · `sync` |
 | Remember or prune context | `/assistant:memory add` · `prune` |
+| Prep for meetings / follow up on notes | `/assistant:meeting prep` · `follow-up` (default) |
 
 Plus skills that fire on their own as you work: calendar scheduling, meeting follow-up from pasted notes, and two-tier memory that decodes your shorthand ("ask todd re oracle").
 

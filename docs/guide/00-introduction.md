@@ -32,7 +32,6 @@ No coding required.
 |---------|----------------|
 | `/assistant:setup` | First run, or to update who you are and how you write |
 | `/assistant:brief` | Morning briefing |
-| `/assistant:prep` | Prep for today's meetings |
 | `/assistant:update` | Sync tasks, memory, and follow-ups (`--comprehensive` scans connectors) |
 | `/assistant:review` | Weekly review |
 | `/assistant:schedules` | Set up recurring scheduled tasks |
@@ -47,6 +46,8 @@ No coding required.
 | `/assistant:email review` | Review what's awaiting a response |
 | `/assistant:tasks` | Add, review, or sync tasks (`add` · `review` · `sync`) |
 | `/assistant:memory` | Remember or prune context (`add` · `prune`) |
+| `/assistant:meeting prep` | Prep for today's meetings |
+| `/assistant:meeting follow-up` | Turn pasted notes into extraction, recap drafts, and queue items (default) |
 
 ## Next
 

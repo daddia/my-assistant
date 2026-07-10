@@ -20,7 +20,7 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 Run the onboarding interview. Read and follow `skills/setup-interview/SKILL.md`.
 
-Offer a 2-minute quick-start or the full 10-minute interview. Write the profile to `~/.claude/plugins/config/my-assistant/profile.md` (outside the plugin, so updates don't overwrite it). Confirm each section as you go, run the post-setup health subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:doctor` for a full check.
+Offer a 2-minute quick-start or the full 10-minute interview. Write the profile to `~/.claude/plugins/config/my-assistant/profile.md` (outside the plugin, so updates don't overwrite it). Confirm each section as you go, run the post-setup health subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health` for a full check.
 
 ## Verification
 
@@ -41,7 +41,7 @@ Present a concise result block:
 
 ## Next Steps
 
-- Run `/assistant:doctor` for a full install health check.
+- Run `/assistant:health` for a full install health check.
 - Run `/assistant:inbox triage` or paste a demo thread from `examples/`.
 - Run `/assistant:brief` for a morning briefing.
 - Connect tools via Cowork → Settings → Connectors when ready.

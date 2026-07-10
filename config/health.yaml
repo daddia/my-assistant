@@ -1,5 +1,5 @@
-# Install doctor checklist — canonical check IDs, categories, and fix routing.
-# Loaded by skills/install-doctor/SKILL.md; validated by evals/scripts/validate-fixtures.sh.
+# Health check checklist — canonical check IDs, categories, and fix routing.
+# Loaded by skills/health-check/SKILL.md; validated by evals/scripts/validate-fixtures.sh.
 
 version: "0.1"
 
@@ -44,7 +44,7 @@ checks:
     default_severity_on_fail: fail
     fix_ref: rules/core-behaviour.md
 
-  - id: plugin-doctor-checklist
+  - id: plugin-health-checklist
     category: plugin
     default_severity_on_fail: fail
     fix_ref: docs/guide/01-getting-started.md

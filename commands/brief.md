@@ -40,7 +40,7 @@ Present a concise result block:
 
 ## Next Steps
 
-- Run `/assistant:prep` for your first meeting.
+- Run `/assistant:meeting prep` for your first meeting.
 - Act on flagged follow-ups via `/assistant:email review`.
 - Run `/assistant:inbox triage` on priority unread.
 - Run `/assistant:calendar protect` if the brief surfaced buffer gaps.

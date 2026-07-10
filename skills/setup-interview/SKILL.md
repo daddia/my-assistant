@@ -80,16 +80,16 @@ Fill the template section by section from their answers. Leave clear placeholder
 
 ### Post-setup health check
 
-After the **initial** profile write (starter, quick-start, or full interview — not when updating an existing profile), run the install doctor **subset**:
+After the **initial** profile write (starter, quick-start, or full interview — not when updating an existing profile), run the health check **subset**:
 
-1. Read and follow `skills/install-doctor/SKILL.md` with `checks: [profile, working-folder]` only.
+1. Read and follow `skills/health-check/SKILL.md` with `checks: [profile, working-folder]` only.
 2. Render a compact **Setup health** block (≤8 lines): summary counts (`pass` / `warn` / `fail` / `skip`) plus the top fails or warns with `fix_ref` links.
 3. Do **not** block the wedge on warnings — always continue to the handoff below.
-4. Chat-only — do not auto-save `doctor-report-*.md` after setup.
+4. Chat-only — do not auto-save `health-report-*.md` after setup.
 
 Then summarise what's captured and point them at the wedge:
 
-> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:doctor` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
+> "You're set up. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:health` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 

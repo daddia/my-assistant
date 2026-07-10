@@ -1,8 +1,8 @@
 fixture_id: fx-no-profile
 description: Fresh install with no profile and empty working folder
 profile_file: null
-working_folder: evals/doctor/fixtures/fx-no-profile/working
+working_folder: evals/health-check/fixtures/fx-no-profile/working
 schedule_health_file: null
 platform_hint: unknown
 connectors_connected: []
-doctor_mode: full
+health_check_mode: full

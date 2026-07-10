@@ -120,7 +120,8 @@ Tier 3 may perform narrow **pre-approved** notify-after actions (e.g. decline ob
 | `/assistant:inbox triage` | `~~email` or paste; profile | Triage report optional; handoff to drafting | Drafts (Tier 1+); labels/archive (Tier 2+) |
 | `/assistant:email draft` | Thread; profile; memory | `drafts/` | Email draft |
 | `/assistant:brief` | `~~calendar`, `~~email`, TASKS.md, memory; profile | `brief-YYYY-MM-DD.md` | — |
-| `/assistant:prep` | Calendar event; related mail; memory | Prep notes | — |
+| `/assistant:meeting prep` | Calendar event; related mail; memory | Prep notes | — |
+| `/assistant:meeting follow-up` | Pasted notes/transcript | Extraction, drafts, queue items | — |
 | `/assistant:tasks` | TASKS.md | TASKS.md | — |
 | `/assistant:memory` | memory/, profile | memory/, CLAUDE.md | — |
 | `/assistant:setup` | profile template | profile.md (full write) | — |

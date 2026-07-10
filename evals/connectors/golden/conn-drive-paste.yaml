@@ -1,7 +1,7 @@
 fixture_id: conn-drive-paste
 category: drive
 placeholder: "~~drive"
-smoke_command: "/assistant:prep"
+smoke_command: "/assistant:meeting prep"
 standalone_pass:
   must_surface:
     - meeting prep summary

@@ -1,0 +1,8 @@
+fixture_id: fx-schedule-missed-local
+description: morning-briefing on local surface with miss_count_7d >= 2
+profile_file: evals/health-check/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-schedule-missed-local/working
+schedule_health_file: evals/health-check/fixtures/fx-schedule-missed-local/working/schedules/index.yaml
+platform_hint: cowork
+connectors_connected: []
+health_check_mode: full

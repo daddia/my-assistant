@@ -2,8 +2,8 @@ fixture_id: fx-schedule-healthy
 version: "0.1"
 generated_at: "2026-07-08T08:20:00+10:00"
 platform_hint: cowork
-working_folder: evals/doctor/fixtures/fx-schedule-healthy/working
-profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-schedule-healthy/working
+profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 4
   warn: 0

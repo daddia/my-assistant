@@ -33,7 +33,7 @@ For **each** of the six categories:
 | -------- | ------- | ------- |
 | `~~email` | `conn-email-paste` | `/assistant:inbox triage` |
 | `~~calendar` | `conn-calendar-paste` | `/assistant:calendar protect` |
-| `~~drive` | `conn-drive-paste` | `/assistant:prep` |
+| `~~drive` | `conn-drive-paste` | `/assistant:meeting prep` |
 | `~~chat` | `conn-chat-paste` | `/assistant:update` |
 | `~~notes` | `conn-notes-paste` | `/assistant:meeting follow-up` |
 | `~~tasks` | `conn-tasks-paste` | `/assistant:tasks review` |

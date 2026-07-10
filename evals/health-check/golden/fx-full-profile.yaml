@@ -2,8 +2,8 @@ fixture_id: fx-full-profile
 version: "0.1"
 generated_at: "2026-07-08T08:10:00+10:00"
 platform_hint: cowork
-working_folder: evals/doctor/fixtures/fx-full-profile/working
-profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-full-profile/working
+profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 19
   warn: 0
@@ -30,10 +30,10 @@ results:
     category: plugin
     status: pass
     message: Core rules present
-  - check_id: plugin-doctor-checklist
+  - check_id: plugin-health-checklist
     category: plugin
     status: pass
-    message: Doctor checklist and schema present
+    message: Health checklist and schema present
   - check_id: profile-exists
     category: profile
     status: pass

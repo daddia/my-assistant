@@ -10,11 +10,10 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 |---------|------|
 | `/assistant:setup` | Onboarding interview → writes your profile |
 | `/assistant:brief` | Morning briefing |
-| `/assistant:prep` | Pre-meeting briefs |
 | `/assistant:update` | Sync tasks + memory + follow-ups (`--comprehensive` scans connectors) |
 | `/assistant:review` | Weekly review |
 | `/assistant:schedules` | Set up scheduled tasks |
-| `/assistant:doctor` | Install and setup health check (`--save` writes report to working folder) |
+| `/assistant:health` | Install and setup health check (`--save` writes report to working folder) |
 
 ### Domain commands — noun + verb arguments
 
@@ -25,9 +24,9 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
 | `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
 | `/assistant:calendar` | `protect` (default) · `schedule` | Scan for buffer/prep/follow-up gaps and draft block proposals, or find meeting times |
-| `/assistant:meeting` | `follow-up` (default) | Import notetaker export or notes → extraction, recap drafts, queue items |
+| `/assistant:meeting` | `prep` · `follow-up` (default) | Pre-meeting briefs, or import notetaker export/notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting prep`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
 
 ### How voice learning works
 
@@ -58,7 +57,7 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 - **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
 - **setup-interview** / **schedule-setup** — onboarding and automation
-- **install-doctor** — read-only install health check (`/assistant:doctor`); post-setup subset runs after profile write
+- **health-check** — read-only install health check (`/assistant:health`); post-setup subset runs after profile write
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.
 

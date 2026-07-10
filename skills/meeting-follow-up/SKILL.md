@@ -171,7 +171,7 @@ Review queue: +N pending (reply-draft: rq-…) — review-queue/index.yaml
 
 - Confirmed task adds → `task-management`
 - Confirmed memory saves → `memory-management`
-- Pre-meeting context → user may have used `/assistant:prep` earlier; no automatic handoff
+- Pre-meeting context → user may have used `/assistant:meeting prep` earlier; no automatic handoff
 
 ## Rules
 

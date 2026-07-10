@@ -1,21 +1,21 @@
 ---
-name: install-doctor
+name: health-check
 description: Install and setup health check for the assistant plugin. Activate on
-  "/assistant:doctor", "run doctor", "health check", "is my assistant set up correctly",
+  "/assistant:health", "run health check", "health check", "is my assistant set up correctly",
   or "diagnose my install". Read-only validator — proposes fixes, never auto-remediates.
 ---
 
-# Install doctor
+# Health check
 
-Structured health check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — doctor proposes fixes and routes to commands or guide chapters; it never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
+Structured health check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — health check proposes fixes and routes to commands or guide chapters; it never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
 
-The only optional write: `doctor-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
+The only optional write: `health-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
 
 ## Load the checklist
 
-Read `config/doctor-checklist.yaml` from the plugin directory. If missing, stop with an honest error:
+Read `config/health-checklist.yaml` from the plugin directory. If missing, stop with an honest error:
 
-> Plugin install incomplete — reinstall from the marketplace. The doctor checklist (`config/doctor-checklist.yaml`) is missing.
+> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`config/health-checklist.yaml`) is missing.
 
 Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
 
@@ -36,7 +36,7 @@ Record the path tried in the report as `profile_path` (or `null`).
 2. Open workspace / current working directory in Cowork or Cursor
 3. If still ambiguous, default to cwd with a **warn** on `working-folder-identified` and ask the user to confirm or open their working folder
 
-Never write health or doctor files under the plugin directory (`rules/file-safety.md`).
+Never write health or health-check files under the plugin directory (`rules/file-safety.md`).
 
 ### Platform hint
 
@@ -62,7 +62,7 @@ When `unknown`, platform-specific checks **skip** with a message to re-run after
 | `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
 | `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
 | `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
-| `plugin-doctor-checklist` | `config/doctor-checklist.yaml` and `config/doctor-report.schema.yaml` exist | **fail** |
+| `plugin-health-checklist` | `config/health-checklist.yaml` and `config/health-report.schema.yaml` exist | **fail** |
 
 ### Profile
 
@@ -140,14 +140,14 @@ Link `docs/guide/connector-smoke-tests.md` for paste smoke steps. Never run live
 
 When invoked from `setup-interview` after initial profile write, run **only** profile + working-folder categories:
 
-- `checks: [profile, working-folder]` — skip plugin, always-on, connectors, platform unless user asks for full doctor
+- `checks: [profile, working-folder]` — skip plugin, always-on, connectors, platform unless user asks for full health check
 - Render a compact **Setup health** block (≤8 lines): summary counts + top fails/warns with fix refs
 - Do **not** block the wedge CTA on warnings — always offer `/assistant:inbox triage` and `/assistant:brief` after the block
-- Chat-only — no auto-save of `doctor-report-*.md` after setup
+- Chat-only — no auto-save of `health-report-*.md` after setup
 
 ## Build and render the report
 
-Aggregate results into `DoctorReport` matching `config/doctor-report.schema.yaml`:
+Aggregate results into `HealthCheckReport` matching `config/health-report.schema.yaml`:
 
 ```yaml
 version: "0.1"
@@ -163,9 +163,9 @@ results: [ ... ]
 
 Use the four-part frame from `rules/approval-frame.md`:
 
-**What I found** — summary line: `Doctor: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
+**What I found** — summary line: `Health check: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
 
-**What I drafted** — "Nothing yet" (doctor does not create drafts).
+**What I drafted** — "Nothing yet" (health check does not create drafts).
 
 **What I recommend** — Top 1–3 fixes ranked by severity (fails first, then warns).
 
@@ -184,7 +184,7 @@ Use ✅ pass · ⚠️ warn · ❌ fail · ⏭️ skip in the Status column.
 
 ### Optional save (`--save`)
 
-Write `doctor-report-YYYY-MM-DD.md` to the working folder with the same markdown body. If the folder is not writable, render in chat only and note the save failure.
+Write `health-report-YYYY-MM-DD.md` to the working folder with the same markdown body. If the folder is not writable, render in chat only and note the save failure.
 
 ## Error paths
 
@@ -201,4 +201,4 @@ Every failure maps to a checklist row with `fix_ref` — no opaque errors.
 
 ## Maintainer fixtures
 
-Synthetic states and golden expected reports live in `evals/doctor/`. See `evals/doctor/README.md` for fixture validation.
+Synthetic states and golden expected reports live in `evals/health-check/`. See `evals/health-check/README.md` for fixture validation.

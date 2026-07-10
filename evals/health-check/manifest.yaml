@@ -1,12 +1,12 @@
-# Install doctor fixtures — synthetic install states for structural regression.
-# See evals/doctor/README.md
+# Install health-check fixtures — synthetic install states for structural regression.
+# See evals/health-check/README.md
 
 version: "0.1"
 
 fixtures:
   - id: fx-no-profile
-    file: evals/doctor/fixtures/fx-no-profile.yaml
-    golden: evals/doctor/golden/fx-no-profile.yaml
+    file: evals/health-check/fixtures/fx-no-profile.yaml
+    golden: evals/health-check/golden/fx-no-profile.yaml
     covers_checks:
       - profile-exists
       - profile-readable
@@ -17,8 +17,8 @@ fixtures:
       - tasks-md-present
 
   - id: fx-quick-start-profile
-    file: evals/doctor/fixtures/fx-quick-start-profile.yaml
-    golden: evals/doctor/golden/fx-quick-start-profile.yaml
+    file: evals/health-check/fixtures/fx-quick-start-profile.yaml
+    golden: evals/health-check/golden/fx-quick-start-profile.yaml
     mode: post-setup-subset
     covers_checks:
       - profile-exists
@@ -28,8 +28,8 @@ fixtures:
       - memory-scaffold
 
   - id: fx-full-profile
-    file: evals/doctor/fixtures/fx-full-profile.yaml
-    golden: evals/doctor/golden/fx-full-profile.yaml
+    file: evals/health-check/fixtures/fx-full-profile.yaml
+    golden: evals/health-check/golden/fx-full-profile.yaml
     covers_checks:
       - profile-exists
       - profile-sections-complete
@@ -40,16 +40,16 @@ fixtures:
       - claude-md-present
 
   - id: fx-folder-scaffold
-    file: evals/doctor/fixtures/fx-folder-scaffold.yaml
-    golden: evals/doctor/golden/fx-folder-scaffold.yaml
+    file: evals/health-check/fixtures/fx-folder-scaffold.yaml
+    golden: evals/health-check/golden/fx-folder-scaffold.yaml
     covers_checks:
       - tasks-md-present
       - memory-scaffold
       - claude-md-present
 
   - id: fx-schedule-healthy
-    file: evals/doctor/fixtures/fx-schedule-healthy.yaml
-    golden: evals/doctor/golden/fx-schedule-healthy.yaml
+    file: evals/health-check/fixtures/fx-schedule-healthy.yaml
+    golden: evals/health-check/golden/fx-schedule-healthy.yaml
     covers_checks:
       - schedule-ledger-present
       - schedule-health-valid
@@ -57,14 +57,14 @@ fixtures:
       - schedule-critical-local-misses
 
   - id: fx-schedule-missed-local
-    file: evals/doctor/fixtures/fx-schedule-missed-local.yaml
-    golden: evals/doctor/golden/fx-schedule-missed-local.yaml
+    file: evals/health-check/fixtures/fx-schedule-missed-local.yaml
+    golden: evals/health-check/golden/fx-schedule-missed-local.yaml
     covers_checks:
       - schedule-critical-local-misses
 
   - id: fx-cursor-platform
-    file: evals/doctor/fixtures/fx-cursor-platform.yaml
-    golden: evals/doctor/golden/fx-cursor-platform.yaml
+    file: evals/health-check/fixtures/fx-cursor-platform.yaml
+    golden: evals/health-check/golden/fx-cursor-platform.yaml
     covers_checks:
       - platform-inferred
       - platform-cursor-local-schedules

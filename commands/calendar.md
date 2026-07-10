@@ -53,6 +53,6 @@ Present a concise result block:
 ## Next Steps
 
 - Create proposed calendar blocks manually from `drafts/calendar-block-*.md`.
-- Run `/assistant:prep` before your next meeting.
+- Run `/assistant:meeting prep` before your next meeting.
 - Run `/assistant:brief` to see today's calendar in context.
 - Send scheduling reply drafts from your mail client.

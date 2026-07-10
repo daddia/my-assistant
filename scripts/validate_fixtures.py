@@ -53,8 +53,8 @@ REQUIRED_DIRS = [
     EVALS_DIR / "connectors/golden",
     EVALS_DIR / "connectors/rubric",
     EVALS_DIR / "starter-profiles",
-    EVALS_DIR / "doctor/fixtures",
-    EVALS_DIR / "doctor/golden",
+    EVALS_DIR / "health-check/fixtures",
+    EVALS_DIR / "health-check/golden",
     EVALS_DIR / "demo/assets",
 ]
 
@@ -78,9 +78,9 @@ REQUIRED_FILES = [
     EVALS_DIR / "connectors/manifest.yaml",
     ROOT / "config/starter-profiles/manifest.yaml",
     ROOT / "examples/before-after/manifest.yaml",
-    ROOT / "config/doctor-checklist.yaml",
-    ROOT / "config/doctor-report.schema.yaml",
-    EVALS_DIR / "doctor/manifest.yaml",
+    ROOT / "config/health-checklist.yaml",
+    ROOT / "config/health-report.schema.yaml",
+    EVALS_DIR / "health-check/manifest.yaml",
 ]
 
 PII_PATTERNS: dict[str, re.Pattern[str]] = {
@@ -120,9 +120,9 @@ BLOCKED_PERSONAL_DOMAINS = frozenset({
     "icloud.com", "me.com", "aol.com", "live.com",
 })
 
-DOCTOR_STATUSES = frozenset({"pass", "warn", "fail", "skip"})
-DOCTOR_PLATFORMS = frozenset({"cowork", "cursor", "claude-code", "unknown"})
-MIN_DOCTOR_CHECKS = 20
+HEALTH_CHECK_STATUSES = frozenset({"pass", "warn", "fail", "skip"})
+HEALTH_CHECK_PLATFORMS = frozenset({"cowork", "cursor", "claude-code", "unknown"})
+MIN_HEALTH_CHECKS = 20
 
 
 def resolve_eval_path(rel: str) -> Path:
@@ -1056,164 +1056,164 @@ def validate_before_after(errors: list[str], thread_ids: set[str]) -> list:
     return before_after_demos
 
 
-def validate_doctor(errors: list[str]) -> tuple[list, set[str]]:
-    doctor_checklist_path = ROOT / "config/doctor-checklist.yaml"
-    doctor_check_ids: set[str] = set()
-    doctor_category_ids: set[str] = set()
+def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
+    health_checklist_path = ROOT / "config/health-checklist.yaml"
+    health_check_ids: set[str] = set()
+    health_check_category_ids: set[str] = set()
 
-    if doctor_checklist_path.is_file():
-        doctor_doc = load_yaml(doctor_checklist_path)
-        for cat in doctor_doc.get("categories", []):
+    if health_checklist_path.is_file():
+        health_check_doc = load_yaml(health_checklist_path)
+        for cat in health_check_doc.get("categories", []):
             if isinstance(cat, dict) and cat.get("id"):
-                doctor_category_ids.add(cat["id"])
-        checks = doctor_doc.get("checks")
+                health_check_category_ids.add(cat["id"])
+        checks = health_check_doc.get("checks")
         if not isinstance(checks, list):
-            errors.append("doctor-checklist.yaml: 'checks' must be a list")
+            errors.append("health-checklist.yaml: 'checks' must be a list")
             checks = []
-        if len(checks) < MIN_DOCTOR_CHECKS:
+        if len(checks) < MIN_HEALTH_CHECKS:
             errors.append(
-                f"doctor-checklist.yaml lists {len(checks)} checks; minimum is {MIN_DOCTOR_CHECKS}"
+                f"health-checklist.yaml lists {len(checks)} checks; minimum is {MIN_HEALTH_CHECKS}"
             )
         for i, entry in enumerate(checks):
             if not isinstance(entry, dict):
-                errors.append(f"doctor-checklist.yaml: checks[{i}] must be a mapping")
+                errors.append(f"health-checklist.yaml: checks[{i}] must be a mapping")
                 continue
             cid = entry.get("id")
             cat = entry.get("category")
             if not cid:
-                errors.append(f"doctor-checklist.yaml: checks[{i}] missing 'id'")
+                errors.append(f"health-checklist.yaml: checks[{i}] missing 'id'")
             else:
-                doctor_check_ids.add(cid)
-            if cat and cat not in doctor_category_ids:
+                health_check_ids.add(cid)
+            if cat and cat not in health_check_category_ids:
                 errors.append(
-                    f"doctor-checklist.yaml: check '{cid}' unknown category '{cat}'"
+                    f"health-checklist.yaml: check '{cid}' unknown category '{cat}'"
                 )
             if not entry.get("fix_ref"):
-                errors.append(f"doctor-checklist.yaml: check '{cid}' missing fix_ref")
+                errors.append(f"health-checklist.yaml: check '{cid}' missing fix_ref")
     else:
-        errors.append("missing config/doctor-checklist.yaml")
+        errors.append("missing config/health-checklist.yaml")
 
     golden_check_ids: set[str] = set()
-    doctor_fixtures: list = []
+    health_check_fixtures: list = []
 
-    manifest_path = EVALS_DIR / "doctor/manifest.yaml"
+    manifest_path = EVALS_DIR / "health-check/manifest.yaml"
     if not manifest_path.is_file():
-        errors.append("missing doctor/manifest.yaml")
-        return doctor_fixtures, doctor_check_ids
+        errors.append("missing health-check/manifest.yaml")
+        return health_check_fixtures, health_check_ids
 
-    doctor_manifest = load_yaml(manifest_path)
-    doctor_fixtures = doctor_manifest.get("fixtures")
-    if not isinstance(doctor_fixtures, list):
-        errors.append("doctor/manifest.yaml: 'fixtures' must be a list")
-        return [], doctor_check_ids
+    health_check_manifest = load_yaml(manifest_path)
+    health_check_fixtures = health_check_manifest.get("fixtures")
+    if not isinstance(health_check_fixtures, list):
+        errors.append("health-check/manifest.yaml: 'fixtures' must be a list")
+        return [], health_check_ids
 
-    doctor_ids: set[str] = set()
-    for i, entry in enumerate(doctor_fixtures):
+    health_check_fixture_ids: set[str] = set()
+    for i, entry in enumerate(health_check_fixtures):
         if not isinstance(entry, dict):
-            errors.append(f"doctor/manifest.yaml: fixtures[{i}] must be a mapping")
+            errors.append(f"health-check/manifest.yaml: fixtures[{i}] must be a mapping")
             continue
         fid = entry.get("id")
         fpath = entry.get("file")
         gpath = entry.get("golden")
         if not fid:
-            errors.append(f"doctor/manifest.yaml: fixtures[{i}] missing 'id'")
-        elif fid in doctor_ids:
-            errors.append(f"doctor/manifest.yaml: duplicate fixture id '{fid}'")
+            errors.append(f"health-check/manifest.yaml: fixtures[{i}] missing 'id'")
+        elif fid in health_check_fixture_ids:
+            errors.append(f"health-check/manifest.yaml: duplicate fixture id '{fid}'")
         else:
-            doctor_ids.add(fid)
+            health_check_fixture_ids.add(fid)
 
         if not fpath:
-            errors.append(f"doctor/manifest.yaml: fixture '{fid}' missing 'file'")
+            errors.append(f"health-check/manifest.yaml: fixture '{fid}' missing 'file'")
         else:
             resolved = resolve_eval_path(fpath)
             if not resolved.is_file():
-                errors.append(f"missing doctor fixture file: {resolved}")
+                errors.append(f"missing health-check fixture file: {resolved}")
             else:
                 fixture = load_yaml(resolved)
                 if fixture.get("fixture_id") != fid:
                     errors.append(
-                        f"doctor fixture {Path(fpath).name} fixture_id "
+                        f"health-check fixture {Path(fpath).name} fixture_id "
                         f"'{fixture.get('fixture_id')}' does not match manifest id '{fid}'"
                     )
                 wf = fixture.get("working_folder")
                 if wf and not resolve_eval_path(wf).is_dir():
-                    errors.append(f"missing doctor working folder: {resolve_eval_path(wf)}")
+                    errors.append(f"missing health-check working folder: {resolve_eval_path(wf)}")
                 pfile = fixture.get("profile_file")
                 if pfile and not resolve_eval_path(pfile).is_file():
-                    errors.append(f"missing doctor profile file: {resolve_eval_path(pfile)}")
+                    errors.append(f"missing health-check profile file: {resolve_eval_path(pfile)}")
 
         if not gpath:
-            errors.append(f"doctor/manifest.yaml: fixture '{fid}' missing 'golden'")
+            errors.append(f"health-check/manifest.yaml: fixture '{fid}' missing 'golden'")
             continue
 
         golden_resolved = resolve_eval_path(gpath)
         if not golden_resolved.is_file():
-            errors.append(f"missing doctor golden file: {golden_resolved}")
+            errors.append(f"missing health-check golden file: {golden_resolved}")
             continue
 
         golden = load_yaml(golden_resolved)
         if golden.get("fixture_id") != fid:
             errors.append(
-                f"doctor golden {Path(gpath).name} fixture_id "
+                f"health-check golden {Path(gpath).name} fixture_id "
                 f"'{golden.get('fixture_id')}' does not match manifest id '{fid}'"
             )
         if not golden.get("version"):
-            errors.append(f"doctor golden {Path(gpath).name} missing version")
+            errors.append(f"health-check golden {Path(gpath).name} missing version")
         hint = golden.get("platform_hint")
-        if hint and hint not in DOCTOR_PLATFORMS:
+        if hint and hint not in HEALTH_CHECK_PLATFORMS:
             errors.append(
-                f"doctor golden {Path(gpath).name} invalid platform_hint '{hint}'"
+                f"health-check golden {Path(gpath).name} invalid platform_hint '{hint}'"
             )
         summary = golden.get("summary")
         if not isinstance(summary, dict):
-            errors.append(f"doctor golden {Path(gpath).name} missing 'summary' mapping")
+            errors.append(f"health-check golden {Path(gpath).name} missing 'summary' mapping")
 
         results = golden.get("results")
         if not isinstance(results, list):
-            errors.append(f"doctor golden {Path(gpath).name} missing 'results' list")
+            errors.append(f"health-check golden {Path(gpath).name} missing 'results' list")
         else:
             tallies: dict[str, int] = {}
             for j, row in enumerate(results):
                 if not isinstance(row, dict):
                     errors.append(
-                        f"doctor golden {Path(gpath).name} results[{j}] must be a mapping"
+                        f"health-check golden {Path(gpath).name} results[{j}] must be a mapping"
                     )
                     continue
                 check_id = row.get("check_id")
                 status = row.get("status")
                 if check_id:
                     golden_check_ids.add(check_id)
-                if status and status not in DOCTOR_STATUSES:
+                if status and status not in HEALTH_CHECK_STATUSES:
                     errors.append(
-                        f"doctor golden {Path(gpath).name} results[{j}] "
+                        f"health-check golden {Path(gpath).name} results[{j}] "
                         f"invalid status '{status}'"
                     )
                 if status:
                     tallies[status] = tallies.get(status, 0) + 1
                 if not row.get("message"):
                     errors.append(
-                        f"doctor golden {Path(gpath).name} results[{j}] missing message"
+                        f"health-check golden {Path(gpath).name} results[{j}] missing message"
                     )
             if isinstance(summary, dict):
-                for st in DOCTOR_STATUSES:
+                for st in HEALTH_CHECK_STATUSES:
                     expected = tallies.get(st, 0)
                     actual = summary.get(st)
                     if actual != expected:
                         errors.append(
-                            f"doctor golden {Path(gpath).name} summary.{st} is {actual!r}; "
+                            f"health-check golden {Path(gpath).name} summary.{st} is {actual!r}; "
                             f"expected {expected} from results"
                         )
 
-    if len(doctor_fixtures) < 7:
+    if len(health_check_fixtures) < 7:
         errors.append(
-            f"doctor/manifest.yaml must list at least 7 fixtures; got {len(doctor_fixtures)}"
+            f"health-check/manifest.yaml must list at least 7 fixtures; got {len(health_check_fixtures)}"
         )
 
-    for cid in doctor_check_ids:
+    for cid in health_check_ids:
         if cid not in golden_check_ids:
-            errors.append(f"doctor-checklist check_id '{cid}' not referenced by any golden report")
+            errors.append(f"health-checklist check_id '{cid}' not referenced by any golden report")
 
-    return doctor_fixtures, doctor_check_ids
+    return health_check_fixtures, health_check_ids
 
 
 def main() -> int:
@@ -1229,7 +1229,7 @@ def main() -> int:
     conn_fixtures = validate_connectors(errors)
     starter_profiles = validate_starter_profiles(errors)
     before_after_demos = validate_before_after(errors, thread_ids)
-    doctor_fixtures, doctor_check_ids = validate_doctor(errors)
+    health_check_fixtures, health_check_ids = validate_health_check(errors)
 
     if errors:
         for error in errors:
@@ -1242,8 +1242,8 @@ def main() -> int:
         f"{len(nt_fixtures)} notetaker fixtures, {len(cal_fixtures)} calendar fixtures, "
         f"{len(sh_fixtures)} schedule-health fixtures, {len(fb_fixtures)} feedback fixtures, "
         f"{len(conn_fixtures)} connector fixtures, {len(starter_profiles)} starter profiles, "
-        f"{len(before_after_demos)} before-after demos, {len(doctor_fixtures)} doctor fixtures "
-        f"({len(doctor_check_ids)} checks), {len(EXPECTED_JOB_IDS)} catalog jobs"
+        f"{len(before_after_demos)} before-after demos, {len(health_check_fixtures)} health-check fixtures "
+        f"({len(health_check_ids)} checks), {len(EXPECTED_JOB_IDS)} catalog jobs"
     )
     return 0
 

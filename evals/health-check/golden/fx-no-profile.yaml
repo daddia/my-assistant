@@ -2,7 +2,7 @@ fixture_id: fx-no-profile
 version: "0.1"
 generated_at: "2026-07-08T08:00:00+10:00"
 platform_hint: unknown
-working_folder: evals/doctor/fixtures/fx-no-profile/working
+working_folder: evals/health-check/fixtures/fx-no-profile/working
 profile_path: null
 summary:
   pass: 1

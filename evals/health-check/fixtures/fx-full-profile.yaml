@@ -1,8 +1,8 @@
 fixture_id: fx-full-profile
 description: Complete eval profile with all required sections filled
-profile_file: evals/doctor/fixtures/profiles/fx-full-profile.md
-working_folder: evals/doctor/fixtures/fx-full-profile/working
+profile_file: evals/health-check/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-full-profile/working
 schedule_health_file: null
 platform_hint: cowork
 connectors_connected: [email, calendar]
-doctor_mode: full
+health_check_mode: full

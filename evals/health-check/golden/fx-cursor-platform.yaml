@@ -2,8 +2,8 @@ fixture_id: fx-cursor-platform
 version: "0.1"
 generated_at: "2026-07-08T08:30:00+10:00"
 platform_hint: cursor
-working_folder: evals/doctor/fixtures/fx-cursor-platform/working
-profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-cursor-platform/working
+profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 1
   warn: 2

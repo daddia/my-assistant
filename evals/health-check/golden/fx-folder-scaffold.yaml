@@ -2,8 +2,8 @@ fixture_id: fx-folder-scaffold
 version: "0.1"
 generated_at: "2026-07-08T08:15:00+10:00"
 platform_hint: cowork
-working_folder: evals/doctor/fixtures/fx-folder-scaffold/working
-profile_path: evals/doctor/fixtures/profiles/fx-full-profile.md
+working_folder: evals/health-check/fixtures/fx-folder-scaffold/working
+profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 2
   warn: 3

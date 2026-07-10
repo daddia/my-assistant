@@ -50,7 +50,7 @@ Add a **Notetaker import** table to `eval-run-YYYY-MM-DD.md`:
 
 - [`config/notetaker-formats.yaml`](../../config/notetaker-formats.yaml) — format fingerprints
 - [`skills/meeting-follow-up/SKILL.md`](../../skills/meeting-follow-up/SKILL.md) — import mode
-- [`commands/meeting.md`](../../commands/meeting.md) — `/assistant:meeting follow-up`
+- [`commands/meeting.md`](../../commands/meeting.md) — `/assistant:meeting prep` · `follow-up`
 - [MA04 design](../../.agency/work/notetaker-import/design.md)
 
 **Language:** English-first corpus. Multilingual exports deferred unless fixtures are added.

@@ -30,14 +30,14 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | `/assistant:calendar schedule` or within prep/brief |
 | Wants calendar protected / buffer gaps fixed | `skills/calendar-scheduling/SKILL.md` | `/assistant:calendar protect` (default) |
-| Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/assistant:prep` |
-| Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | `/assistant:meeting follow-up` or paste notes |
+| Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/assistant:meeting prep` |
+| Pastes notes / a transcript after a meeting | `skills/meeting-follow-up/SKILL.md` | `/assistant:meeting follow-up` (default) or paste notes |
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | `/assistant:memory add` · `prune` |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/assistant:review` |
 | Wants to set up scheduled tasks / always-on reliability | `skills/schedule-setup/SKILL.md` | `/assistant:schedules` |
-| Wants an install / setup health check | `skills/install-doctor/SKILL.md` | `/assistant:doctor` |
+| Wants an install / setup health check | `skills/health-check/SKILL.md` | `/assistant:health` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/follow-up-tracking/SKILL.md` + `skills/memory-management/SKILL.md` | `/assistant:update` |
 | Wants a visual editor for tasks or memory | `skills/dashboard.html` | (open in browser) |
 
@@ -56,14 +56,13 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:memory` | `add` (default) · `prune` | `memory-management` |
 | `/assistant:calendar` | `protect` (default) · `schedule` | `calendar-scheduling` |
 | `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
-| `/assistant:prep` | — | `meeting-prep` (+ `calendar-scheduling`, `follow-up-tracking`) |
-| `/assistant:meeting` | `follow-up` (default) | `meeting-follow-up` |
+| `/assistant:meeting` | `prep` · `follow-up` (default) | `meeting-prep` · `meeting-follow-up` |
 | `/assistant:update` | `--comprehensive` flag | `task-management` + `follow-up-tracking` + `memory-management` |
 | `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
 | `/assistant:schedules` | — | `schedule-setup` |
-| `/assistant:doctor` | `--save` flag | `install-doctor` |
+| `/assistant:health` | `--save` flag | `health-check` |
 
-Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup, doctor. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
+Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup, health. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
 
 ## Visual dashboard
 

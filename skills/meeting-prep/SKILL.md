@@ -1,7 +1,7 @@
 ---
 name: meeting-prep
 description: Produce a pre-meeting brief — who's in the room, what they do, last
-  contact, and what to prepare. Activate when the user says "/assistant:prep",
+  contact, and what to prepare. Activate when the user says "/assistant:meeting prep",
   "prep me for my next meeting", "who am I meeting", or on a meeting-prep schedule.
 ---
 

@@ -1,6 +1,6 @@
 # My Assistant — profile (quick-start fixture)
 
-Synthetic quick-start profile for doctor evals. Fictional persona only.
+Synthetic quick-start profile for health-check evals. Fictional persona only.
 
 ---
 
