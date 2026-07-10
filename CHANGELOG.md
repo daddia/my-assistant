@@ -18,6 +18,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - _(none)_
 
+## [1.2.0] - 2026-07-10
+
+### Changed
+
+- **Schedule health ledger path** — working-folder heartbeats now live at `schedules/index.yaml` (was `schedule-health/index.yaml`); docs, skills, doctor fixtures, and schema comments updated.
+- **Command descriptions** — standardized frontmatter across all 13 slash commands for clearer discovery.
+
+### Fixed
+
+- **Cowork command loading** — removed redundant component-path fields from both plugin manifests so auto-discovery loads `commands/`, `skills/`, `agents/`, and hooks from their default locations; fixes `/assistant:*` reporting "Unknown command" in Claude Cowork.
+
 ## [1.1.0] - 2026-07-08
 
 ### Fixed
