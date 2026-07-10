@@ -4,7 +4,7 @@ My Assistant runs recurring jobs on your machine (Cowork scheduled tasks), in Cl
 
 **Canonical job list:** `config/schedule-catalog.yaml`  
 **Setup command:** `/assistant:schedules`  
-**Health ledger:** `{working-folder}/schedule-health/index.yaml`
+**Health ledger:** `{working-folder}/schedules/index.yaml`
 
 ## Two surfaces, one source
 
@@ -47,7 +47,7 @@ Walk this during `/assistant:schedules` or when a job keeps missing.
 
 ## Health ledger
 
-After setup, `/assistant:schedules` creates `schedule-health/index.yaml` in your **working folder** (never inside the plugin directory).
+After setup, `/assistant:schedules` creates `schedules/index.yaml` in your **working folder** (never inside the plugin directory).
 
 Each scheduled run writes a heartbeat: last run time, success/partial/failed status, and whether expected artefacts (e.g. `brief-YYYY-MM-DD.md`) exist.
 

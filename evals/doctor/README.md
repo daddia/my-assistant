@@ -14,7 +14,7 @@ Synthetic install states and golden expected reports for `/assistant:doctor` str
 | `fx-quick-start-profile` | Post quick-start interview; thin VIP/calendar (`post-setup-subset`) |
 | `fx-full-profile` | Complete profile + scaffolded working folder |
 | `fx-folder-scaffold` | Profile OK; missing `TASKS.md` and `memory/` |
-| `fx-schedule-healthy` | Healthy `schedule-health/index.yaml` |
+| `fx-schedule-healthy` | Healthy `schedules/index.yaml` |
 | `fx-schedule-missed-local` | `morning-briefing` local with `miss_count_7d >= 2` |
 | `fx-cursor-platform` | Cursor + local critical job — platform and escalation warns |
 

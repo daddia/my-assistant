@@ -1,7 +1,7 @@
-# Schedule health ledger schema — machine-readable shape for schedule-health/index.yaml
+# Schedule health ledger schema — machine-readable shape for schedules/index.yaml
 #
 # Authoritative contract for scheduled-run skills and miss-detection logic.
-# Working-folder location: {working-folder}/schedule-health/index.yaml
+# Working-folder location: {working-folder}/schedules/index.yaml
 # Never write health files under the plugin directory (see rules/file-safety.md).
 #
 # Validation: compare fixture items in evals/schedule-health/fixtures/*.yaml

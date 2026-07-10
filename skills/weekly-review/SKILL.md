@@ -17,7 +17,7 @@ Load goals/priorities (to judge what mattered), voice, and working hours.
 
 On an **interactive** Friday run after the expected window (**cron 16:00 Friday + 90 minutes = 17:30**), optionally surface a low-priority miss hint for `weekly-review` when:
 
-- `schedule-health/index.yaml` exists and `weekly-review.surface` is `local`
+- `schedules/index.yaml` exists and `weekly-review.surface` is `local`
 - `review-{today}.md` is absent and `last_run_at` is stale
 
 Use the same `### Schedule health` block format as `daily-brief`, naming the weekly review job. Suggest `cloud-code` (no managed cookbook for this job). Skip when `surface` is `managed` or `cloud-code`. Max one health block per chat turn; do not block the review.
@@ -55,7 +55,7 @@ Next week
 
 Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `skills/schedule-setup/SKILL.md`.
 
-**Heartbeat:** at end of a scheduled run, update `schedule-health/index.yaml` for `weekly-review`:
+**Heartbeat:** at end of a scheduled run, update `schedules/index.yaml` for `weekly-review`:
 
 - `last_run_at`: now
 - `last_run_status`: `success` if `review-{today}.md` was written; else `partial` or `failed`

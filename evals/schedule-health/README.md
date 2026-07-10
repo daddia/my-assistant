@@ -9,10 +9,10 @@ Synthetic working-folder health ledgers for miss-detection smoke tests and schem
 
 ```bash
 WORK=/tmp/my-assistant-schedule-health-test
-mkdir -p "$WORK/schedule-health"
+mkdir -p "$WORK/schedules"
 
 # Missed morning brief (sh-02 smoke)
-cp evals/schedule-health/fixtures/sh-02-missed-morning-brief.yaml "$WORK/schedule-health/index.yaml"
+cp evals/schedule-health/fixtures/sh-02-missed-morning-brief.yaml "$WORK/schedules/index.yaml"
 ```
 
 Then run `/assistant:brief` on a weekday after 09:30 local — the **Schedule health** block should appear with "Missed", `morning-briefing`, and `managed-agents/morning-briefing`.
@@ -20,7 +20,7 @@ Then run `/assistant:brief` on a weekday after 09:30 local — the **Schedule he
 For the healthy case:
 
 ```bash
-cp evals/schedule-health/fixtures/sh-01-healthy-weekday.yaml "$WORK/schedule-health/index.yaml"
+cp evals/schedule-health/fixtures/sh-01-healthy-weekday.yaml "$WORK/schedules/index.yaml"
 # Ensure brief-2026-07-08.md exists in $WORK if testing artefact presence
 ```
 

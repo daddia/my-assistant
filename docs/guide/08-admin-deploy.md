@@ -45,7 +45,7 @@ User-owned directory the assistant reads and writes during sessions:
 | `drafts/` | Email, calendar, and follow-up drafts |
 | `brief-YYYY-MM-DD.md` | Morning briefings |
 | `review-queue/` | Pending approvals (`index.yaml` per review-queue schema) |
-| `schedule-health/` | Scheduled job heartbeats |
+| `schedules/` | Scheduled job heartbeats |
 
 The plugin directory (`skills/`, `rules/`, …) is **read-only** — skills never write there.
 
@@ -63,7 +63,7 @@ Skills use category placeholders (`~~email`, `~~calendar`, …) — not product 
 | Claude Code cloud schedules | Same chapter — `cloud-code` surface |
 | Managed agents | [`managed-agents/`](../../managed-agents/) cookbooks on Anthropic infrastructure |
 
-Canonical job list: `config/schedule-catalog.yaml`. Health ledger: `{working-folder}/schedule-health/index.yaml`.
+Canonical job list: `config/schedule-catalog.yaml`. Health ledger: `{working-folder}/schedules/index.yaml`.
 
 ## Managed agents
 

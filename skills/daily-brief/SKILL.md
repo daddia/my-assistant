@@ -18,7 +18,7 @@ Load working hours, VIP tiers, and voice (the brief is written *to* the user, in
 
 Before assembling the brief on an **interactive** run (`/assistant:brief`), check for a missed scheduled morning briefing. Do **not** run this block when the current session *is* the scheduled run recovering the job.
 
-1. Load `{working-folder}/schedule-health/index.yaml` if present. If missing, treat as "never scheduled" — suggest `/assistant:schedules` once, then proceed. If corrupt, note "health ledger unreadable — re-run /assistant:schedules" and proceed.
+1. Load `{working-folder}/schedules/index.yaml` if present. If missing, treat as "never scheduled" — suggest `/assistant:schedules` once, then proceed. If corrupt, note "health ledger unreadable — re-run /assistant:schedules" and proceed.
 2. Read the `morning-briefing` entry. **Skip miss detection** when `surface` is `managed` or `cloud-code` — local miss logic does not apply.
 3. On `surface: local`, on a **weekday**, when local time is past the expected run window (**cron fire time + 90 minutes**; default 08:00 + 90m = 09:30), detect a miss when **either**:
    - `brief-{today}.md` is absent in the working folder, **or**
@@ -82,7 +82,7 @@ Quiet otherwise. Have a good one.
 
 When run as a scheduled task, save output to `brief-YYYY-MM-DD.md` in the working folder so there's a history. See `skills/schedule-setup/SKILL.md` for the packaged 8am prompt.
 
-**Heartbeat:** at end of a scheduled run, update `schedule-health/index.yaml` for `morning-briefing`:
+**Heartbeat:** at end of a scheduled run, update `schedules/index.yaml` for `morning-briefing`:
 
 - `last_run_at`: now
 - `last_run_status`: `success` if `brief-{today}.md` was written; else `partial` or `failed`

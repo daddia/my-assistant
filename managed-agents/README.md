@@ -37,4 +37,4 @@ All three cookbooks are **draft-only**: they never send, book, or spend.
 
 ## Health ledger
 
-Managed runs should update `{working-folder}/schedule-health/index.yaml` with `surface: managed` and heartbeat fields per `config/schedule-health.schema.yaml`.
+Managed runs should update `{working-folder}/schedules/index.yaml` with `surface: managed` and heartbeat fields per `config/schedule-health.schema.yaml`.

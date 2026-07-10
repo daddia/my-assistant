@@ -45,7 +45,7 @@ Full user-facing copy of this tree: `docs/guide/07-always-on-reliability.md`.
 
 ## Initialize schedule health ledger
 
-After the user picks jobs and surfaces, create or update `{working-folder}/schedule-health/index.yaml`:
+After the user picks jobs and surfaces, create or update `{working-folder}/schedules/index.yaml`:
 
 ```yaml
 version: "0.1"
@@ -62,7 +62,7 @@ jobs:
     notes: null
 ```
 
-- Create `schedule-health/` on first write in the **working folder only** — never under the plugin directory.
+- Create `schedules/` on first write in the **working folder only** — never under the plugin directory.
 - Include only jobs the user actually set up.
 - If the ledger already exists, merge new jobs; do not wipe existing heartbeat history.
 
@@ -134,7 +134,7 @@ If the user wants a minimal setup, recommend just two: **Morning briefing** and 
 
 ## Health recording on scheduled runs
 
-When a scheduled run completes (any surface), the target skill updates `schedule-health/index.yaml` for its `job_id`:
+When a scheduled run completes (any surface), the target skill updates `schedules/index.yaml` for its `job_id`:
 
 - Set `last_run_at` to now (ISO-8601).
 - Set `last_run_status` to `success` only when required artefacts exist or the skill's completion criteria are met; otherwise `partial` or `failed`.

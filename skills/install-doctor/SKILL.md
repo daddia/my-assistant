@@ -101,7 +101,7 @@ If `working-folder-identified` **warns** (ambiguous), folder file checks may **s
 
 ### Always-on
 
-When `{working-folder}/schedule-health/index.yaml` is **absent**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
+When `{working-folder}/schedules/index.yaml` is **absent**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
 
 When ledger **exists**:
 

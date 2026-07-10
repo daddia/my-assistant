@@ -70,7 +70,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 - **Scheduled tasks** (`/assistant:schedules`) — guided decision tree for local Cowork schedules, Claude Code cloud schedules, or managed agents. Canonical job list: [`config/schedule-catalog.yaml`](./config/schedule-catalog.yaml).
 - **Managed-agent cookbooks** ([`managed-agents/`](./managed-agents/)) — the same jobs on Anthropic's infrastructure, immune to a sleeping laptop. Advanced/optional.
-- **Reliability guide** — [Always-on reliability](./docs/guide/07-always-on-reliability.md): when to stay local, when to escalate, and how missed runs surface in chat via `schedule-health/`.
+- **Reliability guide** — [Always-on reliability](./docs/guide/07-always-on-reliability.md): when to stay local, when to escalate, and how missed runs surface in chat via `schedules/`.
 
 ## Visual dashboard
 

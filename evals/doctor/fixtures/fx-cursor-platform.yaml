@@ -2,7 +2,7 @@ fixture_id: fx-cursor-platform
 description: Cursor user with critical job on local surface and missed runs
 profile_file: evals/doctor/fixtures/profiles/fx-full-profile.md
 working_folder: evals/doctor/fixtures/fx-cursor-platform/working
-schedule_health_file: evals/doctor/fixtures/fx-cursor-platform/working/schedule-health/index.yaml
+schedule_health_file: evals/doctor/fixtures/fx-cursor-platform/working/schedules/index.yaml
 platform_hint: cursor
 connectors_connected: []
 doctor_mode: full
