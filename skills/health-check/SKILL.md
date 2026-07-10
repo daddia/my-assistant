@@ -13,9 +13,9 @@ The only optional write: `health-report-YYYY-MM-DD.md` in the working folder whe
 
 ## Load the checklist
 
-Read `config/health-checklist.yaml` from the plugin directory. If missing, stop with an honest error:
+Read `config/health.yaml` from the plugin directory. If missing, stop with an honest error:
 
-> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`config/health-checklist.yaml`) is missing.
+> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`config/health.yaml`) is missing.
 
 Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
 
@@ -62,7 +62,7 @@ When `unknown`, platform-specific checks **skip** with a message to re-run after
 | `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
 | `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
 | `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
-| `plugin-health-checklist` | `config/health-checklist.yaml` and `config/health-report.schema.yaml` exist | **fail** |
+| `plugin-health-checklist` | `config/health.yaml` and `config/health-report.schema.yaml` exist | **fail** |
 
 ### Profile
 
@@ -108,8 +108,8 @@ When ledger **exists**:
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
 | `schedule-ledger-present` | Ledger file exists | **pass** |
-| `schedule-health-valid` | Shape matches `config/schedule-health.schema.yaml` (version, updated_at, jobs map; per-job surface, cadence, last_run_status, miss_count_7d) | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
-| `schedule-catalog-jobs-match` | Every `job_id` in ledger exists in `config/schedule-catalog.yaml` | **warn** |
+| `schedule-health-valid` | Shape matches `config/schedules.schema.yaml` (version, updated_at, jobs map; per-job surface, cadence, last_run_status, miss_count_7d) | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
+| `schedule-catalog-jobs-match` | Every `job_id` in ledger exists in `config/schedules.yaml` | **warn** |
 | `schedule-critical-local-misses` | No `morning-briefing` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
 
 ### Connectors (advisory)

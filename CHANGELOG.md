@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- _(none)_
+- **Config filenames** — simplified plugin manifests and schemas under `config/`: `calendar.yaml`, `connectors.yaml`, `schedules.yaml`, `schedules.schema.yaml`, `notetaker.yaml`, `feedback.yaml`, `health.yaml`, `review.schema.yaml` (replacing long hyphenated names).
 
 ### Fixed
 

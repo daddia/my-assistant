@@ -48,7 +48,7 @@ Everything still runs — paste a thread, your agenda, or work from `TASKS.md` a
 | Goal | Where |
 | ---- | ----- |
 | Prove "works with email/calendar/chat…" without live OAuth | [Connector smoke tests](connector-smoke-tests.md) |
-| Category manifest and smoke commands | [`config/connector-categories.yaml`](../../config/connector-categories.yaml) |
+| Category manifest and smoke commands | [`config/connectors.yaml`](../../config/connectors.yaml) |
 | Product ↔ category mapping | [`CONNECTORS.md`](../../CONNECTORS.md) |
 
 ## Next

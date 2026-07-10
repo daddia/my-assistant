@@ -36,7 +36,7 @@ job_fields:
   cadence:
     required: true
     type: string
-    description: Cron expression copied from schedule-catalog.yaml at setup time
+    description: Cron expression copied from schedules.yaml at setup time
 
   last_run_at:
     required: true
@@ -90,7 +90,7 @@ index:
     type: map
     keys: job_id
     values: job_fields
-    description: One entry per configured job_id from schedule-catalog.yaml
+    description: One entry per configured job_id from schedules.yaml
 
 # ---------------------------------------------------------------------------
 # Examples

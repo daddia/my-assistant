@@ -65,12 +65,12 @@ REQUIRED_FILES = [
     EVALS_DIR / "notetaker/manifest.yaml",
     EVALS_DIR / "calendar/manifest.yaml",
     EVALS_DIR / "schedule-health/manifest.yaml",
-    ROOT / "config/notetaker-formats.yaml",
-    ROOT / "config/calendar-block-types.yaml",
-    ROOT / "config/schedule-catalog.yaml",
-    ROOT / "config/schedule-health.schema.yaml",
-    ROOT / "config/feedback-signals.yaml",
-    ROOT / "config/connector-categories.yaml",
+    ROOT / "config/notetaker.yaml",
+    ROOT / "config/calendar.yaml",
+    ROOT / "config/schedules.yaml",
+    ROOT / "config/schedules.schema.yaml",
+    ROOT / "config/feedback.yaml",
+    ROOT / "config/connectors.yaml",
     ROOT / "security/README.md",
     ROOT / "docs/guide/08-admin-deploy.md",
     ROOT / "docs/guide/connector-smoke-tests.md",
@@ -78,7 +78,7 @@ REQUIRED_FILES = [
     EVALS_DIR / "connectors/manifest.yaml",
     ROOT / "config/starter-profiles/manifest.yaml",
     ROOT / "examples/before-after/manifest.yaml",
-    ROOT / "config/health-checklist.yaml",
+    ROOT / "config/health.yaml",
     ROOT / "config/health-report.schema.yaml",
     EVALS_DIR / "health-check/manifest.yaml",
 ]
@@ -247,7 +247,7 @@ def validate_injection(errors: list[str]) -> list:
 
 
 def validate_notetaker(errors: list[str]) -> list:
-    formats_path = ROOT / "config/notetaker-formats.yaml"
+    formats_path = ROOT / "config/notetaker.yaml"
     if formats_path.is_file():
         formats_doc = load_yaml(formats_path)
         format_ids = [
@@ -257,11 +257,11 @@ def validate_notetaker(errors: list[str]) -> list:
         ]
         if sorted(format_ids) != sorted(NOTETAKER_FORMAT_IDS):
             errors.append(
-                f"config/notetaker-formats.yaml must list exactly "
+                f"config/notetaker.yaml must list exactly "
                 f"{', '.join(sorted(NOTETAKER_FORMAT_IDS))}; got {', '.join(format_ids)}"
             )
     else:
-        errors.append("missing config/notetaker-formats.yaml")
+        errors.append("missing config/notetaker.yaml")
 
     manifest_path = EVALS_DIR / "notetaker/manifest.yaml"
     if not manifest_path.is_file():
@@ -386,7 +386,7 @@ def validate_notetaker(errors: list[str]) -> list:
 
 
 def validate_calendar(errors: list[str]) -> list:
-    block_types_path = ROOT / "config/calendar-block-types.yaml"
+    block_types_path = ROOT / "config/calendar.yaml"
     if block_types_path.is_file():
         block_doc = load_yaml(block_types_path)
         block_type_ids = [
@@ -396,11 +396,11 @@ def validate_calendar(errors: list[str]) -> list:
         ]
         if sorted(block_type_ids) != sorted(CALENDAR_BLOCK_TYPES):
             errors.append(
-                f"config/calendar-block-types.yaml must list exactly "
+                f"config/calendar.yaml must list exactly "
                 f"{', '.join(sorted(CALENDAR_BLOCK_TYPES))}; got {', '.join(block_type_ids)}"
             )
     else:
-        errors.append("missing config/calendar-block-types.yaml")
+        errors.append("missing config/calendar.yaml")
 
     manifest_path = EVALS_DIR / "calendar/manifest.yaml"
     if not manifest_path.is_file():
@@ -516,7 +516,7 @@ def validate_calendar(errors: list[str]) -> list:
 
 
 def validate_schedule_health(errors: list[str]) -> list:
-    catalog_path = ROOT / "config/schedule-catalog.yaml"
+    catalog_path = ROOT / "config/schedules.yaml"
     if catalog_path.is_file():
         catalog = load_yaml(catalog_path)
         catalog_jobs = catalog.get("jobs", [])
@@ -525,7 +525,7 @@ def validate_schedule_health(errors: list[str]) -> list:
         ]
         if sorted(catalog_ids) != sorted(EXPECTED_JOB_IDS):
             errors.append(
-                f"config/schedule-catalog.yaml must list exactly "
+                f"config/schedules.yaml must list exactly "
                 f"{', '.join(EXPECTED_JOB_IDS)}; got {', '.join(catalog_ids)}"
             )
         for job in catalog_jobs:
@@ -539,7 +539,7 @@ def validate_schedule_health(errors: list[str]) -> list:
             if managed and not (ROOT / managed).is_file():
                 errors.append(f"catalog job '{jid}' managed cookbook missing: {managed}")
     else:
-        errors.append("missing config/schedule-catalog.yaml")
+        errors.append("missing config/schedules.yaml")
 
     manifest_path = EVALS_DIR / "schedule-health/manifest.yaml"
     if not manifest_path.is_file():
@@ -631,7 +631,7 @@ def validate_schedule_health(errors: list[str]) -> list:
 
 
 def validate_feedback(errors: list[str]) -> list:
-    signals_path = ROOT / "config/feedback-signals.yaml"
+    signals_path = ROOT / "config/feedback.yaml"
     if signals_path.is_file():
         signals = load_yaml(signals_path)
         class_ids = [
@@ -641,17 +641,17 @@ def validate_feedback(errors: list[str]) -> list:
         ]
         if sorted(class_ids) != sorted(FEEDBACK_CLASSES):
             errors.append(
-                f"config/feedback-signals.yaml must list exactly "
+                f"config/feedback.yaml must list exactly "
                 f"{', '.join(sorted(FEEDBACK_CLASSES))}; got {', '.join(class_ids)}"
             )
         allowed = signals.get("allowed_profile_sections", [])
         if sorted(allowed) != sorted(ALLOWED_PROFILE_SECTIONS):
             errors.append(
-                "config/feedback-signals.yaml allowed_profile_sections must be "
+                "config/feedback.yaml allowed_profile_sections must be "
                 f"{', '.join(sorted(ALLOWED_PROFILE_SECTIONS))}"
             )
     else:
-        errors.append("missing config/feedback-signals.yaml")
+        errors.append("missing config/feedback.yaml")
 
     manifest_path = EVALS_DIR / "feedback/manifest.yaml"
     if not manifest_path.is_file():
@@ -789,13 +789,13 @@ def validate_connectors(errors: list[str]) -> list:
     else:
         errors.append("missing security/README.md")
 
-    conn_manifest_path = ROOT / "config/connector-categories.yaml"
+    conn_manifest_path = ROOT / "config/connectors.yaml"
     conn_fixtures: list = []
     if conn_manifest_path.is_file():
         conn_doc = load_yaml(conn_manifest_path)
         categories = conn_doc.get("categories")
         if not isinstance(categories, list):
-            errors.append("connector-categories.yaml: 'categories' must be a list")
+            errors.append("connectors.yaml: 'categories' must be a list")
             categories = []
 
         cat_ids = [
@@ -803,18 +803,18 @@ def validate_connectors(errors: list[str]) -> list:
         ]
         if sorted(cat_ids) != sorted(CONNECTOR_CATEGORIES):
             errors.append(
-                f"connector-categories.yaml must list exactly "
+                f"connectors.yaml must list exactly "
                 f"{', '.join(sorted(CONNECTOR_CATEGORIES))}; got {', '.join(cat_ids)}"
             )
 
         for i, entry in enumerate(categories):
             if not isinstance(entry, dict):
-                errors.append(f"connector-categories.yaml: categories[{i}] must be a mapping")
+                errors.append(f"connectors.yaml: categories[{i}] must be a mapping")
                 continue
             cat = entry.get("category")
             smoke = entry.get("smoke")
             if not isinstance(smoke, dict):
-                errors.append(f"connector-categories.yaml: category '{cat}' missing 'smoke' mapping")
+                errors.append(f"connectors.yaml: category '{cat}' missing 'smoke' mapping")
                 continue
 
             fpath = smoke.get("standalone_fixture")
@@ -822,15 +822,15 @@ def validate_connectors(errors: list[str]) -> list:
             cmd = smoke.get("command")
             if not fpath:
                 errors.append(
-                    f"connector-categories.yaml: category '{cat}' missing smoke.standalone_fixture"
+                    f"connectors.yaml: category '{cat}' missing smoke.standalone_fixture"
                 )
             if not gpath:
                 errors.append(
-                    f"connector-categories.yaml: category '{cat}' missing smoke.golden"
+                    f"connectors.yaml: category '{cat}' missing smoke.golden"
                 )
             if not cmd:
                 errors.append(
-                    f"connector-categories.yaml: category '{cat}' missing smoke.command"
+                    f"connectors.yaml: category '{cat}' missing smoke.command"
                 )
 
             if fpath:
@@ -874,10 +874,10 @@ def validate_connectors(errors: list[str]) -> list:
             live = entry.get("live_optional")
             if cat == "email" and isinstance(live, dict) and live.get("draft_only") is not True:
                 errors.append(
-                    "connector-categories.yaml: email live_optional.draft_only must be true"
+                    "connectors.yaml: email live_optional.draft_only must be true"
                 )
     else:
-        errors.append("missing config/connector-categories.yaml")
+        errors.append("missing config/connectors.yaml")
 
     conn_eval_manifest_path = EVALS_DIR / "connectors/manifest.yaml"
     if conn_eval_manifest_path.is_file():
@@ -1057,7 +1057,7 @@ def validate_before_after(errors: list[str], thread_ids: set[str]) -> list:
 
 
 def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
-    health_checklist_path = ROOT / "config/health-checklist.yaml"
+    health_checklist_path = ROOT / "config/health.yaml"
     health_check_ids: set[str] = set()
     health_check_category_ids: set[str] = set()
 
@@ -1068,30 +1068,30 @@ def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
                 health_check_category_ids.add(cat["id"])
         checks = health_check_doc.get("checks")
         if not isinstance(checks, list):
-            errors.append("health-checklist.yaml: 'checks' must be a list")
+            errors.append("health.yaml: 'checks' must be a list")
             checks = []
         if len(checks) < MIN_HEALTH_CHECKS:
             errors.append(
-                f"health-checklist.yaml lists {len(checks)} checks; minimum is {MIN_HEALTH_CHECKS}"
+                f"health.yaml lists {len(checks)} checks; minimum is {MIN_HEALTH_CHECKS}"
             )
         for i, entry in enumerate(checks):
             if not isinstance(entry, dict):
-                errors.append(f"health-checklist.yaml: checks[{i}] must be a mapping")
+                errors.append(f"health.yaml: checks[{i}] must be a mapping")
                 continue
             cid = entry.get("id")
             cat = entry.get("category")
             if not cid:
-                errors.append(f"health-checklist.yaml: checks[{i}] missing 'id'")
+                errors.append(f"health.yaml: checks[{i}] missing 'id'")
             else:
                 health_check_ids.add(cid)
             if cat and cat not in health_check_category_ids:
                 errors.append(
-                    f"health-checklist.yaml: check '{cid}' unknown category '{cat}'"
+                    f"health.yaml: check '{cid}' unknown category '{cat}'"
                 )
             if not entry.get("fix_ref"):
-                errors.append(f"health-checklist.yaml: check '{cid}' missing fix_ref")
+                errors.append(f"health.yaml: check '{cid}' missing fix_ref")
     else:
-        errors.append("missing config/health-checklist.yaml")
+        errors.append("missing config/health.yaml")
 
     golden_check_ids: set[str] = set()
     health_check_fixtures: list = []
@@ -1211,7 +1211,7 @@ def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
 
     for cid in health_check_ids:
         if cid not in golden_check_ids:
-            errors.append(f"health-checklist check_id '{cid}' not referenced by any golden report")
+            errors.append(f"health check_id '{cid}' not referenced by any golden report")
 
     return health_check_fixtures, health_check_ids
 

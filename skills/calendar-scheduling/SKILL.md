@@ -34,7 +34,7 @@ Natural language ("protect my calendar this week", "I have no buffers tomorrow")
 
 Proactive time protection: scan upcoming meetings, detect buffer/prep/follow-up gaps and focus-time violations, and draft calendar block proposals the user creates manually — the Reclaim/Motion outcome without auto-booking.
 
-Read block type definitions from [`config/calendar-block-types.yaml`](../../config/calendar-block-types.yaml) at session start or first protect run.
+Read block type definitions from [`config/calendar.yaml`](../../config/calendar.yaml) at session start or first protect run.
 
 ### Horizon
 
@@ -51,7 +51,7 @@ If empty: ask for today's agenda paste or connect a calendar; show an example pa
 
 ### Violation scan
 
-Apply heuristics per `block_type` in `config/calendar-block-types.yaml`:
+Apply heuristics per `block_type` in `config/calendar.yaml`:
 
 | Violation type | Detects |
 | -------------- | ------- |

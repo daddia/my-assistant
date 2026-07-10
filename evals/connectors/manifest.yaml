@@ -1,5 +1,5 @@
 # Connector smoke fixtures — one standalone paste fixture per ~~category.
-# See docs/guide/connector-smoke-tests.md and config/connector-categories.yaml.
+# See docs/guide/connector-smoke-tests.md and config/connectors.yaml.
 
 version: "0.1"
 

@@ -46,7 +46,7 @@ Add a **Time protection** table to `eval-run-YYYY-MM-DD.md`:
 
 ## Related
 
-- [`config/calendar-block-types.yaml`](../../config/calendar-block-types.yaml) — block type definitions
+- [`config/calendar.yaml`](../../config/calendar.yaml) — block type definitions
 - [`skills/calendar-scheduling/SKILL.md`](../../skills/calendar-scheduling/SKILL.md) — protect mode
 - [`commands/calendar.md`](../../commands/calendar.md) — `/assistant:calendar protect`
 - [MA05 design](../../.agency/work/time-protection/design.md)

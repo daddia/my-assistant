@@ -3,7 +3,7 @@
 # Schema (per fixture entry):
 #   id: string           — unique fixture id (e.g. "nt-01-granola-product-sync")
 #   file: string          — path relative to evals/ (e.g. notetaker/fixtures/nt-01-….md)
-#   format: string        — expected format_id from config/notetaker-formats.yaml
+#   format: string        — expected format_id from config/notetaker.yaml
 #   golden: string        — path to golden YAML relative to evals/
 #   smoke: boolean        — include in smoke subset when true
 #   tags: [string]        — optional labels (e.g. "injection", "ambiguous")

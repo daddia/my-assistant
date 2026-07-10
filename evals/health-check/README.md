@@ -2,7 +2,7 @@
 
 Synthetic install states and golden expected reports for `/assistant:health` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
 
-**Checklist:** [`config/health-checklist.yaml`](../../config/health-checklist.yaml)  
+**Checklist:** [`config/health.yaml`](../../config/health.yaml)  
 **Report schema:** [`config/health-report.schema.yaml`](../../config/health-report.schema.yaml)  
 **Skill:** [`skills/health-check/SKILL.md`](../../skills/health-check/SKILL.md)
 
@@ -32,7 +32,7 @@ Post-setup subset: run `/assistant:setup` quick-start against `fx-quick-start-pr
 
 Structural validation runs in `./evals/scripts/validate-fixtures.sh` (CI on every PR). The script asserts:
 
-- Every `check_id` in `health-checklist.yaml` appears in at least one golden report
+- Every `check_id` in `health.yaml` appears in at least one golden report
 - Golden `summary` counts match `results` status tallies
 - Fixture files and working-folder paths exist
 

@@ -7,7 +7,7 @@ description: A Friday review of the week — wins, open loops, stale tasks, and 
 
 # Weekly review
 
-Close the week cleanly: what got done, what's still open, what's gone stale, and what to line up for Monday. Also the moment to prune tasks and memory. Catalog entry: `job_id: weekly-review` in `config/schedule-catalog.yaml`.
+Close the week cleanly: what got done, what's still open, what's gone stale, and what to line up for Monday. Also the moment to prune tasks and memory. Catalog entry: `job_id: weekly-review` in `config/schedules.yaml`.
 
 ## Read the profile first
 

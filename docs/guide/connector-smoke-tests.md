@@ -1,6 +1,6 @@
 # Connector smoke tests
 
-Prove each `~~category` works in minutes — **standalone paste fixtures first**, live OAuth optional. Authoritative manifest: [`config/connector-categories.yaml`](../../config/connector-categories.yaml).
+Prove each `~~category` works in minutes — **standalone paste fixtures first**, live OAuth optional. Authoritative manifest: [`config/connectors.yaml`](../../config/connectors.yaml).
 
 ## Prerequisites
 

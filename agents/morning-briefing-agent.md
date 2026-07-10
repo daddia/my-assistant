@@ -9,7 +9,7 @@ tools: [Read, Write]
 
 # Morning briefing agent
 
-`job_id: morning-briefing` · catalog: `config/schedule-catalog.yaml`
+`job_id: morning-briefing` · catalog: `config/schedules.yaml`
 
 Runs weekdays at 8am to produce the daily brief. Because a sleeping laptop misses local runs, the managed-agent version (`managed-agents/morning-briefing/agent.yaml`) on Anthropic infra is the reliable choice if the brief must always land. Walk the decision tree via `/assistant:schedules` or `docs/guide/07-always-on-reliability.md`.
 

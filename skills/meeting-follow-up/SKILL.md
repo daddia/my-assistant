@@ -22,13 +22,13 @@ If no profile exists, proceed with generic voice and suggest `/assistant:setup` 
 **Default** when:
 
 - The user invoked `/assistant:meeting follow-up`, or
-- Pasted content matches a fingerprint in [`config/notetaker-formats.yaml`](../../config/notetaker-formats.yaml)
+- Pasted content matches a fingerprint in [`config/notetaker.yaml`](../../config/notetaker.yaml)
 
 **Legacy paste** (brain-dump without a vendor fingerprint) uses the same pipeline with `format_detected: hand-typed`.
 
 ### Format detection
 
-1. Read `config/notetaker-formats.yaml` at session start or first import.
+1. Read `config/notetaker.yaml` at session start or first import.
 2. Match pasted content against each format's `detection_signals` (vendor formats only — `hand-typed` has no signals).
 3. Set `format_detected` to the best match, or `hand-typed` when nothing matches, or `unknown` only when content is unparseable garbage.
 4. Apply the format's `normalization` notes before extraction.
@@ -107,7 +107,7 @@ Internal shape (stable field names for eval comparison):
 | `pending-memory/{slug}.md` | Durable fact proposed | `memory-suggestion` |
 | `review-queue/index.yaml` | Any pending item above | — |
 
-- Item `id` pattern: `rq-YYYY-MM-DD-{slug}` per [`config/review-queue.schema.yaml`](../../config/review-queue.schema.yaml).
+- Item `id` pattern: `rq-YYYY-MM-DD-{slug}` per [`config/review.schema.yaml`](../../config/review.schema.yaml).
 - `source_skill` is always `meeting-follow-up`.
 - If `review-queue/index.yaml` is missing, create the index with the first pending item.
 - Never write under the plugin directory.

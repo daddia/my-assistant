@@ -2,8 +2,8 @@
 
 Synthetic working-folder health ledgers for miss-detection smoke tests and schema validation. Maintainer docs: [`.agency/work/always-on/`](../../.agency/work/always-on/) (design).
 
-**Schema:** [`config/schedule-health.schema.yaml`](../../config/schedule-health.schema.yaml)  
-**Catalog:** [`config/schedule-catalog.yaml`](../../config/schedule-catalog.yaml)
+**Schema:** [`config/schedules.schema.yaml`](../../config/schedules.schema.yaml)  
+**Catalog:** [`config/schedules.yaml`](../../config/schedules.yaml)
 
 ## Copy into a test working folder
 

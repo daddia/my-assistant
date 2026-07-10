@@ -22,7 +22,7 @@ For each upcoming meeting (from `~~calendar`, or a meeting the user names/pastes
 3. **Last contact** — when the user last spoke to this person and about what (from `~~email` history or memory). One line.
 4. **Prep needed** — the 1–3 things the user should have ready: a decision to make, a doc to bring, a question to ask, an open thread to close.
 
-After the prep list, check whether a **prep block** exists before the target meeting (via `~~calendar` or pasted agenda). If the meeting matches prep triggers from [`config/calendar-block-types.yaml`](../../config/calendar-block-types.yaml) — external attendee, Tier 1–2, or important meeting — and no prep block is present, offer a single prep block proposal via `calendar-scheduling` protect mode (one `BlockProposal`, no full-day scan). Use propose-only language: "I can draft a prep block for you to add manually."
+After the prep list, check whether a **prep block** exists before the target meeting (via `~~calendar` or pasted agenda). If the meeting matches prep triggers from [`config/calendar.yaml`](../../config/calendar.yaml) — external attendee, Tier 1–2, or important meeting — and no prep block is present, offer a single prep block proposal via `calendar-scheduling` protect mode (one `BlockProposal`, no full-day scan). Use propose-only language: "I can draft a prep block for you to add manually."
 
 Keep each brief to a tight paragraph plus a short prep list. A day of meetings should fit on one screen.
 

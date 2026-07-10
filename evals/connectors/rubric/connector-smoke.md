@@ -1,6 +1,6 @@
 # Connector smoke rubric
 
-Score each category **pass**, **partial**, or **fail** after the standalone smoke path. Use with [`golden/`](../golden/) expectations and [`config/connector-categories.yaml`](../../config/connector-categories.yaml).
+Score each category **pass**, **partial**, or **fail** after the standalone smoke path. Use with [`golden/`](../golden/) expectations and [`config/connectors.yaml`](../../config/connectors.yaml).
 
 ## Global invariants (all categories)
 

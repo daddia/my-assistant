@@ -9,7 +9,7 @@ tools: [Read, Write]
 
 # Follow-up watcher
 
-`job_id: follow-up-watcher` · catalog: `config/schedule-catalog.yaml`
+`job_id: follow-up-watcher` · catalog: `config/schedules.yaml`
 
 Runs daily (default 5pm) to catch open loops before they go silent. Managed-agent version: `managed-agents/follow-up-watcher/agent.yaml`. See `/assistant:schedules` and `docs/guide/07-always-on-reliability.md`.
 

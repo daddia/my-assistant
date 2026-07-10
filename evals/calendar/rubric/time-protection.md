@@ -67,6 +67,6 @@ Minimum bar for regression: **cal-01**, **cal-03**, **cal-04**, **cal-06** — a
 
 ## Related
 
-- [`config/calendar-block-types.yaml`](../../config/calendar-block-types.yaml) — block type heuristics
+- [`config/calendar.yaml`](../../config/calendar.yaml) — block type heuristics
 - [`skills/calendar-scheduling/SKILL.md`](../../skills/calendar-scheduling/SKILL.md) — protect mode
 - [`commands/calendar.md`](../../commands/calendar.md) — `/assistant:calendar protect`

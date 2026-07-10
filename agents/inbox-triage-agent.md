@@ -9,7 +9,7 @@ tools: [Read, Write]
 
 # Inbox triage agent
 
-`job_id: inbox-sweep` · catalog: `config/schedule-catalog.yaml`
+`job_id: inbox-sweep` · catalog: `config/schedules.yaml`
 
 Runs the inbox sweep on a schedule (default weekdays 8am / 12pm / 4pm). Enable it as a named agent, or copy the schedule into a Cowork scheduled task. For always-on reliability that survives a sleeping laptop, use the managed-agent version at `managed-agents/inbox-triage/agent.yaml`. See `/assistant:schedules` and `docs/guide/07-always-on-reliability.md`.
 

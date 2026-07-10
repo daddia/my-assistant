@@ -2,7 +2,7 @@
 
 Synthetic working-folder fixtures for dashboard smoke tests and schema validation. Maintainer docs: [`.agency/work/review-queue/`](../../.agency/work/review-queue/) (design, spec, tasks).
 
-**Schema:** [`config/review-queue.schema.yaml`](../../config/review-queue.schema.yaml)  
+**Schema:** [`config/review.schema.yaml`](../../config/review.schema.yaml)  
 **Runtime rule:** [`rules/approval-frame.md`](../../rules/approval-frame.md)
 
 ## Copy into a test working folder
@@ -26,4 +26,4 @@ Then open `skills/dashboard.html`, select `$WORK`, and switch to the **Review** 
 
 ## Schema validation
 
-Compare `fixtures/sample-index.yaml` items against `config/review-queue.schema.yaml`. Optional: `yamllint evals/review-queue/fixtures/sample-index.yaml`.
+Compare `fixtures/sample-index.yaml` items against `config/review.schema.yaml`. Optional: `yamllint evals/review-queue/fixtures/sample-index.yaml`.

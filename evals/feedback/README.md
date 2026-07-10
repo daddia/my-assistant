@@ -47,7 +47,7 @@ Add a **Feedback loop** table to `eval-run-YYYY-MM-DD.md`:
 
 ## Related
 
-- [`config/feedback-signals.yaml`](../../config/feedback-signals.yaml) — taxonomy and edit patterns
+- [`config/feedback.yaml`](../../config/feedback.yaml) — taxonomy and edit patterns
 - [`skills/email-feedback/SKILL.md`](../../skills/email-feedback/SKILL.md) — feedback skill
 - [`commands/email.md`](../../commands/email.md) — `/assistant:email feedback`
 - [`evals/rubric/draft-quality.md`](../rubric/draft-quality.md) — MA01 rubric dimensions

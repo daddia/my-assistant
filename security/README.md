@@ -47,4 +47,4 @@ Entry point for My Assistant security and trust material. **Runtime behaviour is
 
 - [CONNECTORS.md](../CONNECTORS.md) — category placeholders and native vs MCP
 - [Rules](../rules/core-behaviour.md) — enforceable runtime constraints
-- [Review queue schema](../config/review-queue.schema.yaml) — approval surface types
+- [Review queue schema](../config/review.schema.yaml) — approval surface types

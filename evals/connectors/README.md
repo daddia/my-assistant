@@ -10,7 +10,7 @@ Same as [`evals/README.md`](../README.md): plugin installed, fresh session, opti
 LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 ```
 
-Canonical manifest: [`config/connector-categories.yaml`](../../config/connector-categories.yaml)
+Canonical manifest: [`config/connectors.yaml`](../../config/connectors.yaml)
 
 ## Run order
 

@@ -48,7 +48,7 @@ Add a **Notetaker import** table to `eval-run-YYYY-MM-DD.md`:
 
 ## Related
 
-- [`config/notetaker-formats.yaml`](../../config/notetaker-formats.yaml) — format fingerprints
+- [`config/notetaker.yaml`](../../config/notetaker.yaml) — format fingerprints
 - [`skills/meeting-follow-up/SKILL.md`](../../skills/meeting-follow-up/SKILL.md) — import mode
 - [`commands/meeting.md`](../../commands/meeting.md) — `/assistant:meeting prep` · `follow-up`
 - [MA04 design](../../.agency/work/notetaker-import/design.md)

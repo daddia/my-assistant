@@ -46,7 +46,7 @@ When the assistant drafts something that needs your eyes, it adds a **pending** 
 | `memory-suggestion` | New or changed memory entry | Ask + show diff |
 | `profile-diff` | Profile policy or voice change | Ask + show diff |
 
-Privacy summary table: [Protect your privacy — Permissions at a glance](05-protect-privacy.md#permissions-at-a-glance-tier-1--default). Full matrix: [`security/permissions.md`](../../security/permissions.md). Schema: [`config/review-queue.schema.yaml`](../../config/review-queue.schema.yaml).
+Privacy summary table: [Protect your privacy — Permissions at a glance](05-protect-privacy.md#permissions-at-a-glance-tier-1--default). Full matrix: [`security/permissions.md`](../../security/permissions.md). Schema: [`config/review.schema.yaml`](../../config/review.schema.yaml).
 
 Open [`skills/dashboard.html`](../../skills/dashboard.html) in Chrome or Edge, point it at your working folder, and use the **Review** tab to browse pending items.
 

@@ -68,9 +68,9 @@ Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, bri
 
 `skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view), browsing/editing `CLAUDE.md` + `memory/`, and browsing pending approvals in the **Review** tab. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.
 
-Review queue: skills write **pending** items to `{working-folder}/review-queue/index.yaml` per `config/review-queue.schema.yaml` and `rules/approval-frame.md`. Maintainer fixtures: [`evals/review-queue/`](evals/review-queue/).
+Review queue: skills write **pending** items to `{working-folder}/review-queue/index.yaml` per `config/review.schema.yaml` and `rules/approval-frame.md`. Maintainer fixtures: [`evals/review-queue/`](evals/review-queue/).
 
-Schedule health: scheduled runs write heartbeats to `{working-folder}/schedules/index.yaml` per `config/schedule-health.schema.yaml` and `config/schedule-catalog.yaml`. Setup and miss detection: `docs/guide/07-always-on-reliability.md`. Maintainer fixtures: [`evals/schedule-health/`](evals/schedule-health/).
+Schedule health: scheduled runs write heartbeats to `{working-folder}/schedules/index.yaml` per `config/schedules.schema.yaml` and `config/schedules.yaml`. Setup and miss detection: `docs/guide/07-always-on-reliability.md`. Maintainer fixtures: [`evals/schedule-health/`](evals/schedule-health/).
 
 ## Connectors are tool-agnostic
 
@@ -109,7 +109,7 @@ Skills refer to connectors by category using `~~` placeholders — `~~email`, `~
 | `docs/guide/08-admin-deploy.md` | Deployers — runtimes, paths, managed agents |
 | `docs/guide/connector-smoke-tests.md` | Verifiers — prove each `~~category` without OAuth |
 | `security/README.md` | Security reviewers — index to threat model, data flow, permissions |
-| `config/connector-categories.yaml` | Maintainer manifest — smoke commands and fixture refs |
+| `config/connectors.yaml` | Maintainer manifest — smoke commands and fixture refs |
 
 ## Graduated autonomy (default: Tier 1 — Draft)
 

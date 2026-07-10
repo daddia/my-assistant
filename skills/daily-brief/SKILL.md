@@ -8,7 +8,7 @@ description: A short, scannable morning briefing — today's calendar, priority 
 
 # Daily brief
 
-One screen the user reads with their coffee that tells them exactly what today needs. This is the anchor of the scheduled-task setup — most users run it weekday mornings. Catalog entry: `job_id: morning-briefing` in `config/schedule-catalog.yaml`.
+One screen the user reads with their coffee that tells them exactly what today needs. This is the anchor of the scheduled-task setup — most users run it weekday mornings. Catalog entry: `job_id: morning-briefing` in `config/schedules.yaml`.
 
 ## Read the profile first
 

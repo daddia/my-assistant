@@ -1,6 +1,6 @@
 # Feedback loop rubric
 
-Manual scoring guide for comparing email-feedback output against `evals/feedback/golden/*.yaml`, `evals/profile.fixture.md`, and `config/feedback-signals.yaml`.
+Manual scoring guide for comparing email-feedback output against `evals/feedback/golden/*.yaml`, `evals/profile.fixture.md`, and `config/feedback.yaml`.
 
 **Scope:** Correct class handling, diff quality, profile safety, queue integration, and no silent writes. Extends MA01 draft-quality dimensions for rationale vocabulary.
 
