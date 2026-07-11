@@ -32,7 +32,7 @@ my-assistant/
 └── docs/       guide/
 ```
 
-**User data never lives in the plugin.** Personalisation goes to `~/.claude/plugins/config/my-assistant/profile.md`; tasks and memory live in the user's working folder. Never commit real names, contacts, or private data.
+**User data never lives in the plugin.** Personalisation goes to `~/MyAssistant/config/profile.md`; tasks and memory live in the user's working folder. Never commit real names, contacts, or private data.
 
 **Naming:** display name **My Assistant** · repo/marketplace/profile path `my-assistant` · plugin manifest `name` `assistant` · commands `/assistant:*`.
 

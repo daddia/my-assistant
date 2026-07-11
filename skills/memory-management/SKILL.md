@@ -32,7 +32,7 @@ Without memory, that request is meaningless. With memory, the assistant knows:
 
 | Layer | File | What lives here |
 |-------|------|-----------------|
-| **Profile** | `~/.claude/plugins/config/my-assistant/profile.md` | Identity, voice, VIP tiers, email/calendar policy, autonomy — written by `/assistant:setup` |
+| **Profile** | `~/MyAssistant/config/profile.md` | Identity, voice, VIP tiers, email/calendar policy, autonomy — written by `/assistant:setup` |
 | **Working memory** | `CLAUDE.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
 | **Deep memory** | `memory/` in the working folder | Full glossary, people profiles, project detail, company context |
 

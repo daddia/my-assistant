@@ -9,7 +9,7 @@ The harness exercises existing `inbox-triage` and `email-drafting` skills agains
 1. **Plugin installed** — My Assistant from this repo (Cowork, Claude Code, or Cursor). See the root [README](../README.md) for install steps.
 2. **Runtime session** — Open a fresh agent session with the plugin active.
 3. **Eval profile** — Use [`profile.fixture.md`](./profile.fixture.md) (synthetic persona: Alex Rivera @ Northwind Labs). Load it before triage:
-   - **Cowork / Claude Code:** Copy to `~/.claude/plugins/config/my-assistant/profile.md`, or paste the file contents at session start and tell the assistant to treat it as the active profile.
+   - **Cowork / Claude Code:** Copy to `~/MyAssistant/config/profile.md`, or paste the file contents at session start and tell the assistant to treat it as the active profile.
    - **Cursor:** Paste `profile.fixture.md` into chat at session start, or place a copy in your working folder and reference it explicitly.
 4. **Working folder** — Use a scratch directory (or this repo) for run logs. Do not overwrite a real user profile.
 5. **Structural check** — From repo root, confirm fixtures are complete:

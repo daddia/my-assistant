@@ -6,7 +6,7 @@ argument-hint: "[--comprehensive]"
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; sync still works from the working folder.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; sync still works from the working folder.
 - **Working folder** — Confirm `TASKS.md`, `memory/`, `CLAUDE.md`, and queue locations. Note if the folder is read-only.
 - **Connectors** — Detect `~~email`, `~~calendar`, `~~chat`, `~~drive` when `--comprehensive` is set. State which are available; skip missing connectors and note the gap.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Present each capture for confirmation — never auto-add. Draft-only: never send, book, or spend.

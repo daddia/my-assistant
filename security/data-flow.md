@@ -45,7 +45,8 @@ flowchart TB
 
 | Source | Location | When read | Leaves device? |
 |--------|----------|-----------|----------------|
-| **Profile** | `~/.claude/plugins/config/my-assistant/profile.md` (or workspace copy in Cowork) | Session start; skills that need voice, VIP, policy, autonomy | Yes — content is included in model context for the session |
+| **Profile** | `~/MyAssistant/config/profile.md` (or resolved via `my-assistant.json`) | Session start; skills that need voice, VIP, policy, autonomy | Yes — content is included in model context for the session |
+| **Install config** | `~/MyAssistant/config/my-assistant.json` | Path resolution, scope | Yes — paths included when skills resolve locations |
 | **Task list** | `TASKS.md` in working folder | Task review, brief, update, weekly review | Yes — when relevant to the task |
 | **Memory index** | `CLAUDE.md` (memory) in working folder | Shorthand decode, memory add/prune, prep | Yes — when relevant |
 | **Deep memory** | `memory/` in working folder | People, projects, glossary lookups | Yes — when relevant |

@@ -8,15 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-- _(none)_
+- **Working-folder setup** — `/assistant:setup` now establishes a working directory (default `~/MyAssistant`) before the profile interview.
+- **`config/my-assistant.json`** — selective machine-readable install config (`assistantPath`, `configPath`, `scope`, `platform`, `setupAt`) at `{assistantPath}/config/my-assistant.json`; schema in `config/my-assistant.schema.yaml`.
+- **`rules/paths.md`** — canonical resolution for working folder, config, and profile (legacy paths still supported).
 
 ### Changed
 
-- _(none)_
+- **Profile location** — setup writes once to `{assistantPath}/config/profile.md` instead of duplicating under `~/.claude/plugins/config/my-assistant/` and the workspace.
+- **SessionStart hook** — resolves profile via `my-assistant.json` then fallback paths per `rules/paths.md`.
+- **Health check** — new `config-exists`, `config-valid`, and `config-profile-aligned` checks.
 
 ### Fixed
 
-- _(none)_
+- **Duplicate profile on setup** — explicit single-write rule prevents Cowork from saving profile to both legacy config and workspace paths.
 
 ## [1.2.1] - 2026-07-10
 

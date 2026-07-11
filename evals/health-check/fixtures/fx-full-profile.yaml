@@ -1,6 +1,7 @@
 fixture_id: fx-full-profile
 description: Complete eval profile with all required sections filled
-profile_file: evals/health-check/fixtures/profiles/fx-full-profile.md
+profile_file: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
+config_file: evals/health-check/fixtures/fx-full-profile/working/config/my-assistant.json
 working_folder: evals/health-check/fixtures/fx-full-profile/working
 schedule_health_file: null
 platform_hint: cowork

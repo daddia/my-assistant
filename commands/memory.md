@@ -8,7 +8,7 @@ Parse `$ARGUMENTS` for the verb. Default to **add** when empty or unrecognized.
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; memory still works in the working folder.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; memory still works in the working folder.
 - **Working folder** — Confirm where `CLAUDE.md`, `memory/`, and any `review-queue/index.yaml` items will be written. Note if the folder is read-only.
 - **Connectors** — Not required; note if `~~notes` or `~~drive` could enrich context.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Propose profile updates for VIPs; never write `profile.md` without approval.

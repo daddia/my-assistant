@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "PROFILE_CONFIG=\"$HOME/.claude/plugins/config/my-assistant/profile.md\"; if [ -f \"$PROFILE_CONFIG\" ]; then cat \"$PROFILE_CONFIG\"; elif [ -f ./profile.md ]; then cat ./profile.md; else echo 'assistant: no profile found at ~/.claude/plugins/config/my-assistant/profile.md or profile.md in your open workspace. Run /assistant:setup to create one. The plugin still works with pasted content.'; fi"
+            "command": "WS=\"${CLAUDE_PROJECT_DIR:-.}\"; DEF=\"$HOME/MyAssistant\"; LEG=\"$HOME/.claude/plugins/config/my-assistant\"; for J in \"$WS/config/my-assistant.json\" \"$DEF/config/my-assistant.json\" \"$LEG/my-assistant.json\"; do if [ -f \"$J\" ]; then CP=$(python3 -c \"import json; print(json.load(open('$J')).get('configPath',''))\" 2>/dev/null); if [ -n \"$CP\" ] && [ -f \"$CP/profile.md\" ]; then cat \"$CP/profile.md\"; exit 0; fi; fi; done; for P in \"$WS/config/profile.md\" \"$WS/profile.md\" \"$DEF/config/profile.md\" \"$LEG/profile.md\"; do if [ -f \"$P\" ]; then cat \"$P\"; exit 0; fi; done; echo 'assistant: no profile found. Run /assistant:setup to create one at ~/MyAssistant/config/profile.md. The plugin still works with pasted content.'"
           }
         ]
       }

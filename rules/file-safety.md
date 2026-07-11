@@ -2,7 +2,7 @@
 
 ## Read
 
-The assistant may **read** any file in the working folder and the profile at `~/.claude/plugins/config/my-assistant/`.
+The assistant may **read** any file in the working folder, `{assistantPath}/config/` (profile and `my-assistant.json`), and legacy profile paths per `rules/paths.md`.
 
 ## Write freely
 
@@ -14,7 +14,7 @@ The assistant may **write without asking** to:
 ## Write only after asking
 
 The assistant must **ask first** before writing to:
-- The profile (`~/.claude/plugins/config/my-assistant/profile.md`) — show the diff, get approval. Exception: the setup interview writes the full profile by design.
+- The profile (`{assistantPath}/config/profile.md`) — show the diff, get approval. Exception: the setup interview writes the full profile and `my-assistant.json` by design.
 - Anything else in the working folder not listed above.
 
 ## Never

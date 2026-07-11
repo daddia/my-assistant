@@ -7,7 +7,7 @@ Parse `$ARGUMENTS` for the verb. Default to **review** when empty or unrecognize
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; tasks still work in the working folder.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; tasks still work in the working folder.
 - **Working folder** — Confirm `TASKS.md` location and writability. Note if the folder is read-only.
 - **Connectors** — Not required for `add`/`review`; for `sync`, note whether context comes from chat/paste only (connector-backed sync uses `/assistant:update`).
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never auto-add without confirmation.

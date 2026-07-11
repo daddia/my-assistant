@@ -40,6 +40,11 @@ index:
     type: string
     description: Resolved working-folder path, or null when unidentified
 
+  config_path:
+    required: false
+    type: string
+    description: Resolved my-assistant.json path, or null when missing
+
   profile_path:
     required: false
     type: string
@@ -90,8 +95,9 @@ examples:
   version: "0.1"
   generated_at: "2026-07-08T08:00:00+10:00"
   platform_hint: cursor
-  working_folder: /tmp/my-assistant-working
-  profile_path: ~/.claude/plugins/config/my-assistant/profile.md
+  working_folder: /Users/jane/MyAssistant
+  config_path: /Users/jane/MyAssistant/config/my-assistant.json
+  profile_path: /Users/jane/MyAssistant/config/profile.md
   summary:
     pass: 18
     warn: 3
@@ -101,6 +107,6 @@ examples:
     - check_id: profile-exists
       category: profile
       status: pass
-      message: Profile found at ~/.claude/plugins/config/my-assistant/profile.md
+      message: Profile found at /Users/jane/MyAssistant/config/profile.md
       detail: null
       fix_ref: null

@@ -78,7 +78,7 @@ Weekdays 8:00am · `job_id: morning-briefing` · `reliability_tier: critical`
 Each weekday at 8am, give me a short, scannable briefing: today's
 calendar with attendees, important unread emails or messages, follow-ups
 going cold, and anything needing my attention before noon. Read my
-profile at ~/.claude/plugins/config/my-assistant/profile.md first. Run
+profile per rules/paths.md first. Run
 /assistant:brief. Keep it under 400 words. Save it as brief-YYYY-MM-DD.md.
 ```
 Cron: `0 8 * * 1-5`

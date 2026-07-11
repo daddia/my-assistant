@@ -8,8 +8,8 @@ Every slash command in this plugin follows a consistent structure so that the AI
 
 Check prerequisites before doing any work:
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; the plugin still works with pasted content.
-- **Working folder** — Confirm where `TASKS.md`, memory, drafts, and the review queue will be written. Note if the folder is read-only.
+- **Profile & paths** — Resolve per `rules/paths.md` (`{assistantPath}/config/my-assistant.json` → `config/profile.md`; legacy paths still supported). If missing, note it and offer `/assistant:setup`; the plugin still works with pasted content.
+- **Working folder** — Prefer `assistantPath` from `my-assistant.json` (default `~/MyAssistant`). Confirm where `TASKS.md`, memory, drafts, and the review queue will be written. Note if the folder is read-only.
 - **Connectors** — Detect which `~~category` connectors are available (`~~email`, `~~calendar`, `~~chat`, `~~notes`, `~~tasks`, `~~drive`). State whether the run is connector-backed or paste-only.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never exceed it.
 

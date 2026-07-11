@@ -3,9 +3,10 @@ version: "0.1"
 generated_at: "2026-07-08T08:10:00+10:00"
 platform_hint: cowork
 working_folder: evals/health-check/fixtures/fx-full-profile/working
-profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
+config_path: evals/health-check/fixtures/fx-full-profile/working/config/my-assistant.json
+profile_path: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 summary:
-  pass: 19
+  pass: 22
   warn: 0
   fail: 0
   skip: 8
@@ -34,6 +35,18 @@ results:
     category: plugin
     status: pass
     message: Health checklist and schema present
+  - check_id: config-exists
+    category: profile
+    status: pass
+    message: Install config found
+  - check_id: config-valid
+    category: profile
+    status: pass
+    message: Install config valid
+  - check_id: config-profile-aligned
+    category: profile
+    status: pass
+    message: Profile aligned with install config
   - check_id: profile-exists
     category: profile
     status: pass

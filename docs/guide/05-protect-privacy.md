@@ -4,7 +4,7 @@ Where your data lives and who can see it.
 
 ## Your profile stays on your machine
 
-Your personal details — identity, voice, VIP tiers, policies — live in your profile at `~/.claude/plugins/config/my-assistant/profile.md`, a file on your computer. It is **not** part of the plugin and is never uploaded to GitHub. Only a blank `config/profile.template.md` ships with the repo.
+Your personal details — identity, voice, VIP tiers, policies — live in your profile at `~/MyAssistant/config/profile.md`, a file on your computer. It is **not** part of the plugin and is never uploaded to GitHub. Only a blank `config/profile.template.md` ships with the repo.
 
 Your tasks (`TASKS.md`) and memory (`memory/`) are likewise plain files in your working folder.
 

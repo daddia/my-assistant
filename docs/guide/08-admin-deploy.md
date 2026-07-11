@@ -23,16 +23,16 @@ Step-by-step install: [Get started](01-getting-started.md).
 - Email, calendar, and drive categories need an MCP provider in your host or paste-first content — the plugin bundles Slack, Notion, and GitHub MCP suggestions only.
 - Cursor users without always-on desktop should use `cloud-code` or `managed` surfaces for jobs that must not miss — see [Always-on reliability](07-always-on-reliability.md).
 
-## Profile location
+## Profile and config location
 
 Personalisation lives **outside** the plugin so `/plugin update` never overwrites it.
 
-| Host | Default path |
-| ---- | ------------ |
-| Cowork / Claude Code | `~/.claude/plugins/config/my-assistant/profile.md` |
-| Cowork workspace | Copy may live in an open workspace folder — plugin checks both |
+| Host | Default layout |
+| ---- | -------------- |
+| Cowork / Claude Code / Cursor | `~/MyAssistant/config/profile.md` + `my-assistant.json` |
+| Legacy installs | `~/.claude/plugins/config/my-assistant/profile.md` still supported |
 
-Created by `/assistant:setup` from `config/profile.template.md`. Never commit real profiles to git.
+Created by `/assistant:setup` from `config/profile.template.md`. Resolution order: `rules/paths.md`. Never commit real profiles to git.
 
 ## Working folder
 

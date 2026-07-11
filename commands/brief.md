@@ -4,7 +4,7 @@ description: Morning briefing — today's calendar, priority unread, follow-ups 
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; the brief still works with pasted content.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the brief still works with pasted content.
 - **Working folder** — Confirm where `brief-YYYY-MM-DD.md` and any queue references will be written. Note if the folder is read-only.
 - **Connectors** — Detect `~~email`, `~~calendar`, `~~chat`, `~~tasks`. State which sources are connector-backed vs paste-only; degrade gracefully when connectors are missing.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). The brief proposes actions only — never send, book, or spend.

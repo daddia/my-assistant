@@ -49,7 +49,22 @@ checks:
     default_severity_on_fail: fail
     fix_ref: docs/guide/01-getting-started.md
 
-  # --- profile ---
+  # --- profile (includes install config when present) ---
+  - id: config-exists
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: config-valid
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: config-profile-aligned
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
   - id: profile-exists
     category: profile
     default_severity_on_fail: fail
@@ -79,7 +94,7 @@ checks:
   - id: working-folder-identified
     category: working-folder
     default_severity_on_fail: warn
-    fix_ref: docs/guide/02-configure-profile.md
+    fix_ref: rules/paths.md
 
   - id: tasks-md-present
     category: working-folder

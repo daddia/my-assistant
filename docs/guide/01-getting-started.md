@@ -14,7 +14,7 @@ https://github.com/daddia/my-assistant
 
 Then install **My Assistant** from that marketplace. It shows up in both chat and Cowork. (You can also upload the plugin as a zip, or add the repo as a local directory marketplace during development.)
 
-**Naming:** display name **My Assistant** · repo/marketplace `my-assistant` · plugin id `assistant` · commands `/assistant:*` · profile at `~/.claude/plugins/config/my-assistant/profile.md`.
+**Naming:** display name **My Assistant** · repo/marketplace `my-assistant` · plugin id `assistant` · commands `/assistant:*` · default working folder `~/MyAssistant` (`config/profile.md` + `config/my-assistant.json`).
 
 ### Cursor
 
@@ -37,13 +37,14 @@ A short conversation captures your identity, writing voice, anti-AI style, worki
 
 Choose the 2-minute quick-start, a starter persona, or the full 10-minute interview.
 
-Your answers are written to a **profile** at:
+Setup asks for a **working folder** (default `~/MyAssistant`), then writes:
 
-```
-~/.claude/plugins/config/my-assistant/profile.md
+```text
+~/MyAssistant/config/profile.md          # your personalisation
+~/MyAssistant/config/my-assistant.json   # paths, scope, platform
 ```
 
-This lives *outside* the plugin, so updating the plugin never overwrites your personalisation. (In Cowork you can instead keep the profile in a workspace folder you have open; the plugin checks there too.)
+This lives *outside* the plugin, so updating the plugin never overwrites your data. Open `~/MyAssistant` in Cowork or Cursor so scheduled jobs and hooks resolve paths reliably.
 
 ## Step 3 — Try the wedge
 

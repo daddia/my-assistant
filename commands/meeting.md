@@ -9,7 +9,7 @@ Parse `$ARGUMENTS` for the verb. Default to **follow-up** when empty or unrecogn
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; the plugin still works with pasted invites or notes.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the plugin still works with pasted invites or notes.
 - **Working folder** — Confirm where `drafts/`, `review-queue/index.yaml`, `TASKS.md`, and memory updates will be written. Note if the folder is read-only.
 - **Connectors** — Detect `~~calendar`, `~~email`, `~~chat`, `~~notes` if relevant. State whether prep uses a connected calendar or pasted invite; whether follow-up drafts use a connector or copy-paste output.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never exceed it.

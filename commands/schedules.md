@@ -5,7 +5,7 @@ description: Set up the packaged Cowork scheduled tasks — morning briefing, in
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup` before scheduling jobs that depend on personalisation.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup` before scheduling jobs that depend on personalisation.
 - **Working folder** — Confirm where `schedules/index.yaml` will be initialised. Note if the folder is read-only.
 - **Connectors** — Advisory only; note which `~~category` connectors each scheduled job will use when the machine is awake.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Scheduled jobs draft only — never send, book, or spend.

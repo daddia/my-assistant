@@ -2,7 +2,7 @@
 
 This is the single source of truth about you. The setup interview writes it; skills read it at session start.
 
-**Where it lives:** `~/.claude/plugins/config/my-assistant/profile.md` — *outside* the plugin directory, so `/plugin update` never overwrites it. (In Cowork, it may instead live in a workspace folder you keep open.)
+**Where it lives:** `{assistantPath}/config/profile.md` — default working folder `~/MyAssistant`, *outside* the plugin directory, so `/plugin update` never overwrites it. Install paths and scope are in `{assistantPath}/config/my-assistant.json`. See `rules/paths.md`.
 
 Fill in what you can. The more you provide, the sharper the assistant. Leave placeholders for anything you skip. Keep it under ~2,000 words so it loads cheaply every session.
 

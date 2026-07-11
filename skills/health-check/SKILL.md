@@ -21,20 +21,32 @@ Run checks in **category order** from the checklist. Each result maps to one row
 
 ## Resolve paths
 
+Follow `rules/paths.md` — same order as `hooks/load-profile.sh`.
+
+### Install config
+
+Locate `my-assistant.json` (workspace `config/`, then `~/MyAssistant/config/`, then legacy plugin config). Record `config_path` in the report when found.
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `config-exists` | `my-assistant.json` found at a resolved path | **warn** — suggest re-running `/assistant:setup` or completing working-folder step |
+| `config-valid` | JSON parses; `assistantPath`, `configPath`, `scope`, `setupAt` present per schema | **warn** with detail |
+| `config-profile-aligned` | `{configPath}/profile.md` exists when config is present | **warn** |
+
 ### Profile
 
-Same order as `hooks/hooks.json`:
+1. `{configPath}/profile.md` from `my-assistant.json` when valid
+2. Fallback order in `rules/paths.md` (workspace `config/profile.md`, workspace root, `~/MyAssistant/config/`, legacy plugin config)
 
-1. `~/.claude/plugins/config/my-assistant/profile.md`
-2. `./profile.md` in the open workspace (Cowork or Cursor working folder)
-
-Record the path tried in the report as `profile_path` (or `null`).
+Record the path in the report as `profile_path` (or `null`).
 
 ### Working folder
 
-1. User-stated path in chat
-2. Open workspace / current working directory in Cowork or Cursor
-3. If still ambiguous, default to cwd with a **warn** on `working-folder-identified` and ask the user to confirm or open their working folder
+1. `assistantPath` from `my-assistant.json` when valid
+2. Parent of `config/profile.md` when profile lives under a `config/` subdirectory
+3. User-stated path in chat
+4. Open workspace / current working directory in Cowork or Cursor
+5. If still ambiguous, default to cwd with a **warn** on `working-folder-identified` and ask the user to confirm or open their working folder (`~/MyAssistant` by default)
 
 Never write health or health-check files under the plugin directory (`rules/file-safety.md`).
 

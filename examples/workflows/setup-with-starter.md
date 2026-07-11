@@ -5,7 +5,7 @@ Pick a vertical persona, optionally customize identity fields, then try inbox tr
 ## Prerequisites
 
 - Plugin installed (see root [README](../../README.md))
-- No existing profile at `~/.claude/plugins/config/my-assistant/profile.md` (or choose to start fresh)
+- No existing install at `~/MyAssistant/config/` (or choose to start fresh / pick a different folder)
 
 ## Steps
 
@@ -25,24 +25,28 @@ When no profile exists, you'll see five **starter personas** plus **Blank templa
 | Operator | Chief of staff / ops lead |
 | Investor | Angel or micro-VC |
 
-### 2. Select a starter
+### 2. Confirm working folder
+
+Default `~/MyAssistant` — accept or choose another path.
+
+### 3. Select a starter
 
 Example: **Founder**
 
 The assistant reads [`config/starter-profiles/founder.md`](../../config/starter-profiles/founder.md).
 
-### 3. Customize or keep as-is
+### 4. Customize or keep as-is
 
 - **Quick customize** — update name, company, timezone
 - **Keep as-is for demo** — write the starter verbatim (fictional identity)
 
-Profile is written to `~/.claude/plugins/config/my-assistant/profile.md` (or your Cowork workspace path if you chose that).
+Profile and `my-assistant.json` are written to `{assistantPath}/config/` (default `~/MyAssistant/config/`).
 
-### 4. Confirm summary
+### 5. Confirm summary
 
 Expect a line like: **Profile: Founder starter (customized)**
 
-### 5. Try a demo thread
+### 6. Try a demo thread
 
 Continue with [Inbox triage (paste-only)](./inbox-triage-paste.md) using thread **01-vip-board-update**.
 

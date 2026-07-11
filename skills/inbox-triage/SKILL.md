@@ -19,7 +19,7 @@ Invoked via `/assistant:inbox triage` (default) or `/assistant:inbox sweep`:
 
 ## Read the profile first
 
-Load `~/.claude/plugins/config/my-assistant/profile.md` for VIP tiers, email policy (reply threshold, auto-archive senders, labels), and voice. If there's no profile, use sensible defaults and mention that `/assistant:setup` will sharpen the buckets.
+Load the profile per `rules/paths.md` (default `~/MyAssistant/config/profile.md`) for VIP tiers, email policy (reply threshold, auto-archive senders, labels), and voice. If there's no profile, use sensible defaults and mention that `/assistant:setup` will sharpen the buckets.
 
 ## Standalone vs connected
 

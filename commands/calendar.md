@@ -7,7 +7,7 @@ Parse `$ARGUMENTS` for the verb. Default to **protect** when empty or unrecogniz
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; calendar policy defaults still apply for pasted agendas.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; calendar policy defaults still apply for pasted agendas.
 - **Working folder** — Confirm where `drafts/calendar-block-*.md` and `review-queue/index.yaml` will be written. Note if the folder is read-only.
 - **Connectors** — Detect `~~calendar`. State whether the run is connector-backed or paste-only.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never exceed it.

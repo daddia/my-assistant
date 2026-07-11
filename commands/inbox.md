@@ -8,7 +8,7 @@ Parse `$ARGUMENTS` for the verb. Default to **triage** when empty or unrecognize
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; the plugin still works with pasted threads.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the plugin still works with pasted threads.
 - **Working folder** — Confirm where `drafts/`, `review-queue/index.yaml`, and any label/archive proposals will be written. Note if the folder is read-only.
 - **Connectors** — Detect `~~email`. State whether the run is connector-backed or paste-only.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never exceed it.

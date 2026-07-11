@@ -2,13 +2,22 @@
 
 Your **profile** is the single file that makes My Assistant sound like you and respect your rules. It's created by `/assistant:setup` and read at the start of every session.
 
-## Where it lives
+## Working folder and config
 
-```
-~/.claude/plugins/config/my-assistant/profile.md
+Setup creates a user-owned folder (default `~/MyAssistant`):
+
+```text
+~/MyAssistant/
+  config/
+    profile.md              # human personalisation
+    my-assistant.json       # paths, scope, platform (selective)
+  TASKS.md
+  memory/
+  schedules/
+  ...
 ```
 
-Outside the plugin directory — so `/plugin update` overwrites plugin files but never your personalisation. (In Cowork you can instead keep it in a workspace folder you have open; the plugin checks there too.)
+Outside the plugin directory — so `/plugin update` overwrites plugin files but never your personalisation. Open this folder in Cowork or Cursor so hooks and scheduled jobs find your files. Path resolution: `rules/paths.md`.
 
 ## Run setup
 
@@ -30,7 +39,7 @@ Five vertical ICP personas ship in `config/starter-profiles/` — fictional iden
 | Operator | Chief of staff / ops lead |
 | Investor | Angel / micro-VC |
 
-During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes to your external profile path — same as a hand-built profile.
+During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes to `{assistantPath}/config/` — same as a hand-built profile.
 
 Browse [before/after draft demos](../../examples/before-after/) to see generic AI output vs profile-tuned replies. **Evals** still use Alex Rivera ([`evals/profile.fixture.md`](../../evals/profile.fixture.md)); starters are for onboarding.
 
@@ -51,7 +60,7 @@ It walks eight sections, one at a time, confirming each before writing (blank pa
 
 - **Be specific about voice.** "Direct and warm, no fluff" beats "professional."
 - **The anti-style section matters most** — it's the most effective way to stop generic AI output.
-- **Paste real emails** into a `voice/` folder next to the profile so drafts match your rhythm.
+- **Paste real emails** into `{assistantPath}/voice/` so drafts match your rhythm.
 - **Autonomy defaults to Tier 1 (Draft).** Raise it only after a week of good output.
 
 ## Update later

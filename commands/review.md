@@ -5,7 +5,7 @@ description: Weekly review — wins, open loops, stale tasks, and what to line u
 
 ## Preflight
 
-- **Profile** — Read `~/.claude/plugins/config/my-assistant/profile.md` (or `profile.md` in the open workspace). If missing, note it and offer `/assistant:setup`; the review still works from the working folder.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the review still works from the working folder.
 - **Working folder** — Confirm `TASKS.md`, `memory/`, `CLAUDE.md`, and `review-YYYY-MM-DD.md` locations. Note if the folder is read-only.
 - **Connectors** — Optional; note available `~~email`, `~~calendar`, `~~chat` for open-loop context.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Update tasks and memory only with confirmation.

@@ -51,7 +51,9 @@ Plus skills that fire on their own as you work: calendar scheduling, meeting fol
 | **Display name** | My Assistant |
 | **Repo & marketplace** | `my-assistant` |
 | **Plugin id** (manifest `name`) | `assistant` |
-| **Profile path** | `~/.claude/plugins/config/my-assistant/profile.md` |
+| **Working folder** | `~/MyAssistant` (configurable at setup) |
+| **Profile** | `~/MyAssistant/config/profile.md` |
+| **Install config** | `~/MyAssistant/config/my-assistant.json` |
 | **Commands** | `/assistant:*` |
 
 Then run:
@@ -60,7 +62,7 @@ Then run:
 /assistant:setup
 ```
 
-A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. It writes a **profile** to `~/.claude/plugins/config/my-assistant/profile.md` — outside the plugin, so `/plugin update` never overwrites it.
+A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. Setup creates your working folder (default `~/MyAssistant`) and writes `config/profile.md` plus selective `config/my-assistant.json` — outside the plugin, so `/plugin update` never overwrites it.
 
 ## Works on day one, sharper with connectors
 

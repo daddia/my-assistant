@@ -12,11 +12,11 @@ This file orchestrates the plugin: it maps what the user asks for to the skill t
 
 ## Personalisation lives outside this plugin
 
-Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in a **profile** at `~/.claude/plugins/config/my-assistant/profile.md` (created by the setup interview from `config/profile.template.md`). It is read at session start and is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
+Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in a **profile** at `{assistantPath}/config/profile.md` inside the user's working folder (default `~/MyAssistant`, created by the setup interview from `config/profile.template.md`). A selective machine config lives at `{assistantPath}/config/my-assistant.json`. See `rules/paths.md` for resolution and legacy fallbacks. Personalisation is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
-- If the profile exists, read it first and treat it as the source of truth about the user.
-- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to the external profile path. Gallery: [`examples/README.md`](examples/README.md).
-- In Cowork, the profile may instead live in a workspace folder the user has open; check there too.
+- If the profile exists (via `my-assistant.json` or path resolution), read it first and treat it as the source of truth about the user.
+- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to `{assistantPath}/config/`. Gallery: [`examples/README.md`](examples/README.md).
+- Open the working folder (`~/MyAssistant` by default) in Cowork or Cursor so hooks, schedules, and the dashboard resolve paths reliably.
 
 ## Trigger → skill map
 
@@ -95,7 +95,8 @@ Skills refer to connectors by category using `~~` placeholders — `~~email`, `~
 
 | File | Purpose | Location |
 |------|---------|----------|
-| `profile.md` | Who the user is, voice, policy, autonomy | `~/.claude/plugins/config/my-assistant/` |
+| `profile.md` | Who the user is, voice, policy, autonomy | `{assistantPath}/config/` (default `~/MyAssistant/config/`) |
+| `my-assistant.json` | Paths, scope, platform (selective machine config) | `{assistantPath}/config/` |
 | `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |
 | `CLAUDE.md` (memory) + `memory/` | Two-tier memory | Working folder |
 | `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |

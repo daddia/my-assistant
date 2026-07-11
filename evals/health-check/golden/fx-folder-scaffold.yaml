@@ -6,10 +6,23 @@ working_folder: evals/health-check/fixtures/fx-folder-scaffold/working
 profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 2
-  warn: 3
+  warn: 4
   fail: 0
-  skip: 0
+  skip: 2
 results:
+  - check_id: config-exists
+    category: profile
+    status: warn
+    message: No install config — run /assistant:setup
+    fix_ref: /assistant:setup
+  - check_id: config-valid
+    category: profile
+    status: skip
+    message: No install config — skipped
+  - check_id: config-profile-aligned
+    category: profile
+    status: skip
+    message: No install config — skipped
   - check_id: profile-exists
     category: profile
     status: pass

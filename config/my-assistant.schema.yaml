@@ -1,0 +1,50 @@
+# Schema for {assistantPath}/config/my-assistant.json
+# Selective machine-readable install config — not a duplicate of profile.md.
+# Human personalisation (voice, VIP, email/calendar policy) stays in profile.md.
+
+version: "1"
+description: My Assistant install config written by /assistant:setup
+
+required:
+  - version
+  - assistantPath
+  - configPath
+  - scope
+  - setupAt
+
+properties:
+  version:
+    type: string
+    const: "1"
+    description: Schema version for forward-compatible reads
+
+  assistantPath:
+    type: string
+    description: Absolute path to the working folder (default ~/MyAssistant)
+
+  configPath:
+    type: string
+    description: Absolute path to the config subdirectory ({assistantPath}/config)
+
+  scope:
+    type: string
+    enum: [personal, work, both]
+    description: Personal-only, work-only, or both — from setup working rules
+
+  platform:
+    type: string
+    enum: [cowork, cursor, claude-code, unknown]
+    description: Host runtime detected at setup
+
+  setupAt:
+    type: string
+    format: date-time
+    description: ISO-8601 timestamp when setup last wrote this file
+
+example:
+  version: "1"
+  assistantPath: /Users/jane/MyAssistant
+  configPath: /Users/jane/MyAssistant/config
+  scope: personal
+  platform: cowork
+  setupAt: "2026-07-10T12:00:00+10:00"

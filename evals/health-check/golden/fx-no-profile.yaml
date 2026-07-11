@@ -6,10 +6,23 @@ working_folder: evals/health-check/fixtures/fx-no-profile/working
 profile_path: null
 summary:
   pass: 1
-  warn: 3
+  warn: 4
   fail: 1
-  skip: 10
+  skip: 12
 results:
+  - check_id: config-exists
+    category: profile
+    status: warn
+    message: No install config — run /assistant:setup
+    fix_ref: /assistant:setup
+  - check_id: config-valid
+    category: profile
+    status: skip
+    message: No install config — skipped
+  - check_id: config-profile-aligned
+    category: profile
+    status: skip
+    message: No install config — skipped
   - check_id: profile-exists
     category: profile
     status: fail

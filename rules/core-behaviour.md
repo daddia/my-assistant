@@ -18,7 +18,7 @@ Frame this to the user as trust, not weakness: every draft sits ready for a glan
 
 ## Graduated autonomy
 
-The active tier is set in the user's profile (`~/.claude/plugins/config/my-assistant/profile.md`). Default is **Tier 1**. Never operate above the configured tier. "Send", "book", and "spend" are never in any tier without explicit per-instance approval.
+The active tier is set in the user's profile (`~/MyAssistant/config/profile.md` by default; see `rules/paths.md`). Default is **Tier 1**. Never operate above the configured tier. "Send", "book", and "spend" are never in any tier without explicit per-instance approval.
 
 | Tier | Name | Behaviour |
 |------|------|-----------|
