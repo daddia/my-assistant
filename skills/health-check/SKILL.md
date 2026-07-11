@@ -30,7 +30,7 @@ Locate `my-assistant.json` (workspace `config/`, then `~/MyAssistant/config/`, t
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
 | `config-exists` | `my-assistant.json` found at a resolved path | **warn** — suggest re-running `/assistant:setup` or completing working-folder step |
-| `config-valid` | JSON parses; `assistantPath`, `configPath`, `scope`, `setupAt` present per schema | **warn** with detail |
+| `config-valid` | JSON parses; `assistantPath`, `configPath`, `scope`, `setupAt`, `lastUpdated` present per schema | **warn** with detail |
 | `config-profile-aligned` | `{configPath}/profile.md` exists when config is present | **warn** |
 
 ### Profile

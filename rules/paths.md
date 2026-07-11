@@ -32,7 +32,8 @@ Selective JSON for paths and non-prose settings. **Do not** duplicate profile co
 | `configPath` | string | Absolute path to `{assistantPath}/config` |
 | `scope` | `"personal"` \| `"work"` \| `"both"` | From setup interview working rules |
 | `platform` | `"cowork"` \| `"cursor"` \| `"claude-code"` \| `"unknown"` | Host at setup time |
-| `setupAt` | ISO-8601 datetime | When setup last wrote this file |
+| `setupAt` | ISO-8601 datetime | When setup first created this file |
+| `lastUpdated` | ISO-8601 datetime | When this file was last written |
 
 Shape: `config/my-assistant.schema.yaml`.
 
@@ -69,7 +70,7 @@ When found, use `assistantPath` and `configPath` from the file. Profile path is 
 1. Ask for **working folder** — suggest `~/MyAssistant`, accept an alternate path.
 2. Create `{assistantPath}/config/` if needed.
 3. Write `{assistantPath}/config/profile.md` (from template or starter).
-4. Write `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`.
+4. Write `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`.
 5. Offer to scaffold `TASKS.md`, `memory/`, and `CLAUDE.md` in `{assistantPath}`.
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a second workspace copy. One assistant path, one profile.

@@ -11,6 +11,7 @@ required:
   - configPath
   - scope
   - setupAt
+  - lastUpdated
 
 properties:
   version:
@@ -39,7 +40,12 @@ properties:
   setupAt:
     type: string
     format: date-time
-    description: ISO-8601 timestamp when setup last wrote this file
+    description: ISO-8601 timestamp when setup first created this file
+
+  lastUpdated:
+    type: string
+    format: date-time
+    description: ISO-8601 timestamp when this file was last written
 
 example:
   version: "1"
@@ -48,3 +54,4 @@ example:
   scope: personal
   platform: cowork
   setupAt: "2026-07-10T12:00:00+10:00"
+  lastUpdated: "2026-07-11T09:30:00+10:00"

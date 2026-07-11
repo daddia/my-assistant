@@ -26,7 +26,7 @@ Offer a 2-minute quick-start or the full 10-minute interview. Confirm the workin
 ## Verification
 
 - Re-read the written profile — confirm identity, voice, VIP tiers, email/calendar policy, and autonomy tier are complete.
-- Confirm `my-assistant.json` has `assistantPath`, `configPath`, `scope`, and `setupAt`.
+- Confirm `my-assistant.json` has `assistantPath`, `configPath`, `scope`, `setupAt`, and `lastUpdated`.
 - Confirm files were written under the working folder, not inside the plugin directory.
 - Surface write failures (permissions, read-only path) clearly.
 

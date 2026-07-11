@@ -49,7 +49,8 @@ After writing the profile, write `{assistantPath}/config/my-assistant.json` per 
 - `assistantPath`, `configPath` — absolute paths
 - `scope`: `"personal"`, `"work"`, or `"both"` (from working rules)
 - `platform`: best-effort `cowork`, `cursor`, `claude-code`, or `unknown`
-- `setupAt`: ISO-8601 timestamp
+- `setupAt`: ISO-8601 timestamp — set on **first** write; preserve on later updates
+- `lastUpdated`: ISO-8601 timestamp — set on every write (initial setup and profile/config updates)
 
 **Do not include** voice, VIP tiers, email/calendar policy, autonomy prose, or goals — those belong in `profile.md` only.
 
@@ -113,7 +114,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words.
 
-Then write or update `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, and `setupAt`.
+Then write or update `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt` and refresh `lastUpdated`.
 
 Offer to scaffold `{assistantPath}/TASKS.md`, `{assistantPath}/memory/`, and `{assistantPath}/CLAUDE.md` when the folder is empty.
 

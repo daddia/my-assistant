@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - **Working-folder setup** — `/assistant:setup` now establishes a working directory (default `~/MyAssistant`) before the profile interview.
-- **`config/my-assistant.json`** — selective machine-readable install config (`assistantPath`, `configPath`, `scope`, `platform`, `setupAt`) at `{assistantPath}/config/my-assistant.json`; schema in `config/my-assistant.schema.yaml`.
+- **`config/my-assistant.json`** — selective machine-readable install config (`assistantPath`, `configPath`, `scope`, `platform`, `setupAt`, `lastUpdated`) at `{assistantPath}/config/my-assistant.json`; schema in `config/my-assistant.schema.yaml`.
 - **`rules/paths.md`** — canonical resolution for working folder, config, and profile (legacy paths still supported).
 
 ### Changed
