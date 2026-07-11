@@ -7,7 +7,7 @@ config_path: evals/health-check/fixtures/fx-full-profile/working/config/my-assis
 profile_path: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 summary:
   pass: 22
-  warn: 0
+  warn: 5
   fail: 0
   skip: 8
 results:
@@ -67,6 +67,31 @@ results:
     category: profile
     status: pass
     message: Optional sections filled
+  - check_id: policies-dir-exists
+    category: policies
+    status: warn
+    message: policies/ directory not found
+    fix_ref: /assistant:setup
+  - check_id: policies-email-present
+    category: policies
+    status: warn
+    message: email.policy.md not found
+    fix_ref: /assistant:setup
+  - check_id: policies-calendar-present
+    category: policies
+    status: warn
+    message: calendar.policy.md not found
+    fix_ref: /assistant:setup
+  - check_id: policies-sections-complete
+    category: policies
+    status: warn
+    message: Policy files missing or incomplete
+    fix_ref: /assistant:setup
+  - check_id: profile-legacy-policy-sections
+    category: policies
+    status: warn
+    message: Profile still contains legacy VIP, email, and calendar sections
+    fix_ref: /assistant:setup
   - check_id: working-folder-identified
     category: working-folder
     status: pass

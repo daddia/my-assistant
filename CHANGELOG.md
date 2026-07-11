@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+### Fixed
+
+## [1.3.0] - 2026-07-11
+
 ### Changed
 
 - **Policies split from profile** — VIP tiers, email rules, and calendar rules now live in `{configPath}/policies/*.policy.md` (e.g. `email.policy.md`, `calendar.policy.md`). Master templates ship in the plugin's `policies/` directory. `profile.md` holds identity, voice, anti-style, working rules, and goals only.
@@ -27,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Fixed
 
 - **Duplicate profile on setup** — explicit single-write rule prevents Cowork from saving profile to both legacy config and workspace paths.
+- **Health-check golden fixtures** — policy check IDs now referenced in eval golden reports.
 
 ## [1.2.1] - 2026-07-10
 

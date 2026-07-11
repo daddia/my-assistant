@@ -35,6 +35,11 @@ fixtures:
       - profile-sections-complete
       - profile-word-count
       - profile-optional-sections
+      - policies-dir-exists
+      - policies-email-present
+      - policies-calendar-present
+      - policies-sections-complete
+      - profile-legacy-policy-sections
       - tasks-md-present
       - memory-scaffold
       - claude-md-present
