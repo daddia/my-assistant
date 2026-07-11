@@ -13,7 +13,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:update` | Sync tasks + memory + follow-ups (`--comprehensive` scans connectors) |
 | `/assistant:review` | Weekly review |
 | `/assistant:schedules` | Set up scheduled tasks |
-| `/assistant:health` | Install and setup health check (`--save` writes report to working folder) |
+| `/assistant:status` | Install and setup status check (`--save` writes report to working folder) |
 
 ### Domain commands — noun + verb arguments
 
@@ -57,7 +57,7 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 - **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
 - **setup-interview** / **schedule-setup** — onboarding and automation
-- **health-check** — read-only install health check (`/assistant:health`); post-setup subset runs after profile write
+- **status** (`commands/status.md`) — read-only install status check (`/assistant:status`); post-setup subset runs after profile write
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.
 

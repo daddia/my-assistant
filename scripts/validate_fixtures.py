@@ -78,8 +78,7 @@ REQUIRED_FILES = [
     EVALS_DIR / "connectors/manifest.yaml",
     ROOT / "config/starter-profiles/manifest.yaml",
     ROOT / "examples/before-after/manifest.yaml",
-    ROOT / "skills/health-check/assets/health.yaml",
-    ROOT / "skills/health-check/assets/health-report.schema.yaml",
+    ROOT / "commands/status.md.tmpl",
     EVALS_DIR / "health-check/manifest.yaml",
 ]
 
@@ -136,6 +135,21 @@ def resolve_eval_path(rel: str) -> Path:
 
 def load_yaml(path: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
+def load_status_checklist() -> dict:
+    tmpl_path = ROOT / "commands/status.md.tmpl"
+    if not tmpl_path.is_file():
+        return {}
+    text = tmpl_path.read_text(encoding="utf-8")
+    match = re.search(
+        r"^## Checklist\s*\n\n```yaml\n(.*?)\n```",
+        text,
+        re.MULTILINE | re.DOTALL,
+    )
+    if not match:
+        return {}
+    return yaml.safe_load(match.group(1)) or {}
 
 
 def check_pii(path: Path, errors: list[str]) -> None:
@@ -1074,41 +1088,40 @@ def validate_before_after(errors: list[str], thread_ids: set[str]) -> list:
 
 
 def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
-    health_checklist_path = ROOT / "skills/health-check/assets/health.yaml"
+    health_check_doc = load_status_checklist()
     health_check_ids: set[str] = set()
     health_check_category_ids: set[str] = set()
 
-    if health_checklist_path.is_file():
-        health_check_doc = load_yaml(health_checklist_path)
+    if health_check_doc:
         for cat in health_check_doc.get("categories", []):
             if isinstance(cat, dict) and cat.get("id"):
                 health_check_category_ids.add(cat["id"])
         checks = health_check_doc.get("checks")
         if not isinstance(checks, list):
-            errors.append("health.yaml: 'checks' must be a list")
+            errors.append("status.md.tmpl checklist: 'checks' must be a list")
             checks = []
         if len(checks) < MIN_HEALTH_CHECKS:
             errors.append(
-                f"health.yaml lists {len(checks)} checks; minimum is {MIN_HEALTH_CHECKS}"
+                f"status.md.tmpl checklist lists {len(checks)} checks; minimum is {MIN_HEALTH_CHECKS}"
             )
         for i, entry in enumerate(checks):
             if not isinstance(entry, dict):
-                errors.append(f"health.yaml: checks[{i}] must be a mapping")
+                errors.append(f"status.md.tmpl checklist: checks[{i}] must be a mapping")
                 continue
             cid = entry.get("id")
             cat = entry.get("category")
             if not cid:
-                errors.append(f"health.yaml: checks[{i}] missing 'id'")
+                errors.append(f"status.md.tmpl checklist: checks[{i}] missing 'id'")
             else:
                 health_check_ids.add(cid)
             if cat and cat not in health_check_category_ids:
                 errors.append(
-                    f"health.yaml: check '{cid}' unknown category '{cat}'"
+                    f"status.md.tmpl checklist: check '{cid}' unknown category '{cat}'"
                 )
             if not entry.get("fix_ref"):
-                errors.append(f"health.yaml: check '{cid}' missing fix_ref")
+                errors.append(f"status.md.tmpl checklist: check '{cid}' missing fix_ref")
     else:
-        errors.append("missing skills/health-check/assets/health.yaml")
+        errors.append("missing commands/status.md.tmpl checklist")
 
     golden_check_ids: set[str] = set()
     health_check_fixtures: list = []

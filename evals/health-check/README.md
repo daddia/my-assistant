@@ -1,10 +1,9 @@
-# Health check fixtures
+# Status check fixtures
 
-Synthetic install states and golden expected reports for `/assistant:health` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
+Synthetic install states and golden expected reports for `/assistant:status` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
 
-**Checklist:** [`skills/health-check/assets/health.yaml`](../../skills/health-check/assets/health.yaml)  
-**Report schema:** [`skills/health-check/assets/health-report.schema.yaml`](../../skills/health-check/assets/health-report.schema.yaml)  
-**Skill:** [`skills/health-check/SKILL.md`](../../skills/health-check/SKILL.md)
+**Template:** [`commands/status.md.tmpl`](../../commands/status.md.tmpl) (checklist + report schema)  
+**Command:** [`commands/status.md`](../../commands/status.md)
 
 ## Fixture matrix
 
@@ -24,18 +23,18 @@ Golden reports are **structural** (check IDs + statuses + fix_ref), not LLM-judg
 
 1. Copy a fixture profile to your test profile path (or paste in chat).
 2. Point the working folder at the fixture `working/` subdirectory.
-3. Run `/assistant:health` and compare check statuses to the matching golden file in `golden/`.
+3. Run `/assistant:status` and compare check statuses to the matching golden file in `golden/`.
 
-Post-setup subset: run `/assistant:setup` quick-start against `fx-quick-start-profile` — confirm the **Setup health** block appears before the inbox/brief wedge.
+Post-setup subset: run `/assistant:setup` quick-start against `fx-quick-start-profile` — confirm the **Setup status** block appears before the inbox/brief wedge.
 
 ## Schema validation
 
 Structural validation runs in `./evals/scripts/validate-fixtures.sh` (CI on every PR). The script asserts:
 
-- Every `check_id` in `health.yaml` appears in at least one golden report
+- Every `check_id` in the status checklist appears in at least one golden report
 - Golden `summary` counts match `results` status tallies
 - Fixture files and working-folder paths exist
 
 ## Checklist versioning
 
-Health check is stateless — new checks ship with plugin updates. Re-run `/assistant:health` after `/plugin update` to pick up new checklist rows. No migration of saved reports is required.
+Status check is stateless — new checks ship with plugin updates. Re-run `/assistant:status` after `/plugin update` to pick up new checklist rows. No migration of saved reports is required.

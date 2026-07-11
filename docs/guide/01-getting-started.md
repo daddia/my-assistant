@@ -55,15 +55,15 @@ This lives *outside* the plugin, so updating the plugin never overwrites your da
 
 No connectors yet? Paste an email thread or your calendar — every skill works standalone. Try thread [`01-vip-board-update`](../../evals/corpus/threads/01-vip-board-update.md) and compare your draft to the [before/after gallery](../examples/before-after/01-vip-board-update/).
 
-## Step 4 — Run health check
+## Step 4 — Run status check
 
 ```
-/assistant:health
+/assistant:status
 ```
 
-A scannable health report checks your profile, working folder, scheduled jobs (if configured), connectors (advisory), and platform fit. Each row is **pass**, **warn**, **fail**, or **skip** with a concrete fix — usually `/assistant:setup`, `/assistant:schedules`, or a guide chapter.
+A scannable status report checks your profile, working folder, scheduled jobs (if configured), connectors (advisory), and platform fit. Each row is **pass**, **warn**, **fail**, or **skip** with a concrete fix — usually `/assistant:setup`, `/assistant:schedules`, or a guide chapter.
 
-Setup runs a short **Setup health** block automatically after writing your profile. Run the full health check anytime after plugin updates or when something feels off. Add `--save` to write `health-report-YYYY-MM-DD.md` to your working folder.
+Setup runs a short **Setup status** block automatically after writing your profile. Run the full status check anytime after plugin updates or when something feels off. Add `--save` to write `status-report-YYYY-MM-DD.md` to your working folder.
 
 ## Next
 

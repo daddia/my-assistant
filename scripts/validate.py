@@ -45,6 +45,7 @@ _FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 _FRONTMATTER_KEY_RE = re.compile(r"^(\s*)([A-Za-z0-9_-]+):\s*(.*)$")
 _MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 _SKILL_REF_RE = re.compile(r"skills/([a-z][a-z0-9-]*)/SKILL\.md")
+_CMD_TMPL_REF_RE = re.compile(r"commands/([a-z][a-z0-9-]*)\.md\.tmpl")
 _AGENTS_COMMAND_RE = re.compile(r"`/assistant:([a-z][a-z0-9-]*)`")
 
 CRITICAL_COMMAND_SECTIONS = ("Preflight", "Verification")
@@ -490,12 +491,13 @@ class Validator:
                 self.pass_(f"{rel} has frontmatter description")
 
             skill_refs = sorted(set(_SKILL_REF_RE.findall(content)))
-            if not skill_refs:
+            tmpl_refs = sorted(set(_CMD_TMPL_REF_RE.findall(content)))
+            if not skill_refs and not tmpl_refs:
                 self.fail(
                     "CMD_NO_SKILL_REF",
-                    f"{rel} has no skills/<name>/SKILL.md reference",
+                    f"{rel} has no skills/<name>/SKILL.md or commands/<name>.md.tmpl reference",
                     file=rel,
-                    hint="Route to at least one skill file",
+                    hint="Route to at least one skill file or a command template",
                 )
             else:
                 for skill_name in skill_refs:
@@ -508,6 +510,17 @@ class Validator:
                             f"{rel} references missing skills/{skill_name}/SKILL.md",
                             file=rel,
                             hint=f"Create skills/{skill_name}/SKILL.md or fix the reference",
+                        )
+                for tmpl_slug in tmpl_refs:
+                    tmpl_path = ROOT / "commands" / f"{tmpl_slug}.md.tmpl"
+                    if tmpl_path.is_file():
+                        self.pass_(f"{rel} → commands/{tmpl_slug}.md.tmpl")
+                    else:
+                        self.fail(
+                            "CMD_TMPL_REF_BROKEN",
+                            f"{rel} references missing commands/{tmpl_slug}.md.tmpl",
+                            file=rel,
+                            hint=f"Create commands/{tmpl_slug}.md.tmpl or fix the reference",
                         )
 
             missing_sections: list[str] = []

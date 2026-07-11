@@ -1,29 +1,49 @@
 ---
-name: health-check
-description: Install and setup health check for the assistant plugin. Activate on
-  "/assistant:health", "run health check", "health check", "is my assistant set up correctly",
-  or "diagnose my install". Read-only validator — proposes fixes, never auto-remediates.
+description: Show install and setup status — profile, working folder, schedules, connectors (advisory), and platform fit. Prints a scannable pass / warn / fail / skip report with concrete fix steps.
 ---
 
-# Health check
+# Assistant Status (Doctor)
 
-Structured health check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — health check proposes fixes and routes to commands or guide chapters; it never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
+Structured status check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — proposes fixes and routes to commands or guide chapters; never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
 
-The only optional write: `health-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
+The only optional write: `status-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
 
-## Load the checklist
+## Preflight
 
-Read `skills/health-check/assets/health.yaml` from the plugin directory. If missing, stop with an honest error:
+- **Profile & paths** — Resolve per `rules/paths.md`. Missing profile is a check result, not a blocker.
+- **Working folder** — Resolve the working folder for `TASKS.md`, `scheduled/`, and optional report output. Note if read-only.
+- **Connectors** — Advisory scan of available `~~category` connectors; status check does not require OAuth.
+- **Autonomy tier** — Read from profile if present; include in report context only.
 
-> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`skills/health-check/assets/health.yaml`) is missing.
+## Plan
+
+- Parse `$ARGUMENTS`: `--save` writes `status-report-YYYY-MM-DD.md` to the working folder when writable; default is chat-only.
+- Load checklist and report schema from `commands/status.md.tmpl`, run all checks, render pass/warn/fail/skip report with fix links.
+- Read-only — never mutate profile, plugin files, or working-folder state.
+
+## Commands
+
+Run the status check. Activate on `/assistant:status`, "run status check", "status check", "is my assistant set up correctly", or "diagnose my install".
+
+Parse `$ARGUMENTS`:
+
+- **`--save`** — after rendering the report in chat, also write `status-report-YYYY-MM-DD.md` to the working folder (only when the folder is writable; otherwise note the save failure and keep chat output).
+- **No flags** — chat report only (default; no unsolicited file writes).
+- **`checks: [profile, policies, working-folder]`** — post-setup subset only (used by `/assistant:setup` after initial profile write).
+
+### Load the checklist
+
+Read `commands/status.md.tmpl` from the plugin directory. Parse the **Checklist** and **Report schema** YAML blocks. If missing, stop with an honest error:
+
+> Plugin install incomplete — reinstall from the marketplace. The status template (`commands/status.md.tmpl`) is missing.
 
 Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
 
-## Resolve paths
+### Resolve paths
 
 Follow `rules/paths.md` — same order as `hooks/load-profile.sh`.
 
-### Install config
+#### Install config
 
 Locate `my-assistant.json` (workspace `config/`, then `~/MyAssistant/config/`, then legacy plugin config). Record `config_path` in the report when found.
 
@@ -34,14 +54,14 @@ Locate `my-assistant.json` (workspace `config/`, then `~/MyAssistant/config/`, t
 | `config-profile-aligned` | `{configPath}/profile.md` exists when config is present | **warn** |
 | `config-policies-aligned` | `{policiesPath}/` exists when config is present | **warn** |
 
-### Profile
+#### Profile
 
 1. `{configPath}/profile.md` from `my-assistant.json` when valid
 2. Fallback order in `rules/paths.md` (workspace `config/profile.md`, workspace root, `~/MyAssistant/config/`, legacy plugin config)
 
 Record the path in the report as `profile_path` (or `null`).
 
-### Working folder
+#### Working folder
 
 1. `assistantPath` from `my-assistant.json` when valid
 2. Parent of `config/profile.md` when profile lives under a `config/` subdirectory
@@ -49,9 +69,9 @@ Record the path in the report as `profile_path` (or `null`).
 4. Open workspace / current working directory in Cowork or Cursor
 5. If still ambiguous, default to cwd with a **warn** on `working-folder-identified` and ask the user to confirm or open their working folder (`~/MyAssistant` by default)
 
-Never write health or health-check files under the plugin directory (`rules/file-safety.md`).
+Never write status or status-report files under the plugin directory (`rules/file-safety.md`).
 
-### Platform hint
+#### Platform hint
 
 Best-effort inference for `platform_hint`:
 
@@ -64,9 +84,9 @@ Best-effort inference for `platform_hint`:
 
 When `unknown`, platform-specific checks **skip** with a message to re-run after stating the platform.
 
-## Check logic
+### Check logic
 
-### Plugin
+#### Plugin
 
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
@@ -75,9 +95,9 @@ When `unknown`, platform-specific checks **skip** with a message to re-run after
 | `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
 | `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
 | `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
-| `plugin-health-checklist` | `skills/health-check/assets/health.yaml` and `skills/health-check/assets/health-report.schema.yaml` exist | **fail** |
+| `plugin-health-checklist` | `commands/status.md.tmpl` exists with checklist and report schema | **fail** |
 
-### Profile
+#### Profile
 
 If `profile-exists` **fails**, **skip** all downstream profile checks (`profile-readable`, `profile-sections-complete`, `profile-word-count`, `profile-optional-sections`) with message "Profile missing — skipped."
 
@@ -99,7 +119,7 @@ If `profile-exists` **fails**, **skip** all downstream profile checks (`profile-
 
 Sections 3 (anti-style) and 5 (goals) are checked by `profile-optional-sections` — warn if skipped, do not fail post-setup quick-start.
 
-### Policies
+#### Policies
 
 Policies live at `{policiesPath}/` from `my-assistant.json` when present, else `{assistantPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
 
@@ -119,7 +139,7 @@ If `profile-exists` **fails**, skip policy checks with "Profile missing — skip
 2. **Email policy** — reply threshold stated (in `email.policy.md`)
 3. **Calendar policy** — working hours stated (in `calendar.policy.md`)
 
-### Working folder
+#### Working folder
 
 If `working-folder-identified` **warns** (ambiguous), folder file checks may **skip** with "Working folder not confirmed."
 
@@ -130,7 +150,7 @@ If `working-folder-identified` **warns** (ambiguous), folder file checks may **s
 | `memory-scaffold` | `memory/` directory exists | **warn** — run `skills/setup-interview/scripts/scaffold-working-folder.sh {assistantPath}` (dirs only) |
 | `claude-md-present` | `CLAUDE.md` exists in working folder | **warn** |
 
-### Always-on
+#### Always-on
 
 When `{working-folder}/scheduled/` is **absent or empty**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
 
@@ -143,7 +163,7 @@ When the directory **exists** with one or more job files:
 | `schedule-catalog-jobs-match` | Every `job_id` in `scheduled/` exists in `scheduled/schedules.yaml` | **warn** |
 | `schedule-critical-local-misses` | No `morning-briefing.yaml` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
 
-### Connectors (advisory)
+#### Connectors (advisory)
 
 **Ask-first UX** for standalone parity — do not assume OAuth or MCP visibility.
 
@@ -158,7 +178,7 @@ Ask inline: "Which connector categories do you have connected? (email / calendar
 
 Link `docs/guide/connector-smoke-tests.md` for paste smoke steps. Never run live OAuth probes (MA08).
 
-### Platform
+#### Platform
 
 | check_id | Behaviour |
 |----------|-----------|
@@ -167,18 +187,18 @@ Link `docs/guide/connector-smoke-tests.md` for paste smoke steps. Never run live
 | `platform-cowork-schedules` | When `platform_hint: cowork` → **pass** if local schedules are viable; **skip** otherwise |
 | `platform-unknown-skip` | When `platform_hint: unknown` → **skip** with message to state platform and re-run |
 
-## Post-setup subset
+### Post-setup subset
 
 When invoked from `setup-interview` after initial profile write, run **only** profile + working-folder categories:
 
-- `checks: [profile, working-folder]` — skip plugin, always-on, connectors, platform unless user asks for full health check
-- Render a compact **Setup health** block (≤8 lines): summary counts + top fails/warns with fix refs
+- `checks: [profile, policies, working-folder]` — skip plugin, always-on, connectors, platform unless user asks for full status check
+- Render a compact **Setup status** block (≤8 lines): summary counts + top fails/warns with fix refs
 - Do **not** block the wedge CTA on warnings — always offer `/assistant:inbox triage` and `/assistant:brief` after the block
-- Chat-only — no auto-save of `health-report-*.md` after setup
+- Chat-only — no auto-save of `status-report-*.md` after setup
 
-## Build and render the report
+### Build and render the report
 
-Aggregate results into `HealthCheckReport` matching `skills/health-check/assets/health-report.schema.yaml`:
+Aggregate results into `StatusReport` matching the **Report schema** block in `commands/status.md.tmpl`:
 
 ```yaml
 version: "0.1"
@@ -190,13 +210,13 @@ summary: { pass, warn, fail, skip }
 results: [ ... ]
 ```
 
-### Markdown output (approval frame)
+#### Markdown output (approval frame)
 
 Use the four-part frame from `rules/approval-frame.md`:
 
-**What I found** — summary line: `Health check: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
+**What I found** — summary line: `Status check: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
 
-**What I drafted** — "Nothing yet" (health check does not create drafts).
+**What I drafted** — "Nothing yet" (status check does not create drafts).
 
 **What I recommend** — Top 1–3 fixes ranked by severity (fails first, then warns).
 
@@ -213,11 +233,11 @@ Then render a **checklist table** grouped by category:
 
 Use ✅ pass · ⚠️ warn · ❌ fail · ⏭️ skip in the Status column.
 
-### Optional save (`--save`)
+#### Optional save (`--save`)
 
-Write `health-report-YYYY-MM-DD.md` to the working folder with the same markdown body. If the folder is not writable, render in chat only and note the save failure.
+Write `status-report-YYYY-MM-DD.md` to the working folder with the same markdown body. If the folder is not writable, render in chat only and note the save failure.
 
-## Error paths
+### Error paths
 
 | Condition | Behaviour |
 |-----------|-----------|
@@ -230,6 +250,27 @@ Write `health-report-YYYY-MM-DD.md` to the working folder with the same markdown
 
 Every failure maps to a checklist row with `fix_ref` — no opaque errors.
 
-## Maintainer fixtures
+Maintainer fixtures: synthetic states and golden expected reports live in `evals/health-check/`. See `evals/health-check/README.md` for fixture validation.
 
-Synthetic states and golden expected reports live in `evals/health-check/`. See `evals/health-check/README.md` for fixture validation.
+## Verification
+
+- Re-read the rendered report — confirm every checklist item has pass/warn/fail/skip with a concrete fix.
+- Confirm no profile, plugin, or working-folder files were modified (except optional `--save` report).
+- Surface checklist load failures or unreadable paths clearly.
+
+## Summary
+
+Present a concise result block:
+
+```
+## Result
+- **Action**: status check
+- **Status**: success | partial | failed
+- **Details**: pass/warn/fail/skip counts, report path if --save
+```
+
+## Next Steps
+
+- Fix any **fail** rows via `/assistant:setup`, `/assistant:schedules`, or the linked guide chapter.
+- Re-run `/assistant:status` after plugin updates or connector changes.
+- Run `/assistant:status --save` to keep a dated report in the working folder.

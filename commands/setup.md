@@ -15,13 +15,13 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 - Run `skills/setup-interview/SKILL.md`.
 - Establish working folder first, then offer 2-minute quick-start, a starter profile, or the full 10-minute interview.
-- Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup health subset; do not overwrite an existing profile without confirmation.
+- Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup status subset; do not overwrite an existing profile without confirmation.
 
 ## Commands
 
 Run the onboarding interview. Read and follow `skills/setup-interview/SKILL.md`.
 
-Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup health subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health` for a full check.
+Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup status subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:status` for a full check.
 
 ## Verification
 
@@ -45,7 +45,7 @@ Present a concise result block:
 ## Next Steps
 
 - Open `{assistantPath}` in Cowork or Cursor so hooks and schedules resolve paths.
-- Run `/assistant:health` for a full install health check.
+- Run `/assistant:status` for a full install status check.
 - Run `/assistant:inbox triage` or paste a demo thread from `examples/`.
 - Run `/assistant:brief` for a morning briefing.
 - Connect tools via Cowork → Settings → Connectors when ready.

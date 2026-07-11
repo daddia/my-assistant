@@ -18,7 +18,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/schedule-health/`](../evals/schedule-health/) | Schedule health ledger fixtures + miss-detection golden |
 | [`evals/feedback/`](../evals/feedback/) | Draft feedback fixtures + golden profile diffs |
 | [`evals/connectors/`](../evals/connectors/) | Connector category paste fixtures + golden smoke expectations |
-| [`evals/health-check/`](../evals/health-check/) | Install health-check fixtures + golden health reports |
+| [`evals/health-check/`](../evals/health-check/) | Install status-check fixtures + golden status reports |
 | [`evals/rubric/`](../evals/rubric/) | Manual scoring rubrics |
 
 **Quick structural check** (from repo root):
@@ -41,7 +41,7 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Connector smoke** (manual, ~30 minutes): six paste fixtures (`conn-email-paste` … `conn-tasks-paste`) — one per `~~category`; smoke subset minimum: email, calendar, chat. See [`docs/guide/connector-smoke-tests.md`](./guide/connector-smoke-tests.md) and [`evals/connectors/README.md`](../evals/connectors/README.md).
 
-**Health check** (manual, ~10 minutes): copy a fixture from [`evals/health-check/fixtures/`](../evals/health-check/fixtures/) to a scratch working folder, run `/assistant:health`, compare statuses to [`evals/health-check/golden/`](../evals/health-check/golden/). Post-setup: confirm **Setup health** block after `/assistant:setup` quick-start. See [`evals/health-check/README.md`](../evals/health-check/README.md).
+**Status check** (manual, ~10 minutes): copy a fixture from [`evals/health-check/fixtures/`](../evals/health-check/fixtures/) to a scratch working folder, run `/assistant:status`, compare statuses to [`evals/health-check/golden/`](../evals/health-check/golden/). Post-setup: confirm **Setup status** block after `/assistant:setup` quick-start. See [`evals/health-check/README.md`](../evals/health-check/README.md).
 
 ## 2. Skill and behaviour checks
 

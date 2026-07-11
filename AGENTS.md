@@ -37,7 +37,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | `/assistant:memory add` · `prune` |
 | Wants a weekly review | `skills/weekly-review/SKILL.md` | `/assistant:review` |
 | Wants to set up scheduled tasks / always-on reliability | `skills/schedule-setup/SKILL.md` | `/assistant:schedules` |
-| Wants an install / setup health check | `skills/health-check/SKILL.md` | `/assistant:health` |
+| Wants an install / setup status check | `commands/status.md` | `/assistant:status` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/follow-up-tracking/SKILL.md` + `skills/memory-management/SKILL.md` | `/assistant:update` |
 | Wants a visual editor for tasks or memory | `skills/dashboard.html` | (open in browser) |
 
@@ -60,9 +60,9 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:update` | `--comprehensive` flag | `task-management` + `follow-up-tracking` + `memory-management` |
 | `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
 | `/assistant:schedules` | — | `schedule-setup` |
-| `/assistant:health` | `--save` flag | `health-check` |
+| `/assistant:status` | `--save` flag | — (self-contained) |
 
-Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup, health. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
+Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup, status. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
 
 ## Visual dashboard
 

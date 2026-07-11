@@ -62,12 +62,13 @@ Suggest logical follow-ups:
 
 - After inbox triage → review drafts, run `/assistant:email feedback` on sent replies.
 - After brief or prep → act on flagged follow-ups or calendar conflicts.
-- After setup → `/assistant:health` for a full health check.
+- After setup → `/assistant:status` for a full status check.
 - After schedule setup → confirm heartbeats in `scheduled/{job_id}.yaml`.
 
 ## File Naming
 
 - Command files live in `commands/` and end in `.md`.
+- Self-contained commands may pair `commands/<slug>.md` with `commands/<slug>.md.tmpl` for checklist/schema data (see `status.md` / `status.md.tmpl`).
 - Files prefixed with `_` (like this one) are meta-documents, not slash commands. They are excluded from plugin enumeration and not presented as user-invocable commands.
 - Command slugs match the routing table in `AGENTS.md` (`inbox.md` → `/assistant:inbox`, etc.).
 
