@@ -100,13 +100,13 @@ Sections 3 (anti-style) and 5 (goals) are checked by `profile-optional-sections`
 
 ### Policies
 
-Policies live at `{configPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
+Policies live at `{assistantPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
 
 If `profile-exists` **fails**, skip policy checks with "Profile missing — skipped."
 
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
-| `policies-dir-exists` | `{configPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
+| `policies-dir-exists` | `{assistantPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
 | `policies-email-present` | `email.policy.md` exists and is readable | **warn** |
 | `policies-calendar-present` | `calendar.policy.md` exists and is readable | **warn** |
 | `policies-sections-complete` | VIP tiers + reply threshold in email policy; working hours in calendar policy | **warn** |

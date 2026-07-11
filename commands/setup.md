@@ -7,7 +7,7 @@ description: Configure the assistant — a 10-minute interview that writes your 
 ## Preflight
 
 - **Profile & paths** — Resolve per `rules/paths.md`. If a profile already exists, confirm whether the user wants to update or start fresh.
-- **Working folder** — Step 0 of setup: suggest `~/MyAssistant`, accept an alternate path, create `{assistantPath}/config/policies/`. Note if the folder is read-only.
+- **Working folder** — Step 0 of setup: suggest `~/MyAssistant`, accept an alternate path, create `{assistantPath}/policies/`. Note if the folder is read-only.
 - **Connectors** — Advisory only; note which connectors the user plans to connect after setup.
 - **Autonomy tier** — Explain tiers during the interview; default to Tier 1 — Draft unless the user chooses otherwise.
 
@@ -15,7 +15,7 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 - Run `skills/setup-interview/SKILL.md`.
 - Establish working folder first, then offer 2-minute quick-start, a starter profile, or the full 10-minute interview.
-- Write `{assistantPath}/config/profile.md`, `{assistantPath}/config/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup health subset; do not overwrite an existing profile without confirmation.
+- Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup health subset; do not overwrite an existing profile without confirmation.
 
 ## Commands
 
@@ -26,7 +26,7 @@ Offer a 2-minute quick-start or the full 10-minute interview. Confirm the workin
 ## Verification
 
 - Re-read the written profile — confirm identity, voice, and autonomy tier are complete.
-- Re-read `{configPath}/policies/email.policy.md` and `calendar.policy.md` — confirm VIP tiers, email rules, and calendar rules are captured.
+- Re-read `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` — confirm VIP tiers, email rules, and calendar rules are captured.
 - Confirm `my-assistant.json` has `assistantPath`, `configPath`, `scope`, `setupAt`, and `lastUpdated`.
 - Confirm files were written under the working folder, not inside the plugin directory.
 - Surface write failures (permissions, read-only path) clearly.

@@ -16,7 +16,7 @@ schedule: "0 8,12,16 * * 1-5"
 
 system_prompt: |
   You are the user's inbox-triage chief of staff. Every run:
-    1. Read the profile and /config/policies/email.policy.md for VIP tiers,
+    1. Read the profile and /policies/email.policy.md for VIP tiers,
        email policy, voice, and autonomy tier.
     2. Follow the my-assistant inbox-triage skill to bucket new mail
        since the last sweep.
@@ -48,8 +48,8 @@ files:
   - source: config/profile.md
     mount: /config/profile.md
     mode: read
-  - source: config/policies/email.policy.md
-    mount: /config/policies/email.policy.md
+  - source: policies/email.policy.md
+    mount: /policies/email.policy.md
     mode: read
 
 steering_examples:

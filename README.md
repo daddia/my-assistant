@@ -53,7 +53,7 @@ Plus skills that fire on their own as you work: calendar scheduling, meeting fol
 | **Plugin id** (manifest `name`) | `assistant` |
 | **Working folder** | `~/MyAssistant` (configurable at setup) |
 | **Profile** | `~/MyAssistant/config/profile.md` |
-| **Policies** | `~/MyAssistant/config/policies/*.policy.md` |
+| **Policies** | `~/MyAssistant/policies/*.policy.md` |
 | **Install config** | `~/MyAssistant/config/my-assistant.json` |
 | **Commands** | `/assistant:*` |
 
@@ -63,7 +63,7 @@ Then run:
 /assistant:setup
 ```
 
-A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. Setup creates your working folder (default `~/MyAssistant`) and writes `config/profile.md`, `config/policies/*.policy.md`, and selective `config/my-assistant.json` — outside the plugin, so `/plugin update` never overwrites it. Policy templates ship in the plugin's `policies/` directory.
+A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. Setup creates your working folder (default `~/MyAssistant`) and writes `config/profile.md`, `policies/*.policy.md`, and selective `config/my-assistant.json` — outside the plugin, so `/plugin update` never overwrites it. Policy templates ship in the plugin's `policies/` directory.
 
 ## Works on day one, sharper with connectors
 

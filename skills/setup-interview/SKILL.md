@@ -20,7 +20,7 @@ Before identity, voice, or starters, establish where the assistant lives:
 
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
-3. **Confirm the absolute path** — create `{assistantPath}`, `{assistantPath}/config/`, and `{assistantPath}/config/policies/` if needed.
+3. **Confirm the absolute path** — create `{assistantPath}`, `{assistantPath}/config/`, and `{assistantPath}/policies/` if needed.
 4. Record `assistantPath` and `configPath` (`{assistantPath}/config`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
@@ -28,7 +28,7 @@ All user-owned files go under `{assistantPath}`:
 | Path | Purpose |
 | ---- | ------- |
 | `{assistantPath}/config/profile.md` | Identity, voice, anti-style, working rules, goals |
-| `{assistantPath}/config/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
+| `{assistantPath}/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
 | `{assistantPath}/config/my-assistant.json` | Machine-readable install config (selective) |
 | `{assistantPath}/TASKS.md`, `memory/`, … | Working-folder artefacts (offer scaffold after profile write) |
 
@@ -37,7 +37,7 @@ All user-owned files go under `{assistantPath}`:
 ## Where files go
 
 - **Profile:** `{assistantPath}/config/profile.md` — base on `config/profile.template.md` (sections 1–5 only; no VIP, email, or calendar content).
-- **Policies:** `{assistantPath}/config/policies/` — one file per domain, named `<name>.policy.md`. Base on the plugin's master templates in `policies/` (repo root): `email.policy.md`, `calendar.policy.md`. **Do not** create per-starter or per-persona policy copies in the plugin — there is only one master template set.
+- **Policies:** `{assistantPath}/policies/` — one file per domain, named `<name>.policy.md`. Base on the plugin's master templates in `policies/` (repo root): `email.policy.md`, `calendar.policy.md`. **Do not** create per-starter or per-persona policy copies in the plugin — there is only one master template set.
 
 > This is the only skill that writes the full profile and policies without a diff prompt. Every other skill proposes changes and asks first.
 
@@ -54,7 +54,7 @@ After writing the profile and policies, write `{assistantPath}/config/my-assista
 - `setupAt`: ISO-8601 timestamp — set on **first** write; preserve on later updates
 - `lastUpdated`: ISO-8601 timestamp — set on every write (initial setup and profile/config updates)
 
-**Do not include** voice, VIP tiers, email/calendar policy, autonomy prose, or goals — those belong in `profile.md` and `{configPath}/policies/*.policy.md` only.
+**Do not include** voice, VIP tiers, email/calendar policy, autonomy prose, or goals — those belong in `profile.md` and `{assistantPath}/policies/*.policy.md` only.
 
 ## Three paths — offer when no profile exists
 
@@ -86,7 +86,7 @@ Present all five starters with ICP one-liner from the manifest:
 4. Read `config/starter-profiles/{id}.md` for profile sections only.
 5. Offer **Quick customize** (name, company, timezone) OR **Keep as-is for demo**.
 6. **Do not write** until the user confirms customize-or-keep (match interview pacing — no half-written profiles if they abort).
-7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/config/policies/email.policy.md`, `{assistantPath}/config/policies/calendar.policy.md`, and `my-assistant.json`.
+7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/email.policy.md`, `{assistantPath}/policies/calendar.policy.md`, and `my-assistant.json`.
 8. For starter demo mode, pre-fill policies with sensible defaults for that persona during customize — still using the master `policies/` templates as the base shape.
 9. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath}`.
 10. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
@@ -112,7 +112,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 4. **Working rules & autonomy** — pick an autonomy tier (default **Tier 1 — Draft**; explain the four tiers from `rules/core-behaviour.md`); scope (personal only? work + personal? → maps to `scope` in `my-assistant.json`); money threshold; anything off-limits.
 5. **Goals** (optional) — this quarter's top objectives and deadlines to watch.
 
-**Policies (`config/policies/`):**
+**Policies (`policies/`):**
 
 6. **VIP tiers** → `email.policy.md` — who must surface first and never be auto-touched (Tier 1); who to draft fastest for (Tier 2).
 7. **Email policy** → `email.policy.md` — reply threshold (which categories to draft for vs summarise vs archive); exact-sender auto-archive list (start conservative); labels they use.
@@ -130,7 +130,7 @@ Offer to scaffold `{assistantPath}/TASKS.md`, `{assistantPath}/memory/`, and `{a
 
 If `profile.md` still contains VIP tiers, email policy, or calendar policy sections:
 
-1. Offer a one-time **split** — extract into `{configPath}/policies/email.policy.md` and `calendar.policy.md`.
+1. Offer a one-time **split** — extract into `{assistantPath}/policies/email.policy.md` and `calendar.policy.md`.
 2. Trim those sections from `profile.md`.
 3. Show the diff before writing.
 

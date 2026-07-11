@@ -12,7 +12,7 @@ One screen the user reads with their coffee that tells them exactly what today n
 
 ## Read the profile first
 
-Load working hours from `{configPath}/policies/calendar.policy.md`, VIP tiers from `{configPath}/policies/email.policy.md`, and voice from the profile (the brief is written *to* the user, in their preferred style — tight, scannable, no filler).
+Load working hours from `{assistantPath}/policies/calendar.policy.md`, VIP tiers from `{assistantPath}/policies/email.policy.md`, and voice from the profile (the brief is written *to* the user, in their preferred style — tight, scannable, no filler).
 
 ## Schedule health check (interactive runs only)
 

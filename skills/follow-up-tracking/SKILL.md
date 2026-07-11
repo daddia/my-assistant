@@ -12,7 +12,7 @@ The things that fall through the cracks are the ones you're *waiting on*. This s
 
 ## Read the profile first
 
-Load VIP tiers from `{configPath}/policies/email.policy.md` (VIP silences escalate faster and harder) and voice from the profile (nudges must sound like the user). Default cold threshold: **3 business days**; override from the profile if set.
+Load VIP tiers from `{assistantPath}/policies/email.policy.md` (VIP silences escalate faster and harder) and voice from the profile (nudges must sound like the user). Default cold threshold: **3 business days**; override from the profile if set.
 
 ## What it does
 

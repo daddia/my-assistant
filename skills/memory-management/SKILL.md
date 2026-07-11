@@ -33,7 +33,7 @@ Without memory, that request is meaningless. With memory, the assistant knows:
 | Layer | File | What lives here |
 |-------|------|-----------------|
 | **Profile** | `~/MyAssistant/config/profile.md` | Identity, voice, working rules, autonomy — written by `/assistant:setup` |
-| **Policies** | `~/MyAssistant/config/policies/*.policy.md` | VIP tiers, email/calendar rules — written by `/assistant:setup` |
+| **Policies** | `~/MyAssistant/policies/*.policy.md` | VIP tiers, email/calendar rules — written by `/assistant:setup` |
 | **Working memory** | `CLAUDE.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
 | **Deep memory** | `memory/` in the working folder | Full glossary, people profiles, project detail, company context |
 

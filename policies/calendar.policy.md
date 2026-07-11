@@ -1,6 +1,6 @@
 # Calendar policy
 
-Scheduling, buffers, and focus-time defence. Setup writes this to `{configPath}/policies/calendar.policy.md` — outside the plugin. See `rules/paths.md`.
+Scheduling, buffers, and focus-time defence. Setup writes this to `{assistantPath}/policies/calendar.policy.md` — outside the plugin. See `rules/paths.md`.
 
 ---
 

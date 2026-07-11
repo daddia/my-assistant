@@ -1,6 +1,6 @@
 # Schema for {assistantPath}/config/my-assistant.json
 # Selective machine-readable install config — not a duplicate of profile.md.
-# Human personalisation (voice, VIP, policy) stays in profile.md and {configPath}/policies/*.policy.md.
+# Human personalisation (voice, VIP, policy) stays in profile.md and {assistantPath}/policies/*.policy.md.
 
 version: "1"
 description: My Assistant install config written by /assistant:setup

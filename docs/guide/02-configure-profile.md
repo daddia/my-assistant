@@ -10,17 +10,17 @@ Setup creates a user-owned folder (default `~/MyAssistant`):
 ~/MyAssistant/
   config/
     profile.md              # identity, voice, working rules, goals
-    policies/
-      email.policy.md       # VIP tiers, reply threshold, auto-archive, labels
-      calendar.policy.md    # scheduling, buffers, focus-time defence
     my-assistant.json       # paths, scope, platform (selective)
+  policies/
+    email.policy.md         # VIP tiers, reply threshold, auto-archive, labels
+    calendar.policy.md      # scheduling, buffers, focus-time defence
   TASKS.md
   memory/
   scheduled/
   ...
 ```
 
-Policy **templates** ship in the plugin's `policies/` directory (repo root). Setup copies and fills them into your `{configPath}/policies/` folder.
+Policy **templates** ship in the plugin's `policies/` directory (repo root). Setup copies and fills them into your `{assistantPath}/policies/` folder.
 
 Outside the plugin directory — so `/plugin update` overwrites plugin files but never your personalisation. Open this folder in Cowork or Cursor so hooks and scheduled jobs find your files. Path resolution: `rules/paths.md`.
 
@@ -44,7 +44,7 @@ Five vertical ICP personas ship in `config/starter-profiles/` — fictional iden
 | Operator | Chief of staff / ops lead |
 | Investor | Angel / micro-VC |
 
-During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes profile + policies to `{assistantPath}/config/`.
+During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes profile to `{assistantPath}/config/` and policies to `{assistantPath}/policies/`.
 
 Browse [before/after draft demos](../../examples/before-after/) to see generic AI output vs profile-tuned replies. **Evals** still use Alex Rivera ([`evals/profile.fixture.md`](../../evals/profile.fixture.md)); starters are for onboarding.
 

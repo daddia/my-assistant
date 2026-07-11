@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+- **Policies path** — user policies live at `{assistantPath}/policies/` (working-folder root), not `{assistantPath}/config/policies/`. SessionStart hook, setup, health check, and skills updated; legacy `{configPath}/policies/` still read for existing installs.
+
 ## [1.3.0] - 2026-07-11
 
 ### Changed

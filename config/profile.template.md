@@ -2,7 +2,7 @@
 
 Identity, voice, and working rules. The setup interview writes it; skills read it at session start.
 
-**Where it lives:** `{assistantPath}/config/profile.md` — default working folder `~/MyAssistant`, *outside* the plugin directory, so `/plugin update` never overwrites it. Install paths and scope are in `{assistantPath}/config/my-assistant.json`. **Policies** (VIP tiers, email, calendar) live in `{assistantPath}/config/policies/*.policy.md`. See `rules/paths.md`.
+**Where it lives:** `{assistantPath}/config/profile.md` — default working folder `~/MyAssistant`, *outside* the plugin directory, so `/plugin update` never overwrites it. Install paths and scope are in `{assistantPath}/config/my-assistant.json`. **Policies** (VIP tiers, email, calendar) live in `{assistantPath}/policies/*.policy.md`. See `rules/paths.md`.
 
 Fill in what you can. The more you provide, the sharper the assistant. Leave placeholders for anything you skip. Keep profile + policies under ~2,000 words combined so they load cheaply every session.
 

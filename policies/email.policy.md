@@ -1,6 +1,6 @@
 # Email policy
 
-VIP tiers, inbox triage, and reply rules. Setup writes this to `{configPath}/policies/email.policy.md` — outside the plugin, so `/plugin update` never overwrites it. See `rules/paths.md`.
+VIP tiers, inbox triage, and reply rules. Setup writes this to `{assistantPath}/policies/email.policy.md` — outside the plugin, so `/plugin update` never overwrites it. See `rules/paths.md`.
 
 ---
 

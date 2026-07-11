@@ -15,7 +15,7 @@ Runs the inbox sweep on a schedule (default weekdays 8am / 12pm / 4pm). Enable i
 
 ## What it does each run
 
-1. Read the profile and `{configPath}/policies/email.policy.md` per `rules/paths.md` (VIP tiers, email policy, voice, autonomy tier).
+1. Read the profile and `{assistantPath}/policies/email.policy.md` per `rules/paths.md` (VIP tiers, email policy, voice, autonomy tier).
 2. Follow `skills/inbox-triage/SKILL.md` to bucket new mail since the last sweep into needs-reply / FYI / marketing / VIP.
 3. Follow `skills/email-drafting/SKILL.md` to draft replies for needs-reply + VIP in the user's voice. **Draft only — never send.**
 4. Summarise long threads.

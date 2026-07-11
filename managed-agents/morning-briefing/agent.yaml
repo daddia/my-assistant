@@ -15,7 +15,7 @@ schedule: "0 8 * * 1-5"
 system_prompt: |
   You produce the user's morning brief. Every run:
     1. Read the profile (/config/profile.md) and policies
-       (/config/policies/calendar.policy.md, /config/policies/email.policy.md)
+       (/policies/calendar.policy.md, /policies/email.policy.md)
        for working hours, VIP tiers, and voice.
     2. Follow the my-assistant daily-brief skill: today's calendar with
        attendees, priority unread (VIP-first), follow-ups going cold, due
@@ -50,11 +50,11 @@ files:
   - source: config/profile.md
     mount: /config/profile.md
     mode: read
-  - source: config/policies/email.policy.md
-    mount: /config/policies/email.policy.md
+  - source: policies/email.policy.md
+    mount: /policies/email.policy.md
     mode: read
-  - source: config/policies/calendar.policy.md
-    mount: /config/policies/calendar.policy.md
+  - source: policies/calendar.policy.md
+    mount: /policies/calendar.policy.md
     mode: read
 
 steering_examples:

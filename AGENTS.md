@@ -12,7 +12,7 @@ This file orchestrates the plugin: it maps what the user asks for to the skill t
 
 ## Personalisation lives outside this plugin
 
-Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in the user's working folder (default `~/MyAssistant`): **profile** at `{assistantPath}/config/profile.md` (identity, voice, working rules) and **policies** at `{assistantPath}/config/policies/*.policy.md` (VIP tiers, email, calendar). Setup copies policy templates from the plugin's master `policies/` directory. A selective machine config lives at `{assistantPath}/config/my-assistant.json`. See `rules/paths.md` for resolution and legacy fallbacks. Personalisation is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
+Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in the user's working folder (default `~/MyAssistant`): **profile** at `{assistantPath}/config/profile.md` (identity, voice, working rules) and **policies** at `{assistantPath}/policies/*.policy.md` (VIP tiers, email, calendar). Setup copies policy templates from the plugin's master `policies/` directory. A selective machine config lives at `{assistantPath}/config/my-assistant.json`. See `rules/paths.md` for resolution and legacy fallbacks. Personalisation is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
 - If the profile exists (via `my-assistant.json` or path resolution), read it first and treat it as the source of truth about the user.
 - If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to `{assistantPath}/config/`. Gallery: [`examples/README.md`](examples/README.md).
@@ -96,7 +96,7 @@ Skills refer to connectors by category using `~~` placeholders — `~~email`, `~
 | File | Purpose | Location |
 |------|---------|----------|
 | `profile.md` | Identity, voice, anti-style, working rules, goals | `{assistantPath}/config/` |
-| `policies/*.policy.md` | VIP tiers, email rules, calendar rules | `{assistantPath}/config/policies/` |
+| `policies/*.policy.md` | VIP tiers, email rules, calendar rules | `{assistantPath}/policies/` |
 | `policies/` (templates) | Master policy templates (plugin, read-only) | Plugin repo root |
 | `my-assistant.json` | Paths, scope, platform (selective machine config) | `{assistantPath}/config/` |
 | `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |

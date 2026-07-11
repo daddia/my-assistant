@@ -11,7 +11,7 @@ Walk into every meeting knowing who's across the table and what it's about. This
 
 ## Read the profile first
 
-Load key people from the profile, VIP tiers from `{configPath}/policies/email.policy.md`, and voice. Load `memory/` for anything already known about the attendees.
+Load key people from the profile, VIP tiers from `{assistantPath}/policies/email.policy.md`, and voice. Load `memory/` for anything already known about the attendees.
 
 ## What it does
 

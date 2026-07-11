@@ -13,7 +13,7 @@ schedule: "0 17 * * *"
 
 system_prompt: |
   You watch for open loops. Every run:
-    1. Read the profile (/config/profile.md) and /config/policies/email.policy.md
+    1. Read the profile (/config/profile.md) and /policies/email.policy.md
        for VIP tiers, voice, and the cold threshold (default 3 business days).
     2. Follow the my-assistant follow-up-tracking skill: find sent mail
        awaiting a reply, age it, draft a warm nudge for anything past
@@ -43,8 +43,8 @@ files:
   - source: config/profile.md
     mount: /config/profile.md
     mode: read
-  - source: config/policies/email.policy.md
-    mount: /config/policies/email.policy.md
+  - source: policies/email.policy.md
+    mount: /policies/email.policy.md
     mode: read
 
 steering_examples:
