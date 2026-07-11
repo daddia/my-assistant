@@ -1,5 +1,5 @@
 # Canonical always-on job catalog — joins local scheduled tasks and managed-agent cookbooks.
-# Referenced by skills/schedule-setup, schedules/index.yaml ledger, and docs/guide/07-always-on-reliability.md.
+# Referenced by skills/schedule-setup, scheduled/{job_id}.yaml ledger files, and docs/guide/07-always-on-reliability.md.
 # Add jobs here; do not fork prompts elsewhere.
 
 version: "0.1"

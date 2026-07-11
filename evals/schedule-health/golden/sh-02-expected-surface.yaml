@@ -1,5 +1,5 @@
 fixture_id: sh-02-missed-morning-brief
-health_fixture: evals/schedule-health/fixtures/sh-02-missed-morning-brief.yaml
+health_fixture: evals/schedule-health/fixtures/sh-02-missed-morning-brief/
 trigger_skill: daily-brief
 trigger_mode: manual
 must_surface:

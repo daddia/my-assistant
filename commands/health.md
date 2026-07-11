@@ -5,7 +5,7 @@ description: Run an install-and-setup health check — profile, working folder, 
 ## Preflight
 
 - **Profile & paths** — Resolve per `rules/paths.md`. Missing profile is a check result, not a blocker.
-- **Working folder** — Resolve the working folder for `TASKS.md`, `schedules/`, and optional report output. Note if read-only.
+- **Working folder** — Resolve the working folder for `TASKS.md`, `scheduled/`, and optional report output. Note if read-only.
 - **Connectors** — Advisory scan of available `~~category` connectors; health check does not require OAuth.
 - **Autonomy tier** — Read from profile if present; include in report context only.
 

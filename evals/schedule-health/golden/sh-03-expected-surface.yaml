@@ -1,5 +1,5 @@
 fixture_id: sh-03-partial-managed
-health_fixture: evals/schedule-health/fixtures/sh-03-partial-managed.yaml
+health_fixture: evals/schedule-health/fixtures/sh-03-partial-managed/
 trigger_skill: daily-brief
 trigger_mode: manual
 must_surface: []

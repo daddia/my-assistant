@@ -1,0 +1,11 @@
+version: "0.1"
+job_id: inbox-sweep
+updated_at: "2026-07-08T09:45:00+10:00"
+surface: local
+cadence: "0 8,12,16 * * 1-5"
+last_run_at: "2026-07-08T08:12:00+10:00"
+last_run_status: success
+expected_artifact: null
+artifact_present: null
+miss_count_7d: 0
+notes: null

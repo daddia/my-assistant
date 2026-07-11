@@ -45,26 +45,26 @@ Full user-facing copy of this tree: `docs/guide/07-always-on-reliability.md`.
 
 ## Initialize schedule health ledger
 
-After the user picks jobs and surfaces, create or update `{working-folder}/schedules/index.yaml`:
+After the user picks jobs and surfaces, create or update one file per job at `{working-folder}/scheduled/{job_id}.yaml`:
 
 ```yaml
 version: "0.1"
+job_id: <job_id>
 updated_at: <ISO-8601 now>
-jobs:
-  <job_id>:
-    surface: local | cloud-code | managed   # user's choice
-    cadence: "<cron from catalog>"
-    last_run_at: null
-    last_run_status: missed
-    expected_artifact: null                 # or resolved path pattern for dated artefacts
-    artifact_present: false
-    miss_count_7d: 0
-    notes: null
+surface: local | cloud-code | managed   # user's choice
+cadence: "<cron from catalog>"
+last_run_at: null
+last_run_status: missed
+expected_artifact: null                 # or resolved path pattern for dated artefacts
+artifact_present: false
+miss_count_7d: 0
+notes: null
 ```
 
-- Create `schedules/` on first write in the **working folder only** — never under the plugin directory.
+- Create `scheduled/` on first write in the **working folder only** — never under the plugin directory.
+- Write one YAML file per configured job; filename must match `job_id` (e.g. `morning-briefing.yaml`).
 - Include only jobs the user actually set up.
-- If the ledger already exists, merge new jobs; do not wipe existing heartbeat history.
+- If a job file already exists, merge updates; do not wipe existing heartbeat history.
 
 ## The packaged tasks
 
@@ -134,12 +134,12 @@ If the user wants a minimal setup, recommend just two: **Morning briefing** and 
 
 ## Health recording on scheduled runs
 
-When a scheduled run completes (any surface), the target skill updates `schedules/index.yaml` for its `job_id`:
+When a scheduled run completes (any surface), the target skill updates `scheduled/{job_id}.yaml` for its job:
 
 - Set `last_run_at` to now (ISO-8601).
 - Set `last_run_status` to `success` only when required artefacts exist or the skill's completion criteria are met; otherwise `partial` or `failed`.
 - Set `expected_artifact` and `artifact_present` when the catalog defines a dated file.
-- Update `updated_at` on the index root.
+- Update `updated_at` on the job file.
 
 Interactive runs do not reset `miss_count_7d` unless they complete the scheduled job's artefact contract.
 

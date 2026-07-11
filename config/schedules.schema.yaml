@@ -1,10 +1,10 @@
-# Schedule health ledger schema — machine-readable shape for schedules/index.yaml
+# Schedule health ledger schema — machine-readable shape for scheduled/{job_id}.yaml
 #
 # Authoritative contract for scheduled-run skills and miss-detection logic.
-# Working-folder location: {working-folder}/schedules/index.yaml
+# Working-folder location: {working-folder}/scheduled/{job_id}.yaml (one file per job)
 # Never write health files under the plugin directory (see rules/file-safety.md).
 #
-# Validation: compare fixture items in evals/schedule-health/fixtures/*.yaml
+# Validation: compare fixture items in evals/schedule-health/fixtures/*/*.yaml
 # against this schema; see evals/schedule-health/README.md.
 
 version: "0.1"
@@ -24,9 +24,25 @@ run_statuses:
   - missed
 
 # ---------------------------------------------------------------------------
-# Per-job entry fields (jobs.{job_id})
+# Per-job file fields (scheduled/{job_id}.yaml)
 # ---------------------------------------------------------------------------
-job_fields:
+job_file_fields:
+  version:
+    required: true
+    type: string
+    description: Schema version, e.g. "0.1"
+
+  job_id:
+    required: true
+    type: string
+    description: Stable slug from config/schedules.yaml; must match the filename stem
+
+  updated_at:
+    required: true
+    type: datetime
+    format: ISO-8601
+    description: Timestamp of the last ledger write for this job
+
   surface:
     required: true
     type: enum
@@ -71,50 +87,17 @@ job_fields:
     description: Freeform context (e.g. laptop asleep on local surface)
 
 # ---------------------------------------------------------------------------
-# Index file shape
-# ---------------------------------------------------------------------------
-index:
-  version:
-    required: true
-    type: string
-    description: Schema version, e.g. "0.1"
-
-  updated_at:
-    required: true
-    type: datetime
-    format: ISO-8601
-    description: Timestamp of the last ledger write
-
-  jobs:
-    required: true
-    type: map
-    keys: job_id
-    values: job_fields
-    description: One entry per configured job_id from schedules.yaml
-
-# ---------------------------------------------------------------------------
 # Examples
 # ---------------------------------------------------------------------------
 examples:
   version: "0.1"
+  job_id: morning-briefing
   updated_at: "2026-07-08T08:05:00+10:00"
-  jobs:
-    morning-briefing:
-      surface: local
-      cadence: "0 8 * * 1-5"
-      last_run_at: "2026-07-08T08:02:00+10:00"
-      last_run_status: success
-      expected_artifact: brief-2026-07-08.md
-      artifact_present: true
-      miss_count_7d: 0
-      notes: null
-
-    inbox-sweep:
-      surface: managed
-      cadence: "0 8,12,16 * * 1-5"
-      last_run_at: "2026-07-08T12:01:00+10:00"
-      last_run_status: success
-      expected_artifact: null
-      artifact_present: null
-      miss_count_7d: 0
-      notes: null
+  surface: local
+  cadence: "0 8 * * 1-5"
+  last_run_at: "2026-07-08T08:02:00+10:00"
+  last_run_status: success
+  expected_artifact: brief-2026-07-08.md
+  artifact_present: true
+  miss_count_7d: 0
+  notes: null

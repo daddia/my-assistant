@@ -70,7 +70,7 @@ Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, bri
 
 Review queue: skills write **pending** items to `{working-folder}/review-queue/index.yaml` per `config/review.schema.yaml` and `rules/approval-frame.md`. Maintainer fixtures: [`evals/review-queue/`](evals/review-queue/).
 
-Schedule health: scheduled runs write heartbeats to `{working-folder}/schedules/index.yaml` per `config/schedules.schema.yaml` and `config/schedules.yaml`. Setup and miss detection: `docs/guide/07-always-on-reliability.md`. Maintainer fixtures: [`evals/schedule-health/`](evals/schedule-health/).
+Schedule health: scheduled runs write heartbeats to `{working-folder}/scheduled/{job_id}.yaml` (one file per job) per `config/schedules.schema.yaml` and `config/schedules.yaml`. Setup and miss detection: `docs/guide/07-always-on-reliability.md`. Maintainer fixtures: [`evals/schedule-health/`](evals/schedule-health/).
 
 ## Connectors are tool-agnostic
 

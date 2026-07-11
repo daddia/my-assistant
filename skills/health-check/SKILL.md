@@ -113,16 +113,16 @@ If `working-folder-identified` **warns** (ambiguous), folder file checks may **s
 
 ### Always-on
 
-When `{working-folder}/schedules/index.yaml` is **absent**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
+When `{working-folder}/scheduled/` is **absent or empty**: `schedule-ledger-present` → **skip** (not fail) with info message "No scheduled jobs configured — optional; run `/assistant:schedules` when ready." Skip `schedule-health-valid`, `schedule-catalog-jobs-match`, `schedule-critical-local-misses`.
 
-When ledger **exists**:
+When the directory **exists** with one or more job files:
 
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
-| `schedule-ledger-present` | Ledger file exists | **pass** |
-| `schedule-health-valid` | Shape matches `config/schedules.schema.yaml` (version, updated_at, jobs map; per-job surface, cadence, last_run_status, miss_count_7d) | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
-| `schedule-catalog-jobs-match` | Every `job_id` in ledger exists in `config/schedules.yaml` | **warn** |
-| `schedule-critical-local-misses` | No `morning-briefing` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
+| `schedule-ledger-present` | At least one `scheduled/{job_id}.yaml` exists | **pass** |
+| `schedule-health-valid` | Each file shape matches `config/schedules.schema.yaml` (version, job_id, updated_at, surface, cadence, last_run_status, miss_count_7d); filename matches `job_id` | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
+| `schedule-catalog-jobs-match` | Every `job_id` in `scheduled/` exists in `config/schedules.yaml` | **warn** |
+| `schedule-critical-local-misses` | No `morning-briefing.yaml` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
 
 ### Connectors (advisory)
 

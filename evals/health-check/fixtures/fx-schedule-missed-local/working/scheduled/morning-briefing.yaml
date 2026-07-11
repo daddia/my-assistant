@@ -1,0 +1,11 @@
+version: "0.1"
+job_id: morning-briefing
+updated_at: "2026-07-08T09:45:00+10:00"
+surface: local
+cadence: "0 8 * * 1-5"
+last_run_at: "2026-07-07T08:01:00+10:00"
+last_run_status: success
+expected_artifact: brief-2026-07-07.md
+artifact_present: true
+miss_count_7d: 1
+notes: "laptop asleep — user on local surface"

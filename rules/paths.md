@@ -14,7 +14,7 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
   TASKS.md
   CLAUDE.md
   memory/
-  schedules/
+  scheduled/
   review-queue/
   drafts/
 ```

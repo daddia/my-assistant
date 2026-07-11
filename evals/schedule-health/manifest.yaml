@@ -1,11 +1,11 @@
 version: "0.1"
 fixtures:
   - id: sh-01-healthy-weekday
-    file: evals/schedule-health/fixtures/sh-01-healthy-weekday.yaml
+    file: evals/schedule-health/fixtures/sh-01-healthy-weekday/
     golden: evals/schedule-health/golden/sh-01-expected-surface.yaml
   - id: sh-02-missed-morning-brief
-    file: evals/schedule-health/fixtures/sh-02-missed-morning-brief.yaml
+    file: evals/schedule-health/fixtures/sh-02-missed-morning-brief/
     golden: evals/schedule-health/golden/sh-02-expected-surface.yaml
   - id: sh-03-partial-managed
-    file: evals/schedule-health/fixtures/sh-03-partial-managed.yaml
+    file: evals/schedule-health/fixtures/sh-03-partial-managed/
     golden: evals/schedule-health/golden/sh-03-expected-surface.yaml

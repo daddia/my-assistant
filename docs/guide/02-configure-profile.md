@@ -13,7 +13,7 @@ Setup creates a user-owned folder (default `~/MyAssistant`):
     my-assistant.json       # paths, scope, platform (selective)
   TASKS.md
   memory/
-  schedules/
+  scheduled/
   ...
 ```
 

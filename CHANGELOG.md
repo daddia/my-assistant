@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- **Schedule health ledger layout** — working-folder heartbeats now live at `scheduled/{job_id}.yaml` (one file per job; was `schedules/index.yaml`).
+
 ### Added
 
 - **Working-folder setup** — `/assistant:setup` now establishes a working directory (default `~/MyAssistant`) before the profile interview.

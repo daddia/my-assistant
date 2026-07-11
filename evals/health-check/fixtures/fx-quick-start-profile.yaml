@@ -2,7 +2,7 @@ fixture_id: fx-quick-start-profile
 description: Post quick-start interview — identity, voice, autonomy only; thin VIP/calendar
 profile_file: evals/health-check/fixtures/profiles/fx-quick-start-profile.md
 working_folder: evals/health-check/fixtures/fx-quick-start-profile/working
-schedule_health_file: null
+schedule_health_dir: null
 platform_hint: cowork
 connectors_connected: []
 health_check_mode: post-setup-subset

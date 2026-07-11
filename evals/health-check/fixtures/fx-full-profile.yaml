@@ -3,7 +3,7 @@ description: Complete eval profile with all required sections filled
 profile_file: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 config_file: evals/health-check/fixtures/fx-full-profile/working/config/my-assistant.json
 working_folder: evals/health-check/fixtures/fx-full-profile/working
-schedule_health_file: null
+schedule_health_dir: null
 platform_hint: cowork
 connectors_connected: [email, calendar]
 health_check_mode: full

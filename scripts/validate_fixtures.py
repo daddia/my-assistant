@@ -515,6 +515,38 @@ def validate_calendar(errors: list[str]) -> list:
     return cal_fixtures
 
 
+def _validate_schedule_job_file(
+    errors: list[str],
+    job_path: Path,
+    label: str,
+) -> None:
+    if not job_path.is_file():
+        errors.append(f"missing schedule job file: {job_path}")
+        return
+    job_entry = load_yaml(job_path)
+    if not isinstance(job_entry, dict):
+        errors.append(f"schedule job file {label} must be a mapping")
+        return
+    job_id = job_entry.get("job_id")
+    stem = job_path.stem
+    if job_id != stem:
+        errors.append(
+            f"schedule job file {label} job_id '{job_id}' does not match filename '{stem}'"
+        )
+    for field in ("version", "updated_at", "surface", "cadence", "last_run_status", "miss_count_7d"):
+        if field not in job_entry:
+            errors.append(f"schedule job file {label} missing '{field}'")
+    surface = job_entry.get("surface")
+    if surface and surface not in SURFACES:
+        errors.append(f"schedule job file {label} invalid surface '{surface}'")
+    status = job_entry.get("last_run_status")
+    if status and status not in RUN_STATUSES:
+        errors.append(f"schedule job file {label} invalid last_run_status '{status}'")
+    miss = job_entry.get("miss_count_7d")
+    if miss is not None and not isinstance(miss, int):
+        errors.append(f"schedule job file {label} miss_count_7d must be integer")
+
+
 def validate_schedule_health(errors: list[str]) -> list:
     catalog_path = ROOT / "config/schedules.yaml"
     if catalog_path.is_file():
@@ -569,39 +601,24 @@ def validate_schedule_health(errors: list[str]) -> list:
 
         if not fpath:
             errors.append(f"schedule-health/manifest.yaml: fixture '{fid}' missing 'file'")
-        elif (resolved := resolve_eval_path(fpath)).is_file():
-            fixture = load_yaml(resolved)
-            jobs = fixture.get("jobs")
-            if not isinstance(jobs, dict):
-                errors.append(f"schedule-health fixture {Path(fpath).name} missing 'jobs' mapping")
-            else:
-                for job_id, job_entry in jobs.items():
-                    if not isinstance(job_entry, dict):
-                        continue
-                    surface = job_entry.get("surface")
-                    if surface and surface not in SURFACES:
-                        errors.append(
-                            f"schedule-health fixture {Path(fpath).name} job '{job_id}' "
-                            f"invalid surface '{surface}'"
-                        )
-                    status = job_entry.get("last_run_status")
-                    if status and status not in RUN_STATUSES:
-                        errors.append(
-                            f"schedule-health fixture {Path(fpath).name} job '{job_id}' "
-                            f"invalid last_run_status '{status}'"
-                        )
-                    miss = job_entry.get("miss_count_7d")
-                    if miss is not None and not isinstance(miss, int):
-                        errors.append(
-                            f"schedule-health fixture {Path(fpath).name} job '{job_id}' "
-                            "miss_count_7d must be integer"
-                        )
-            if "version" not in fixture:
-                errors.append(f"schedule-health fixture {Path(fpath).name} missing version")
-            if "updated_at" not in fixture:
-                errors.append(f"schedule-health fixture {Path(fpath).name} missing updated_at")
         else:
-            errors.append(f"missing schedule-health fixture file: {resolved}")
+            resolved = resolve_eval_path(fpath)
+            if resolved.is_dir():
+                job_files = sorted(resolved.glob("*.yaml"))
+                if not job_files:
+                    errors.append(f"schedule-health fixture directory {fpath} has no job files")
+                for job_path in job_files:
+                    _validate_schedule_job_file(
+                        errors,
+                        job_path,
+                        f"{Path(fpath).name}/{job_path.name}",
+                    )
+            elif resolved.is_file():
+                errors.append(
+                    f"schedule-health fixture {fpath} must be a directory of job files, not a single file"
+                )
+            else:
+                errors.append(f"missing schedule-health fixture directory: {resolved}")
 
         if not gpath:
             errors.append(f"schedule-health/manifest.yaml: fixture '{fid}' missing 'golden'")

@@ -18,12 +18,12 @@ Load working hours, VIP tiers, and voice (the brief is written *to* the user, in
 
 Before assembling the brief on an **interactive** run (`/assistant:brief`), check for a missed scheduled morning briefing. Do **not** run this block when the current session *is* the scheduled run recovering the job.
 
-1. Load `{working-folder}/schedules/index.yaml` if present. If missing, treat as "never scheduled" — suggest `/assistant:schedules` once, then proceed. If corrupt, note "health ledger unreadable — re-run /assistant:schedules" and proceed.
-2. Read the `morning-briefing` entry. **Skip miss detection** when `surface` is `managed` or `cloud-code` — local miss logic does not apply.
+1. Load `{working-folder}/scheduled/morning-briefing.yaml` if present. If missing, treat as "never scheduled" — suggest `/assistant:schedules` once, then proceed. If corrupt, note "health ledger unreadable — re-run /assistant:schedules" and proceed.
+2. Read the morning-briefing entry. **Skip miss detection** when `surface` is `managed` or `cloud-code` — local miss logic does not apply.
 3. On `surface: local`, on a **weekday**, when local time is past the expected run window (**cron fire time + 90 minutes**; default 08:00 + 90m = 09:30), detect a miss when **either**:
    - `brief-{today}.md` is absent in the working folder, **or**
    - `last_run_at` is stale (before today's expected window).
-4. On miss: increment `miss_count_7d` in the ledger, persist the index, then append **one** health block after normal brief output (see below). Do not auto-run a catch-up brief — the user may be intentionally running early or late.
+4. On miss: increment `miss_count_7d` in the job file, persist it, then append **one** health block after normal brief output (see below). Do not auto-run a catch-up brief — the user may be intentionally running early or late.
 5. When `miss_count_7d >= 2` for this critical job on `local`, add the escalation line to the health block.
 
 **Expected run window:** cron from catalog (`0 8 * * 1-5`) + 90 minutes. Use profile `working_hours.timezone` when set; otherwise the user's stated local timezone.
@@ -82,13 +82,13 @@ Quiet otherwise. Have a good one.
 
 When run as a scheduled task, save output to `brief-YYYY-MM-DD.md` in the working folder so there's a history. See `skills/schedule-setup/SKILL.md` for the packaged 8am prompt.
 
-**Heartbeat:** at end of a scheduled run, update `schedules/index.yaml` for `morning-briefing`:
+**Heartbeat:** at end of a scheduled run, update `scheduled/morning-briefing.yaml`:
 
 - `last_run_at`: now
 - `last_run_status`: `success` if `brief-{today}.md` was written; else `partial` or `failed`
 - `expected_artifact`: `brief-{today}.md`
 - `artifact_present`: true/false
-- `updated_at` on the index root
+- `updated_at` on the job file
 
 ## Standalone
 
