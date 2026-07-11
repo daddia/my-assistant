@@ -12,8 +12,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
-- **Policies path** — user policies live at `{assistantPath}/policies/` (working-folder root), not `{assistantPath}/config/policies/`. SessionStart hook, setup, health check, and skills updated; legacy `{configPath}/policies/` still read for existing installs.
+## [1.3.1] - 2026-07-11
+
+### Added
+
 - **`policiesPath` in install config** — `my-assistant.json` now records `{assistantPath}/policies` alongside `assistantPath` and `configPath`; setup writes it on new installs and backfills on update.
+- **Working-folder `AGENTS.md`** — setup scaffolds `AGENTS.md` from a template (orientation and memory hot cache) alongside optional `TASKS.md` and `memory/`.
+
+### Changed
+
+- **Health check assets** — checklist and report schema moved to `skills/health-check/assets/` (was `config/`).
+
+### Fixed
+
+- **Policies path** — user policies live at `{assistantPath}/policies/` (working-folder root), not `{assistantPath}/config/policies/`. SessionStart hook, setup, health check, and skills updated; legacy `{configPath}/policies/` still read for existing installs.
 
 ## [1.3.0] - 2026-07-11
 
