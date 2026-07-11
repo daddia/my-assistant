@@ -15,7 +15,7 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
     email.policy.md              # VIP tiers, reply threshold, auto-archive, labels
     calendar.policy.md           # scheduling, buffers, focus-time defence
   TASKS.md
-  CLAUDE.md
+  AGENTS.md
   memory/
   scheduled/
   review-queue/
@@ -86,7 +86,7 @@ If VIP tiers, email policy, or calendar policy still live inside `profile.md`, s
 3. Write `{assistantPath}/config/profile.md` (from template or starter — identity, voice, rules, goals only).
 4. Write `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` from the plugin's master templates in `policies/`.
 5. Write `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`.
-6. Offer to scaffold `TASKS.md`, `memory/`, and `CLAUDE.md` in `{assistantPath}`.
+6. Offer to scaffold `AGENTS.md` (from `skills/setup-interview/assets/AGENTS.template.md`), `TASKS.md`, and `memory/` in `{assistantPath}`.
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a second workspace copy. One assistant path, one profile, one policies directory.
 
