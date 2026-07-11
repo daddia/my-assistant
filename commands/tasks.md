@@ -9,7 +9,7 @@ Parse `$ARGUMENTS` for the verb. Default to **review** when empty or unrecognize
 
 - **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; tasks still work in the working folder.
 - **Working folder** — Confirm `TASKS.md` location and writability. Note if the folder is read-only.
-- **Connectors** — Not required for `add`/`review`; for `sync`, note whether context comes from chat/paste only (connector-backed sync uses `/assistant:update`).
+- **Connectors** — Not required for `add`/`review`; for `sync`, note whether context comes from chat/paste only (connector-backed sync uses `/assistant:update tasks --all` or `/assistant:update --all`).
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Never auto-add without confirmation.
 
 ## Plan
@@ -34,7 +34,7 @@ Read `TASKS.md`, summarise Active and Waiting On (overdue first), and interactiv
 
 Sync tasks from recent activity into `TASKS.md`. Read and follow `skills/task-management/SKILL.md`.
 
-Read `TASKS.md` and working memory. Surface action items from the current conversation or pasted content; offer to capture each — never auto-add. For connector-backed sync (email, calendar, chat), use `/assistant:update` instead — this verb scopes to the task list only.
+Read `TASKS.md` and working memory. Surface action items from the current conversation or pasted content; offer to capture each — never auto-add. For connector-backed sync (email, calendar, chat), use `/assistant:update tasks --all` or `/assistant:update --all` — this verb scopes to the task list and chat/paste only.
 
 ## Verification
 
@@ -55,6 +55,6 @@ Present a concise result block:
 
 ## Next Steps
 
-- Run `/assistant:update` for connector-backed task and memory sync.
+- Run `/assistant:update` for a full catch-up (tasks, memory, follow-ups).
 - Run `/assistant:review` for a weekly task prune.
 - Open `skills/dashboard.html` for a visual task board.

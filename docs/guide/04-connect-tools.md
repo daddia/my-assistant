@@ -32,7 +32,7 @@ Once connected:
 ```
 /assistant:inbox triage          # triages your real inbox
 /assistant:brief                 # pulls today's real calendar + unread
-/assistant:update --comprehensive # scans email/calendar/chat for missed todos
+/assistant:update --all          # scans email/calendar/chat for missed todos and memory
 ```
 
 It always asks before adding a task or a memory, and never sends or books automatically.

@@ -55,4 +55,4 @@ Present a concise result block:
 - After **prep** → run `/assistant:meeting follow-up` after the meeting with pasted notes; run `/assistant:calendar protect` if prep surfaced scheduling conflicts.
 - After **follow-up** → send approved follow-up drafts from your mail client; run `/assistant:meeting prep` before your next meeting with the same attendees.
 - Run `/assistant:tasks add` to capture action items you confirmed.
-- Run `/assistant:memory add` for new people or project context.
+- Run `/assistant:update memory` for new people or project context.

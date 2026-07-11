@@ -84,7 +84,7 @@ Timed walkthrough for visitors: **setup → inbox triage → draft review → me
 
 **Do:**
 
-1. Run `/assistant:memory add` or ask to remember Morgan Lee's role.
+1. Run `/assistant:update memory` or ask to remember Morgan Lee's role.
 2. Show the **proposed** memory entry — assistant should surface what it would write, not silently edit files without confirmation (Tier 1 — Draft).
 
 **Expect:**

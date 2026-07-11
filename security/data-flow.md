@@ -48,7 +48,7 @@ flowchart TB
 | **Profile** | `~/MyAssistant/config/profile.md` (or resolved via `my-assistant.json`) | Session start; skills that need voice, VIP, policy, autonomy | Yes — content is included in model context for the session |
 | **Install config** | `~/MyAssistant/config/my-assistant.json` | Path resolution, scope | Yes — paths included when skills resolve locations |
 | **Task list** | `TASKS.md` in working folder | Task review, brief, update, weekly review | Yes — when relevant to the task |
-| **Memory index** | `CLAUDE.md` (memory) in working folder | Shorthand decode, memory add/prune, prep | Yes — when relevant |
+| **Memory index** | `CLAUDE.md` (memory) in working folder | Shorthand decode, `/assistant:update memory`, prep | Yes — when relevant |
 | **Deep memory** | `memory/` in working folder | People, projects, glossary lookups | Yes — when relevant |
 | **Generated output** | `brief-*.md`, `drafts/`, review docs | Follow-up runs, user reference | Yes — when re-read for continuity |
 | **Voice samples** | `voice/` alongside profile (optional) | Email drafting | Yes — when drafting |
@@ -124,7 +124,7 @@ Tier 3 may perform narrow **pre-approved** notify-after actions (e.g. decline ob
 | `/assistant:meeting prep` | Calendar event; related mail; memory | Prep notes | — |
 | `/assistant:meeting follow-up` | Pasted notes/transcript | Extraction, drafts, queue items | — |
 | `/assistant:tasks` | TASKS.md | TASKS.md | — |
-| `/assistant:memory` | memory/, profile | memory/, CLAUDE.md | — |
+| `/assistant:update` | TASKS.md, memory/, profile; connectors when `--all` | TASKS.md, memory/, CLAUDE.md; follow-up drafts | — |
 | `/assistant:setup` | profile template | profile.md (full write) | — |
 | `dashboard.html` | User-granted folder | TASKS.md, memory/ (browser-local) | — |
 

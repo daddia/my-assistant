@@ -49,4 +49,4 @@ results:
     category: working-folder
     status: warn
     message: CLAUDE.md not found
-    fix_ref: /assistant:memory add
+    fix_ref: /assistant:update memory

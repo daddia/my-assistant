@@ -68,7 +68,7 @@ categories:
     live_optional:
       prerequisite: "Slack MCP enabled in host settings"
       steps:
-        - "Run /assistant:update --comprehensive with Slack connected"
+        - "Run /assistant:update --all with Slack connected"
         - "Confirm task proposals only; no message posted to channel"
       draft_only: false
 

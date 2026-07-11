@@ -10,7 +10,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 |---------|------|
 | `/assistant:setup` | Onboarding interview → writes your profile |
 | `/assistant:brief` | Morning briefing |
-| `/assistant:update` | Sync tasks + memory + follow-ups (`--comprehensive` scans connectors) |
+| `/assistant:update` | Bring the assistant up to date (`tasks` · `memory` scopes; `--all` deep-scans connectors) |
 | `/assistant:review` | Weekly review |
 | `/assistant:schedules` | Set up scheduled tasks |
 | `/assistant:status` | Install and setup status check (`--save` writes report to working folder) |
@@ -22,11 +22,10 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:inbox` | `triage` (default) · `sweep` | Full triage + drafts, or lighter bucket-and-archive pass |
 | `/assistant:email` | `draft` (default) · `review` · `feedback` | Draft one reply, review what's awaiting a response, or capture draft feedback for voice learning |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | Capture, review, or sync tasks in `TASKS.md` |
-| `/assistant:memory` | `add` (default) · `prune` | Remember people/projects/terms, or prune stale hot-cache entries |
 | `/assistant:calendar` | `protect` (default) · `schedule` | Scan for buffer/prep/follow-up gaps and draft block proposals, or find meeting times |
 | `/assistant:meeting` | `prep` · `follow-up` (default) | Pre-meeting briefs, or import notetaker export/notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting prep`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:memory prune`.
+Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting prep`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:update memory`.
 
 ### How voice learning works
 
