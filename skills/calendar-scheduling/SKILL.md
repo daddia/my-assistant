@@ -13,7 +13,7 @@ Do the scheduling legwork — find the slots, spot the clashes, draft the offer,
 
 ## Read the profile first
 
-Load the calendar policy: working hours, meeting-length defaults, buffers, prep/follow-up durations, protected focus window, focus-time defence level, what may be auto-proposed vs must-always-ask, and how scheduling replies should read.
+Load `{configPath}/policies/calendar.policy.md` (and profile identity for timezone fallback): working hours, meeting-length defaults, buffers, prep/follow-up durations, protected focus window, focus-time defence level, what may be auto-proposed vs must-always-ask, and how scheduling replies should read.
 
 If profile §7 is missing prep/follow-up fields, use defaults from [`evals/profile.fixture.md`](../../evals/profile.fixture.md) (15 min prep, 15 min follow-up, 09:00–10:00 protected) and suggest `/assistant:setup`.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart: load the user's profile if present.
+# SessionStart: load the user's profile and policies if present.
 # Resolution order: rules/paths.md
 
 set -euo pipefail
@@ -32,13 +32,49 @@ find_config_json() {
   return 1
 }
 
+load_policies() {
+  local policies_dir="$1"
+  if [[ ! -d "$policies_dir" ]]; then
+    return 0
+  fi
+  local found=0
+  shopt -s nullglob
+  local files=("${policies_dir}"/*.policy.md)
+  shopt -u nullglob
+  if (( ${#files[@]} == 0 )); then
+    return 0
+  fi
+  IFS=$'\n' files=($(printf '%s\n' "${files[@]}" | sort))
+  for policy in "${files[@]}"; do
+    if [[ -f "$policy" ]]; then
+      if (( found == 0 )); then
+        echo ""
+        echo "---"
+        echo ""
+        found=1
+      else
+        echo ""
+        echo "---"
+        echo ""
+      fi
+      cat "$policy"
+    fi
+  done
+}
+
+try_load() {
+  local config_path="$1"
+  if [[ -n "$config_path" && -f "${config_path}/profile.md" ]]; then
+    cat "${config_path}/profile.md"
+    load_policies "${config_path}/policies"
+    exit 0
+  fi
+}
+
 CONFIG_JSON=""
 if CONFIG_JSON="$(find_config_json)"; then
   CONFIG_PATH="$(read_json_path configPath "$CONFIG_JSON")"
-  if [[ -n "$CONFIG_PATH" && -f "${CONFIG_PATH}/profile.md" ]]; then
-    cat "${CONFIG_PATH}/profile.md"
-    exit 0
-  fi
+  try_load "$CONFIG_PATH"
 fi
 
 PROFILE_CANDIDATES=(
@@ -51,6 +87,8 @@ PROFILE_CANDIDATES=(
 for profile in "${PROFILE_CANDIDATES[@]}"; do
   if [[ -f "$profile" ]]; then
     cat "$profile"
+    config_dir="$(dirname "$profile")"
+    load_policies "${config_dir}/policies"
     exit 0
   fi
 done

@@ -8,6 +8,8 @@ categories:
     title: Plugin install
   - id: profile
     title: Profile & personalisation
+  - id: policies
+    title: Policies
   - id: working-folder
     title: Working folder
   - id: always-on
@@ -87,6 +89,31 @@ checks:
 
   - id: profile-optional-sections
     category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: policies-dir-exists
+    category: policies
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: policies-email-present
+    category: policies
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: policies-calendar-present
+    category: policies
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: policies-sections-complete
+    category: policies
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: profile-legacy-policy-sections
+    category: policies
     default_severity_on_fail: warn
     fix_ref: /assistant:setup
 

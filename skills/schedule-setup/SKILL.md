@@ -8,7 +8,7 @@ description: Walk the user through creating the packaged Cowork scheduled tasks
 
 # Schedule setup
 
-Turn the plugin's recurring jobs into scheduled tasks. The canonical job list lives in `config/schedules.yaml` — five jobs, stable `job_id` slugs, shared prompts across local Cowork schedules, Claude Code cloud schedules, and managed-agent cookbooks.
+Turn the plugin's recurring jobs into scheduled tasks. The canonical job list lives in `scheduled/schedules.yaml` — five jobs, stable `job_id` slugs, shared prompts across local Cowork schedules, Claude Code cloud schedules, and managed-agent cookbooks.
 
 Walk the user through the decision tree, then help them create each job they want.
 
@@ -28,7 +28,7 @@ Three honest caveats — say them up front:
 
 ## Decision tree
 
-Read `config/schedules.yaml` and walk the user through surface selection **per job**. Default is always `local` — managed agents are opt-in when reliability outweighs local-first.
+Read `scheduled/schedules.yaml` and walk the user through surface selection **per job**. Default is always `local` — managed agents are opt-in when reliability outweighs local-first.
 
 1. **Ask:** "Does any job need to run while your laptop sleeps?"
 2. If **no** — recommend `local` (Cowork scheduled tasks) for all chosen jobs. State the machine-awake caveat once.
@@ -68,7 +68,7 @@ notes: null
 
 ## The packaged tasks
 
-Prompts below match `config/schedules.yaml`. Anchor headings are stable `packaged_prompt_ref` targets.
+Prompts below match `scheduled/schedules.yaml`. Anchor headings are stable `packaged_prompt_ref` targets.
 
 ### Morning briefing {#morning-briefing}
 

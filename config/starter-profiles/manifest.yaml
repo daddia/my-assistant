@@ -25,14 +25,16 @@ profiles:
     icp: Angel or micro-VC investor
     file: config/starter-profiles/investor.md
     demo_threads: [01-vip-board-update, 24-scheduling-client-meeting]
-required_sections:
+required_profile_sections:
   - "## 1. Identity"
   - "## 2. Voice"
   - "## 3. Anti-style"
   - "## 4. Working rules & autonomy"
-  - "## 5. VIP tiers"
-  - "## 6. Email policy"
-  - "## 7. Calendar policy"
-  - "## 8. Goals & priorities"
+  - "## 5. Goals & priorities"
+policy_templates:
+  dir: policies
+  files:
+    - email.policy.md
+    - calendar.policy.md
 max_words: 2000
 fictional_only: true

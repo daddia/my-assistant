@@ -2,7 +2,7 @@
 
 Cookbooks for deploying my-assistant's always-on jobs as **Claude Managed Agents** (beta, `managed-agents-2026-04-01`) — the headless surface that runs on Anthropic's infrastructure instead of a desktop, so a sleeping laptop never causes a missed 8am briefing or a dropped follow-up.
 
-Each cookbook is an `agent.yaml` (model, system prompt, tools, MCP servers, skills reused from this plugin). Same prompts and skills as the desktop `agents/` — two surfaces, one source. The canonical join key is `config/schedules.yaml`.
+Each cookbook is an `agent.yaml` (model, system prompt, tools, MCP servers, skills reused from this plugin). Same prompts and skills as the desktop `agents/` — two surfaces, one source. The canonical join key is `scheduled/schedules.yaml`.
 
 ## When to use these
 
@@ -23,7 +23,7 @@ Connect `~~email` / `~~chat` via MCP servers using vault-stored OAuth credential
 
 ## The three cookbooks
 
-Aligned with `config/schedules.yaml`:
+Aligned with `scheduled/schedules.yaml`:
 
 | `job_id` | Cookbook | Cadence | Job |
 |----------|----------|---------|-----|
@@ -37,4 +37,4 @@ All three cookbooks are **draft-only**: they never send, book, or spend.
 
 ## Health ledger
 
-Managed runs should update `{working-folder}/scheduled/{job_id}.yaml` with `surface: managed` and heartbeat fields per `config/schedules.schema.yaml`.
+Managed runs should update `{working-folder}/scheduled/{job_id}.yaml` with `surface: managed` and heartbeat fields per `scheduled/schedules.schema.yaml`.

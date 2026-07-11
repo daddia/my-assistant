@@ -1,6 +1,6 @@
-# Configure your profile
+# Configure your profile and policies
 
-Your **profile** is the single file that makes My Assistant sound like you and respect your rules. It's created by `/assistant:setup` and read at the start of every session.
+Your **profile** and **policies** make My Assistant sound like you and respect your rules. They're created by `/assistant:setup` and read at the start of every session.
 
 ## Working folder and config
 
@@ -9,13 +9,18 @@ Setup creates a user-owned folder (default `~/MyAssistant`):
 ```text
 ~/MyAssistant/
   config/
-    profile.md              # human personalisation
+    profile.md              # identity, voice, working rules, goals
+    policies/
+      email.policy.md       # VIP tiers, reply threshold, auto-archive, labels
+      calendar.policy.md    # scheduling, buffers, focus-time defence
     my-assistant.json       # paths, scope, platform (selective)
   TASKS.md
   memory/
   scheduled/
   ...
 ```
+
+Policy **templates** ship in the plugin's `policies/` directory (repo root). Setup copies and fills them into your `{configPath}/policies/` folder.
 
 Outside the plugin directory — so `/plugin update` overwrites plugin files but never your personalisation. Open this folder in Cowork or Cursor so hooks and scheduled jobs find your files. Path resolution: `rules/paths.md`.
 
@@ -29,7 +34,7 @@ Pick the 2-minute quick-start, a **starter profile**, or the full 10-minute inte
 
 ### Starter profiles
 
-Five vertical ICP personas ship in `config/starter-profiles/` — fictional identities only, same eight sections as the template:
+Five vertical ICP personas ship in `config/starter-profiles/` — fictional identities for profile sections (identity, voice, working rules). Policies are always filled from the master templates in `policies/`:
 
 | Starter | Best for |
 |---------|----------|
@@ -39,22 +44,22 @@ Five vertical ICP personas ship in `config/starter-profiles/` — fictional iden
 | Operator | Chief of staff / ops lead |
 | Investor | Angel / micro-VC |
 
-During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes to `{assistantPath}/config/` — same as a hand-built profile.
+During `/assistant:setup`, choose a starter for a quick customize (name, company, timezone) or keep as-is for demo. The assistant writes profile + policies to `{assistantPath}/config/`.
 
 Browse [before/after draft demos](../../examples/before-after/) to see generic AI output vs profile-tuned replies. **Evals** still use Alex Rivera ([`evals/profile.fixture.md`](../../evals/profile.fixture.md)); starters are for onboarding.
 
-It walks eight sections, one at a time, confirming each before writing (blank path).
+### Interview sections
 
-| Section | What it captures |
-|---------|------------------|
-| **Identity** | Name, role, timezone, working hours, key people |
-| **Voice** | Tone, spelling, formats, sign-offs by relationship, sample emails |
-| **Anti-style** | AI tells to never use ("delve", "circle back", em-dash overuse) |
-| **Working rules & autonomy** | Draft-vs-send, money threshold, autonomy tier |
-| **VIP tiers** | Who surfaces first and who to draft fastest for |
-| **Email policy** | Reply threshold, auto-archive senders, labels |
-| **Calendar policy** | Working hours, buffers, focus-time defence |
-| **Goals** | This quarter's priorities and deadlines (optional) |
+| Section | File | What it captures |
+|---------|------|------------------|
+| **Identity** | `profile.md` | Name, role, timezone, working hours, key people |
+| **Voice** | `profile.md` | Tone, spelling, formats, sign-offs by relationship |
+| **Anti-style** | `profile.md` | AI tells to never use ("delve", "circle back", em-dash overuse) |
+| **Working rules & autonomy** | `profile.md` | Draft-vs-send, money threshold, autonomy tier |
+| **Goals** | `profile.md` | This quarter's priorities and deadlines (optional) |
+| **VIP tiers** | `email.policy.md` | Who surfaces first and who to draft fastest for |
+| **Email policy** | `email.policy.md` | Reply threshold, auto-archive senders, labels |
+| **Calendar policy** | `calendar.policy.md` | Working hours, buffers, focus-time defence |
 
 ## Tips
 
@@ -65,7 +70,7 @@ It walks eight sections, one at a time, confirming each before writing (blank pa
 
 ## Update later
 
-Re-run `/assistant:setup` to adjust any section, or just correct the assistant mid-work — when a durable convention emerges (a new VIP, a tone tweak), it proposes a profile change and shows you the diff before writing.
+Re-run `/assistant:setup` to adjust any section, or just correct the assistant mid-work — when a durable convention emerges (a new VIP, a tone tweak), it proposes a change and shows you the diff before writing.
 
 ## Next
 

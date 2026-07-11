@@ -35,7 +35,7 @@ job_file_fields:
   job_id:
     required: true
     type: string
-    description: Stable slug from config/schedules.yaml; must match the filename stem
+    description: Stable slug from scheduled/schedules.yaml; must match the filename stem
 
   updated_at:
     required: true

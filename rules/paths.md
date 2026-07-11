@@ -1,6 +1,6 @@
-# Paths — working folder, config, and profile
+# Paths — working folder, config, profile, and policies
 
-Every skill and command resolves the user's **working folder**, **config directory**, and **profile** the same way. Setup writes once; nothing duplicates across legacy and workspace paths.
+Every skill and command resolves the user's **working folder**, **config directory**, **profile**, and **policies** the same way. Setup writes once; nothing duplicates across legacy and workspace paths.
 
 ## Layout
 
@@ -10,7 +10,10 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
 {assistantPath}/                 # working folder — TASKS, memory, drafts, schedules
   config/
     my-assistant.json            # machine-readable install config (selective fields)
-    profile.md                   # human-readable personalisation (voice, VIP, policy)
+    profile.md                   # identity, voice, anti-style, working rules, goals
+    policies/
+      email.policy.md            # VIP tiers, reply threshold, auto-archive, labels
+      calendar.policy.md         # scheduling, buffers, focus-time defence
   TASKS.md
   CLAUDE.md
   memory/
@@ -19,11 +22,13 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
   drafts/
 ```
 
+Policy **templates** ship in the plugin's `policies/` directory (repo root). Setup copies and fills them into the user's `{configPath}/policies/`.
+
 The plugin directory (`skills/`, `commands/`, …) is **read-only**. User data lives under `{assistantPath}` only.
 
 ## Machine config — `config/my-assistant.json`
 
-Selective JSON for paths and non-prose settings. **Do not** duplicate profile content (voice, VIP tiers, email policy, etc.) — those stay in `profile.md`.
+Selective JSON for paths and non-prose settings. **Do not** duplicate profile or policy content (voice, VIP tiers, email/calendar rules, etc.) — those stay in `profile.md` and `{configPath}/policies/*.policy.md`.
 
 | Field | Type | Purpose |
 | ----- | ---- | ------- |
@@ -47,7 +52,7 @@ Check in order; stop at the first file that exists and parses:
 2. `~/MyAssistant/config/my-assistant.json` (default assistant path)
 3. `~/.claude/plugins/config/my-assistant/my-assistant.json` (legacy — migration only)
 
-When found, use `assistantPath` and `configPath` from the file. Profile path is `{configPath}/profile.md`.
+When found, use `assistantPath` and `configPath` from the file. Profile path is `{configPath}/profile.md`. Policies directory is `{configPath}/policies/`.
 
 ### 2. Profile (when no JSON, or JSON missing `configPath`)
 
@@ -56,7 +61,13 @@ When found, use `assistantPath` and `configPath` from the file. Profile path is 
 3. `~/MyAssistant/config/profile.md`
 4. `~/.claude/plugins/config/my-assistant/profile.md` (legacy)
 
-### 3. Working folder
+### 3. Policies
+
+When `{configPath}/policies/` exists, read all `*.policy.md` files (at minimum `email.policy.md` and `calendar.policy.md`). Skills load policies alongside the profile.
+
+**Legacy installs:** If VIP tiers, email policy, or calendar policy still live inside `profile.md`, skills should still read them — but setup and health check will recommend splitting into `{configPath}/policies/`.
+
+### 4. Working folder
 
 1. `assistantPath` from `my-assistant.json` when present
 2. Parent of resolved `config/profile.md` when profile is under a `config/` subdirectory
@@ -68,16 +79,17 @@ When found, use `assistantPath` and `configPath` from the file. Profile path is 
 `/assistant:setup` (`skills/setup-interview/SKILL.md`):
 
 1. Ask for **working folder** — suggest `~/MyAssistant`, accept an alternate path.
-2. Create `{assistantPath}/config/` if needed.
-3. Write `{assistantPath}/config/profile.md` (from template or starter).
-4. Write `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`.
-5. Offer to scaffold `TASKS.md`, `memory/`, and `CLAUDE.md` in `{assistantPath}`.
+2. Create `{assistantPath}/config/policies/` if needed.
+3. Write `{assistantPath}/config/profile.md` (from template or starter — identity, voice, rules, goals only).
+4. Write `{assistantPath}/config/policies/email.policy.md` and `calendar.policy.md` from the plugin's master templates in `policies/`.
+5. Write `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`.
+6. Offer to scaffold `TASKS.md`, `memory/`, and `CLAUDE.md` in `{assistantPath}`.
 
-**Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a second workspace copy. One assistant path, one profile.
+**Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a second workspace copy. One assistant path, one profile, one policies directory.
 
 ## SessionStart hook
 
-`hooks/load-profile.sh` loads `{configPath}/profile.md` using the resolution order above. Legacy paths remain supported for existing installs.
+`hooks/load-profile.sh` loads `{configPath}/profile.md` and all `{configPath}/policies/*.policy.md` using the resolution order above. Legacy paths remain supported for existing installs.
 
 ## Migration
 
@@ -85,3 +97,8 @@ If a profile exists only at `~/.claude/plugins/config/my-assistant/profile.md`:
 
 - Health check may **warn** on `config-exists` / suggest re-running setup or moving files into `{assistantPath}/config/`.
 - Do not auto-migrate without user confirmation.
+
+If policy sections (VIP tiers, email policy, calendar policy) still live inside `profile.md`:
+
+- Offer a one-time **split**: extract sections into `{configPath}/policies/email.policy.md` and `calendar.policy.md`, then trim the profile.
+- Show the diff before writing.

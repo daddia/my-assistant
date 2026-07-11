@@ -8,11 +8,11 @@ description: A short, scannable morning briefing — today's calendar, priority 
 
 # Daily brief
 
-One screen the user reads with their coffee that tells them exactly what today needs. This is the anchor of the scheduled-task setup — most users run it weekday mornings. Catalog entry: `job_id: morning-briefing` in `config/schedules.yaml`.
+One screen the user reads with their coffee that tells them exactly what today needs. This is the anchor of the scheduled-task setup — most users run it weekday mornings. Catalog entry: `job_id: morning-briefing` in `scheduled/schedules.yaml`.
 
 ## Read the profile first
 
-Load working hours, VIP tiers, and voice (the brief is written *to* the user, in their preferred style — tight, scannable, no filler).
+Load working hours from `{configPath}/policies/calendar.policy.md`, VIP tiers from `{configPath}/policies/email.policy.md`, and voice from the profile (the brief is written *to* the user, in their preferred style — tight, scannable, no filler).
 
 ## Schedule health check (interactive runs only)
 

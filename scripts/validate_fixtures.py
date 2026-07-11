@@ -67,8 +67,8 @@ REQUIRED_FILES = [
     EVALS_DIR / "schedule-health/manifest.yaml",
     ROOT / "config/notetaker.yaml",
     ROOT / "config/calendar.yaml",
-    ROOT / "config/schedules.yaml",
-    ROOT / "config/schedules.schema.yaml",
+    ROOT / "scheduled/schedules.yaml",
+    ROOT / "scheduled/schedules.schema.yaml",
     ROOT / "config/feedback.yaml",
     ROOT / "config/connectors.yaml",
     ROOT / "security/README.md",
@@ -548,7 +548,7 @@ def _validate_schedule_job_file(
 
 
 def validate_schedule_health(errors: list[str]) -> list:
-    catalog_path = ROOT / "config/schedules.yaml"
+    catalog_path = ROOT / "scheduled/schedules.yaml"
     if catalog_path.is_file():
         catalog = load_yaml(catalog_path)
         catalog_jobs = catalog.get("jobs", [])
@@ -557,7 +557,7 @@ def validate_schedule_health(errors: list[str]) -> list:
         ]
         if sorted(catalog_ids) != sorted(EXPECTED_JOB_IDS):
             errors.append(
-                f"config/schedules.yaml must list exactly "
+                f"scheduled/schedules.yaml must list exactly "
                 f"{', '.join(EXPECTED_JOB_IDS)}; got {', '.join(catalog_ids)}"
             )
         for job in catalog_jobs:
@@ -571,7 +571,7 @@ def validate_schedule_health(errors: list[str]) -> list:
             if managed and not (ROOT / managed).is_file():
                 errors.append(f"catalog job '{jid}' managed cookbook missing: {managed}")
     else:
-        errors.append("missing config/schedules.yaml")
+        errors.append("missing scheduled/schedules.yaml")
 
     manifest_path = EVALS_DIR / "schedule-health/manifest.yaml"
     if not manifest_path.is_file():

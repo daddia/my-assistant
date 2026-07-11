@@ -32,7 +32,8 @@ Without memory, that request is meaningless. With memory, the assistant knows:
 
 | Layer | File | What lives here |
 |-------|------|-----------------|
-| **Profile** | `~/MyAssistant/config/profile.md` | Identity, voice, VIP tiers, email/calendar policy, autonomy — written by `/assistant:setup` |
+| **Profile** | `~/MyAssistant/config/profile.md` | Identity, voice, working rules, autonomy — written by `/assistant:setup` |
+| **Policies** | `~/MyAssistant/config/policies/*.policy.md` | VIP tiers, email/calendar rules — written by `/assistant:setup` |
 | **Working memory** | `CLAUDE.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
 | **Deep memory** | `memory/` in the working folder | Full glossary, people profiles, project detail, company context |
 
@@ -44,6 +45,7 @@ In Cowork, the profile may live in a workspace folder the user has open; check t
 
 ```
 profile.md         ← Who you are, how you write, your rules (setup interview)
+policies/          ← VIP tiers, email and calendar rules (setup interview)
 CLAUDE.md          ← Hot cache (~30 people, common terms)
 memory/
   glossary.md      ← Full decoder ring (everything)
@@ -250,7 +252,7 @@ $1.2M budget, 6-month timeline. Critical path for Horizon project.
 **Always** decode shorthand before acting on requests:
 
 ```
-1. profile.md                  → Identity, VIP tiers (for prioritisation)
+1. profile.md + policies/     → Identity, VIP tiers (for prioritisation)
 2. CLAUDE.md (hot cache)       → Check first, covers 90% of cases
 3. memory/glossary.md          → Full glossary if not in hot cache
 4. memory/people/, projects/    → Rich detail when needed
@@ -348,17 +350,17 @@ No connectors? Memory still works from conversation, pasted threads, and meeting
 
 ## What goes where
 
-| Type | profile.md | CLAUDE.md (hot cache) | memory/ (full storage) |
-|------|------------|----------------------|------------------------|
-| Your identity & voice | ✓ | ✗ | ✗ |
-| VIP tiers & email policy | ✓ | ✗ | ✗ |
-| Person | Key people only | Top ~30 frequent contacts | glossary.md + people/{name}.md |
-| Acronym/term | ✗ | ~30 most common | glossary.md (complete list) |
-| Project | Goals/deadlines | Active projects only | glossary.md + projects/{name}.md |
-| Nickname | ✗ | In People if top 30 | glossary.md (all nicknames) |
-| Company context | ✗ | Quick reference only | context/company.md |
-| Work preferences | Policy-level | Day-to-day prefs | — |
-| Historical/stale | ✗ | ✗ Remove | ✓ Keep in memory/ |
+| Type | profile.md | policies/ | CLAUDE.md (hot cache) | memory/ (full storage) |
+|------|------------|-----------|----------------------|------------------------|
+| Your identity & voice | ✓ | ✗ | ✗ | ✗ |
+| VIP tiers & email policy | ✗ | ✓ | ✗ | ✗ |
+| Person | Key people only | ✗ | Top ~30 frequent contacts | glossary.md + people/{name}.md |
+| Acronym/term | ✗ | ✗ | ~30 most common | glossary.md (complete list) |
+| Project | Goals/deadlines | ✗ | Active projects only | glossary.md + projects/{name}.md |
+| Nickname | ✗ | ✗ | In People if top 30 | glossary.md (all nicknames) |
+| Company context | ✗ | ✗ | Quick reference only | context/company.md |
+| Work preferences | Policy-level | ✓ | Day-to-day prefs | — |
+| Historical/stale | ✗ | ✗ | ✗ Remove | ✓ Keep in memory/ |
 
 ## Promotion / demotion
 

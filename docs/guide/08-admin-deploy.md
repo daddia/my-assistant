@@ -63,7 +63,7 @@ Skills use category placeholders (`~~email`, `~~calendar`, …) — not product 
 | Claude Code cloud schedules | Same chapter — `cloud-code` surface |
 | Managed agents | [`managed-agents/`](../../managed-agents/) cookbooks on Anthropic infrastructure |
 
-Canonical job list: `config/schedules.yaml`. Health ledger: `{working-folder}/scheduled/{job_id}.yaml`.
+Canonical job list: `scheduled/schedules.yaml`. Health ledger: `{working-folder}/scheduled/{job_id}.yaml`.
 
 ## Managed agents
 

@@ -2,7 +2,7 @@
 
 My Assistant runs recurring jobs on your machine (Cowork scheduled tasks), in Claude Code (cloud schedules), or on Anthropic's infrastructure (managed agents). This chapter explains how to choose, what breaks when your laptop sleeps, and how missed runs surface in chat.
 
-**Canonical job list:** `config/schedules.yaml`  
+**Canonical job list:** `scheduled/schedules.yaml`  
 **Setup command:** `/assistant:schedules`  
 **Health ledger:** `{working-folder}/scheduled/{job_id}.yaml`
 
@@ -86,5 +86,5 @@ Minimal setup: **morning briefing** + **inbox sweep** on `local`. Add meeting-pr
 
 - [`skills/schedule-setup/SKILL.md`](../../skills/schedule-setup/SKILL.md) — setup workflow and packaged prompts
 - [`managed-agents/README.md`](../../managed-agents/README.md) — managed-agent cookbooks and credentials
-- [`config/schedules.yaml`](../../config/schedules.yaml) — machine-readable job definitions
-- [`config/schedules.schema.yaml`](../../config/schedules.schema.yaml) — health ledger contract
+- [`scheduled/schedules.yaml`](../../scheduled/schedules.yaml) — machine-readable job definitions
+- [`scheduled/schedules.schema.yaml`](../../scheduled/schedules.schema.yaml) — health ledger contract

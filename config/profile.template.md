@@ -1,10 +1,10 @@
 # My Assistant — profile
 
-This is the single source of truth about you. The setup interview writes it; skills read it at session start.
+Identity, voice, and working rules. The setup interview writes it; skills read it at session start.
 
-**Where it lives:** `{assistantPath}/config/profile.md` — default working folder `~/MyAssistant`, *outside* the plugin directory, so `/plugin update` never overwrites it. Install paths and scope are in `{assistantPath}/config/my-assistant.json`. See `rules/paths.md`.
+**Where it lives:** `{assistantPath}/config/profile.md` — default working folder `~/MyAssistant`, *outside* the plugin directory, so `/plugin update` never overwrites it. Install paths and scope are in `{assistantPath}/config/my-assistant.json`. **Policies** (VIP tiers, email, calendar) live in `{assistantPath}/config/policies/*.policy.md`. See `rules/paths.md`.
 
-Fill in what you can. The more you provide, the sharper the assistant. Leave placeholders for anything you skip. Keep it under ~2,000 words so it loads cheaply every session.
+Fill in what you can. The more you provide, the sharper the assistant. Leave placeholders for anything you skip. Keep profile + policies under ~2,000 words combined so they load cheaply every session.
 
 ---
 
@@ -56,48 +56,11 @@ Ban the AI tells. Write like you on your best day, never like a generic assistan
 - **Off-limits:** [e.g. no medical/legal/financial advice — summarise and name a professional]
 - **Push back if:** I ask you to cross a rule, commit/spend/send without approval, or I'm rushing a decision I'd regret.
 
-## 5. VIP tiers — who surfaces first
-
-### Tier 1 — surface immediately, never auto-touch
-- [immediate family, key clients — names or email addresses]
-
-### Tier 2 — high priority, draft fastest
-- [close colleagues, active-deal contacts]
-
-### Tier 3 — normal
-- Everyone else not caught by archive rules.
-
-## 6. Email policy
-
-- **Reply threshold** (which categories to draft for): [e.g. draft for needs-reply + VIP; summarise FYI; archive marketing]
-- **Auto-archive (high confidence, exact sender only):**
-
-  | Sender | Action |
-  |--------|--------|
-  | noreply@github.com | Archive + mark read |
-  | [add exact addresses] | Archive + mark read |
-
-- **Labels you use:** [e.g. @ToRead, @Family, Auto-Archive]
-- **Newsletter platforms** → @ToRead: substack.com, beehiiv.com, mailchimp.com, buttondown.email
-- **Rules:** never mark Tier 1 read without confirmation; when in doubt, leave in inbox and flag in the summary.
-
-## 7. Calendar policy
-
-- **Working hours:** [Mon–Fri 09:00–17:30; weekends personal]
-- **Meeting defaults:** [e.g. 30 min default, 15 min buffer between meetings, protect 30 min before deep work]
-- **Prep block:** [e.g. 15 min before external or Tier 1–2 meetings]
-- **Follow-up block:** [e.g. 15 min after meetings 45 min+ or with decisions]
-- **Protected focus window:** [e.g. Mon–Fri 09:00–10:00 deep work — do not propose meetings here]
-- **Focus-time defence:** [gentle / moderate / assertive]
-- **May auto-propose:** [e.g. times within working hours to Tier 2+]
-- **Must always ask:** any booking, move, or decline.
-- **Scheduling replies:** offer 2–3 specific slots with timezone; match formality to the contact's VIP tier.
-
-## 8. Goals & priorities (optional)
+## 5. Goals & priorities (optional)
 
 - **This quarter:** [top 2–3 objectives]
 - **Deadlines to watch:** [date → item]
 
 ---
 
-*Update any section anytime by running `/assistant:setup`, or ask the assistant to propose a change when a new convention emerges — it will show you the diff before writing.*
+*Update profile or policies anytime by running `/assistant:setup`, or ask the assistant to propose a change when a new convention emerges — it will show you the diff before writing.*

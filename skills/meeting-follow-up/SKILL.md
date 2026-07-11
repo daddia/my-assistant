@@ -13,7 +13,7 @@ The value of a meeting is in what happens after it. Paste the notes; get structu
 
 ## Read the profile first
 
-Load voice, anti-style, and VIP tiers (so drafts to attendees match their relationship). Load `memory/` to resolve who's who — especially `memory/people/*` for attendee name resolution.
+Load voice and anti-style from the profile, VIP tiers from `{configPath}/policies/email.policy.md` (so drafts to attendees match their relationship). Load `memory/` to resolve who's who — especially `memory/people/*` for attendee name resolution.
 
 If no profile exists, proceed with generic voice and suggest `/assistant:setup` to sharpen drafts.
 

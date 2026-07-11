@@ -9,13 +9,13 @@ tools: [Read, Write]
 
 # Follow-up watcher
 
-`job_id: follow-up-watcher` · catalog: `config/schedules.yaml`
+`job_id: follow-up-watcher` · catalog: `scheduled/schedules.yaml`
 
 Runs daily (default 5pm) to catch open loops before they go silent. Managed-agent version: `managed-agents/follow-up-watcher/agent.yaml`. See `/assistant:schedules` and `docs/guide/07-always-on-reliability.md`.
 
 ## What it does each run
 
-1. Read the profile (VIP tiers, voice, cold threshold — default 3 business days).
+1. Read the profile and policies (VIP tiers from `email.policy.md`, voice from profile, cold threshold — default 3 business days).
 2. Follow `skills/follow-up-tracking/SKILL.md`: find sent mail awaiting a reply, age it, and draft a warm nudge for anything past threshold (sooner for VIPs).
 3. Cross-check the **Waiting On** section of `TASKS.md`.
 4. Emit the waiting list plus the drafted nudges. Escalate VIP silences to `~~chat` only if the user opted in.

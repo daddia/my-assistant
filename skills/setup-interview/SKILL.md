@@ -3,12 +3,12 @@ name: setup-interview
 description: Onboarding interview for the assistant plugin. Activate when the user says
   "/assistant:setup", "set me up", "configure my assistant", "help me get started",
   or when no profile exists per rules/paths.md.
-  Writes the personalisation profile and install config that every other skill reads.
+  Writes the personalisation profile, policies, and install config that every other skill reads.
 ---
 
 # Setup interview
 
-A 10-minute conversation that produces the user's **profile** — the single file that makes every other skill sound like them and respect their rules. Skipping this is the number-one cause of generic output, so lead with it.
+A 10-minute conversation that produces the user's **profile** and **policies** — what makes every other skill sound like them and respect their rules. Skipping this is the number-one cause of generic output, so lead with it.
 
 ## Path resolution
 
@@ -20,28 +20,30 @@ Before identity, voice, or starters, establish where the assistant lives:
 
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
-3. **Confirm the absolute path** — create `{assistantPath}` and `{assistantPath}/config/` if needed.
+3. **Confirm the absolute path** — create `{assistantPath}`, `{assistantPath}/config/`, and `{assistantPath}/config/policies/` if needed.
 4. Record `assistantPath` and `configPath` (`{assistantPath}/config`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
 
 | Path | Purpose |
 | ---- | ------- |
-| `{assistantPath}/config/profile.md` | Human personalisation (voice, VIP, policy) |
+| `{assistantPath}/config/profile.md` | Identity, voice, anti-style, working rules, goals |
+| `{assistantPath}/config/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
 | `{assistantPath}/config/my-assistant.json` | Machine-readable install config (selective) |
 | `{assistantPath}/TASKS.md`, `memory/`, … | Working-folder artefacts (offer scaffold after profile write) |
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a loose `profile.md` at the workspace root unless the user explicitly asks to migrate an existing legacy copy (then move, don't duplicate).
 
-## Where the profile goes
+## Where files go
 
-Write to `{assistantPath}/config/profile.md` — **outside** the plugin directory, so `/plugin update` never overwrites it. Base content on `config/profile.template.md` in the plugin.
+- **Profile:** `{assistantPath}/config/profile.md` — base on `config/profile.template.md` (sections 1–5 only; no VIP, email, or calendar content).
+- **Policies:** `{assistantPath}/config/policies/` — one file per domain, named `<name>.policy.md`. Base on the plugin's master templates in `policies/` (repo root): `email.policy.md`, `calendar.policy.md`. **Do not** create per-starter or per-persona policy copies in the plugin — there is only one master template set.
 
-> This is the only skill that writes the full profile without a diff prompt. Every other skill proposes profile changes and asks first.
+> This is the only skill that writes the full profile and policies without a diff prompt. Every other skill proposes changes and asks first.
 
 ## Install config — `my-assistant.json`
 
-After writing the profile, write `{assistantPath}/config/my-assistant.json` per `config/my-assistant.schema.yaml`.
+After writing the profile and policies, write `{assistantPath}/config/my-assistant.json` per `config/my-assistant.schema.yaml`.
 
 **Include (selective, machine-readable only):**
 
@@ -52,7 +54,7 @@ After writing the profile, write `{assistantPath}/config/my-assistant.json` per 
 - `setupAt`: ISO-8601 timestamp — set on **first** write; preserve on later updates
 - `lastUpdated`: ISO-8601 timestamp — set on every write (initial setup and profile/config updates)
 
-**Do not include** voice, VIP tiers, email/calendar policy, autonomy prose, or goals — those belong in `profile.md` only.
+**Do not include** voice, VIP tiers, email/calendar policy, autonomy prose, or goals — those belong in `profile.md` and `{configPath}/policies/*.policy.md` only.
 
 ## Three paths — offer when no profile exists
 
@@ -60,9 +62,9 @@ When **no profile exists** (per `rules/paths.md`, or the user asks to "start fro
 
 | Option | What happens |
 |--------|----------------|
-| **Starter persona** (five choices) | Copy a vertical ICP profile, optional quick customize, write to `{assistantPath}/config/` |
-| **Blank template (full interview)** | Existing eight-section interview below |
-| **Quick-start (2 min)** | Identity + voice one-liner + autonomy tier only (blank path shortcut) |
+| **Starter persona** (five choices) | Copy a vertical ICP profile (identity + voice only), optional quick customize, fill policies from master templates |
+| **Blank template (full interview)** | Full interview below — profile + policies |
+| **Quick-start (2 min)** | Identity + voice one-liner + autonomy tier; policy templates with placeholders |
 
 ### Starter selection table
 
@@ -81,48 +83,62 @@ Present all five starters with ICP one-liner from the manifest:
 1. User picks a starter id (or blank / quick-start).
 2. **Unknown id** — list valid ids from manifest; offer blank interview. Do not write a partial profile.
 3. **Missing starter file** — say "Starter unavailable — use blank template" and link to the repo issue tracker. Do not write an empty profile.
-4. Read `config/starter-profiles/{id}.md`.
+4. Read `config/starter-profiles/{id}.md` for profile sections only.
 5. Offer **Quick customize** (name, company, timezone) OR **Keep as-is for demo**.
 6. **Do not write** until the user confirms customize-or-keep (match interview pacing — no half-written profiles if they abort).
-7. Write the profile to `{assistantPath}/config/profile.md` and `my-assistant.json`.
-8. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath}`.
-9. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
+7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/config/policies/email.policy.md`, `{assistantPath}/config/policies/calendar.policy.md`, and `my-assistant.json`.
+8. For starter demo mode, pre-fill policies with sensible defaults for that persona during customize — still using the master `policies/` templates as the base shape.
+9. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath}`.
+10. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
 
 If user picks **blank** or **quick-start**, continue with the paths below.
 
 ## Two paths — when blank or profile exists
 
-- **Quick-start (2 min):** identity + voice one-liner + autonomy tier. Enough to be useful today.
-- **Full interview (10 min):** all eight sections below. Recommend this when not using a starter.
+- **Quick-start (2 min):** identity + voice one-liner + autonomy tier. Policy files get template placeholders — enough to be useful today.
+- **Full interview (10 min):** all sections below. Recommend this when not using a starter.
 
 Ask which they'd like (when not using a starter), then proceed.
 
-## The interview — eight sections
+## The interview — profile and policies
 
 Ask conversationally, one section at a time. Confirm and write after each. Don't dump all questions at once.
+
+**Profile (`profile.md`):**
 
 1. **Identity** — name, preferred name, role/company (skip for purely personal use), location, timezone, working hours, key people (partner, kids, co-founder, EA, top clients).
 2. **Voice** — one-line description of their writing voice; locale/spelling; date/number formats; how they structure messages; default length; sign-offs by relationship (client vs colleague vs friend); openers. Then **show a two-sentence sample in that voice and ask if it sounds right.** Adjust until it does. Invite them to paste 2–3 real sent emails into `{assistantPath}/voice/` (or `{configPath}/voice/`).
 3. **Anti-style** — show the banned-tells list (openers, AI words, corporate-speak, em-dash/hedging/rule-of-three patterns). Ask which bother them most and what to add. Collect one "sounds like me" and one "sounds like AI" example.
 4. **Working rules & autonomy** — pick an autonomy tier (default **Tier 1 — Draft**; explain the four tiers from `rules/core-behaviour.md`); scope (personal only? work + personal? → maps to `scope` in `my-assistant.json`); money threshold; anything off-limits.
-5. **VIP tiers** — who must surface first and never be auto-touched (Tier 1); who to draft fastest for (Tier 2).
-6. **Email policy** — reply threshold (which categories to draft for vs summarise vs archive — this is the "how often to reply" dial); exact-sender auto-archive list (start conservative); labels they use.
-7. **Calendar policy** — working hours; meeting-length defaults and buffers; focus-time defence level; what may be auto-proposed vs must-always-ask.
-8. **Goals** (optional) — this quarter's top objectives and deadlines to watch.
+5. **Goals** (optional) — this quarter's top objectives and deadlines to watch.
 
-## Writing the profile
+**Policies (`config/policies/`):**
 
-Fill the template section by section from their answers. Leave clear placeholders for anything skipped. Keep it under ~2,000 words.
+6. **VIP tiers** → `email.policy.md` — who must surface first and never be auto-touched (Tier 1); who to draft fastest for (Tier 2).
+7. **Email policy** → `email.policy.md` — reply threshold (which categories to draft for vs summarise vs archive); exact-sender auto-archive list (start conservative); labels they use.
+8. **Calendar policy** → `calendar.policy.md` — working hours; meeting-length defaults and buffers; focus-time defence level; what may be auto-proposed vs must-always-ask.
+
+## Writing the files
+
+Fill the profile template (sections 1–5) and policy templates from their answers. Leave clear placeholders for anything skipped. Keep profile + policies under ~2,000 words combined.
 
 Then write or update `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt` and refresh `lastUpdated`.
 
 Offer to scaffold `{assistantPath}/TASKS.md`, `{assistantPath}/memory/`, and `{assistantPath}/CLAUDE.md` when the folder is empty.
 
+### Migrating legacy monolithic profiles
+
+If `profile.md` still contains VIP tiers, email policy, or calendar policy sections:
+
+1. Offer a one-time **split** — extract into `{configPath}/policies/email.policy.md` and `calendar.policy.md`.
+2. Trim those sections from `profile.md`.
+3. Show the diff before writing.
+
 ### Post-setup health check
 
 After the **initial** profile write (starter, quick-start, or full interview — not when updating an existing profile), run the health check **subset**:
 
-1. Read and follow `skills/health-check/SKILL.md` with `checks: [profile, working-folder]` only.
+1. Read and follow `skills/health-check/SKILL.md` with `checks: [profile, policies, working-folder]` only.
 2. Render a compact **Setup health** block (≤8 lines): summary counts (`pass` / `warn` / `fail` / `skip`) plus the top fails or warns with `fix_ref` links.
 3. Do **not** block the wedge on warnings — always continue to the handoff below.
 4. Chat-only — do not auto-save `health-report-*.md` after setup.
@@ -140,11 +156,11 @@ Then summarise what's captured and point them at the wedge:
 
 ## Approval frame
 
-Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing post-setup profile changes.
+Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing post-setup profile or policy changes.
 
 **Queue writing:**
 
-- The **initial full profile write** during setup is **exempt** from `profile-diff` queue items — the user is actively answering interview questions.
+- The **initial full profile and policy write** during setup is **exempt** from `profile-diff` queue items — the user is actively answering interview questions.
 - **Post-setup profile change proposals** use queue type `profile-diff` via the standard diff flow in `pending-profile/`.
 
-Use the four-part frame when showing profile diffs after setup.
+Use the four-part frame when showing profile or policy diffs after setup.

@@ -84,21 +84,39 @@ If `profile-exists` **fails**, **skip** all downstream profile checks (`profile-
 |----------|-----------|-------------|
 | `profile-exists` | Profile file found at resolved path | **fail** — fix: `/assistant:setup`; note plugin works with pasted content until then |
 | `profile-readable` | File reads without error | **fail** with path attempted |
-| `profile-sections-complete` | Required sections filled (heuristic below) | **warn** |
-| `profile-word-count` | Under ~2,000 words | **warn** if over |
-| `profile-optional-sections` | Anti-style, calendar policy, goals have real content | **warn** if still template placeholders |
+| `profile-sections-complete` | Required profile sections filled (heuristic below) | **warn** |
+| `profile-word-count` | Profile under ~1,200 words (policies counted separately) | **warn** if over |
+| `profile-optional-sections` | Anti-style and goals have real content | **warn** if still template placeholders |
 
-**Section completeness heuristic** — compare against `config/profile.template.md` bracket placeholders (e.g. `[full name]`, `[e.g. Founder, Acme]`) or empty values:
+**Profile section completeness** — compare against `config/profile.template.md` bracket placeholders:
 
 **Required for pass on `profile-sections-complete`:**
 
 1. **Identity** — name, timezone, working hours
 2. **Voice** — one-line voice description (not template quote only)
 3. **Working rules** — autonomy tier explicitly set (not template default line only)
-4. **VIP tiers** — at least one Tier 1 or Tier 2 entry with a real name or address
-5. **Email policy** — reply threshold stated
 
-Sections 3 (anti-style), 7 (calendar policy), 8 (goals) are checked by `profile-optional-sections` — warn if skipped, do not fail post-setup quick-start.
+Sections 3 (anti-style) and 5 (goals) are checked by `profile-optional-sections` — warn if skipped, do not fail post-setup quick-start.
+
+### Policies
+
+Policies live at `{configPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
+
+If `profile-exists` **fails**, skip policy checks with "Profile missing — skipped."
+
+| check_id | Pass when | Fail / warn |
+|----------|-----------|-------------|
+| `policies-dir-exists` | `{configPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
+| `policies-email-present` | `email.policy.md` exists and is readable | **warn** |
+| `policies-calendar-present` | `calendar.policy.md` exists and is readable | **warn** |
+| `policies-sections-complete` | VIP tiers + reply threshold in email policy; working hours in calendar policy | **warn** |
+| `profile-legacy-policy-sections` | `profile.md` does **not** still contain `## 5. VIP tiers`, `## 6. Email policy`, or `## 7. Calendar policy` | **warn** — offer split via `/assistant:setup` |
+
+**Required for pass on `policies-sections-complete`:**
+
+1. **VIP tiers** — at least one Tier 1 or Tier 2 entry with a real name or address (in `email.policy.md`)
+2. **Email policy** — reply threshold stated (in `email.policy.md`)
+3. **Calendar policy** — working hours stated (in `calendar.policy.md`)
 
 ### Working folder
 
@@ -120,8 +138,8 @@ When the directory **exists** with one or more job files:
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
 | `schedule-ledger-present` | At least one `scheduled/{job_id}.yaml` exists | **pass** |
-| `schedule-health-valid` | Each file shape matches `config/schedules.schema.yaml` (version, job_id, updated_at, surface, cadence, last_run_status, miss_count_7d); filename matches `job_id` | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
-| `schedule-catalog-jobs-match` | Every `job_id` in `scheduled/` exists in `config/schedules.yaml` | **warn** |
+| `schedule-health-valid` | Each file shape matches `scheduled/schedules.schema.yaml` (version, job_id, updated_at, surface, cadence, last_run_status, miss_count_7d); filename matches `job_id` | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
+| `schedule-catalog-jobs-match` | Every `job_id` in `scheduled/` exists in `scheduled/schedules.yaml` | **warn** |
 | `schedule-critical-local-misses` | No `morning-briefing.yaml` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
 
 ### Connectors (advisory)

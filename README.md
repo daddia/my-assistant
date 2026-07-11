@@ -53,6 +53,7 @@ Plus skills that fire on their own as you work: calendar scheduling, meeting fol
 | **Plugin id** (manifest `name`) | `assistant` |
 | **Working folder** | `~/MyAssistant` (configurable at setup) |
 | **Profile** | `~/MyAssistant/config/profile.md` |
+| **Policies** | `~/MyAssistant/config/policies/*.policy.md` |
 | **Install config** | `~/MyAssistant/config/my-assistant.json` |
 | **Commands** | `/assistant:*` |
 
@@ -62,7 +63,7 @@ Then run:
 /assistant:setup
 ```
 
-A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. Setup creates your working folder (default `~/MyAssistant`) and writes `config/profile.md` plus selective `config/my-assistant.json` — outside the plugin, so `/plugin update` never overwrites it.
+A short interview captures who you are, how you write, your VIP tiers, and your email and calendar policy. Setup creates your working folder (default `~/MyAssistant`) and writes `config/profile.md`, `config/policies/*.policy.md`, and selective `config/my-assistant.json` — outside the plugin, so `/plugin update` never overwrites it. Policy templates ship in the plugin's `policies/` directory.
 
 ## Works on day one, sharper with connectors
 
@@ -70,7 +71,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 ## Always-on options
 
-- **Scheduled tasks** (`/assistant:schedules`) — guided decision tree for local Cowork schedules, Claude Code cloud schedules, or managed agents. Canonical job list: [`config/schedules.yaml`](./config/schedules.yaml).
+- **Scheduled tasks** (`/assistant:schedules`) — guided decision tree for local Cowork schedules, Claude Code cloud schedules, or managed agents. Canonical job list: [`scheduled/schedules.yaml`](./scheduled/schedules.yaml).
 - **Managed-agent cookbooks** ([`managed-agents/`](./managed-agents/)) — the same jobs on Anthropic's infrastructure, immune to a sleeping laptop. Advanced/optional.
 - **Reliability guide** — [Always-on reliability](./docs/guide/07-always-on-reliability.md): when to stay local, when to escalate, and how missed runs surface in chat via `scheduled/`.
 

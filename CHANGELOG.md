@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- **Policies split from profile** — VIP tiers, email rules, and calendar rules now live in `{configPath}/policies/*.policy.md` (e.g. `email.policy.md`, `calendar.policy.md`). Master templates ship in the plugin's `policies/` directory. `profile.md` holds identity, voice, anti-style, working rules, and goals only.
+- **Schedule catalog moved** — `schedules.yaml` and `schedules.schema.yaml` moved from `config/` to `scheduled/` (plugin reference files; user heartbeats remain at `{assistantPath}/scheduled/{job_id}.yaml`).
 - **Schedule health ledger layout** — working-folder heartbeats now live at `scheduled/{job_id}.yaml` (one file per job; was `schedules/index.yaml`).
 
 ### Added
