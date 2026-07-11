@@ -20,7 +20,7 @@ Before identity, voice, or starters, establish where the assistant lives:
 
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
-3. **Confirm the absolute path** — create `{assistantPath}`, `{assistantPath}/config/`, and `{assistantPath}/policies/` if needed.
+3. **Confirm the absolute path** — run `skills/setup-interview/scripts/scaffold-working-folder.sh` with the expanded absolute path (dirs only; no `--tasks` yet). Idempotent — safe if the folder already exists.
 4. Record `assistantPath`, `configPath` (`{assistantPath}/config`), and `policiesPath` (`{assistantPath}/policies`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
@@ -31,7 +31,7 @@ All user-owned files go under `{assistantPath}`:
 | `{assistantPath}/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
 | `{assistantPath}/config/my-assistant.json` | Machine-readable install config (selective) |
 | `{assistantPath}/AGENTS.md` | Working-folder orientation + memory hot cache (from `assets/AGENTS.template.md`) |
-| `{assistantPath}/TASKS.md`, `memory/`, … | Other working-folder artefacts (offer scaffold after profile write) |
+| `{assistantPath}/TASKS.md`, `memory/`, `drafts/`, `scheduled/`, `review-queue/` | Working-folder artefacts — dirs from scaffold script; `TASKS.md` and `AGENTS.md` after profile write |
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a loose `profile.md` at the workspace root unless the user explicitly asks to migrate an existing legacy copy (then move, don't duplicate).
 
@@ -125,16 +125,15 @@ Fill the profile template (sections 1–5) and policy templates from their answe
 
 Then write or update `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt`, refresh `lastUpdated`, and add `policiesPath` if missing from older installs.
 
-Offer to scaffold `{assistantPath}/AGENTS.md`, `{assistantPath}/TASKS.md`, and `{assistantPath}/memory/` when the folder is empty.
+Offer to scaffold `{assistantPath}/AGENTS.md` and `{assistantPath}/TASKS.md` when the folder has no `AGENTS.md` yet (`memory/` and other dirs already exist from Step 0).
 
 ### Working-folder scaffold
 
 When the user accepts (or the folder has no `AGENTS.md` yet):
 
-1. Read `skills/setup-interview/assets/AGENTS.template.md`.
-2. Write `{assistantPath}/AGENTS.md`, substituting `[full name]` and `[preferred name]` from the profile identity section (use the legal name for both if preferred name was skipped).
-3. Create empty `{assistantPath}/memory/` if missing.
-4. Offer a minimal `{assistantPath}/TASKS.md` with Active / Waiting On / Someday / Done headings if missing.
+1. Re-run `skills/setup-interview/scripts/scaffold-working-folder.sh` with `{assistantPath}` and `--tasks` if `TASKS.md` is missing (dirs-only pass is fine when `TASKS.md` already exists).
+2. Read `skills/setup-interview/assets/AGENTS.template.md`.
+3. Write `{assistantPath}/AGENTS.md`, substituting `[full name]` and `[preferred name]` from the profile identity section (use the legal name for both if preferred name was skipped).
 
 Do **not** duplicate profile or policy content into `AGENTS.md` — orientation and memory hot cache only.
 

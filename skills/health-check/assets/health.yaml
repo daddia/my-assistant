@@ -131,12 +131,12 @@ checks:
   - id: tasks-md-present
     category: working-folder
     default_severity_on_fail: warn
-    fix_ref: /assistant:tasks add
+    fix_ref: skills/setup-interview/scripts/scaffold-working-folder.sh
 
   - id: memory-scaffold
     category: working-folder
     default_severity_on_fail: warn
-    fix_ref: /assistant:memory add
+    fix_ref: skills/setup-interview/scripts/scaffold-working-folder.sh
 
   - id: claude-md-present
     category: working-folder
