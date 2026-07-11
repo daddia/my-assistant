@@ -78,8 +78,8 @@ REQUIRED_FILES = [
     EVALS_DIR / "connectors/manifest.yaml",
     ROOT / "config/starter-profiles/manifest.yaml",
     ROOT / "examples/before-after/manifest.yaml",
-    ROOT / "config/health.yaml",
-    ROOT / "config/health-report.schema.yaml",
+    ROOT / "skills/health-check/assets/health.yaml",
+    ROOT / "skills/health-check/assets/health-report.schema.yaml",
     EVALS_DIR / "health-check/manifest.yaml",
 ]
 
@@ -1074,7 +1074,7 @@ def validate_before_after(errors: list[str], thread_ids: set[str]) -> list:
 
 
 def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
-    health_checklist_path = ROOT / "config/health.yaml"
+    health_checklist_path = ROOT / "skills/health-check/assets/health.yaml"
     health_check_ids: set[str] = set()
     health_check_category_ids: set[str] = set()
 
@@ -1108,7 +1108,7 @@ def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
             if not entry.get("fix_ref"):
                 errors.append(f"health.yaml: check '{cid}' missing fix_ref")
     else:
-        errors.append("missing config/health.yaml")
+        errors.append("missing skills/health-check/assets/health.yaml")
 
     golden_check_ids: set[str] = set()
     health_check_fixtures: list = []

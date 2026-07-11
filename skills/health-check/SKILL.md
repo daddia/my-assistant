@@ -13,9 +13,9 @@ The only optional write: `health-report-YYYY-MM-DD.md` in the working folder whe
 
 ## Load the checklist
 
-Read `config/health.yaml` from the plugin directory. If missing, stop with an honest error:
+Read `skills/health-check/assets/health.yaml` from the plugin directory. If missing, stop with an honest error:
 
-> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`config/health.yaml`) is missing.
+> Plugin install incomplete — reinstall from the marketplace. The health check checklist (`skills/health-check/assets/health.yaml`) is missing.
 
 Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
 
@@ -75,7 +75,7 @@ When `unknown`, platform-specific checks **skip** with a message to re-run after
 | `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
 | `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
 | `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
-| `plugin-health-checklist` | `config/health.yaml` and `config/health-report.schema.yaml` exist | **fail** |
+| `plugin-health-checklist` | `skills/health-check/assets/health.yaml` and `skills/health-check/assets/health-report.schema.yaml` exist | **fail** |
 
 ### Profile
 
@@ -178,7 +178,7 @@ When invoked from `setup-interview` after initial profile write, run **only** pr
 
 ## Build and render the report
 
-Aggregate results into `HealthCheckReport` matching `config/health-report.schema.yaml`:
+Aggregate results into `HealthCheckReport` matching `skills/health-check/assets/health-report.schema.yaml`:
 
 ```yaml
 version: "0.1"

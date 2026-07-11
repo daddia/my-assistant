@@ -2,8 +2,8 @@
 
 Synthetic install states and golden expected reports for `/assistant:health` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
 
-**Checklist:** [`config/health.yaml`](../../config/health.yaml)  
-**Report schema:** [`config/health-report.schema.yaml`](../../config/health-report.schema.yaml)  
+**Checklist:** [`skills/health-check/assets/health.yaml`](../../skills/health-check/assets/health.yaml)  
+**Report schema:** [`skills/health-check/assets/health-report.schema.yaml`](../../skills/health-check/assets/health-report.schema.yaml)  
 **Skill:** [`skills/health-check/SKILL.md`](../../skills/health-check/SKILL.md)
 
 ## Fixture matrix
