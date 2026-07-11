@@ -21,7 +21,7 @@ Before identity, voice, or starters, establish where the assistant lives:
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
 3. **Confirm the absolute path** — create `{assistantPath}`, `{assistantPath}/config/`, and `{assistantPath}/policies/` if needed.
-4. Record `assistantPath` and `configPath` (`{assistantPath}/config`) for all writes in this session.
+4. Record `assistantPath`, `configPath` (`{assistantPath}/config`), and `policiesPath` (`{assistantPath}/policies`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
 
@@ -48,7 +48,7 @@ After writing the profile and policies, write `{assistantPath}/config/my-assista
 **Include (selective, machine-readable only):**
 
 - `version`: `"1"`
-- `assistantPath`, `configPath` — absolute paths
+- `assistantPath`, `configPath`, `policiesPath` — absolute paths
 - `scope`: `"personal"`, `"work"`, or `"both"` (from working rules)
 - `platform`: best-effort `cowork`, `cursor`, `claude-code`, or `unknown`
 - `setupAt`: ISO-8601 timestamp — set on **first** write; preserve on later updates
@@ -122,7 +122,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 Fill the profile template (sections 1–5) and policy templates from their answers. Leave clear placeholders for anything skipped. Keep profile + policies under ~2,000 words combined.
 
-Then write or update `{assistantPath}/config/my-assistant.json` with paths, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt` and refresh `lastUpdated`.
+Then write or update `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt`, refresh `lastUpdated`, and add `policiesPath` if missing from older installs.
 
 Offer to scaffold `{assistantPath}/TASKS.md`, `{assistantPath}/memory/`, and `{assistantPath}/CLAUDE.md` when the folder is empty.
 

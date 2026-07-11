@@ -8,7 +8,7 @@ summary:
   pass: 2
   warn: 4
   fail: 0
-  skip: 2
+  skip: 3
 results:
   - check_id: config-exists
     category: profile
@@ -20,6 +20,10 @@ results:
     status: skip
     message: No install config — skipped
   - check_id: config-profile-aligned
+    category: profile
+    status: skip
+    message: No install config — skipped
+  - check_id: config-policies-aligned
     category: profile
     status: skip
     message: No install config — skipped

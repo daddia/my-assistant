@@ -63,8 +63,14 @@ load_policies() {
 }
 
 resolve_policies_dir() {
-  local assistant_path="$1"
-  local config_path="${2:-}"
+  local policies_path="${1:-}"
+  local assistant_path="$2"
+  local config_path="${3:-}"
+
+  if [[ -n "$policies_path" && -d "$policies_path" ]]; then
+    echo "$policies_path"
+    return 0
+  fi
   if [[ -d "${assistant_path}/policies" ]]; then
     echo "${assistant_path}/policies"
     return 0
@@ -74,15 +80,20 @@ resolve_policies_dir() {
     echo "${config_path}/policies"
     return 0
   fi
+  if [[ -n "$policies_path" ]]; then
+    echo "$policies_path"
+    return 0
+  fi
   echo "${assistant_path}/policies"
 }
 
 try_load() {
   local config_path="$1"
   local assistant_path="$2"
+  local policies_path="${3:-}"
   if [[ -n "$config_path" && -f "${config_path}/profile.md" ]]; then
     cat "${config_path}/profile.md"
-    load_policies "$(resolve_policies_dir "$assistant_path" "$config_path")"
+    load_policies "$(resolve_policies_dir "$policies_path" "$assistant_path" "$config_path")"
     exit 0
   fi
 }
@@ -91,7 +102,8 @@ CONFIG_JSON=""
 if CONFIG_JSON="$(find_config_json)"; then
   CONFIG_PATH="$(read_json_path configPath "$CONFIG_JSON")"
   ASSISTANT_PATH="$(read_json_path assistantPath "$CONFIG_JSON")"
-  try_load "$CONFIG_PATH" "$ASSISTANT_PATH"
+  POLICIES_PATH="$(read_json_path policiesPath "$CONFIG_JSON")"
+  try_load "$CONFIG_PATH" "$ASSISTANT_PATH" "$POLICIES_PATH"
 fi
 
 PROFILE_CANDIDATES=(
@@ -110,7 +122,7 @@ for profile in "${PROFILE_CANDIDATES[@]}"; do
     else
       assistant_path="$config_dir"
     fi
-    load_policies "$(resolve_policies_dir "$assistant_path" "$config_dir")"
+    load_policies "$(resolve_policies_dir "" "$assistant_path" "$config_dir")"
     exit 0
   fi
 done

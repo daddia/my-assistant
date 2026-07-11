@@ -2,6 +2,7 @@
   "version": "1",
   "assistantPath": "evals/health-check/fixtures/fx-full-profile/working",
   "configPath": "evals/health-check/fixtures/fx-full-profile/working/config",
+  "policiesPath": "evals/health-check/fixtures/fx-full-profile/working/policies",
   "scope": "work",
   "platform": "cowork",
   "setupAt": "2026-07-08T08:00:00+10:00",

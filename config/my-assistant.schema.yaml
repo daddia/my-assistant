@@ -9,6 +9,7 @@ required:
   - version
   - assistantPath
   - configPath
+  - policiesPath
   - scope
   - setupAt
   - lastUpdated
@@ -26,6 +27,10 @@ properties:
   configPath:
     type: string
     description: Absolute path to the config subdirectory ({assistantPath}/config)
+
+  policiesPath:
+    type: string
+    description: Absolute path to the policies directory ({assistantPath}/policies)
 
   scope:
     type: string
@@ -51,6 +56,7 @@ example:
   version: "1"
   assistantPath: /Users/jane/MyAssistant
   configPath: /Users/jane/MyAssistant/config
+  policiesPath: /Users/jane/MyAssistant/policies
   scope: personal
   platform: cowork
   setupAt: "2026-07-10T12:00:00+10:00"

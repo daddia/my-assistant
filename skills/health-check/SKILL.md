@@ -30,8 +30,9 @@ Locate `my-assistant.json` (workspace `config/`, then `~/MyAssistant/config/`, t
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
 | `config-exists` | `my-assistant.json` found at a resolved path | **warn** — suggest re-running `/assistant:setup` or completing working-folder step |
-| `config-valid` | JSON parses; `assistantPath`, `configPath`, `scope`, `setupAt`, `lastUpdated` present per schema | **warn** with detail |
+| `config-valid` | JSON parses; `assistantPath`, `configPath`, `policiesPath`, `scope`, `setupAt`, `lastUpdated` present per schema | **warn** with detail |
 | `config-profile-aligned` | `{configPath}/profile.md` exists when config is present | **warn** |
+| `config-policies-aligned` | `{policiesPath}/` exists when config is present | **warn** |
 
 ### Profile
 
@@ -100,13 +101,13 @@ Sections 3 (anti-style) and 5 (goals) are checked by `profile-optional-sections`
 
 ### Policies
 
-Policies live at `{assistantPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
+Policies live at `{policiesPath}/` from `my-assistant.json` when present, else `{assistantPath}/policies/*.policy.md`. Master templates ship in the plugin's `policies/` directory.
 
 If `profile-exists` **fails**, skip policy checks with "Profile missing — skipped."
 
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
-| `policies-dir-exists` | `{assistantPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
+| `policies-dir-exists` | `{policiesPath}/` or `{assistantPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
 | `policies-email-present` | `email.policy.md` exists and is readable | **warn** |
 | `policies-calendar-present` | `calendar.policy.md` exists and is readable | **warn** |
 | `policies-sections-complete` | VIP tiers + reply threshold in email policy; working hours in calendar policy | **warn** |

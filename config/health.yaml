@@ -67,6 +67,11 @@ checks:
     default_severity_on_fail: warn
     fix_ref: /assistant:setup
 
+  - id: config-policies-aligned
+    category: profile
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
   - id: profile-exists
     category: profile
     default_severity_on_fail: fail

@@ -27,7 +27,7 @@ Offer a 2-minute quick-start or the full 10-minute interview. Confirm the workin
 
 - Re-read the written profile — confirm identity, voice, and autonomy tier are complete.
 - Re-read `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` — confirm VIP tiers, email rules, and calendar rules are captured.
-- Confirm `my-assistant.json` has `assistantPath`, `configPath`, `scope`, `setupAt`, and `lastUpdated`.
+- Confirm `my-assistant.json` has `assistantPath`, `configPath`, `policiesPath`, `scope`, `setupAt`, and `lastUpdated`.
 - Confirm files were written under the working folder, not inside the plugin directory.
 - Surface write failures (permissions, read-only path) clearly.
 

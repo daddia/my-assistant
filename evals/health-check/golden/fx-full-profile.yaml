@@ -7,7 +7,7 @@ config_path: evals/health-check/fixtures/fx-full-profile/working/config/my-assis
 profile_path: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 summary:
   pass: 22
-  warn: 5
+  warn: 6
   fail: 0
   skip: 8
 results:
@@ -47,6 +47,11 @@ results:
     category: profile
     status: pass
     message: Profile aligned with install config
+  - check_id: config-policies-aligned
+    category: profile
+    status: warn
+    message: Policies directory not found at policiesPath
+    fix_ref: /assistant:setup
   - check_id: profile-exists
     category: profile
     status: pass
