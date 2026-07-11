@@ -12,6 +12,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+## [1.3.2] - 2026-07-12
+
+### Added
+
+- **Working-folder scaffold script** — setup calls `scaffold-working-folder.sh` for idempotent creation of `config/`, `policies/`, `memory/`, `drafts/`, `scheduled/`, and `review-queue/`; optional `--tasks` scaffolds `TASKS.md` from template.
+
+### Changed
+
+- **Health → status** — `/assistant:health` replaced with `/assistant:status` (read-only install/setup report); checklist and report schema live in `commands/status.md.tmpl`.
+- **Memory command consolidated** — standalone `/assistant:memory` removed; use `/assistant:update memory` or chat for memory updates.
+- **`/assistant:update` scopes** — accepts `tasks`, `memory`, or `--all` (deprecated alias `--comprehensive`) for scoped syncs and connector deep-scans.
+
+### Fixed
+
+- _(none)_
+
 ## [1.3.1] - 2026-07-11
 
 ### Added
