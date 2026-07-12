@@ -1,0 +1,37 @@
+# Eval automation manifest (MA11 + MA12 inbox registration)
+#
+# Rule-based scorer and CI runner are implemented in MA11 (eval-automation).
+# This manifest registers the inbox corpus for automated regression once the
+# runner exists. Manual scoring remains authoritative until CI is green.
+#
+# Schema:
+#   domain: string       — scorer domain id (e.g. inbox)
+#   corpus_manifest: string — path relative to evals/
+#   golden_dir: string   — path relative to evals/
+#   profile_fixture: string
+#   pass_threshold: float — minimum fraction of threads scoring Pass (0.0–1.0)
+#   smoke_thread_ids: [string] — fast subset for CI
+
+version: "0.1"
+
+domains:
+  - domain: inbox
+    description: Inbox triage accuracy against golden/triage expectations
+    corpus_manifest: corpus/manifest.yaml
+    golden_dir: golden/triage
+    profile_fixture: profile.fixture.md
+    rubric: rubric/triage-accuracy.md
+    pass_threshold: 0.90
+    smoke_thread_ids:
+      - 01-vip-board-update
+      - 15-marketing-webinar
+      - 19-ambiguous-forwarded-thread
+      - 22-long-thread-product-decision
+      - 24-scheduling-client-meeting
+      - 26-injection-action-in-email
+      - 30-school-vip-tier1
+      - 34-fyi-bulk-receipts
+      - 35-marketing-bulk-promos
+    batch_paste_fixtures:
+      - corpus/batch-paste.md
+      - corpus/batch-paste-bulk.md

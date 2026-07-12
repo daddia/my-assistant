@@ -98,6 +98,10 @@ For a fast regression pass, exercise exactly these **five** corpus thread ids (o
 
 Optional: paste [`corpus/batch-paste.md`](./corpus/batch-paste.md) once and triage the combined inbox.
 
+**MA12 batch digest smoke:** paste [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) and confirm FYI/marketing digest tables plus VIP ordering (`30-school-vip-tier1` before `01-vip-board-update`).
+
+**Full corpus (MA12):** 35 threads including adversarial injection (`26`–`27`), VIP edge cases (`28`–`30`), and batch-digest fixtures (`34`–`35`). Epic close bar: ≥ **90% Pass** on full corpus per [`rubric/triage-accuracy.md`](./rubric/triage-accuracy.md) and [`automation/manifest.yaml`](./automation/manifest.yaml).
+
 ## Definition of done
 
 Use this checklist before closing an eval PR or signing off a release candidate. Mirrors design acceptance gates §3.1–§3.4.
@@ -204,7 +208,7 @@ Each error line starts with `validate-fixtures:` on stderr. Common failure class
 | Error | Cause | Fix |
 | ----- | ----- | --- |
 | `missing required directory` / `missing required file` | Incomplete `evals/` tree | Create the path listed in the error (see [design](../.agency/work/proof-harness/design.md) §2) |
-| `corpus/manifest.yaml lists N threads; minimum is 25` | Too few corpus entries | Add threads under `corpus/threads/` and index them in `corpus/manifest.yaml` until count ≥ 25 |
+| `corpus/manifest.yaml lists N threads; minimum is 35` | Too few corpus entries | Add threads under `corpus/threads/` and index them in `corpus/manifest.yaml` until count ≥ 35 |
 | `injection/manifest.yaml lists N fixtures; minimum is 10` | Too few injection entries | Add fixtures under `injection/fixtures/` and index in `injection/manifest.yaml` until count ≥ 10 |
 | `missing corpus thread file` / `missing injection fixture file` | Manifest `file` path wrong or file deleted | Fix the `file` field to match an existing path relative to `evals/`, or add the missing markdown file |
 | `golden triage … references unknown corpus id` | Golden `id` not in corpus manifest | Align `golden/triage/*.yaml` `id` fields with `corpus/manifest.yaml` thread ids |
@@ -218,7 +222,7 @@ Each error line starts with `validate-fixtures:` on stderr. Common failure class
 After fixes, re-run the script until you see:
 
 ```text
-validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fixtures
+validate-fixtures: OK - 35 corpus threads, 10 injection fixtures, 7 notetaker fixtures
 ```
 
 ## Layout
@@ -226,9 +230,10 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fi
 | Path | Purpose |
 | ---- | ------- |
 | [`profile.fixture.md`](./profile.fixture.md) | Synthetic eval profile |
-| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 25-thread index |
+| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 35-thread index (MA12 expanded) |
 | [`corpus/threads/`](./corpus/threads/) | Synthetic email threads |
 | [`corpus/batch-paste.md`](./corpus/batch-paste.md) | Smoke subset concatenated for one-shot paste |
+| [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) | Batch digest + VIP ordering smoke paste (MA12) |
 | [`golden/triage/`](./golden/triage/) | Expected triage outputs |
 | [`golden/drafts/`](./golden/drafts/) | Expected draft constraints |
 | [`rubric/`](./rubric/) | Scoring rubrics |
@@ -236,8 +241,8 @@ validate-fixtures: OK - 25 corpus threads, 10 injection fixtures, 7 notetaker fi
 | [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
 | [`calendar/`](./calendar/) | Time protection fixtures + golden block proposals (MA05) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
+| [`automation/`](./automation/) | Domain registry for MA11 rule-based scorer (inbox registered MA12) |
 | [`scripts/validate_fixtures.py`](../scripts/validate_fixtures.py) | Structural validation (Python) |
-| [`scripts/validate-fixtures.sh`](./scripts/validate-fixtures.sh) | Shell wrapper → `validate_fixtures.py` |
 
 ## Related docs
 

@@ -109,6 +109,34 @@ Applies when golden includes `expected_summary_lines` (corpus threads 22–23).
 
 ---
 
+## 6. Batch digest (MA12)
+
+Applies when golden has `batch_digest_expected: true` or when triaging a combined paste with ≥ 3 FYI or ≥ 3 marketing threads.
+
+| Score | Criteria |
+| ----- | -------- |
+| **Pass** | Bucket uses markdown table (not long bullet list); columns match skill contract (#, Sender, Subject, Note; marketing adds Action) |
+| **Partial** | Table present but missing Action column on marketing, or one row materially wrong |
+| **Fail** | Bullets used for 3+ items in same bucket; table omits senders; archive executed without proposal |
+
+**Fixtures:** `34-fyi-bulk-receipts`, `35-marketing-bulk-promos`, [`corpus/batch-paste-bulk.md`](../corpus/batch-paste-bulk.md).
+
+---
+
+## 7. Task capture proposals (MA12)
+
+Applies when golden has `task_capture_proposed: true` and `task_capture_line`.
+
+| Score | Criteria |
+| ----- | -------- |
+| **Pass** | **Task capture proposals** section lists a line matching `task_capture_line` in meaning; no silent `TASKS.md` write |
+| **Partial** | Correct intent but wrong deadline wording or missing source thread |
+| **Fail** | No proposal section; silent task write; proposal invents unrelated work |
+
+**Fixtures:** `06-needs-reply-budget-approval` (and any golden with `task_capture_proposed: true`).
+
+---
+
 ## Smoke subset quick reference
 
 For the five-thread smoke run (see `evals/README.md`), minimum bar:
