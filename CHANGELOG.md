@@ -12,6 +12,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+## [1.6.0] - 2026-07-12
+
+### Added
+
+- **Inbox batch digest and VIP ordering** — triage report shape with FYI/marketing digest tables and VIP-first ordering (MA12).
+- **Task proposals from triage** — inbox triage proposes tasks from emails needing action.
+- **Sweep → brief integration** — inbox sweeps write `sweep-YYYY-MM-DD-{slot}.md`; morning brief consumes recent sweep files.
+- **35-thread eval corpus** — adversarial injection, VIP edge cases, batch digest, and school VIP fixtures.
+- **Inbox automation registry** — `evals/automation/manifest.yaml` with 90% rubric pass threshold for release gating.
+
+### Changed
+
+- **Inbox-triage skill** — formal report shape, ambiguous score-0 handling, injection surfacing, and verification checks; `commands/inbox.md` updated.
+- **Schedule catalog** — inbox-sweep expected artifacts updated in `scheduled/schedules.yaml`.
+
+### Fixed
+
 ## [1.5.0] - 2026-07-12
 
 ### Added
