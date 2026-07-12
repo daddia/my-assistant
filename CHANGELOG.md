@@ -12,6 +12,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+## [1.4.0] - 2026-07-12
+
+### Added
+
+- **`/assistant:draft`** — draft email, chat, or letter replies in your voice (`commands/draft.md` → `email-drafting`).
+- **`/assistant:review`** — review awaiting email and chat follow-ups; nudge drafts for items gone cold (`commands/review.md` → `follow-up-tracking`).
+
+### Changed
+
+- **`/assistant:health` restored** — `/assistant:status` renamed back to `/assistant:health` for the install/setup health check.
+- **Weekly review → report** — weekly ritual moved to `/assistant:report`; `/assistant:review` now covers follow-up review only.
+- **Setup skill renamed** — `setup` → `assistant-setup` across commands, docs, rules, and health-check fixtures.
+
+### Fixed
+
 ## [1.3.3] - 2026-07-12
 
 ### Added
