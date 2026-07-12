@@ -4,7 +4,7 @@ description: Two-tier memory that decodes shorthand, acronyms, nicknames, and in
   language so the assistant understands requests like a colleague would. Activate when
   the user introduces a person, project, or term ("remember that", "X means Y", "who is
   Todd"), during /assistant:update or "/assistant:update memory",
-  or when another skill surfaces a durable fact to save. CLAUDE.md for working memory, memory/ for the full knowledge base.
+  or when another skill surfaces a durable fact to save. AGENTS.md for working memory (CLAUDE.md → @AGENTS.md shim), memory/ for the full knowledge base.
 user-invocable: false
 ---
 
@@ -34,10 +34,10 @@ Without memory, that request is meaningless. With memory, the assistant knows:
 |-------|------|-----------------|
 | **Profile** | `~/MyAssistant/config/profile.md` | Identity, voice, working rules, autonomy — written by `/assistant:setup` |
 | **Policies** | `~/MyAssistant/policies/*.policy.md` | VIP tiers, email/calendar rules — written by `/assistant:setup` |
-| **Working memory** | `CLAUDE.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
+| **Working memory** | `AGENTS.md` in the working folder | Hot cache: top people, terms, active projects (~50–80 lines) |
 | **Deep memory** | `memory/` in the working folder | Full glossary, people profiles, project detail, company context |
 
-**Read the profile first** for who the user is and how they write. Use `CLAUDE.md` + `memory/` to decode shorthand and store workplace context. Never duplicate voice, VIP tiers, or identity into `CLAUDE.md` — that's the profile's job.
+**Read the profile first** for who the user is and how they write. Use `AGENTS.md` + `memory/` to decode shorthand and store workplace context. Never duplicate voice, VIP tiers, or full identity prose into `AGENTS.md` — link to `config/profile.md` instead.
 
 In Cowork, the profile may live in a workspace folder the user has open; check there too.
 
@@ -46,7 +46,8 @@ In Cowork, the profile may live in a workspace folder the user has open; check t
 ```
 profile.md         ← Who you are, how you write, your rules (/assistant:setup)
 policies/          ← VIP tiers, email and calendar rules (/assistant:setup)
-CLAUDE.md          ← Hot cache (~30 people, common terms)
+AGENTS.md          ← Hot cache (~30 people, common terms)
+CLAUDE.md          ← @AGENTS.md shim (Claude Code / Cowork auto-load)
 memory/
   glossary.md      ← Full decoder ring (everything)
   people/          ← Complete profiles
@@ -54,7 +55,7 @@ memory/
   context/         ← Company, teams, tools
 ```
 
-**CLAUDE.md (hot cache):**
+**AGENTS.md (hot cache):**
 - Top ~30 people you interact with most
 - ~30 most common acronyms/terms
 - Active projects (5–15)
@@ -63,7 +64,7 @@ memory/
 
 **memory/glossary.md (full glossary):**
 - Complete decoder ring — everyone, every term
-- Searched when something isn't in `CLAUDE.md`
+- Searched when something isn't in `AGENTS.md`
 - Can grow indefinitely
 
 **memory/people/, projects/, context/:**
@@ -75,7 +76,7 @@ memory/
 ```
 User: "ask todd about the PSR for phoenix"
 
-1. Check CLAUDE.md (hot cache)
+1. Check AGENTS.md (hot cache)
    → Todd? ✓ Todd Martinez, Finance
    → PSR? ✓ Pipeline Status Report
    → Phoenix? ✓ DB migration project
@@ -87,20 +88,21 @@ User: "ask todd about the PSR for phoenix"
    → "What does X mean? I'll remember it."
 ```
 
-This tiered approach keeps `CLAUDE.md` lean (~100 lines) while supporting unlimited scale in `memory/`.
+This tiered approach keeps `AGENTS.md` lean (~100 lines) while supporting unlimited scale in `memory/`.
 
 ## File locations
 
-All memory files live in the **working folder** — the directory where `TASKS.md`, briefs, and drafts also live. Create `memory/` and the memory `CLAUDE.md` if missing.
+All memory files live in the **working folder** — the directory where `TASKS.md`, briefs, and drafts also live. Create `memory/` and `AGENTS.md` (+ `CLAUDE.md` shim) if missing.
 
-- **Working memory:** `CLAUDE.md` in the working folder
+- **Working memory:** `AGENTS.md` in the working folder
+- **Compat shim:** `CLAUDE.md` containing `@AGENTS.md` for Claude hosts
 - **Deep memory:** `memory/` subdirectory
 
-**Visual editor:** `skills/dashboard.html` (open in Chrome or Edge) — Memory tab opens the working folder to browse and edit `CLAUDE.md` and `memory/` files.
+**Visual editor:** `{assistantPath}/dashboard.html` (copied at setup) or `skills/dashboard.html` in the plugin — Memory tab opens the working folder to browse and edit `AGENTS.md` and `memory/` files.
 
-Per `rules/file-safety.md`: the assistant may write to `memory/` and the memory `CLAUDE.md` without asking; tell the user what was added or changed.
+Per `rules/file-safety.md`: the assistant may write to `memory/` and `AGENTS.md` without asking; tell the user what was added or changed.
 
-## Working memory format (CLAUDE.md)
+## Working memory format (AGENTS.md)
 
 Use tables for compactness. Target ~50–80 lines total. Do **not** repeat profile content (name, voice, VIP list).
 
@@ -253,7 +255,7 @@ $1.2M budget, 6-month timeline. Critical path for Horizon project.
 
 ```
 1. profile.md + policies/     → Identity, VIP tiers (for prioritisation)
-2. CLAUDE.md (hot cache)       → Check first, covers 90% of cases
+2. AGENTS.md (hot cache)       → Check first, covers 90% of cases
 3. memory/glossary.md          → Full glossary if not in hot cache
 4. memory/people/, projects/    → Rich detail when needed
 5. Ask user                    → Unknown term? Learn it.
@@ -264,7 +266,7 @@ Example:
 ```
 User: "ask todd to do the PSR for oracle"
 
-CLAUDE.md lookup:
+AGENTS.md lookup:
   "todd" → Todd Martinez, Finance ✓
   "PSR" → Pipeline Status Report ✓
   "oracle" → (not in hot cache)
@@ -281,20 +283,20 @@ When the user says "remember this", "X means Y", or introduces a person/project:
 
 1. **Glossary items** (acronyms, terms, shorthand):
    - Add to `memory/glossary.md`
-   - If frequently used, add to `CLAUDE.md` Terms table
+   - If frequently used, add to `AGENTS.md` Terms table
 
 2. **People:**
    - Create/update `memory/people/{name}.md`
-   - Add to `CLAUDE.md` People table if important
+   - Add to `AGENTS.md` People table if important
    - **Capture nicknames** — critical for decoding
    - If they're a VIP or key person, **propose a profile update** (show diff, ask first)
 
 3. **Projects:**
    - Create/update `memory/projects/{name}.md`
-   - Add to `CLAUDE.md` Projects table if current
+   - Add to `AGENTS.md` Projects table if current
    - **Capture codenames** — "Phoenix", "the migration", etc.
 
-4. **Work preferences:** add to `CLAUDE.md` Preferences (not the profile unless it's a durable policy change)
+4. **Work preferences:** add to `AGENTS.md` Preferences (not the profile unless it's a durable policy change)
 
 Tell the user what was saved. Never store passwords, PINs, 2FA codes, or full account numbers.
 
@@ -302,16 +304,16 @@ Tell the user what was saved. Never store passwords, PINs, 2FA codes, or full ac
 
 When the user asks "who is X" or "what does X mean":
 
-1. Check `CLAUDE.md` first
+1. Check `AGENTS.md` first
 2. Check `memory/` for full detail
 3. If not found: "I don't know what X means yet. Can you tell me?"
 
 ### Progressive disclosure
 
-1. Load `CLAUDE.md` for quick parsing of any request
+1. Load `AGENTS.md` for quick parsing of any request
 2. Dive into `memory/` when you need full context for execution
 3. Example: drafting an email to todd about the PSR
-   - `CLAUDE.md` tells you Todd = Todd Martinez, PSR = Pipeline Status Report
+   - `AGENTS.md` tells you Todd = Todd Martinez, PSR = Pipeline Status Report
    - `memory/people/todd-martinez.md` tells you he prefers Slack, is direct
 
 ## Integration with other skills
@@ -334,24 +336,24 @@ When another skill surfaces a durable fact, **offer** to save it — don't add s
 ## Bootstrapping
 
 - **No profile yet?** Offer `/assistant:setup` — captures identity, voice, and key people into the profile.
-- **Empty memory?** Start with `CLAUDE.md` and `memory/glossary.md` from what the user tells you in conversation.
+- **Empty memory?** Run `/assistant:setup` or seed `AGENTS.md` and `memory/glossary.md` from conversation. Setup promotes profile key people automatically.
 - **Fill gaps from activity:** `/assistant:update` decodes existing tasks against memory and asks about unknowns. Add `--all` to scan connected sources for people and projects worth remembering. Run `/assistant:update memory` for a memory-only pass including prune.
 
 No connectors? Memory still works from conversation, pasted threads, and meeting notes.
 
 ## Conventions
 
-- **Bold** terms in `CLAUDE.md` for scannability
-- Keep `CLAUDE.md` under ~100 lines (the "hot 30" rule)
+- **Bold** terms in `AGENTS.md` for scannability
+- Keep `AGENTS.md` under ~100 lines (the "hot 30" rule)
 - Filenames: lowercase, hyphens (`todd-martinez.md`, `project-phoenix.md`)
 - Always capture nicknames and alternate names
 - Glossary tables for easy lookup
-- When something's used frequently, promote it to `CLAUDE.md`
+- When something's used frequently, promote it to `AGENTS.md`
 - When something goes stale, demote it to `memory/` only
 
 ## What goes where
 
-| Type | profile.md | policies/ | CLAUDE.md (hot cache) | memory/ (full storage) |
+| Type | profile.md | policies/ | AGENTS.md (hot cache) | memory/ (full storage) |
 |------|------------|-----------|----------------------|------------------------|
 | Your identity & voice | ✓ | ✗ | ✗ | ✗ |
 | VIP tiers & email policy | ✗ | ✓ | ✗ | ✗ |
@@ -365,7 +367,7 @@ No connectors? Memory still works from conversation, pasted threads, and meeting
 
 ## Promotion / demotion
 
-**Promote to CLAUDE.md when:**
+**Promote to AGENTS.md when:**
 - You use a term/person frequently
 - It's part of active work
 
@@ -378,12 +380,12 @@ No connectors? Memory still works from conversation, pasted threads, and meeting
 - Someone becomes a VIP or key person
 - A durable policy preference emerges (not just a shorthand term)
 
-This keeps `CLAUDE.md` fresh and relevant without bloating the profile.
+This keeps `AGENTS.md` fresh and relevant without bloating the profile.
 
 ## Rules
 
 - Decode before acting — never guess what shorthand means.
-- Tell the user after every write to `memory/` or the memory `CLAUDE.md`.
+- Tell the user after every write to `memory/` or `AGENTS.md`.
 - Don't delete or overwrite memory entries without confirmation.
 - Don't invent biographies — if someone isn't in memory, say so and offer to learn.
 - Profile changes always need a diff and approval (except during setup).
@@ -394,7 +396,7 @@ Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing
 
 **Queue types:**
 
-- `memory-suggestion` — proposed `CLAUDE.md` or `memory/` writes use `source_path` under `pending-memory/*.md`
+- `memory-suggestion` — proposed `AGENTS.md` or `memory/` writes use `source_path` under `pending-memory/*.md`
 - `profile-diff` — profile changes use `source_path` under `pending-profile/*.diff` or inline diff in the item body
 
 Append the observability footer when queue items are written. Never write profile or memory files without user confirmation.

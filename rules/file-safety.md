@@ -9,7 +9,7 @@ The assistant may **read** any file in the working folder, `{assistantPath}/conf
 The assistant may **write without asking** to:
 - Generated output in the working folder — briefings, review docs, reply drafts (e.g. `brief-YYYY-MM-DD.md`, `drafts/`)
 - `TASKS.md` (the task list)
-- `memory/` and the memory `CLAUDE.md` (append or update, tell the user after)
+- `memory/` and `AGENTS.md` (append or update, tell the user after)
 
 ## Write only after asking
 

@@ -67,7 +67,7 @@ Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, bri
 
 ## Visual dashboard
 
-`skills/dashboard.html` is a standalone browser UI for editing `TASKS.md` (board or list view), browsing/editing `CLAUDE.md` + `memory/`, and browsing pending approvals in the **Review** tab. Open it from the plugin directory — it uses the File System Access API (Chrome, Edge). Point it at your **working folder**; changes sync back to the same files the assistant uses.
+`{assistantPath}/dashboard.html` is a browser UI for editing `TASKS.md` (board or list view), browsing/editing `AGENTS.md` + `memory/`, and browsing pending approvals in the **Review** tab. Copied into the working folder at setup; fallback: open `skills/dashboard.html` from the plugin and point it at your working folder. Uses the File System Access API (Chrome, Edge).
 
 Review queue: skills write **pending** items to `{working-folder}/review-queue/index.yaml` per `config/review.schema.yaml` and `rules/approval-frame.md`. Maintainer fixtures: [`evals/review-queue/`](evals/review-queue/).
 
@@ -101,9 +101,9 @@ Skills refer to connectors by category using `~~` placeholders — `~~email`, `~
 | `policies/` (templates) | Master policy templates (plugin, read-only) | Plugin repo root |
 | `my-assistant.json` | Paths, scope, platform (selective machine config) | `{assistantPath}/config/` |
 | `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |
-| `CLAUDE.md` (memory) + `memory/` | Two-tier memory | Working folder |
+| `AGENTS.md` + `CLAUDE.md` shim + `memory/` | Two-tier memory (hot cache + deep) | Working folder |
 | `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |
-| `skills/dashboard.html` | Visual task + memory editor (read-only in plugin; open in browser) | Plugin directory |
+| `dashboard.html` | Visual task + memory editor (copied at setup) | Working folder |
 
 ## Trust documentation
 
