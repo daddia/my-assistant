@@ -1,18 +1,39 @@
-# My Assistant working folder
+# Memory
 
-This is [full name]'s personal data directory for the My Assistant plugin. This is not a software project.
+Hot cache for decoding shorthand. Full profile: `config/profile.md` · Deep memory: `memory/`
 
-## Layout
-- `config/*` — configuration files
-- `config/profile.md` — identity, voice, autonomy (read first)
-- `policies/*.policy.md` — email and calendar rules (read alongside profile)
-- `scheduled/*.yaml` — job heartbeat state (generated; don't hand-edit)
-- `TASKS.md`, `memory/`, `drafts/` — tasks, deep memory, output
+## Me
+
+[preferred name] — [role one-liner]. Full profile: `config/profile.md`
+
+## People
+
+| Who | Role |
+|-----|------|
+| | |
+→ Full list: `memory/glossary.md` · profiles: `memory/people/`
+
+## Terms
+
+| Term | Meaning |
+|------|---------|
+| | |
+→ Full glossary: `memory/glossary.md`
+
+## Projects
+
+| Name | What |
+|------|------|
+| | |
+→ Details: `memory/projects/`
+
+## Preferences
+
+- [2–3 day-to-day prefs from profile — not full voice/anti-style prose]
+→ Voice & rules: `config/profile.md` · Policies: `policies/`
 
 ## Agent rules
-- Read profile + policies directly; this file does not override them.
-- Never send, book, buy, or delete without explicit sign-off.
-- Prefer `/assistant:setup` for profile/policy changes.
 
-## Memory
-(hot-cache tables go here when populated)
+- Read `config/profile.md` and `policies/*.policy.md` first — this file is decode cache, not the voice source.
+- Never send, book, buy, or delete without explicit sign-off.
+- Prefer `/assistant:setup` for profile or policy changes.
