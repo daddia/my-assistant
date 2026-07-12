@@ -44,8 +44,8 @@ In Cowork, the profile may live in a workspace folder the user has open; check t
 ## Architecture
 
 ```
-profile.md         ← Who you are, how you write, your rules (setup interview)
-policies/          ← VIP tiers, email and calendar rules (setup interview)
+profile.md         ← Who you are, how you write, your rules (/assistant:setup)
+policies/          ← VIP tiers, email and calendar rules (/assistant:setup)
 CLAUDE.md          ← Hot cache (~30 people, common terms)
 memory/
   glossary.md      ← Full decoder ring (everything)

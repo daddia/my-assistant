@@ -36,7 +36,7 @@ Legend: ✅ Allowed (no extra ask) · 📝 Draft/propose only · ⚠️ Ask ever
 | Generated output (`brief-*.md`, `drafts/`, reviews) | 📝 | ✅ | ✅ | ✅ | Tier 0: propose paths/content only |
 | `TASKS.md` | 📝 | ✅ | ✅ | ✅ | Tier 1+: append/update; tell user after |
 | `memory/` + memory `CLAUDE.md` | 📝 | ✅ | ✅ | ✅ | Untrusted-sourced updates need user confirm (all tiers) |
-| `profile.md` | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Show diff; ask first. Setup interview exception |
+| `profile.md` | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Show diff; ask first. `/assistant:setup` exception |
 | Other working-folder files | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Ask first |
 | Plugin directory | 🚫 | 🚫 | 🚫 | 🚫 | |
 

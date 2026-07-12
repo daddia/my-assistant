@@ -45,7 +45,7 @@ Raise a user's tier only after they've seen a week of good output. A reasonable 
 
 ## Propose profile updates — don't silently write
 
-Only the setup interview writes a full profile. When a durable convention surfaces mid-work — a repeated tone correction, a new VIP, a changed reply threshold — show the **exact diff** to the profile and ask before writing. Never edit the profile without confirmation.
+Only `/assistant:setup` writes a full profile. When a durable convention surfaces mid-work — a repeated tone correction, a new VIP, a changed reply threshold — show the **exact diff** to the profile and ask before writing. Never edit the profile without confirmation.
 
 ## Output discipline
 

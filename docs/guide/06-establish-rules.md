@@ -52,7 +52,7 @@ Open [`skills/dashboard.html`](../../skills/dashboard.html) in Chrome or Edge, p
 
 ## Proposing changes to your rules
 
-When a durable pattern emerges — a new VIP, a changed reply threshold, a tone correction you keep making — the assistant proposes a profile update and shows you the exact diff before writing. Only the setup interview writes your profile without asking.
+When a durable pattern emerges — a new VIP, a changed reply threshold, a tone correction you keep making — the assistant proposes a profile update and shows you the exact diff before writing. Only `/assistant:setup` writes your profile without asking.
 
 ## Separate scopes
 

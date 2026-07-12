@@ -55,7 +55,7 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 - **task-management** — `TASKS.md` (Active / Waiting On / Someday / Done)
 - **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
-- **setup-interview** / **schedule-setup** — onboarding and automation
+- **setup** / **schedule-setup** — onboarding and automation (invoke via `/assistant:setup` and `/assistant:schedules`)
 - **status** (`commands/status.md`) — read-only install status check (`/assistant:status`); post-setup subset runs after profile write
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.

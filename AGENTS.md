@@ -22,7 +22,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 
 | The user… | Skill | Command |
 |-----------|-------|---------|
-| Wants to configure the assistant / first run | `skills/setup-interview/SKILL.md` | `/assistant:setup` |
+| Wants to configure the assistant / first run | `skills/setup/SKILL.md` | `/assistant:setup` |
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` + `skills/email-drafting/SKILL.md` | `/assistant:inbox triage` (default) |
 | Wants a lighter inbox pass / archive sweep | `skills/inbox-triage/SKILL.md` | `/assistant:inbox sweep` |
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:email draft` or within inbox triage |
@@ -49,7 +49,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 
 | Command | Verb(s) | Skill(s) |
 |---------|---------|----------|
-| `/assistant:setup` | — | `setup-interview` |
+| `/assistant:setup` | — | `setup` |
 | `/assistant:inbox` | `triage` (default) · `sweep` | `inbox-triage` (+ `email-drafting` on triage) |
 | `/assistant:email` | `draft` (default) · `review` · `feedback` | `email-drafting` · `follow-up-tracking` · `email-feedback` |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | `task-management` |
