@@ -25,7 +25,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Wants to configure the assistant / first run | `skills/assistant-setup/SKILL.md` | `/assistant:setup` |
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` + `skills/email-drafting/SKILL.md` | `/assistant:inbox triage` (default) |
 | Wants a lighter inbox pass / archive sweep | `skills/inbox-triage/SKILL.md` | `/assistant:inbox sweep` |
-| Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:email draft` or within inbox triage |
+| Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:draft email|chat|letter` · `/assistant:email draft` · inbox triage |
 | Rates a draft / wants voice to improve from edits | `skills/email-feedback/SKILL.md` | `/assistant:email feedback` |
 | Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | `/assistant:calendar schedule` or within prep/brief |
@@ -51,6 +51,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 |---------|---------|----------|
 | `/assistant:setup` | — | `assistant-setup` |
 | `/assistant:inbox` | `triage` (default) · `sweep` | `inbox-triage` (+ `email-drafting` on triage) |
+| `/assistant:draft` | `email` (default) · `chat` · `letter` | `email-drafting` |
 | `/assistant:email` | `draft` (default) · `review` · `feedback` | `email-drafting` · `follow-up-tracking` · `email-feedback` |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | `task-management` |
 | `/assistant:calendar` | `protect` (default) · `schedule` | `calendar-scheduling` |
@@ -61,7 +62,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:schedules` | — | `schedule-setup` |
 | `/assistant:health` | `--save` flag | — (self-contained) |
 
-Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, review, schedule, setup, status. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
+Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, draft, review, report, schedule, setup, health. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
 
 ## Visual dashboard
 

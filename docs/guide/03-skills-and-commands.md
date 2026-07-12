@@ -10,6 +10,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 |---------|------|
 | `/assistant:setup` | Onboarding interview → writes your profile |
 | `/assistant:brief` | Morning briefing |
+| `/assistant:draft` | Draft email, chat message, or formal letter (`email` · `chat` · `letter`) |
 | `/assistant:update` | Bring the assistant up to date (`tasks` · `memory` scopes; `--all` deep-scans connectors) |
 | `/assistant:report` | Weekly report |
 | `/assistant:schedules` | Set up scheduled tasks |
@@ -25,7 +26,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:calendar` | `protect` (default) · `schedule` | Scan for buffer/prep/follow-up gaps and draft block proposals, or find meeting times |
 | `/assistant:meeting` | `prep` · `follow-up` (default) | Pre-meeting briefs, or import notetaker export/notes → extraction, recap drafts, queue items |
 
-Examples: `/assistant:inbox triage`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting prep`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:update memory`.
+Examples: `/assistant:inbox triage`, `/assistant:draft email`, `/assistant:email draft`, `/assistant:email feedback good`, `/assistant:calendar protect`, `/assistant:meeting prep`, `/assistant:meeting follow-up`, `/assistant:tasks add`, `/assistant:update memory`.
 
 ### How voice learning works
 

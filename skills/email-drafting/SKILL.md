@@ -1,8 +1,9 @@
 ---
 name: email-drafting
-description: Draft email and message replies in the user's own voice. Activate when
-  triaging needs-reply mail, when the user says "/assistant:email draft", "draft a reply",
-  or pastes a message they need to answer. Creates drafts only — never sends.
+description: Draft email, chat, and letter replies in the user's own voice. Activate when
+  triaging needs-reply mail, when the user says "/assistant:draft email|chat|letter",
+  "/assistant:email draft", "draft a reply", or pastes a message they need to answer.
+  Creates drafts only — never sends.
 ---
 
 # Email drafting

@@ -73,7 +73,7 @@ Suggest logical follow-ups:
 ## File Naming
 
 - Command files live in `commands/` and end in `.md`.
-- Self-contained commands may pair `commands/<slug>.md` with `commands/<slug>.md.tmpl` for checklist/schema data (see `status.md` / `status.md.tmpl`).
+- Self-contained commands may pair `commands/<slug>.md` with `commands/<slug>.md.tmpl` for checklist/schema data (see `health.md` / `health.md.tmpl`).
 - Files prefixed with `_` (like this one) are meta-documents, not slash commands. They are excluded from plugin enumeration and not presented as user-invocable commands.
 - Command slugs match the routing table in `AGENTS.md` (`inbox.md` → `/assistant:inbox`, etc.).
 
