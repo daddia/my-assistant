@@ -27,7 +27,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Wants a lighter inbox pass / archive sweep | `skills/inbox-triage/SKILL.md` | `/assistant:inbox sweep` |
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:draft email|chat|letter` · `/assistant:email draft` · inbox triage |
 | Rates a draft / wants voice to improve from edits | `skills/email-feedback/SKILL.md` | `/assistant:email feedback` |
-| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:email review` or `/assistant:update` |
+| Asks what's awaiting a reply / wants nudges | `skills/follow-up-tracking/SKILL.md` | `/assistant:review email|chat` · `/assistant:email review` · `/assistant:update` |
 | Wants times proposed / conflicts checked | `skills/calendar-scheduling/SKILL.md` | `/assistant:calendar schedule` or within prep/brief |
 | Wants calendar protected / buffer gaps fixed | `skills/calendar-scheduling/SKILL.md` | `/assistant:calendar protect` (default) |
 | Has a meeting coming up | `skills/meeting-prep/SKILL.md` | `/assistant:meeting prep` |
@@ -53,6 +53,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:inbox` | `triage` (default) · `sweep` | `inbox-triage` (+ `email-drafting` on triage) |
 | `/assistant:draft` | `email` (default) · `chat` · `letter` | `email-drafting` |
 | `/assistant:email` | `draft` (default) · `review` · `feedback` | `email-drafting` · `follow-up-tracking` · `email-feedback` |
+| `/assistant:review` | `email` (default) · `chat` | `follow-up-tracking` |
 | `/assistant:tasks` | `add` · `review` (default) · `sync` | `task-management` |
 | `/assistant:calendar` | `protect` (default) · `schedule` | `calendar-scheduling` |
 | `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
