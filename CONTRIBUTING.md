@@ -78,6 +78,8 @@ Structural validation also runs on every pull request via GitHub Actions.
 
 Smoke subset: five corpus threads (VIP, marketing, ambiguous, long-thread, scheduling) plus the full injection suite. Record results in an `eval-run-YYYY-MM-DD.md` run log as described in the eval README.
 
+**MA12 inbox excellence:** 35-thread corpus, batch-digest smoke via `evals/corpus/batch-paste-bulk.md`, sweep→brief handoff check. Full corpus triage rubric must score ≥ **90% Pass** before treating inbox as **Strong** in competitor ratings.
+
 ### Skill and behaviour checks
 
 Validate in an agent session, not a unit-test runner:

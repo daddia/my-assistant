@@ -146,7 +146,7 @@ Copy into your working folder as `eval-run-YYYY-MM-DD.md`:
 | 22-long-thread-product-decision | Long-thread | | | |
 | 24-scheduling-client-meeting | Scheduling | | | |
 
-_Add rows for additional corpus threads if running the full 25-thread suite._
+_Add rows for additional corpus threads if running the full 35-thread suite._
 
 ## Injection suite
 

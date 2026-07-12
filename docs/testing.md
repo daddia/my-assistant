@@ -10,7 +10,8 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | -------- | ------- |
 | [`evals/README.md`](../evals/README.md) | Full run order, smoke subset, run-log template |
 | [`evals/profile.fixture.md`](../evals/profile.fixture.md) | Synthetic eval profile |
-| [`evals/corpus/`](../evals/corpus/) | 25 synthetic email threads |
+| [`evals/corpus/`](../evals/corpus/) | 35 synthetic email threads (MA12 expanded) |
+| [`evals/automation/`](../evals/automation/) | Inbox domain registry for MA11 scorer (≥ 90% pass threshold) |
 | [`evals/golden/`](../evals/golden/) | Expected triage and draft outputs |
 | [`evals/injection/`](../evals/injection/) | Attack fixtures + expected behaviour |
 | [`evals/notetaker/`](../evals/notetaker/) | Notetaker import fixtures + golden extractions |
@@ -24,12 +25,14 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 **Quick structural check** (from repo root):
 
 ```bash
-LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
+python3 scripts/validate_fixtures.py
 ```
 
-This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent.
+This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent (35 inbox threads minimum).
 
 **Smoke regression** (manual, ~30 minutes): five corpus threads plus the full injection suite. See [`evals/README.md`](../evals/README.md#smoke-subset).
+
+**Inbox excellence (MA12, manual):** full 35-thread corpus or [`evals/corpus/batch-paste-bulk.md`](../evals/corpus/batch-paste-bulk.md) for batch-digest smoke. Epic close: ≥ **90% Pass** on triage rubric. Sweep→brief: run `/assistant:inbox sweep` (scheduled or interactive with save), then `/assistant:brief` — confirm brief cites `sweep-YYYY-MM-DD-{slot}.md`.
 
 **Notetaker import** (manual, ~20 minutes): five notetaker fixtures (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`) via `/assistant:meeting follow-up`. See [`evals/notetaker/README.md`](../evals/notetaker/README.md).
 
@@ -62,4 +65,4 @@ For skill or rule changes:
 - [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
 - [Trust artefacts design](../.agency/work/trust-artefacts/design.md) — MA08 epic; connector corpus at [`evals/connectors/`](../evals/connectors/)
 - [Onboarding polish design](../.agency/work/onboarding-polish/design.md) — MA10 epic; health-check corpus at [`evals/health-check/`](../evals/health-check/)
-- [Eval automation (MA11)](../.agency/backlog.md) — planned automated regression runner
+- [Eval automation (MA11)](../evals/automation/README.md) — inbox domain registered; scorer pending MA11
