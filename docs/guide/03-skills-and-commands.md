@@ -9,6 +9,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | Command | Does |
 |---------|------|
 | `/assistant:setup` | Onboarding interview → writes your profile |
+| `/assistant:start` | Fast bootstrap — tasks, memory, dashboard (no profile interview) |
 | `/assistant:brief` | Morning briefing |
 | `/assistant:draft` | Draft email, chat message, or formal letter (`email` · `chat` · `letter`) |
 | `/assistant:review` | Review what's awaiting a response (`email` · `chat`) |
@@ -54,10 +55,10 @@ Skills follow `{domain}-{job}`. They compose behind commands — no 1:1 command-
 - **meeting-prep** — who / what / last contact / what to prepare
 - **meeting-follow-up** — imports Granola/Fireflies/Otter/Google Meet exports (or hand-typed notes) into structured extraction, recap drafts, and queue items. **Does not join calls** — paste what your notetaker captured.
 - **daily-brief** — the morning briefing
-- **task-management** — `TASKS.md` (Active / Waiting On / Someday / Done)
+- **task-management** — `TASKS.md` (To do / In progress / In review / Done / Cancelled / Blocked)
 - **memory-management** — two-tier memory that decodes your shorthand
 - **weekly-review** — Friday wrap-up
-- **setup** / **schedule-setup** — onboarding and automation (invoke via `/assistant:setup` and `/assistant:schedules`; setup skill folder is `assistant-setup`)
+- **setup** / **start** / **schedule-setup** — onboarding, fast bootstrap, and automation (invoke via `/assistant:setup`, `/assistant:start`, and `/assistant:schedules`; setup skill folder is `assistant-setup`)
 - **health** (`commands/health.md`) — read-only install health check (`/assistant:health`); post-setup subset runs after profile write
 
 Every skill is **standalone-first**: paste content and it works; connect a tool and it works directly against your accounts.
@@ -67,7 +68,7 @@ Every skill is **standalone-first**: paste content and it works; connect a tool 
 [`dashboard.html`](../../skills/dashboard.html) in your working folder (copied at setup) is a browser UI for your working-folder files — or open `skills/dashboard.html` from the plugin and select the folder. No slash command needed.
 
 1. Open the file in **Chrome or Edge** (uses the File System Access API).
-2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between Active / Waiting On / Someday / Done; auto-saves.
+2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between To do / In progress / In review / Done / Cancelled / Blocked; auto-saves.
 3. **Memory tab** — open your working folder to browse and edit `AGENTS.md` and files under `memory/`.
 4. **Review tab** — browse `review-queue/index.yaml` pending items grouped by type; open `source_path` files (read-only — approve in Gmail/chat/calendar).
 

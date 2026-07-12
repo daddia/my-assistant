@@ -15,7 +15,7 @@ This file orchestrates the plugin: it maps what the user asks for to the skill t
 Everything about the user — identity, voice, VIP tiers, email and calendar policy, autonomy tier — is stored in the user's working folder (default `~/MyAssistant`): **profile** at `{assistantPath}/config/profile.md` (identity, voice, working rules) and **policies** at `{assistantPath}/policies/*.policy.md` (VIP tiers, email, calendar). Setup copies policy templates from the plugin's master `policies/` directory. A selective machine config lives at `{assistantPath}/config/my-assistant.json`. See `rules/paths.md` for resolution and legacy fallbacks. Personalisation is **never** written inside the plugin directory, so `/plugin update` never overwrites it.
 
 - If the profile exists (via `my-assistant.json` or path resolution), read it first and treat it as the source of truth about the user.
-- If it does not exist, the plugin still works with pasted content — offer `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to `{assistantPath}/config/`. Gallery: [`examples/README.md`](examples/README.md).
+- If it does not exist, the plugin still works with pasted content — offer `/assistant:start` for a fast bootstrap or `/assistant:setup` to make it sharper. **Starter profiles** in `config/starter-profiles/` give five vertical ICP personas (founder, consultant, sales lead, operator, investor) as copy templates; setup writes the chosen starter to `{assistantPath}/config/`. Gallery: [`examples/README.md`](examples/README.md).
 - Open the working folder (`~/MyAssistant` by default) in Cowork or Cursor so hooks, schedules, and the dashboard resolve paths reliably.
 
 ## Trigger → skill map
@@ -23,6 +23,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | The user… | Skill | Command |
 |-----------|-------|---------|
 | Wants to configure the assistant / first run | `skills/assistant-setup/SKILL.md` | `/assistant:setup` |
+| Wants a fast tasks + memory bootstrap (no profile interview) | `skills/start/SKILL.md` | `/assistant:start` |
 | Wants their inbox sorted / "triage my mail" | `skills/inbox-triage/SKILL.md` + `skills/email-drafting/SKILL.md` | `/assistant:inbox triage` (default) |
 | Wants a lighter inbox pass / archive sweep | `skills/inbox-triage/SKILL.md` | `/assistant:inbox sweep` |
 | Needs replies drafted | `skills/email-drafting/SKILL.md` | `/assistant:draft email|chat|letter` · `/assistant:email draft` · inbox triage |
@@ -50,6 +51,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | Command | Verb(s) | Skill(s) |
 |---------|---------|----------|
 | `/assistant:setup` | — | `assistant-setup` |
+| `/assistant:start` | — | `start` |
 | `/assistant:inbox` | `triage` (default) · `sweep` | `inbox-triage` (+ `email-drafting` on triage) |
 | `/assistant:draft` | `email` (default) · `chat` · `letter` | `email-drafting` |
 | `/assistant:email` | `draft` (default) · `review` · `feedback` | `email-drafting` · `follow-up-tracking` · `email-feedback` |
@@ -63,7 +65,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:schedules` | — | `schedule-setup` |
 | `/assistant:health` | `--save` flag | — (self-contained) |
 
-Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, draft, review, report, schedule, setup, health. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
+Domain vocabulary: inbox, email, calendar, meeting, follow-up, task, memory, brief, draft, review, report, schedule, setup, start, health. Skills follow `{domain}-{job}`; `-management` is reserved for store stewardship (`task-management`, `memory-management`).
 
 ## Visual dashboard
 
@@ -100,7 +102,7 @@ Skills refer to connectors by category using `~~` placeholders — `~~email`, `~
 | `policies/*.policy.md` | VIP tiers, email rules, calendar rules | `{assistantPath}/policies/` |
 | `policies/` (templates) | Master policy templates (plugin, read-only) | Plugin repo root |
 | `my-assistant.json` | Paths, scope, platform (selective machine config) | `{assistantPath}/config/` |
-| `TASKS.md` | Task list (Active / Waiting On / Someday / Done) | Working folder |
+| `TASKS.md` | Task list (To do / In progress / In review / Done / Cancelled / Blocked) | Working folder |
 | `AGENTS.md` + `CLAUDE.md` shim + `memory/` | Two-tier memory (hot cache + deep) | Working folder |
 | `brief-YYYY-MM-DD.md`, drafts, reviews | Generated output | Working folder |
 | `dashboard.html` | Visual task + memory editor (copied at setup) | Working folder |

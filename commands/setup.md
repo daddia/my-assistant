@@ -22,7 +22,7 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 Configure the assistant. Read and follow `skills/assistant-setup/SKILL.md`.
 
-Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, memory (`AGENTS.md` + `memory/`), install config, and copy `dashboard.html`. Seed memory from key people; optional task decode bootstrap. Confirm each section as you go, run the post-setup status subset, then point the user at `dashboard.html`, `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health`.
+Offer a 2-minute quick-start or the full 10-minute interview. For tasks-only bootstrap without a profile interview, point users at `/assistant:start` first. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, memory (`AGENTS.md` + `memory/`), install config, and copy `dashboard.html`. Seed memory from key people; optional task decode bootstrap. Confirm each section as you go, run the post-setup status subset, then point the user at `dashboard.html`, `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health`.
 
 ## Verification
 
