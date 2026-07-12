@@ -12,6 +12,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+## [1.3.3] - 2026-07-12
+
+### Added
+
+### Changed
+
+- **Setup skill renamed** — `setup-interview` → `setup` across commands, docs, rules, and health-check fixtures.
+- **Command conventions** — metadata section (description, user-invocable) added to `commands/_conventions.md`.
+
+### Fixed
+
 ## [1.3.2] - 2026-07-12
 
 ### Added
