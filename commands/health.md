@@ -147,8 +147,11 @@ If `working-folder-identified` **warns** (ambiguous), folder file checks may **s
 |----------|-----------|-------------|
 | `working-folder-identified` | Path resolved and user context clear | **warn** if defaulted to cwd without confirmation |
 | `tasks-md-present` | `TASKS.md` exists and is readable | **warn** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh {assistantPath} --tasks`, or `/assistant:tasks add` |
-| `memory-scaffold` | `memory/` directory exists | **warn** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh {assistantPath}` (dirs only) |
-| `claude-md-present` | `CLAUDE.md` exists in working folder | **warn** |
+| `memory-scaffold` | `memory/` with `people/`, `projects/`, `context/` subdirs | **warn** — run `/assistant:setup` or `scaffold-working-folder.sh {assistantPath} --memory` |
+| `memory-glossary-present` | `memory/glossary.md` exists | **warn** — run `/assistant:setup` |
+| `agents-md-present` | `AGENTS.md` exists with hot-cache sections | **warn** — run `/assistant:setup` |
+| `claude-md-shim` | `CLAUDE.md` exists (ideally `@AGENTS.md`) | **warn** — run `/assistant:setup` |
+| `dashboard-present` | `dashboard.html` in working folder | **warn** — re-run setup or copy from `skills/dashboard.html` |
 
 #### Always-on
 

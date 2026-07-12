@@ -62,10 +62,26 @@ results:
     status: warn
     message: memory/ directory not found
     fix_ref: skills/assistant-setup/scripts/scaffold-working-folder.sh
-  - check_id: claude-md-present
+  - check_id: memory-glossary-present
+    category: working-folder
+    status: warn
+    message: memory/glossary.md not found
+    fix_ref: /assistant:setup
+  - check_id: agents-md-present
+    category: working-folder
+    status: warn
+    message: AGENTS.md not found
+    fix_ref: /assistant:setup
+  - check_id: claude-md-shim
     category: working-folder
     status: warn
     message: CLAUDE.md not found
+    fix_ref: /assistant:setup
+  - check_id: dashboard-present
+    category: working-folder
+    status: warn
+    message: dashboard.html not found
+    fix_ref: /assistant:setup
     fix_ref: /assistant:update memory
   - check_id: schedule-ledger-present
     category: always-on

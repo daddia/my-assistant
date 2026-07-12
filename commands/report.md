@@ -6,7 +6,7 @@ description: Weekly report — wins, open loops, stale tasks, and what to line u
 ## Preflight
 
 - **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the report still works from the working folder.
-- **Working folder** — Confirm `TASKS.md`, `memory/`, `CLAUDE.md`, and `review-YYYY-MM-DD.md` locations. Note if the folder is read-only.
+- **Working folder** — Confirm `TASKS.md`, `memory/`, `AGENTS.md`, and `review-YYYY-MM-DD.md` locations. Note if the folder is read-only.
 - **Connectors** — Optional; note available `~~email`, `~~calendar`, `~~chat` for open-loop context.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Update tasks and memory only with confirmation.
 

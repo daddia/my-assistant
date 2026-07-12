@@ -6,7 +6,7 @@ working_folder: evals/health-check/fixtures/fx-full-profile/working
 config_path: evals/health-check/fixtures/fx-full-profile/working/config/my-assistant.json
 profile_path: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 summary:
-  pass: 22
+  pass: 25
   warn: 6
   fail: 0
   skip: 8
@@ -109,10 +109,22 @@ results:
     category: working-folder
     status: pass
     message: memory/ directory present
-  - check_id: claude-md-present
+  - check_id: memory-glossary-present
     category: working-folder
     status: pass
-    message: CLAUDE.md present
+    message: memory/glossary.md present
+  - check_id: agents-md-present
+    category: working-folder
+    status: pass
+    message: AGENTS.md present
+  - check_id: claude-md-shim
+    category: working-folder
+    status: pass
+    message: CLAUDE.md shim present
+  - check_id: dashboard-present
+    category: working-folder
+    status: pass
+    message: dashboard.html present
   - check_id: schedule-ledger-present
     category: always-on
     status: skip

@@ -42,7 +42,10 @@ fixtures:
       - profile-legacy-policy-sections
       - tasks-md-present
       - memory-scaffold
-      - claude-md-present
+      - memory-glossary-present
+      - agents-md-present
+      - claude-md-shim
+      - dashboard-present
 
   - id: fx-folder-scaffold
     file: evals/health-check/fixtures/fx-folder-scaffold.yaml
@@ -50,7 +53,10 @@ fixtures:
     covers_checks:
       - tasks-md-present
       - memory-scaffold
-      - claude-md-present
+      - memory-glossary-present
+      - agents-md-present
+      - claude-md-shim
+      - dashboard-present
 
   - id: fx-schedule-healthy
     file: evals/health-check/fixtures/fx-schedule-healthy.yaml

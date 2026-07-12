@@ -68,7 +68,7 @@ Every skill is **standalone-first**: paste content and it works; connect a tool 
 
 1. Open the file in **Chrome or Edge** (uses the File System Access API).
 2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between Active / Waiting On / Someday / Done; auto-saves.
-3. **Memory tab** — open your working folder to browse and edit `CLAUDE.md` and files under `memory/`.
+3. **Memory tab** — open your working folder to browse and edit `AGENTS.md` and files under `memory/`.
 4. **Review tab** — browse `review-queue/index.yaml` pending items grouped by type; open `source_path` files (read-only — approve in Gmail/chat/calendar).
 
 The assistant and the dashboard share the same files, so edits in either place stay in sync.

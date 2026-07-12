@@ -48,7 +48,7 @@ flowchart TB
 | **Profile** | `~/MyAssistant/config/profile.md` (or resolved via `my-assistant.json`) | Session start; skills that need voice, VIP, policy, autonomy | Yes — content is included in model context for the session |
 | **Install config** | `~/MyAssistant/config/my-assistant.json` | Path resolution, scope | Yes — paths included when skills resolve locations |
 | **Task list** | `TASKS.md` in working folder | Task review, brief, update, weekly review | Yes — when relevant to the task |
-| **Memory index** | `CLAUDE.md` (memory) in working folder | Shorthand decode, `/assistant:update memory`, prep | Yes — when relevant |
+| **Memory index** | `AGENTS.md` hot cache in working folder | Shorthand decode, `/assistant:update memory`, prep | Yes — when relevant |
 | **Deep memory** | `memory/` in working folder | People, projects, glossary lookups | Yes — when relevant |
 | **Generated output** | `brief-*.md`, `drafts/`, review docs | Follow-up runs, user reference | Yes — when re-read for continuity |
 | **Voice samples** | `voice/` alongside profile (optional) | Email drafting | Yes — when drafting |
@@ -63,7 +63,7 @@ The assistant may read **any file in the working folder** and the profile direct
 |-------------|----------|----------|----------------|
 | **Working folder — generated** | `brief-2026-07-06.md`, `drafts/reply-priya.md` | None — write freely | No — stays on disk; may re-enter model context if read again |
 | **TASKS.md** | New tasks, status moves | None — append/update; user told after | No |
-| **memory/** + memory **CLAUDE.md** | Glossary entries, people notes | None — append/update; user told after | No |
+| **memory/** + **AGENTS.md** | Glossary entries, people notes | None — append/update; user told after | No |
 | **Profile** | VIP list, voice tweak, tier change | **Ask first** — show diff (except full write during `/assistant:setup`) | No — stays in profile path |
 | **Other working-folder paths** | New files outside the patterns above | **Ask first** | No |
 | **Plugin directory** | — | **Never** | — |
@@ -124,7 +124,7 @@ Tier 3 may perform narrow **pre-approved** notify-after actions (e.g. decline ob
 | `/assistant:meeting prep` | Calendar event; related mail; memory | Prep notes | — |
 | `/assistant:meeting follow-up` | Pasted notes/transcript | Extraction, drafts, queue items | — |
 | `/assistant:tasks` | TASKS.md | TASKS.md | — |
-| `/assistant:update` | TASKS.md, memory/, profile; connectors when `--all` | TASKS.md, memory/, CLAUDE.md; follow-up drafts | — |
+| `/assistant:update` | TASKS.md, memory/, profile; connectors when `--all` | TASKS.md, memory/, AGENTS.md; follow-up drafts | — |
 | `/assistant:setup` | profile template | profile.md (full write) | — |
 | `dashboard.html` | User-granted folder | TASKS.md, memory/ (browser-local) | — |
 

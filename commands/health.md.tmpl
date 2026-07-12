@@ -144,10 +144,25 @@ checks:
     default_severity_on_fail: warn
     fix_ref: skills/assistant-setup/scripts/scaffold-working-folder.sh
 
-  - id: claude-md-present
+  - id: memory-glossary-present
     category: working-folder
     default_severity_on_fail: warn
-    fix_ref: /assistant:update memory
+    fix_ref: /assistant:setup
+
+  - id: agents-md-present
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: claude-md-shim
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
+  - id: dashboard-present
+    category: working-folder
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
 
   # --- always-on ---
   - id: schedule-ledger-present

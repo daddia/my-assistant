@@ -15,7 +15,7 @@ Parse `$ARGUMENTS` for scope and flags:
 ## Preflight
 
 - **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; update still works from the working folder.
-- **Working folder** — Confirm `TASKS.md`, `memory/`, `CLAUDE.md`, and queue locations. Note if the folder is read-only.
+- **Working folder** — Confirm `TASKS.md`, `memory/`, `AGENTS.md`, and queue locations. Note if the folder is read-only.
 - **Connectors** — Detect `~~email`, `~~calendar`, `~~chat`, `~~drive` when `--all` (or `--comprehensive`) is set. State which are available; skip missing connectors and note the gap.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Present each capture for confirmation — never auto-add. Draft-only: never send, book, or spend.
 
@@ -36,7 +36,7 @@ Before executing, state the resolved scope and whether `--all` is active.
 
 Bring the assistant up to date. Read and follow `skills/task-management/SKILL.md`, `skills/follow-up-tracking/SKILL.md`, and `skills/memory-management/SKILL.md`.
 
-Read `TASKS.md`, `memory/`, and `CLAUDE.md`. Triage stale/overdue tasks (present each — done? reschedule? Someday?). Surface follow-ups gone cold via `follow-up-tracking`. Decode task entities against memory; surface gaps and **save confirmed entries inline** — never auto-add. Do **not** prune memory on the default run.
+Read `TASKS.md`, `memory/`, and `AGENTS.md`. Triage stale/overdue tasks (present each — done? reschedule? Someday?). Surface follow-ups gone cold via `follow-up-tracking`. Decode task entities against memory; surface gaps and **save confirmed entries inline** — never auto-add. Do **not** prune memory on the default run.
 
 For task-list-only work, `/assistant:tasks review` or `/assistant:tasks sync` are narrower entry points.
 
@@ -52,7 +52,7 @@ With **`--all`**: additionally deep-scan connectors for action items not yet in 
 
 Memory-only update. Read and follow `skills/memory-management/SKILL.md`.
 
-Decode entities from tasks, chat, or pasted content against `CLAUDE.md` and `memory/`. Surface gaps; save confirmed people, projects, acronyms, or terms inline. **Prune** stale or contradictory hot-cache entries — demote completed projects and infrequent contacts; propose removals with confirmation before deleting anything. Propose profile updates for VIPs; never write `profile.md` without approval.
+Decode entities from tasks, chat, or pasted content against `AGENTS.md` and `memory/`. Surface gaps; save confirmed people, projects, acronyms, or terms inline. **Prune** stale or contradictory hot-cache entries — demote completed projects and infrequent contacts; propose removals with confirmation before deleting anything. Propose profile updates for VIPs; never write `profile.md` without approval.
 
 Explicit capture also works in chat ("remember that Todd = …") — the memory-management skill auto-fires without a slash command.
 
@@ -68,7 +68,7 @@ Deep-scan available connectors (`~~email`, `~~calendar`, `~~chat`, `~~drive`) fo
 
 ## Verification
 
-- Re-read `TASKS.md`, `memory/`, `CLAUDE.md`, and any follow-up drafts — confirm changes match the plan and scope.
+- Re-read `TASKS.md`, `memory/`, `AGENTS.md`, and any follow-up drafts — confirm changes match the plan and scope.
 - Confirm nothing was sent, booked, deleted, or auto-added without explicit approval.
 - Surface connector errors, partial scans, or autonomy-tier blocks clearly.
 

@@ -16,7 +16,7 @@ queue_types:
   - reply-draft        # Email/message reply not yet sent
   - archive-proposal   # Threads/senders proposed for archive
   - follow-up-nudge    # Cold-thread nudge draft
-  - memory-suggestion  # New/changed CLAUDE.md or memory/ entry
+  - memory-suggestion  # New/changed AGENTS.md or memory/ entry
   - profile-diff       # Change to profile.md
   - calendar-proposal  # Proposed times, invite draft, or focus block
 

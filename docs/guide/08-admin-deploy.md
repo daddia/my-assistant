@@ -41,7 +41,7 @@ User-owned directory the assistant reads and writes during sessions:
 | Path | Purpose |
 | ---- | ------- |
 | `TASKS.md` | Task board (Active / Waiting On / Someday / Done) |
-| `CLAUDE.md` + `memory/` | Two-tier memory |
+| `AGENTS.md` + `memory/` | Two-tier memory |
 | `drafts/` | Email, calendar, and follow-up drafts |
 | `brief-YYYY-MM-DD.md` | Morning briefings |
 | `review-queue/` | Pending approvals (`index.yaml` per review-queue schema) |

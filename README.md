@@ -76,7 +76,7 @@ Every skill is standalone-first: paste an email thread or your calendar and it j
 
 ## Visual dashboard
 
-Open [`skills/dashboard.html`](./skills/dashboard.html) in Chrome or Edge for a board/list view of `TASKS.md`, a browser for `CLAUDE.md` + `memory/`, and a **Review** tab for pending approvals. Point it at your working folder — the same files the assistant reads and writes.
+Open `{assistantPath}/dashboard.html` in Chrome or Edge for a board/list view of `TASKS.md`, a browser for `AGENTS.md` + `memory/`, and a **Review** tab for pending approvals. Copied into your working folder at setup; or open `skills/dashboard.html` from the plugin and point it at your working folder.
 
 ## How it's built
 
