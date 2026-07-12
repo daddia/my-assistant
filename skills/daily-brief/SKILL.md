@@ -48,10 +48,21 @@ Max one health block per chat turn.
 Pull from whatever is connected; degrade gracefully when something's missing.
 
 1. **Today's calendar** — meetings with times and attendees; flag anything external or VIP; note gaps and any conflict/no-buffer issues. When back-to-back meetings or missing buffers are detected, append one line: "Run `/assistant:calendar protect` to draft buffer blocks." Optionally footnote: `calendar: N buffer gaps`. Hand scheduling detail to `calendar-scheduling` protect mode when the user confirms — default is offer, not silent inline scan (keeps brief under ~400 words).
-2. **Priority unread** — top items from `~~email`/`~~chat` that need the user today, VIP-first (hand triage to `inbox-triage`). Don't list everything — just what matters before noon.
+2. **Priority unread** — prefer today's sweep artefact over a live re-triage (see **Sweep handoff** below). Fall back to `~~email`/`~~chat` top items or pasted unread when no recent sweep exists. VIP-first; only what matters before noon.
 3. **Follow-ups going cold** — from `follow-up-tracking`: what's silent past threshold.
 4. **Due tasks** — from `TASKS.md`: due or overdue today (via `task-management`).
-5. **Needs attention before noon** — the 1–3 things that will hurt if missed.
+5. **Needs attention before noon** — the 1–3 things that will hurt if missed. Merge VIP/needs-reply lines from the sweep artefact when present.
+
+### Sweep handoff
+
+Before scanning live mail for priority unread:
+
+1. Look for `sweep-YYYY-MM-DD-{slot}.md` files in the working folder for **today's date** (any slot: `0800`, `1200`, `1600`).
+2. Use the **most recent** sweep file if its timestamp is within the last **12 hours** (tolerates the 08:00 sweep/brief race — brief may run before sweep finishes).
+3. Pull VIP and needs-reply lines from that file into **Before noon** / **Priority unread** — do not re-run full inbox triage when a fresh sweep exists.
+4. If no sweep file within 12h, note one line: `No sweep artefact since {last sweep date or "today"} — using live unread.` Then use `~~email` or ask for paste.
+
+Sweep files are written by scheduled `/assistant:inbox sweep` per `skills/inbox-triage/SKILL.md`.
 
 ## Output shape
 

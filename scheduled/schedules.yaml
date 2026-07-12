@@ -43,7 +43,10 @@ jobs:
       managed:
         cookbook: managed-agents/inbox-triage/agent.yaml
         platform: managed-agents-2026-04-01
-    expected_artifacts: []
+    expected_artifacts:
+      - path_pattern: "sweep-{date}-{slot}.md"
+        slot_values: ["0800", "1200", "1600"]
+        required: true
     reliability_tier: standard
 
   - job_id: meeting-prep-watcher

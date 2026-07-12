@@ -68,7 +68,7 @@ job_file_fields:
   expected_artifact:
     required: false
     type: string
-    description: Resolved artefact path for the most recent expected run (e.g. brief-2026-07-08.md)
+    description: Resolved artefact path for the most recent expected run (e.g. brief-2026-07-08.md, sweep-2026-07-12-0800.md for inbox-sweep)
 
   artifact_present:
     required: false

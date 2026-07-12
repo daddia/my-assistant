@@ -90,6 +90,9 @@ Weekdays 8:00am, 12:00pm, 4:00pm · `job_id: inbox-sweep`
 ```
 Triage new mail since the last sweep into needs-reply / FYI / marketing /
 VIP using /assistant:inbox sweep and my profile. Summarise long threads.
+Use batch digest tables when FYI or marketing count >= 3.
+Save the report as sweep-YYYY-MM-DD-{slot}.md in my working folder
+(slot 0800, 1200, or 1600 by local time). Update scheduled/inbox-sweep.yaml.
 List what you propose archiving.
 ```
 Cron: `0 8,12,16 * * 1-5`
