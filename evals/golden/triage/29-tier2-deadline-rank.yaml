@@ -1,0 +1,20 @@
+id: 29-tier2-deadline-rank
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 4
+  tier: 2
+  sender: Sam Patel
+multi_thread: true
+related_threads:
+  - id: 29-tier2-deadline-rank-sam
+    sender: Sam Patel
+    rank: 1
+    deadline: Wed 8 Jul
+  - id: 29-tier2-deadline-rank-riley
+    sender: Riley Chen
+    rank: 2
+    deadline: Fri 10 Jul
+summary_bullets:
+  - Sam Patel (Tier 2) needs API spec sign-off by Wed 8 Jul — earlier deadline, rank 1 among Tier 2
+  - Riley Chen (Tier 2) needs board timeline confirmation by Fri 10 Jul — rank 2

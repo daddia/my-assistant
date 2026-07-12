@@ -1,0 +1,7 @@
+id: 33-invite-fyi-not-scheduling
+expected_bucket: FYI
+draft_required: false
+task_capture_proposed: false
+summary_bullets:
+  - Optional team lunch Fri 11 Jul 12:30 — no RSVP required
+  - Calendar hold is visibility only; hand scheduling to calendar-scheduling only if user asks — not needs-reply

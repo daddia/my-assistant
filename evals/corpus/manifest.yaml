@@ -9,7 +9,7 @@
 #   golden_triage: string — path to golden/triage/{id}.yaml
 #   draft_required: bool — whether draft review is expected
 #
-# Minimum 25 threads when the corpus is complete (see design.md corpus categories table).
+# Minimum 35 threads when the corpus is complete (MA12 expanded adversarial + edge cases).
 
 threads:
   - id: 01-vip-board-update
@@ -211,3 +211,83 @@ threads:
     skill: inbox-triage
     golden_triage: golden/triage/25-scheduling-team-sync.yaml
     draft_required: true
+
+  - id: 26-injection-action-in-email
+    file: corpus/threads/26-injection-action-in-email.md
+    category: FYI
+    tags: [adversarial, injection]
+    skill: inbox-triage
+    golden_triage: golden/triage/26-injection-action-in-email.yaml
+    draft_required: false
+
+  - id: 27-injection-archive-bait
+    file: corpus/threads/27-injection-archive-bait.md
+    category: Marketing
+    tags: [adversarial, injection]
+    skill: inbox-triage
+    golden_triage: golden/triage/27-injection-archive-bait.yaml
+    draft_required: false
+
+  - id: 28-vip-domain-newsletter
+    file: corpus/threads/28-vip-domain-newsletter.md
+    category: VIP
+    tags: [vip-tier-1, newsletter-ambiguous]
+    skill: inbox-triage
+    golden_triage: golden/triage/28-vip-domain-newsletter.yaml
+    draft_required: false
+
+  - id: 29-tier2-deadline-rank
+    file: corpus/threads/29-tier2-deadline-rank.md
+    category: VIP
+    tags: [vip-tier-2, ranking]
+    skill: inbox-triage
+    golden_triage: golden/triage/29-tier2-deadline-rank.yaml
+    draft_required: true
+
+  - id: 30-school-vip-tier1
+    file: corpus/threads/30-school-vip-tier1.md
+    category: VIP
+    tags: [vip-tier-1, personal, school]
+    skill: inbox-triage
+    golden_triage: golden/triage/30-school-vip-tier1.yaml
+    draft_required: true
+
+  - id: 31-auto-reply-ooo
+    file: corpus/threads/31-auto-reply-ooo.md
+    category: FYI
+    tags: [auto-reply, ooo]
+    skill: inbox-triage
+    golden_triage: golden/triage/31-auto-reply-ooo.yaml
+    draft_required: false
+
+  - id: 32-reply-all-storm
+    file: corpus/threads/32-reply-all-storm.md
+    category: FYI
+    tags: [reply-all, internal]
+    skill: inbox-triage
+    golden_triage: golden/triage/32-reply-all-storm.yaml
+    draft_required: false
+
+  - id: 33-invite-fyi-not-scheduling
+    file: corpus/threads/33-invite-fyi-not-scheduling.md
+    category: FYI
+    tags: [calendar, optional]
+    skill: inbox-triage
+    golden_triage: golden/triage/33-invite-fyi-not-scheduling.yaml
+    draft_required: false
+
+  - id: 34-fyi-bulk-receipts
+    file: corpus/threads/34-fyi-bulk-receipts.md
+    category: FYI
+    tags: [batch-digest, receipts]
+    skill: inbox-triage
+    golden_triage: golden/triage/34-fyi-bulk-receipts.yaml
+    draft_required: false
+
+  - id: 35-marketing-bulk-promos
+    file: corpus/threads/35-marketing-bulk-promos.md
+    category: Marketing
+    tags: [batch-digest, promo]
+    skill: inbox-triage
+    golden_triage: golden/triage/35-marketing-bulk-promos.yaml
+    draft_required: false

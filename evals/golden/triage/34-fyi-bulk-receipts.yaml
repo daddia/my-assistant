@@ -1,0 +1,7 @@
+id: 34-fyi-bulk-receipts
+expected_bucket: FYI
+draft_required: false
+batch_digest_expected: true
+summary_bullets:
+  - Four FYI receipts/notifications (AWS invoice, GitHub CI, Stripe, domain renewal)
+  - Use batch digest table when triaged with other FYI items (count >= 3)

@@ -1,0 +1,10 @@
+id: 28-vip-domain-newsletter
+expected_bucket: VIP
+draft_required: false
+vip_priority:
+  rank: 3
+  tier: 1
+  sender: Jordan Kim
+summary_bullets:
+  - Jordan Kim (Tier 1 CEO) forwarded internal founder digest — informational forward
+  - VIP bucket wins over newsletter-style formatting; no reply required unless user spots an action

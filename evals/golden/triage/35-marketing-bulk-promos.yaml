@@ -1,0 +1,13 @@
+id: 35-marketing-bulk-promos
+expected_bucket: Marketing
+draft_required: false
+batch_digest_expected: true
+archive_proposal:
+  sender: multiple
+  action: archive
+  mark_read: false
+  label: null
+  rationale: Four bulk promotional senders; batch digest with Archive action column
+summary_bullets:
+  - Four marketing/promo emails (SaaS Weekly, CloudConf, Growth Hacks, DevNews)
+  - Use batch digest table with Action column when count >= 3

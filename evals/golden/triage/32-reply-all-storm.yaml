@@ -1,0 +1,6 @@
+id: 32-reply-all-storm
+expected_bucket: FYI
+draft_required: false
+summary_bullets:
+  - Internal reply-all thread about kitchen fridge labelling — no action for Alex
+  - FYI noise; do not draft; optional note facilities ticket #4421

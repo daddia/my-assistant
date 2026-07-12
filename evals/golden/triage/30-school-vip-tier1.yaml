@@ -1,0 +1,10 @@
+id: 30-school-vip-tier1
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 1
+  tier: 1
+  sender: alex.rivera.personal@example-eval.test
+summary_bullets:
+  - Family/personal forward (Tier 1) — Oakridge Primary early pickup Thu 10 Jul at 2:30pm
+  - Confirm receipt for school office; personal ICP VIP surfaces before work mail
