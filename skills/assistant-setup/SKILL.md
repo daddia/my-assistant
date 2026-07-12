@@ -189,7 +189,7 @@ Ask:
 
 > "Where do you keep todos? Paste a list, point at `TASKS.md`, or skip — I'll decode shorthand from whatever you share."
 
-For each task line, decode unknown people, projects, acronyms interactively (see `skills/memory-management/SKILL.md`). Add confirmed entries to `AGENTS.md`, `memory/glossary.md`, and `memory/people/` or `memory/projects/` as appropriate.
+For each task line, decode unknown people, projects, acronyms interactively using the ✓ / ? checklist in `skills/memory-management/SKILL.md`. Group proposals by confidence tier. Add confirmed entries to `AGENTS.md`, `memory/glossary.md`, and `memory/people/` or `memory/projects/` as appropriate.
 
 ### 5. Optional — comprehensive scan
 
@@ -197,7 +197,7 @@ After task decode (or if skipped), offer:
 
 > "Want a deeper scan of chat, email, or docs for people and projects? Run `/assistant:update --all` when connectors are ready — or skip for now."
 
-Do not block setup on connectors.
+Do not block setup on connectors. Use confidence-tiered memory proposals from `memory-management` when scanning.
 
 ### 6. Report memory deliverables
 
@@ -233,7 +233,7 @@ After the **initial** profile write (starter, quick-start, or full interview —
 
 Then summarise what's captured and point them at the wedge:
 
-> "You're set up at `{assistantPath}`. Open that folder in Cowork or Cursor. Open `dashboard.html` in Chrome or Edge for tasks and memory. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:health` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos. Re-run `/assistant:setup` anytime to adjust."
+> "You're set up at `{assistantPath}`. Open that folder in Cowork or Cursor. Open `dashboard.html` in Chrome or Edge for tasks and memory. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:health` anytime for a full install check. New here? `/assistant:start` is the fast tasks-only path. Browse [`examples/README.md`](../../examples/README.md) for persona demos. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 

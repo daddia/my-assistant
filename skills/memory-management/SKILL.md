@@ -316,6 +316,71 @@ When the user asks "who is X" or "what does X mean":
    - `AGENTS.md` tells you Todd = Todd Martinez, PSR = Pipeline Status Report
    - `memory/people/todd-martinez.md` tells you he prefers Slack, is direct
 
+### Decode checklist (update / review)
+
+When decoding tasks during `/assistant:update`, `/assistant:tasks review`, or bootstrap, show per-task entity resolution:
+
+```
+Task: "Send PSR to Todd re: Phoenix blockers"
+
+Decode:
+- PSR → ✓ Pipeline Status Report (glossary)
+- Todd → ✓ Todd Martinez (people/)
+- Phoenix → ? Not in memory
+```
+
+Track what's fully decoded vs. gaps. Present unknowns grouped:
+
+```
+I found terms in your tasks I don't have context for:
+
+1. "Phoenix" (from: "Send PSR to Todd re: Phoenix blockers")
+   → What's Phoenix?
+
+2. "Maya" (from: "sync with Maya on API design")
+   → Who is Maya?
+```
+
+Add confirmed answers to `AGENTS.md`, `memory/glossary.md`, and `memory/people/` or `memory/projects/` as appropriate.
+
+### Task enrichment
+
+Tasks often contain richer context than memory. During `/assistant:update` (default) and `/assistant:tasks review`, extract and **propose** updates:
+
+- **Links** from tasks → add to project/people files
+- **Status changes** ("launch done", moved to Done) → update project status; demote from `AGENTS.md` Projects if complete
+- **Relationships** ("Todd's sign-off on Maya's proposal") → cross-reference people files
+- **Deadlines** → add to project files
+
+Never auto-write enrichment — confirm each change with the user.
+
+### Confidence-tiered proposals
+
+When bootstrap or `--all` scans surface new people, projects, or terms, group by confidence:
+
+| Tier | Action |
+|------|--------|
+| **Ready to add** | High confidence (3+ mentions, clear role/context) — offer to add directly |
+| **Needs clarification** | Seen but ambiguous — ask the user |
+| **Low frequency / unclear** | 1–2 mentions, thin context — note for later |
+
+Use this format for comprehensive scans:
+
+```
+## New people (not in memory)
+| Name | Frequency | Context |
+|------|-----------|---------|
+| Maya Rodriguez | 12 mentions | design, UI reviews |
+
+## New projects / topics
+| Name | Frequency | Context |
+|------|-----------|---------|
+| Starlight | 15 mentions | planning docs, product |
+
+## Suggested cleanup
+- **Horizon project** — No mentions in 30 days. Mark completed?
+```
+
 ## Integration with other skills
 
 | Skill / command | How memory fits |
@@ -335,9 +400,10 @@ When another skill surfaces a durable fact, **offer** to save it — don't add s
 
 ## Bootstrapping
 
+- **Fast path:** `/assistant:start` — scaffold files, bootstrap memory from the user's todo list.
 - **No profile yet?** Offer `/assistant:setup` — captures identity, voice, and key people into the profile.
-- **Empty memory?** Run `/assistant:setup` or seed `AGENTS.md` and `memory/glossary.md` from conversation. Setup promotes profile key people automatically.
-- **Fill gaps from activity:** `/assistant:update` decodes existing tasks against memory and asks about unknowns. Add `--all` to scan connected sources for people and projects worth remembering. Run `/assistant:update memory` for a memory-only pass including prune.
+- **Empty memory?** Run `/assistant:start`, `/assistant:setup`, or seed `AGENTS.md` and `memory/glossary.md` from conversation. Setup promotes profile key people automatically.
+- **Fill gaps from activity:** `/assistant:update` decodes existing tasks against memory, runs enrichment, and asks about unknowns. Add `--all` to scan connected sources for people and projects worth remembering. Run `/assistant:update memory` for a memory-only pass including prune.
 
 No connectors? Memory still works from conversation, pasted threads, and meeting notes.
 
