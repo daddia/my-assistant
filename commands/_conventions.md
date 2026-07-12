@@ -1,3 +1,8 @@
+---
+description: Command Conventions
+user-invocable: false
+---
+
 # Command Conventions
 
 Every slash command in this plugin follows a consistent structure so that the AI agent produces reliable, verifiable results. Commands are **thin entry points** — they parse `$ARGUMENTS`, run preflight checks, and route to the skill(s) that do the work. When authoring or updating a command file, include **all** of the sections below.
