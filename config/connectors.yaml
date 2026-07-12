@@ -97,6 +97,11 @@ categories:
     smoke:
       standalone_fixture: evals/connectors/fixtures/conn-tasks-paste.md
       golden: evals/connectors/golden/conn-tasks-paste.yaml
-      command: "/assistant:tasks review"
-      paste_prompt: "Review my tasks and reconcile with this pasted issue list."
-    live_optional: null
+      command: "/assistant:tasks sync"
+      paste_prompt: "Sync my tasks and reconcile with this pasted issue list."
+    live_optional:
+      prerequisite: "Task tracker MCP enabled (GitHub, Linear, Asana, Jira, monday.com, or ClickUp)"
+      steps:
+        - "Run /assistant:tasks sync with ~~tasks connected"
+        - "Confirm diff table proposals only; no remote issue close/create without approval"
+      draft_only: false

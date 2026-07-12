@@ -21,13 +21,18 @@ Connect any MCP server in the right category — skills never hard-code a produc
 
 ## MCP connectors (bundled suggestions)
 
-`.mcp.json` pre-configures default MCP servers for categories that are not email, calendar, or drive:
+`.mcp.json` pre-configures default MCP servers:
 
 | Category | Server | Endpoint |
 |----------|--------|----------|
 | Chat | Slack | `https://mcp.slack.com/mcp` |
 | Notes | Notion | `https://mcp.notion.com/mcp` |
 | Tasks | GitHub | `https://api.githubcopilot.com/mcp/` |
+| Tasks | Asana | `https://mcp.asana.com/v2/mcp` |
+| Tasks | Linear | `https://mcp.linear.app/mcp` |
+| Tasks | Atlassian (Jira) | `https://mcp.atlassian.com/v1/mcp` |
+| Tasks | monday.com | `https://mcp.monday.com/mcp` |
+| Tasks | ClickUp | `https://mcp.clickup.com/mcp` |
 
 For `~~email`, `~~calendar`, and `~~drive`, connect an MCP provider in your host's MCP settings, or paste content — the plugin does not bundle Google MCP endpoints.
 

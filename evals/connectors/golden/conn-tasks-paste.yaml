@@ -1,7 +1,7 @@
 fixture_id: conn-tasks-paste
 category: tasks
 placeholder: "~~tasks"
-smoke_command: "/assistant:tasks review"
+smoke_command: "/assistant:tasks sync"
 standalone_pass:
   must_surface:
     - task review summary

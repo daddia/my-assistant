@@ -36,7 +36,7 @@ For **each** of the six categories:
 | `~~drive` | `conn-drive-paste` | `/assistant:meeting prep` |
 | `~~chat` | `conn-chat-paste` | `/assistant:update` |
 | `~~notes` | `conn-notes-paste` | `/assistant:meeting follow-up` |
-| `~~tasks` | `conn-tasks-paste` | `/assistant:tasks review` |
+| `~~tasks` | `conn-tasks-paste` | `/assistant:tasks sync` |
 
 **Without a connector connected:** the skill must complete on paste and note the connector gap (e.g. "connect `~~email` for live triage") — this is **pass**, not fail.
 
