@@ -64,7 +64,7 @@ Every skill is **standalone-first**: paste content and it works; connect a tool 
 
 ## Visual dashboard
 
-[`skills/dashboard.html`](../../skills/dashboard.html) is a browser UI for your working-folder files — no slash command needed.
+[`dashboard.html`](../../skills/dashboard.html) in your working folder (copied at setup) is a browser UI for your working-folder files — or open `skills/dashboard.html` from the plugin and select the folder. No slash command needed.
 
 1. Open the file in **Chrome or Edge** (uses the File System Access API).
 2. **Tasks tab** — open `TASKS.md` for a kanban board or list view; drag tasks between Active / Waiting On / Someday / Done; auto-saves.
