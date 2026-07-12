@@ -12,6 +12,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+## [1.5.0] - 2026-07-12
+
+### Added
+
+- **`/assistant:start`** — lightweight tasks-and-memory bootstrap without a full profile interview (`commands/start.md` → `start`).
+- **Memory bootstrap in setup** — setup scaffolds `AGENTS.md`, `memory/glossary.md`, and related deliverables as first-class working-folder assets.
+- **Task-tracker MCP servers** — bundled Notion and GitHub task connectors with `~~tasks` sync documentation.
+
+### Changed
+
+- **AGENTS.md memory model** — standardised as the working-folder hot cache across skills, paths, dashboard, and health checks; deep memory stays in `memory/`.
+- **Six-status task workflow** — `TASKS.md` uses To do / In progress / In review / Done / Cancelled / Blocked.
+- **Update loops** — productivity-style task and memory sync guidance in `/assistant:update` and related skills.
+
+### Fixed
+
+- **Health-check golden fixtures** — corrected `summary.warn` tallies for scaffold fixtures after AGENTS.md checks were added.
+
 ## [1.4.0] - 2026-07-12
 
 ### Added

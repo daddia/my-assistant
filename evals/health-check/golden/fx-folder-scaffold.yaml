@@ -6,7 +6,7 @@ working_folder: evals/health-check/fixtures/fx-folder-scaffold/working
 profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
   pass: 2
-  warn: 4
+  warn: 7
   fail: 0
   skip: 3
 results:

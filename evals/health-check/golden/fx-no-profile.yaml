@@ -6,7 +6,7 @@ working_folder: evals/health-check/fixtures/fx-no-profile/working
 profile_path: null
 summary:
   pass: 1
-  warn: 4
+  warn: 7
   fail: 1
   skip: 13
 results:
