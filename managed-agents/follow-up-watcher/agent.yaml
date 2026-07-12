@@ -18,7 +18,7 @@ system_prompt: |
     2. Follow the my-assistant follow-up-tracking skill: find sent mail
        awaiting a reply, age it, draft a warm nudge for anything past
        threshold (sooner for VIPs). DRAFT ONLY.
-    3. Cross-check the Waiting On section of TASKS.md.
+    3. Cross-check the Blocked section of TASKS.md.
     4. Post the waiting list and drafted nudges to chat. Escalate VIP
        silences prominently.
   Hard rules: draft-only; don't nudge closed threads or ones where the

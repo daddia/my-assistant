@@ -23,7 +23,7 @@ Load VIP tiers from `{assistantPath}/policies/email.policy.md` (VIP silences esc
 
 ## Also feeds the task list
 
-Cross-reference the **Waiting On** section of `TASKS.md` (via `task-management`): things the user is blocked on that aren't email (a document from a provider, a callback). Surface those alongside the email follow-ups so "what am I waiting on" is one answer, not two.
+Cross-reference the **Blocked** section of `TASKS.md` (via `task-management`): things the user is blocked on that aren't email (a document from a provider, a callback). Surface those alongside the email follow-ups so "what am I waiting on" is one answer, not two.
 
 ## Output shape
 
@@ -37,7 +37,7 @@ Cold, nudge drafted (2)
 Still within window (1)
   • Supplier quote — sent yesterday. Give it till Thursday.
 
-Non-email (from TASKS.md → Waiting On)
+Non-email (from TASKS.md → Blocked)
   • Insurance document — chased 10 May, still outstanding.
 ```
 

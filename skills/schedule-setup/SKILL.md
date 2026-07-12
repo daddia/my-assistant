@@ -112,7 +112,7 @@ Daily 5:00pm · `job_id: follow-up-watcher`
 ```
 Check mail I sent that's awaiting a reply using /assistant:email review.
 For anything silent 3+ business days, draft a polite nudge (do not send)
-in my voice and list it. Cross-check the Waiting On section of TASKS.md.
+in my voice and list it. Cross-check the Blocked section of TASKS.md.
 ```
 Cron: `0 17 * * *`
 

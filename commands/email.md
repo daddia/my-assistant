@@ -28,7 +28,7 @@ Load the profile voice first. Work on a pasted thread, a named message, or a con
 
 Review sent mail awaiting a reply. Read and follow `skills/follow-up-tracking/SKILL.md`.
 
-Find open loops, age them against the profile's cold threshold, draft warm nudges for anything gone quiet (sooner for VIPs), and cross-check the Waiting On section of `TASKS.md`. Present the waiting list and drafts — never send.
+Find open loops, age them against the profile's cold threshold, draft warm nudges for anything gone quiet (sooner for VIPs), and cross-check the **Blocked** section of `TASKS.md`. Present the waiting list and drafts — never send.
 
 ## feedback
 

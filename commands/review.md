@@ -17,20 +17,20 @@ Parse `$ARGUMENTS` for the channel. Default to **email** when empty or unrecogni
 
 ## Plan
 
-- **email** — Run `skills/follow-up-tracking/SKILL.md`. Surface sent mail awaiting a reply; draft warm nudges for cold threads; cross-check `TASKS.md` Waiting On.
-- **chat** — Run `skills/follow-up-tracking/SKILL.md` for `~~chat`. Surface messages the user sent that expect a reply and have gone quiet; draft short nudges in the user's voice. Cross-check `TASKS.md` Waiting On. Never send.
+- **email** — Run `skills/follow-up-tracking/SKILL.md`. Surface sent mail awaiting a reply; draft warm nudges for cold threads; cross-check `TASKS.md` Blocked.
+- **chat** — Run `skills/follow-up-tracking/SKILL.md` for `~~chat`. Surface messages the user sent that expect a reply and have gone quiet; draft short nudges in the user's voice. Cross-check `TASKS.md` Blocked. Never send.
 
 ## email (default)
 
 Review email awaiting a response. Read and follow `skills/follow-up-tracking/SKILL.md`.
 
-Find open loops from `~~email` sent items (or a pasted list), age them against the profile's cold threshold, draft warm nudges for anything gone quiet (sooner for VIPs), and cross-check the Waiting On section of `TASKS.md`. Present the waiting list and drafts — never send.
+Find open loops from `~~email` sent items (or a pasted list), age them against the profile's cold threshold, draft warm nudges for anything gone quiet (sooner for VIPs), and cross-check the **Blocked** section of `TASKS.md`. Present the waiting list and drafts — never send.
 
 ## chat
 
 Review chat awaiting a response. Read and follow `skills/follow-up-tracking/SKILL.md`.
 
-Find messages the user sent in `~~chat` (Slack, Teams, etc.) that expect a reply and haven't had one — or work from a pasted list. Age them against the cold threshold; draft short, warm nudges in the user's voice. Cross-check `TASKS.md` Waiting On for non-chat blockers. Present the waiting list and drafts — never send.
+Find messages the user sent in `~~chat` (Slack, Teams, etc.) that expect a reply and haven't had one — or work from a pasted list. Age them against the cold threshold; draft short, warm nudges in the user's voice. Cross-check `TASKS.md` Blocked for non-chat blockers. Present the waiting list and drafts — never send.
 
 If no `~~chat` connector is available, ask for a pasted list of sent messages awaiting reply — paste-only is **pass**, not fail.
 

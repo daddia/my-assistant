@@ -25,8 +25,8 @@ Use the same `### Schedule health` block format as `daily-brief`, naming the wee
 ## What it does
 
 1. **Wins** — what closed this week. Pull from `TASKS.md` Done, and from the week's briefs/follow-ups if present.
-2. **Open loops** — Active tasks and `follow-up-tracking` items still outstanding, most-important first.
-3. **Stale** — tasks untouched 14+ days and follow-ups long cold. Present each for triage: still relevant? reschedule? move to Someday? drop?
+2. **Open loops** — To do, In progress, In review, and Blocked tasks plus `follow-up-tracking` items still outstanding, most-important first.
+3. **Stale** — tasks untouched 14+ days and follow-ups long cold. Present each for triage: still relevant? in progress? blocked? cancelled?
 4. **Memory prune** — surface stale or contradictory memory entries to confirm or remove.
 5. **Next week** — what to line up for Monday: upcoming meetings needing prep (hand to `meeting-prep`), deadlines from goals, top 3 priorities.
 
@@ -43,7 +43,7 @@ Open loops (4)
   • Acme contract — nudged twice, still silent (escalate?)
 
 Stale — triage these
-  • "Fix back fence" — untouched 21 days → Someday?
+  • "Fix back fence" — untouched 21 days → cancel or keep in To do?
   • "Call accountant" — no context, 16 days → still needed?
 
 Next week

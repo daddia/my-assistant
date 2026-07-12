@@ -17,7 +17,7 @@ Runs daily (default 5pm) to catch open loops before they go silent. Managed-agen
 
 1. Read the profile and policies (VIP tiers from `email.policy.md`, voice from profile, cold threshold — default 3 business days).
 2. Follow `skills/follow-up-tracking/SKILL.md`: find sent mail awaiting a reply, age it, and draft a warm nudge for anything past threshold (sooner for VIPs).
-3. Cross-check the **Waiting On** section of `TASKS.md`.
+3. Cross-check the **Blocked** section of `TASKS.md`.
 4. Emit the waiting list plus the drafted nudges. Escalate VIP silences to `~~chat` only if the user opted in.
 
 ## Guardrails

@@ -1,9 +1,13 @@
 # Tasks
 
-## Active
+## To do
 
-## Waiting On
+## In progress
 
-## Someday
+## In review
 
 ## Done
+
+## Cancelled
+
+## Blocked
