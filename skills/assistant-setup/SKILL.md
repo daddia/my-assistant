@@ -3,13 +3,13 @@ name: assistant-setup
 description: Onboarding for the assistant plugin. Activate when the user says
   "/assistant:setup", "set me up", "configure my assistant", "help me get started",
   or when no profile exists per rules/paths.md.
-  Writes the personalisation profile, policies, and install config that every other skill reads.
+  Writes profile, policies, memory (AGENTS.md hot cache + memory/ tree), and install config.
 user-invocable: false
 ---
 
 # Setup
 
-A 10-minute conversation that produces the user's **profile** and **policies** — what makes every other skill sound like them and respect their rules. Skipping this is the number-one cause of generic output, so lead with it.
+A 10-minute conversation that produces **profile**, **policies**, and **memory** — what makes every other skill sound like the user and decode their shorthand. Skipping this is the number-one cause of generic output, so lead with it.
 
 Invoked via `/assistant:setup` — the user-facing entry point is the command, not this skill file.
 
@@ -23,7 +23,7 @@ Before identity, voice, or starters, establish where the assistant lives:
 
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
-3. **Confirm the absolute path** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh` with the expanded absolute path (dirs only; no `--tasks` yet). Idempotent — safe if the folder already exists.
+3. **Confirm the absolute path** — create the directory tree (see **Working-folder deliverables** below). Idempotent — safe if the folder already exists.
 4. Record `assistantPath`, `configPath` (`{assistantPath}/config`), and `policiesPath` (`{assistantPath}/policies`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
@@ -33,8 +33,11 @@ All user-owned files go under `{assistantPath}`:
 | `{assistantPath}/config/profile.md` | Identity, voice, anti-style, working rules, goals |
 | `{assistantPath}/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
 | `{assistantPath}/config/my-assistant.json` | Machine-readable install config (selective) |
-| `{assistantPath}/AGENTS.md` | Working-folder orientation + memory hot cache (from `assets/AGENTS.template.md`) |
-| `{assistantPath}/TASKS.md`, `memory/`, `drafts/`, `scheduled/`, `review-queue/` | Working-folder artefacts — dirs from scaffold script; `TASKS.md` and `AGENTS.md` after profile write |
+| `{assistantPath}/AGENTS.md` | Memory hot cache — People, Terms, Projects, Preferences (~50–80 lines) |
+| `{assistantPath}/CLAUDE.md` | Compatibility shim: `@AGENTS.md` (Claude Code / Cowork auto-load) |
+| `{assistantPath}/memory/` | Deep memory — `glossary.md`, `people/`, `projects/`, `context/` |
+| `{assistantPath}/TASKS.md`, `drafts/`, `scheduled/`, `review-queue/` | Tasks, output, schedules, approvals |
+| `{assistantPath}/dashboard.html` | Visual task + memory editor (copied from plugin) |
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a loose `profile.md` at the workspace root unless the user explicitly asks to migrate an existing legacy copy (then move, don't duplicate).
 
@@ -67,7 +70,7 @@ When **no profile exists** (per `rules/paths.md`, or the user asks to "start fro
 | Option | What happens |
 |--------|----------------|
 | **Starter persona** (five choices) | Copy a vertical ICP profile (identity + voice only), optional quick customize, fill policies from master templates |
-| **Blank template (full interview)** | Full interview below — profile + policies |
+| **Blank template (full interview)** | Full interview below — profile + policies + memory |
 | **Quick-start (2 min)** | Identity + voice one-liner + autonomy tier; policy templates with placeholders |
 
 ### Starter selection table
@@ -91,9 +94,10 @@ Present all five starters with ICP one-liner from the manifest:
 5. Offer **Quick customize** (name, company, timezone) OR **Keep as-is for demo**.
 6. **Do not write** until the user confirms customize-or-keep (match interview pacing — no half-written profiles if they abort).
 7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/email.policy.md`, `{assistantPath}/policies/calendar.policy.md`, and `my-assistant.json`.
-8. For starter demo mode, pre-fill policies with sensible defaults for that persona during customize — still using the master `policies/` templates as the base shape.
-9. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath}`.
-10. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
+8. Run **Working-folder deliverables** and **Memory bootstrap** (below).
+9. For starter demo mode, pre-fill policies with sensible defaults for that persona during customize — still using the master `policies/` templates as the base shape.
+10. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath} · Memory: X people seeded`.
+11. Point to `examples/README.md` and `examples/workflows/setup-with-starter.md`; suggest thread `01-vip-board-update` for a first paste demo.
 
 If user picks **blank** or **quick-start**, continue with the paths below.
 
@@ -110,7 +114,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 **Profile (`profile.md`):**
 
-1. **Identity** — name, preferred name, role/company (skip for purely personal use), location, timezone, working hours, key people (partner, kids, co-founder, EA, top clients).
+1. **Identity** — name, preferred name, role/company (skip for purely personal use), location, timezone, working hours, **key people** (partner, kids, co-founder, EA, top clients). For each key person, ask **what you call them** in messages (nicknames matter for decoding).
 2. **Voice** — one-line description of their writing voice; locale/spelling; date/number formats; how they structure messages; default length; sign-offs by relationship (client vs colleague vs friend); openers. Then **show a two-sentence sample in that voice and ask if it sounds right.** Adjust until it does. Invite them to paste 2–3 real sent emails into `{assistantPath}/voice/` (or `{configPath}/voice/`).
 3. **Anti-style** — show the banned-tells list (openers, AI words, corporate-speak, em-dash/hedging/rule-of-three patterns). Ask which bother them most and what to add. Collect one "sounds like me" and one "sounds like AI" example.
 4. **Working rules & autonomy** — pick an autonomy tier (default **Tier 1 — Draft**; explain the four tiers from `rules/core-behaviour.md`); scope (personal only? work + personal? → maps to `scope` in `my-assistant.json`); money threshold; anything off-limits.
@@ -128,19 +132,84 @@ Fill the profile template (sections 1–5) and policy templates from their answe
 
 Then write or update `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`. On updates to an existing install, preserve `setupAt`, refresh `lastUpdated`, and add `policiesPath` if missing from older installs.
 
-Offer to scaffold `{assistantPath}/AGENTS.md` and `{assistantPath}/TASKS.md` when the folder has no `AGENTS.md` yet (`memory/` and other dirs already exist from Step 0).
+**Always** run **Working-folder deliverables** and **Memory bootstrap** after the initial profile write (starter, quick-start, or full interview). On profile **updates** only, offer to refresh memory seed from changed key people — don't overwrite populated tables without confirmation.
 
-### Working-folder scaffold
+## Working-folder deliverables
 
-When the user accepts (or the folder has no `AGENTS.md` yet):
+Create the full working folder on every **initial** setup. Prefer the scaffold script when available; otherwise create the same tree inline.
 
-1. Re-run `skills/assistant-setup/scripts/scaffold-working-folder.sh` with `{assistantPath}` and `--tasks` if `TASKS.md` is missing (dirs-only pass is fine when `TASKS.md` already exists).
-2. Read `skills/assistant-setup/assets/AGENTS.template.md`.
-3. Write `{assistantPath}/AGENTS.md`, substituting `[full name]` and `[preferred name]` from the profile identity section (use the legal name for both if preferred name was skipped).
+**Option A — scaffold script (maintainers / when shell is available):**
 
-Do **not** duplicate profile or policy content into `AGENTS.md` — orientation and memory hot cache only.
+```bash
+skills/assistant-setup/scripts/scaffold-working-folder.sh {assistantPath} --full --plugin-root {pluginRoot}
+```
 
-### Migrating legacy monolithic profiles
+`{pluginRoot}` is the plugin install directory (contains `skills/dashboard.html`). In Cowork/Cursor, resolve from the plugin path or `${CLAUDE_PLUGIN_ROOT}` when set.
+
+**Option B — inline (always valid):**
+
+1. Create directories: `config/`, `policies/`, `memory/people/`, `memory/projects/`, `memory/context/`, `drafts/`, `scheduled/`, `review-queue/`.
+2. Copy templates from `skills/assistant-setup/assets/` when files are missing:
+   - `TASKS.template.md` → `TASKS.md`
+   - `glossary.template.md` → `memory/glossary.md`
+   - `context-personal.template.md` → `memory/context/personal.md` when `scope` is `personal` or `both`; else `context-company.template.md` → `memory/context/company.md`
+   - `AGENTS.template.md` → `AGENTS.md` (then populate in bootstrap — don't leave placeholders)
+   - `CLAUDE.template.md` → `CLAUDE.md`
+3. Copy `skills/dashboard.html` → `{assistantPath}/dashboard.html` when missing. **Do not** use `open` or `xdg-open` — tell the user to open `dashboard.html` from their file browser (Chrome or Edge).
+
+Never skip `TASKS.md`, `memory/glossary.md`, `AGENTS.md`, `CLAUDE.md`, or `dashboard.html` on initial setup.
+
+## Memory bootstrap (first-class deliverable)
+
+After profile and policies are written, **populate memory** — don't leave empty placeholders.
+
+### 1. Seed from profile key people
+
+For each person in profile §1 **Key people**:
+
+1. Add a row to **`AGENTS.md` → People** table: `| **{nickname}** | {full name}, {relationship} |`
+2. Add a row to **`memory/glossary.md` → Nicknames → full names**
+3. Create **`memory/people/{slug}.md`** from `assets/people.template.md` (slug: lowercase, hyphens — e.g. `amelia-daddia.md`)
+
+Use the nickname the user actually uses ("Millie", not only "Amelia").
+
+### 2. Seed VIPs from email policy
+
+For each VIP in `policies/email.policy.md`, ensure they appear in **People** (and glossary nicknames if applicable). Merge with key people — no duplicate rows.
+
+### 3. Fill AGENTS.md header sections
+
+- **Me** — preferred name + one-line role/scope from profile §1 and §4. Link to `config/profile.md`.
+- **Preferences** — 2–3 bullets from voice/working rules (e.g. Australian English, sign-off style). **Do not** paste full anti-style or autonomy prose — link to profile and policies.
+- Leave **Terms** and **Projects** tables empty with header rows unless bootstrap finds entries.
+
+### 4. Optional — decode from tasks (productivity-style)
+
+Ask:
+
+> "Where do you keep todos? Paste a list, point at `TASKS.md`, or skip — I'll decode shorthand from whatever you share."
+
+For each task line, decode unknown people, projects, acronyms interactively (see `skills/memory-management/SKILL.md`). Add confirmed entries to `AGENTS.md`, `memory/glossary.md`, and `memory/people/` or `memory/projects/` as appropriate.
+
+### 5. Optional — comprehensive scan
+
+After task decode (or if skipped), offer:
+
+> "Want a deeper scan of chat, email, or docs for people and projects? Run `/assistant:update --all` when connectors are ready — or skip for now."
+
+Do not block setup on connectors.
+
+### 6. Report memory deliverables
+
+```
+Memory ready:
+- Hot cache: AGENTS.md ({N} people, {N} terms, {N} projects)
+- Deep memory: memory/glossary.md, memory/people/ ({N} files)
+- Compat: CLAUDE.md → @AGENTS.md
+- Dashboard: dashboard.html (open in Chrome/Edge, select this folder)
+```
+
+## Migrating legacy monolithic profiles
 
 If `profile.md` still contains VIP tiers, email policy, or calendar policy sections:
 
@@ -148,7 +217,12 @@ If `profile.md` still contains VIP tiers, email policy, or calendar policy secti
 2. Trim those sections from `profile.md`.
 3. Show the diff before writing.
 
-### Post-setup status check
+If an older install has **`CLAUDE.md` as the hot cache** (not a shim):
+
+1. Offer a one-time **migrate** — move hot-cache content into `AGENTS.md`, replace `CLAUDE.md` with `@AGENTS.md`.
+2. Show the diff before writing.
+
+## Post-setup status check
 
 After the **initial** profile write (starter, quick-start, or full interview — not when updating an existing profile), run the status check **subset**:
 
@@ -159,7 +233,7 @@ After the **initial** profile write (starter, quick-start, or full interview —
 
 Then summarise what's captured and point them at the wedge:
 
-> "You're set up at `{assistantPath}`. Open that folder in Cowork or Cursor so scheduled jobs and the dashboard find your files. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:health` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos and before/after drafts. Re-run `/assistant:setup` anytime to adjust."
+> "You're set up at `{assistantPath}`. Open that folder in Cowork or Cursor. Open `dashboard.html` in Chrome or Edge for tasks and memory. Try `/assistant:inbox triage` to sort your mail, or `/assistant:brief` for a morning briefing. Run `/assistant:health` anytime for a full install check. Browse [`examples/README.md`](../../examples/README.md) for persona demos. Re-run `/assistant:setup` anytime to adjust."
 
 ## Notes
 
@@ -167,6 +241,7 @@ Then summarise what's captured and point them at the wedge:
 - If a profile already exists, don't overwrite blindly — ask whether to update specific sections and show the diff.
 - If a legacy profile exists at `~/.claude/plugins/config/my-assistant/profile.md` but not under `{assistantPath}/config/`, offer a one-time **move** (not copy) after confirming the working folder.
 - Everything works standalone; connectors just make it sharper. Don't block setup on OAuth.
+- The working-folder **`AGENTS.md`** is user data — not the plugin repo's orchestration `AGENTS.md`.
 
 ## Approval frame
 
@@ -174,7 +249,7 @@ Follow [`rules/approval-frame.md`](../../rules/approval-frame.md) when proposing
 
 **Queue writing:**
 
-- The **initial full profile and policy write** during setup is **exempt** from `profile-diff` queue items — the user is actively answering interview questions.
-- **Post-setup profile change proposals** use queue type `profile-diff` via the standard diff flow in `pending-profile/`.
+- The **initial full profile, policy, and memory write** during setup is **exempt** from `profile-diff` / `memory-suggestion` queue items — the user is actively answering interview questions.
+- **Post-setup change proposals** use queue types `profile-diff` and `memory-suggestion` via the standard diff flow.
 
-Use the four-part frame when showing profile or policy diffs after setup.
+Use the four-part frame when showing profile, policy, or memory diffs after setup.

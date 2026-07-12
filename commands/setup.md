@@ -15,19 +15,23 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 - Run `skills/assistant-setup/SKILL.md`.
 - Establish working folder first, then offer 2-minute quick-start, a starter profile, or the full 10-minute interview.
+- Run **working-folder deliverables** and **memory bootstrap** after profile write — `AGENTS.md`, `memory/`, `TASKS.md`, `dashboard.html`, `CLAUDE.md` shim.
 - Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup status subset; do not overwrite an existing profile without confirmation.
 
 ## Commands
 
 Configure the assistant. Read and follow `skills/assistant-setup/SKILL.md`.
 
-Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup status subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health` for a full check.
+Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, memory (`AGENTS.md` + `memory/`), install config, and copy `dashboard.html`. Seed memory from key people; optional task decode bootstrap. Confirm each section as you go, run the post-setup status subset, then point the user at `dashboard.html`, `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health`.
 
 ## Verification
 
 - Re-read the written profile — confirm identity, voice, and autonomy tier are complete.
 - Re-read `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` — confirm VIP tiers, email rules, and calendar rules are captured.
 - Confirm `my-assistant.json` has `assistantPath`, `configPath`, `policiesPath`, `scope`, `setupAt`, and `lastUpdated`.
+- Confirm `AGENTS.md` has Me/People sections seeded (or placeholders replaced).
+- Confirm `memory/glossary.md` and `memory/people/` exist.
+- Confirm `CLAUDE.md` contains `@AGENTS.md` and `dashboard.html` is in the working folder.
 - Confirm files were written under the working folder, not inside the plugin directory.
 - Surface write failures (permissions, read-only path) clearly.
 
@@ -44,7 +48,7 @@ Present a concise result block:
 
 ## Next Steps
 
-- Open `{assistantPath}` in Cowork or Cursor so hooks and schedules resolve paths.
+- Open `{assistantPath}/dashboard.html` in Chrome or Edge for tasks and memory.
 - Run `/assistant:health` for a full install status check.
 - Run `/assistant:inbox triage` or paste a demo thread from `examples/`.
 - Run `/assistant:brief` for a morning briefing.
