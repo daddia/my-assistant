@@ -42,5 +42,5 @@ Present a concise result block:
 ## Next Steps
 
 - Confirm heartbeats appear in `scheduled/{job_id}.yaml` after the first run.
-- Run `/assistant:status` to verify schedule health.
+- Run `/assistant:health` to verify schedule health.
 - See `managed-agents/` for always-on cookbooks when local scheduling is unreliable.

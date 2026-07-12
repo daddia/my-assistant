@@ -1,9 +1,9 @@
 # Status check fixtures
 
-Synthetic install states and golden expected reports for `/assistant:status` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
+Synthetic install states and golden expected reports for `/assistant:health` structural regression. Maintainer design: [`.agency/work/onboarding-polish/`](../../.agency/work/onboarding-polish/).
 
-**Template:** [`commands/status.md.tmpl`](../../commands/status.md.tmpl) (checklist + report schema)  
-**Command:** [`commands/status.md`](../../commands/status.md)
+**Template:** [`commands/health.md.tmpl`](../../commands/health.md.tmpl) (checklist + report schema)
+**Command:** [`commands/health.md`](../../commands/health.md)
 
 ## Fixture matrix
 
@@ -23,7 +23,7 @@ Golden reports are **structural** (check IDs + statuses + fix_ref), not LLM-judg
 
 1. Copy a fixture profile to your test profile path (or paste in chat).
 2. Point the working folder at the fixture `working/` subdirectory.
-3. Run `/assistant:status` and compare check statuses to the matching golden file in `golden/`.
+3. Run `/assistant:health` and compare check statuses to the matching golden file in `golden/`.
 
 Post-setup subset: run `/assistant:setup` quick-start against `fx-quick-start-profile` — confirm the **Setup status** block appears before the inbox/brief wedge.
 
@@ -37,4 +37,4 @@ Structural validation runs in `./evals/scripts/validate-fixtures.sh` (CI on ever
 
 ## Checklist versioning
 
-Status check is stateless — new checks ship with plugin updates. Re-run `/assistant:status` after `/plugin update` to pick up new checklist rows. No migration of saved reports is required.
+Status check is stateless — new checks ship with plugin updates. Re-run `/assistant:health` after `/plugin update` to pick up new checklist rows. No migration of saved reports is required.

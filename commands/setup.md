@@ -21,7 +21,7 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 Configure the assistant. Read and follow `skills/assistant-setup/SKILL.md`.
 
-Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup status subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:status` for a full check.
+Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup status subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:health` for a full check.
 
 ## Verification
 
@@ -45,7 +45,7 @@ Present a concise result block:
 ## Next Steps
 
 - Open `{assistantPath}` in Cowork or Cursor so hooks and schedules resolve paths.
-- Run `/assistant:status` for a full install status check.
+- Run `/assistant:health` for a full install status check.
 - Run `/assistant:inbox triage` or paste a demo thread from `examples/`.
 - Run `/assistant:brief` for a morning briefing.
 - Connect tools via Cowork → Settings → Connectors when ready.

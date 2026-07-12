@@ -67,7 +67,7 @@ Suggest logical follow-ups:
 
 - After inbox triage → review drafts, run `/assistant:email feedback` on sent replies.
 - After brief or prep → act on flagged follow-ups or calendar conflicts.
-- After setup → `/assistant:status` for a full status check.
+- After setup → `/assistant:health` for a full health check.
 - After schedule setup → confirm heartbeats in `scheduled/{job_id}.yaml`.
 
 ## File Naming

@@ -58,7 +58,7 @@ No connectors yet? Paste an email thread or your calendar — every skill works 
 ## Step 4 — Run status check
 
 ```
-/assistant:status
+/assistant:health
 ```
 
 A scannable status report checks your profile, working folder, scheduled jobs (if configured), connectors (advisory), and platform fit. Each row is **pass**, **warn**, **fail**, or **skip** with a concrete fix — usually `/assistant:setup`, `/assistant:schedules`, or a guide chapter.

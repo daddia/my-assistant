@@ -1,6 +1,6 @@
 # Status checklist and report schema
 
-Canonical checklist and report schema for `/assistant:status`. Loaded by `commands/status.md`; validated by `evals/scripts/validate-fixtures.sh`.
+Canonical checklist and report schema for `/assistant:health`. Loaded by `commands/health.md`; validated by `evals/scripts/validate-fixtures.sh`.
 
 ## Checklist
 
@@ -218,7 +218,7 @@ checks:
 ```yaml
 # Status report schema — machine-readable shape for install status reports.
 #
-# Used by commands/status.md and evals/health-check/golden/*.yaml fixtures.
+# Used by commands/health.md and evals/health-check/golden/*.yaml fixtures.
 # Optional user artefact: {working-folder}/status-report-YYYY-MM-DD.md (chat render only unless --save).
 #
 # Validation: evals/scripts/validate-fixtures.sh compares golden reports to this contract.

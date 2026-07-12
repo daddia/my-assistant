@@ -1,10 +1,10 @@
 ---
-description: Show install and setup status — profile, working folder, schedules, connectors (advisory), and platform fit. Prints a scannable pass / warn / fail / skip report with concrete fix steps.
+description: Diagnose install and setup health — profile, working folder, schedules, connectors (advisory), and platform fit. Prints a scannable pass / warn / fail / skip report with concrete fix steps.
 ---
 
-# Assistant Status (Doctor)
+# Assistant health check
 
-Structured status check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — proposes fixes and routes to commands or guide chapters; never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
+Structured health check for plugin install, profile, working folder, scheduled jobs, connectors (advisory), and platform fit. **Read-only** — proposes fixes and routes to commands or guide chapters; never sends, books, schedules, rewrites the profile, or writes inside the plugin directory.
 
 The only optional write: `status-report-YYYY-MM-DD.md` in the working folder when the user passes `--save` and the folder is writable.
 
@@ -12,18 +12,18 @@ The only optional write: `status-report-YYYY-MM-DD.md` in the working folder whe
 
 - **Profile & paths** — Resolve per `rules/paths.md`. Missing profile is a check result, not a blocker.
 - **Working folder** — Resolve the working folder for `TASKS.md`, `scheduled/`, and optional report output. Note if read-only.
-- **Connectors** — Advisory scan of available `~~category` connectors; status check does not require OAuth.
+- **Connectors** — Advisory scan of available `~~category` connectors; health check does not require OAuth.
 - **Autonomy tier** — Read from profile if present; include in report context only.
 
 ## Plan
 
 - Parse `$ARGUMENTS`: `--save` writes `status-report-YYYY-MM-DD.md` to the working folder when writable; default is chat-only.
-- Load checklist and report schema from `commands/status.md.tmpl`, run all checks, render pass/warn/fail/skip report with fix links.
+- Load checklist and report schema from `commands/health.md.tmpl`, run all checks, render pass/warn/fail/skip report with fix links.
 - Read-only — never mutate profile, plugin files, or working-folder state.
 
 ## Commands
 
-Run the status check. Activate on `/assistant:status`, "run status check", "status check", "is my assistant set up correctly", or "diagnose my install".
+Run the health check. Activate on `/assistant:health`, "run health check", "health check", "is my assistant set up correctly", or "diagnose my install".
 
 Parse `$ARGUMENTS`:
 
@@ -33,9 +33,9 @@ Parse `$ARGUMENTS`:
 
 ### Load the checklist
 
-Read `commands/status.md.tmpl` from the plugin directory. Parse the **Checklist** and **Report schema** YAML blocks. If missing, stop with an honest error:
+Read `commands/health.md.tmpl` from the plugin directory. Parse the **Checklist** and **Report schema** YAML blocks. If missing, stop with an honest error:
 
-> Plugin install incomplete — reinstall from the marketplace. The status template (`commands/status.md.tmpl`) is missing.
+> Plugin install incomplete — reinstall from the marketplace. The health template (`commands/health.md.tmpl`) is missing.
 
 Run checks in **category order** from the checklist. Each result maps to one row: `check_id`, `category`, `status` (`pass` | `warn` | `fail` | `skip`), `message`, optional `detail`, and `fix_ref` from the checklist when status is not `pass`.
 
@@ -95,7 +95,7 @@ When `unknown`, platform-specific checks **skip** with a message to re-run after
 | `plugin-commands-present` | `commands/` contains ≥10 `.md` command files | **fail** |
 | `plugin-hooks-session-start` | `hooks/hooks.json` defines `SessionStart` | **warn** |
 | `plugin-rules-present` | `rules/core-behaviour.md`, `rules/untrusted-content.md`, `rules/file-safety.md` exist | **fail** |
-| `plugin-health-checklist` | `commands/status.md.tmpl` exists with checklist and report schema | **fail** |
+| `plugin-health-checklist` | `commands/health.md.tmpl` exists with checklist and report schema | **fail** |
 
 #### Profile
 
@@ -198,7 +198,7 @@ When invoked from `/assistant:setup` after initial profile write, run **only** p
 
 ### Build and render the report
 
-Aggregate results into `StatusReport` matching the **Report schema** block in `commands/status.md.tmpl`:
+Aggregate results into `StatusReport` matching the **Report schema** block in `commands/health.md.tmpl`:
 
 ```yaml
 version: "0.1"
@@ -214,9 +214,9 @@ results: [ ... ]
 
 Use the four-part frame from `rules/approval-frame.md`:
 
-**What I found** — summary line: `Status check: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
+**What I found** — summary line: `Health check: {pass} pass · {warn} warn · {fail} fail · {skip} skip` plus profile and working-folder paths.
 
-**What I drafted** — "Nothing yet" (status check does not create drafts).
+**What I drafted** — "Nothing yet" (health check does not create drafts).
 
 **What I recommend** — Top 1–3 fixes ranked by severity (fails first, then warns).
 
@@ -264,7 +264,7 @@ Present a concise result block:
 
 ```
 ## Result
-- **Action**: status check
+- **Action**: health check
 - **Status**: success | partial | failed
 - **Details**: pass/warn/fail/skip counts, report path if --save
 ```
@@ -272,5 +272,5 @@ Present a concise result block:
 ## Next Steps
 
 - Fix any **fail** rows via `/assistant:setup`, `/assistant:schedules`, or the linked guide chapter.
-- Re-run `/assistant:status` after plugin updates or connector changes.
-- Run `/assistant:status --save` to keep a dated report in the working folder.
+- Re-run `/assistant:health` after plugin updates or connector changes.
+- Run `/assistant:health --save` to keep a dated report in the working folder.

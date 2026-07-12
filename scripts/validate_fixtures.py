@@ -78,7 +78,7 @@ REQUIRED_FILES = [
     EVALS_DIR / "connectors/manifest.yaml",
     ROOT / "config/starter-profiles/manifest.yaml",
     ROOT / "examples/before-after/manifest.yaml",
-    ROOT / "commands/status.md.tmpl",
+    ROOT / "commands/health.md.tmpl",
     EVALS_DIR / "health-check/manifest.yaml",
 ]
 
@@ -138,7 +138,7 @@ def load_yaml(path: Path) -> dict:
 
 
 def load_status_checklist() -> dict:
-    tmpl_path = ROOT / "commands/status.md.tmpl"
+    tmpl_path = ROOT / "commands/health.md.tmpl"
     if not tmpl_path.is_file():
         return {}
     text = tmpl_path.read_text(encoding="utf-8")
@@ -1121,7 +1121,7 @@ def validate_health_check(errors: list[str]) -> tuple[list, set[str]]:
             if not entry.get("fix_ref"):
                 errors.append(f"status.md.tmpl checklist: check '{cid}' missing fix_ref")
     else:
-        errors.append("missing commands/status.md.tmpl checklist")
+        errors.append("missing commands/health.md.tmpl checklist")
 
     golden_check_ids: set[str] = set()
     health_check_fixtures: list = []
