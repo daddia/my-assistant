@@ -39,12 +39,12 @@ results:
     category: working-folder
     status: warn
     message: TASKS.md not found — suggest scaffold
-    fix_ref: skills/setup/scripts/scaffold-working-folder.sh
+    fix_ref: skills/assistant-setup/scripts/scaffold-working-folder.sh
   - check_id: memory-scaffold
     category: working-folder
     status: warn
     message: memory/ directory not found
-    fix_ref: skills/setup/scripts/scaffold-working-folder.sh
+    fix_ref: skills/assistant-setup/scripts/scaffold-working-folder.sh
   - check_id: claude-md-present
     category: working-folder
     status: warn

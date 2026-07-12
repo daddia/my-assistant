@@ -24,7 +24,7 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
 
 Policy **templates** ship in the plugin's `policies/` directory (repo root). Setup copies and fills them into the user's `{assistantPath}/policies/`.
 
-**Directory scaffold:** `skills/setup/scripts/scaffold-working-folder.sh` creates the canonical tree (`config/`, `policies/`, `memory/`, `drafts/`, `scheduled/`, `review-queue/`). Pass `--tasks` to copy `skills/setup/assets/TASKS.template.md` when `TASKS.md` is missing. The script does not write profile, policies, or `my-assistant.json`.
+**Directory scaffold:** `skills/assistant-setup/scripts/scaffold-working-folder.sh` creates the canonical tree (`config/`, `policies/`, `memory/`, `drafts/`, `scheduled/`, `review-queue/`). Pass `--tasks` to copy `skills/assistant-setup/assets/TASKS.template.md` when `TASKS.md` is missing. The script does not write profile, policies, or `my-assistant.json`.
 
 The plugin directory (`skills/`, `commands/`, …) is **read-only**. User data lives under `{assistantPath}` only.
 
@@ -81,14 +81,14 @@ If VIP tiers, email policy, or calendar policy still live inside `profile.md`, s
 
 ## Setup writes once
 
-`/assistant:setup` (`skills/setup/SKILL.md`):
+`/assistant:setup` (`skills/assistant-setup/SKILL.md`):
 
 1. Ask for **working folder** — suggest `~/MyAssistant`, accept an alternate path.
-2. Run `skills/setup/scripts/scaffold-working-folder.sh` with the confirmed absolute path (directories only).
+2. Run `skills/assistant-setup/scripts/scaffold-working-folder.sh` with the confirmed absolute path (directories only).
 3. Write `{assistantPath}/config/profile.md` (from template or starter — identity, voice, rules, goals only).
 4. Write `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` from the plugin's master templates in `policies/`.
 5. Write `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`.
-6. Offer to scaffold `AGENTS.md` (from `skills/setup/assets/AGENTS.template.md`) and `TASKS.md` (re-run scaffold script with `--tasks` when accepted).
+6. Offer to scaffold `AGENTS.md` (from `skills/assistant-setup/assets/AGENTS.template.md`) and `TASKS.md` (re-run scaffold script with `--tasks` when accepted).
 
 **Do not** also write `~/.claude/plugins/config/my-assistant/profile.md` or a second workspace copy. One assistant path, one profile, one policies directory.
 

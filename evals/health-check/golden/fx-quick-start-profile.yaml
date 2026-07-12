@@ -62,4 +62,4 @@ results:
     category: working-folder
     status: warn
     message: memory/ directory not found
-    fix_ref: skills/setup/scripts/scaffold-working-folder.sh
+    fix_ref: skills/assistant-setup/scripts/scaffold-working-folder.sh

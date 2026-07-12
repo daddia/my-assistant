@@ -13,13 +13,13 @@ description: Configure the assistant — a 10-minute interview that writes your 
 
 ## Plan
 
-- Run `skills/setup/SKILL.md`.
+- Run `skills/assistant-setup/SKILL.md`.
 - Establish working folder first, then offer 2-minute quick-start, a starter profile, or the full 10-minute interview.
 - Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/*.policy.md`, and `{assistantPath}/config/my-assistant.json` once (no duplicate legacy copies). Run post-setup status subset; do not overwrite an existing profile without confirmation.
 
 ## Commands
 
-Configure the assistant. Read and follow `skills/setup/SKILL.md`.
+Configure the assistant. Read and follow `skills/assistant-setup/SKILL.md`.
 
 Offer a 2-minute quick-start or the full 10-minute interview. Confirm the working folder (`~/MyAssistant` by default), then write profile, policies, and install config under `{assistantPath}/config/`. Confirm each section as you go, run the post-setup status subset, then point the user at `/assistant:inbox triage`, `/assistant:brief`, and `/assistant:status` for a full check.
 

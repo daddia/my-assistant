@@ -1,5 +1,5 @@
 ---
-name: setup
+name: assistant-setup
 description: Onboarding for the assistant plugin. Activate when the user says
   "/assistant:setup", "set me up", "configure my assistant", "help me get started",
   or when no profile exists per rules/paths.md.
@@ -23,7 +23,7 @@ Before identity, voice, or starters, establish where the assistant lives:
 
 1. **Suggest the default:** `~/MyAssistant` (expand to the user's home directory in paths you write).
 2. **Ask:** "Use `~/MyAssistant`, or a different folder?"
-3. **Confirm the absolute path** — run `skills/setup/scripts/scaffold-working-folder.sh` with the expanded absolute path (dirs only; no `--tasks` yet). Idempotent — safe if the folder already exists.
+3. **Confirm the absolute path** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh` with the expanded absolute path (dirs only; no `--tasks` yet). Idempotent — safe if the folder already exists.
 4. Record `assistantPath`, `configPath` (`{assistantPath}/config`), and `policiesPath` (`{assistantPath}/policies`) for all writes in this session.
 
 All user-owned files go under `{assistantPath}`:
@@ -134,8 +134,8 @@ Offer to scaffold `{assistantPath}/AGENTS.md` and `{assistantPath}/TASKS.md` whe
 
 When the user accepts (or the folder has no `AGENTS.md` yet):
 
-1. Re-run `skills/setup/scripts/scaffold-working-folder.sh` with `{assistantPath}` and `--tasks` if `TASKS.md` is missing (dirs-only pass is fine when `TASKS.md` already exists).
-2. Read `skills/setup/assets/AGENTS.template.md`.
+1. Re-run `skills/assistant-setup/scripts/scaffold-working-folder.sh` with `{assistantPath}` and `--tasks` if `TASKS.md` is missing (dirs-only pass is fine when `TASKS.md` already exists).
+2. Read `skills/assistant-setup/assets/AGENTS.template.md`.
 3. Write `{assistantPath}/AGENTS.md`, substituting `[full name]` and `[preferred name]` from the profile identity section (use the legal name for both if preferred name was skipped).
 
 Do **not** duplicate profile or policy content into `AGENTS.md` — orientation and memory hot cache only.

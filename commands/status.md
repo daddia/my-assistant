@@ -146,8 +146,8 @@ If `working-folder-identified` **warns** (ambiguous), folder file checks may **s
 | check_id | Pass when | Fail / warn |
 |----------|-----------|-------------|
 | `working-folder-identified` | Path resolved and user context clear | **warn** if defaulted to cwd without confirmation |
-| `tasks-md-present` | `TASKS.md` exists and is readable | **warn** — run `skills/setup/scripts/scaffold-working-folder.sh {assistantPath} --tasks`, or `/assistant:tasks add` |
-| `memory-scaffold` | `memory/` directory exists | **warn** — run `skills/setup/scripts/scaffold-working-folder.sh {assistantPath}` (dirs only) |
+| `tasks-md-present` | `TASKS.md` exists and is readable | **warn** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh {assistantPath} --tasks`, or `/assistant:tasks add` |
+| `memory-scaffold` | `memory/` directory exists | **warn** — run `skills/assistant-setup/scripts/scaffold-working-folder.sh {assistantPath}` (dirs only) |
 | `claude-md-present` | `CLAUDE.md` exists in working folder | **warn** |
 
 #### Always-on
