@@ -121,7 +121,7 @@ Cron: `0 17 * * *`
 Friday 4:00pm · `job_id: weekly-review` · no managed cookbook — `cloud-code` fallback
 
 ```
-Run /assistant:review: summarise the week — what closed, open loops,
+Run /assistant:report: summarise the week — what closed, open loops,
 stale tasks (untouched 14+ days), and what to line up for Monday. Update
 TASKS.md and prune stale memory with my confirmation. Save as
 review-YYYY-MM-DD.md. Keep it scannable.

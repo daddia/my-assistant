@@ -1,11 +1,11 @@
 ---
-description: Weekly review — wins, open loops, stale tasks, and what to line up for
+description: Weekly report — wins, open loops, stale tasks, and what to line up for
   Monday. Prunes tasks and memory with your confirmation.
 ---
 
 ## Preflight
 
-- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the review still works from the working folder.
+- **Profile & paths** — Resolve per `rules/paths.md`. If missing, note it and offer `/assistant:setup`; the report still works from the working folder.
 - **Working folder** — Confirm `TASKS.md`, `memory/`, `CLAUDE.md`, and `review-YYYY-MM-DD.md` locations. Note if the folder is read-only.
 - **Connectors** — Optional; note available `~~email`, `~~calendar`, `~~chat` for open-loop context.
 - **Autonomy tier** — Read the configured tier from the profile (default: Tier 1 — Draft). Update tasks and memory only with confirmation.
@@ -18,7 +18,7 @@ description: Weekly review — wins, open loops, stale tasks, and what to line u
 
 ## Commands
 
-Run the weekly review. Read and follow `skills/weekly-review/SKILL.md`.
+Run the weekly report. Read and follow `skills/weekly-review/SKILL.md`.
 
 Read the profile first for goals and priorities. Cover wins / open loops / stale (triage interactively) / memory prune / next week. Update `TASKS.md` and `memory/` only with confirmation. Save output to `review-YYYY-MM-DD.md`.
 
@@ -34,13 +34,13 @@ Present a concise result block:
 
 ```
 ## Result
-- **Action**: weekly review
+- **Action**: weekly report
 - **Status**: success | partial | failed
-- **Details**: review path, tasks triaged, memory entries pruned
+- **Details**: report path, tasks triaged, memory entries pruned
 ```
 
 ## Next Steps
 
-- Run `/assistant:schedules` to confirm weekly review is on the calendar.
+- Run `/assistant:schedules` to confirm weekly report is on the calendar.
 - Run `/assistant:update` to sync any remaining gaps.
 - Run `/assistant:brief` Monday morning with next-week priorities in mind.

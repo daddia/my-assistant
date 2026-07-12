@@ -23,7 +23,7 @@ No connectors required. Eval maintainers: see [`evals/demo/first-run-script.md`]
 | Configure it to you (10-min interview) | `/assistant:setup` |
 | Morning briefing | `/assistant:brief` |
 | Bring the assistant up to date (`tasks` · `memory` · `--all`) | `/assistant:update` |
-| Weekly review | `/assistant:review` |
+| Weekly report | `/assistant:report` |
 | Set up scheduled tasks | `/assistant:schedules` |
 
 ### Domain commands (noun + verb)

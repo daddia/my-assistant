@@ -88,4 +88,4 @@ Present a concise result block:
 - Run `/assistant:tasks review` for interactive task triage only.
 - Run `/assistant:email review` for follow-ups only.
 - Run `/assistant:update memory` for a memory-only pass (includes prune).
-- Run `/assistant:review` for a full weekly pass.
+- Run `/assistant:report` for a full weekly pass.

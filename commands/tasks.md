@@ -56,5 +56,5 @@ Present a concise result block:
 ## Next Steps
 
 - Run `/assistant:update` for a full catch-up (tasks, memory, follow-ups).
-- Run `/assistant:review` for a weekly task prune.
+- Run `/assistant:report` for a weekly task prune.
 - Open `skills/dashboard.html` for a visual task board.

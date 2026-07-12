@@ -33,7 +33,7 @@ No coding required.
 | `/assistant:setup` | First run, or to update who you are and how you write |
 | `/assistant:brief` | Morning briefing |
 | `/assistant:update` | Bring the assistant up to date (default: tasks + memory + follow-ups; `tasks` · `memory` scopes; `--all` deep-scans connectors) |
-| `/assistant:review` | Weekly review |
+| `/assistant:report` | Weekly report |
 | `/assistant:schedules` | Set up recurring scheduled tasks |
 
 ### Domain commands (verb arguments)

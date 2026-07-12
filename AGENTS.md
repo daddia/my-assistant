@@ -35,7 +35,7 @@ Everything about the user — identity, voice, VIP tiers, email and calendar pol
 | Wants a morning briefing | `skills/daily-brief/SKILL.md` | `/assistant:brief` |
 | Talks about tasks / todos / commitments | `skills/task-management/SKILL.md` | `/assistant:tasks add` · `review` · `sync` |
 | Introduces a person, project, or shorthand | `skills/memory-management/SKILL.md` | chat, or `/assistant:update memory` |
-| Wants a weekly review | `skills/weekly-review/SKILL.md` | `/assistant:review` |
+| Wants a weekly report | `skills/weekly-review/SKILL.md` | `/assistant:report` |
 | Wants to set up scheduled tasks / always-on reliability | `skills/schedule-setup/SKILL.md` | `/assistant:schedules` |
 | Wants an install / setup health check | `commands/health.md` | `/assistant:health` |
 | Wants tasks/memory synced from activity | `skills/task-management/SKILL.md` + `skills/follow-up-tracking/SKILL.md` + `skills/memory-management/SKILL.md` | `/assistant:update` |
@@ -57,7 +57,7 @@ Commands use **domain nouns + verb arguments** for multi-job domains, and **work
 | `/assistant:brief` | — | `daily-brief` (+ `calendar-scheduling`, `follow-up-tracking`) |
 | `/assistant:meeting` | `prep` · `follow-up` (default) | `meeting-prep` · `meeting-follow-up` |
 | `/assistant:update` | `tasks` · `memory` scopes · `--all` flag | `task-management` + `follow-up-tracking` + `memory-management` |
-| `/assistant:review` | — | `weekly-review` (+ `task-management`, `memory-management`) |
+| `/assistant:report` | — | `weekly-review` (+ `task-management`, `memory-management`) |
 | `/assistant:schedules` | — | `schedule-setup` |
 | `/assistant:health` | `--save` flag | — (self-contained) |
 

@@ -11,7 +11,7 @@ My Assistant ships as one plugin with skills in `skills/`, commands in `commands
 | `/assistant:setup` | Onboarding interview → writes your profile |
 | `/assistant:brief` | Morning briefing |
 | `/assistant:update` | Bring the assistant up to date (`tasks` · `memory` scopes; `--all` deep-scans connectors) |
-| `/assistant:review` | Weekly review |
+| `/assistant:report` | Weekly report |
 | `/assistant:schedules` | Set up scheduled tasks |
 | `/assistant:health` | Install and setup health check (`--save` writes report to working folder) |
 

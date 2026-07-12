@@ -89,7 +89,7 @@ jobs:
   - job_id: weekly-review
     title: "Weekly review"
     skill: weekly-review
-    command: "/assistant:review"
+    command: "/assistant:report"
     cron: "0 16 * * 5"
     packaged_prompt_ref: skills/schedule-setup/SKILL.md#weekly-review
     surfaces:
