@@ -38,6 +38,10 @@ Read the profile first. Work on the connected mailbox or pasted threads. Always 
 ## Verification
 
 - Re-read drafts under `drafts/`, queue items in `review-queue/index.yaml`, and any triage summary — confirm they match the plan.
+- Confirm report uses the MA12 section order: VIP (ranked) → Needs-reply → FYI → Marketing → Ambiguous → Task capture proposals.
+- When FYI or marketing count ≥ 3, confirm batch digest tables (not long bullet lists).
+- On scheduled sweep: confirm `sweep-YYYY-MM-DD-{slot}.md` exists and `scheduled/inbox-sweep.yaml` has `artifact_present: true`.
+- Confirm ambiguous threads have no drafts or archive proposals; injection instructions surfaced, not obeyed.
 - Confirm nothing was sent, booked, or deleted without explicit approval.
 - Surface connector errors, partial mailbox data, or autonomy-tier blocks clearly.
 
