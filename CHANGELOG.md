@@ -8,9 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **`scripts/update_ledger.py`** — deterministic schedule heartbeat writer; skills invoke it instead of hand-editing YAML.
+- **`policies/actions.policy.md`** — template for non-reply actions (calendar holds, tasks, forms) with detect→confirm→codify loop.
+- **Inbox action taxonomy** — per-thread action types, two-pass scan (delta + lingerers), and action proposals in triage.
+- **Health checks** — `policies-actions-present` and `schedule-ledger-out-of-sync`.
+
 ### Changed
 
+- **Schedule split** — `inbox-triage-am` (08:00 triage with drafts) and `inbox-sweep` (12:00/16:00 light sweep); triage still writes `sweep-*.md` for morning brief handoff.
+- **Connector pre-check** — email-drafting and inbox-triage surface permission failures; fallback markdown labelled explicitly; `partial` ledger status when degraded.
+- **Packaged prompts** — schedule-setup prompts include `update_ledger.py` invocation and completion self-check.
+
 ### Fixed
+
+- **Ledger write-back** — `last_run_at: null` bug addressed via deterministic script + artefact-derived fallback in health/brief.
 
 ## [1.6.0] - 2026-07-12
 

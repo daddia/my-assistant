@@ -17,6 +17,7 @@ After `/assistant:setup`, the user owns one directory (default `~/MyAssistant`):
   policies/
     email.policy.md              # VIP tiers, reply threshold, auto-archive, labels
     calendar.policy.md           # scheduling, buffers, focus-time defence
+    actions.policy.md            # non-reply actions: calendar holds, tasks, forms
   TASKS.md
   memory/
     glossary.md                  # full decoder ring
@@ -70,7 +71,7 @@ When found, use `assistantPath`, `configPath`, and `policiesPath` from the file.
 
 ### 3. Policies
 
-When `{policiesPath}/` exists (or `{assistantPath}/policies/` when `policiesPath` is absent from older installs), read all `*.policy.md` files (at minimum `email.policy.md` and `calendar.policy.md`). Skills load policies alongside the profile.
+When `{policiesPath}/` exists (or `{assistantPath}/policies/` when `policiesPath` is absent from older installs), read all `*.policy.md` files (at minimum `email.policy.md`, `calendar.policy.md`, and `actions.policy.md` when present). Skills load policies alongside the profile.
 
 **Legacy installs:** If policies live at `{configPath}/policies/` (older setup), still read them — but setup and health check will recommend moving to `{assistantPath}/policies/`.
 
@@ -95,7 +96,7 @@ If VIP tiers, email policy, or calendar policy still live inside `profile.md`, s
 1. Ask for **working folder** — suggest `~/MyAssistant`, accept an alternate path.
 2. Create the **full working-folder tree** — memory subdirs, templates, `AGENTS.md`, `CLAUDE.md` shim, `TASKS.md`, `dashboard.html`.
 3. Write `{assistantPath}/config/profile.md` (from template or starter — identity, voice, rules, goals only).
-4. Write `{assistantPath}/policies/email.policy.md` and `calendar.policy.md` from the plugin's master templates in `policies/`.
+4. Write `{assistantPath}/policies/email.policy.md`, `calendar.policy.md`, and `actions.policy.md` from the plugin's master templates in `policies/`.
 5. Write `{assistantPath}/config/my-assistant.json` with `assistantPath`, `configPath`, `policiesPath`, `scope`, `platform`, `setupAt`, and `lastUpdated`.
 6. **Bootstrap memory** — seed `AGENTS.md` and `memory/people/` from profile key people and VIPs; optional task decode pass.
 

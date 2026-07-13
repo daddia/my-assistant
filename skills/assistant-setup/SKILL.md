@@ -31,7 +31,7 @@ All user-owned files go under `{assistantPath}`:
 | Path | Purpose |
 | ---- | ------- |
 | `{assistantPath}/config/profile.md` | Identity, voice, anti-style, working rules, goals |
-| `{assistantPath}/policies/*.policy.md` | VIP tiers, email rules, calendar rules |
+| `{assistantPath}/policies/*.policy.md` | VIP tiers, email rules, calendar rules, action extraction rules |
 | `{assistantPath}/config/my-assistant.json` | Machine-readable install config (selective) |
 | `{assistantPath}/AGENTS.md` | Memory hot cache — People, Terms, Projects, Preferences (~50–80 lines) |
 | `{assistantPath}/CLAUDE.md` | Compatibility shim: `@AGENTS.md` (Claude Code / Cowork auto-load) |
@@ -44,7 +44,7 @@ All user-owned files go under `{assistantPath}`:
 ## Where files go
 
 - **Profile:** `{assistantPath}/config/profile.md` — base on `config/profile.template.md` (sections 1–5 only; no VIP, email, or calendar content).
-- **Policies:** `{assistantPath}/policies/` — one file per domain, named `<name>.policy.md`. Base on the plugin's master templates in `policies/` (repo root): `email.policy.md`, `calendar.policy.md`. **Do not** create per-starter or per-persona policy copies in the plugin — there is only one master template set.
+- **Policies:** `{assistantPath}/policies/` — one file per domain, named `<name>.policy.md`. Base on the plugin's master templates in `policies/` (repo root): `email.policy.md`, `calendar.policy.md`, `actions.policy.md`. **Do not** create per-starter or per-persona policy copies in the plugin — there is only one master template set.
 
 > This is the only skill that writes the full profile and policies without a diff prompt. Every other skill proposes changes and asks first.
 
@@ -93,7 +93,7 @@ Present all five starters with ICP one-liner from the manifest:
 4. Read `config/starter-profiles/{id}.md` for profile sections only.
 5. Offer **Quick customize** (name, company, timezone) OR **Keep as-is for demo**.
 6. **Do not write** until the user confirms customize-or-keep (match interview pacing — no half-written profiles if they abort).
-7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/email.policy.md`, `{assistantPath}/policies/calendar.policy.md`, and `my-assistant.json`.
+7. Write `{assistantPath}/config/profile.md`, `{assistantPath}/policies/email.policy.md`, `{assistantPath}/policies/calendar.policy.md`, `{assistantPath}/policies/actions.policy.md`, and `my-assistant.json`.
 8. Run **Working-folder deliverables** and **Memory bootstrap** (below).
 9. For starter demo mode, pre-fill policies with sensible defaults for that persona during customize — still using the master `policies/` templates as the base shape.
 10. Summarize: `Profile: {Title} starter (customized|as-is) · Assistant folder: {assistantPath} · Memory: X people seeded`.
@@ -125,6 +125,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 6. **VIP tiers** → `email.policy.md` — who must surface first and never be auto-touched (Tier 1); who to draft fastest for (Tier 2).
 7. **Email policy** → `email.policy.md` — reply threshold (which categories to draft for vs summarise vs archive); exact-sender auto-archive list (start conservative); labels they use.
 8. **Calendar policy** → `calendar.policy.md` — working hours; meeting-length defaults and buffers; focus-time defence level; what may be auto-proposed vs must-always-ask.
+9. **Actions policy** → `actions.policy.md` — optional at setup; copy the template. Non-reply actions (calendar holds, tasks, forms) are added as the user confirms rules during triage.
 
 ## Writing the files
 
