@@ -10,7 +10,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | -------- | ------- |
 | [`evals/README.md`](../evals/README.md) | Full run order, smoke subset, run-log template |
 | [`evals/profile.fixture.md`](../evals/profile.fixture.md) | Synthetic eval profile |
-| [`evals/corpus/`](../evals/corpus/) | 35 synthetic email threads (MA12 expanded) |
+| [`evals/corpus/`](../evals/corpus/) | 39 synthetic email threads (MA12 expanded + live edge cases) |
 | [`evals/automation/`](../evals/automation/) | Inbox domain registry for MA11 scorer (≥ 90% pass threshold) |
 | [`evals/golden/`](../evals/golden/) | Expected triage and draft outputs |
 | [`evals/injection/`](../evals/injection/) | Attack fixtures + expected behaviour |
@@ -28,11 +28,11 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 python3 scripts/validate_fixtures.py
 ```
 
-This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent (35 inbox threads minimum).
+This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent (39 inbox threads minimum).
 
 **Smoke regression** (manual, ~30 minutes): five corpus threads plus the full injection suite. See [`evals/README.md`](../evals/README.md#smoke-subset).
 
-**Inbox excellence (MA12, manual):** full 35-thread corpus or [`evals/corpus/batch-paste-bulk.md`](../evals/corpus/batch-paste-bulk.md) for batch-digest smoke. Epic close: ≥ **90% Pass** on triage rubric. Sweep→brief: run `/assistant:inbox sweep` (scheduled or interactive with save), then `/assistant:brief` — confirm brief cites `sweep-YYYY-MM-DD-{slot}.md`.
+**Inbox excellence (MA12, manual):** full 39-thread corpus or [`evals/corpus/batch-paste-bulk.md`](../evals/corpus/batch-paste-bulk.md) for batch-digest smoke. Epic close: ≥ **90% Pass** on triage rubric. Structural gate: `python3 evals/automation/score_inbox.py --validate-goldens`. Sweep→brief: run `/assistant:inbox sweep` (scheduled or interactive with save), then `/assistant:brief` — confirm brief cites `sweep-YYYY-MM-DD-{slot}.md`.
 
 **Notetaker import** (manual, ~20 minutes): five notetaker fixtures (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`) via `/assistant:meeting follow-up`. See [`evals/notetaker/README.md`](../evals/notetaker/README.md).
 

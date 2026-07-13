@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Live edge case corpus (36–39)** — utility calendar-hold, co-parent VIP reply, toll auto-archive, inbox lingerer; locks expectations from live sweep review.
+- **`evals/automation/score_inbox.py`** — rule-based golden validator and manual results scorer; wired into CI.
+- **`scripts/test_update_ledger.py`** — unit tests for deterministic schedule heartbeat writer.
+- **`.agency/work/inbox-excellence/tasks.md`** — MA12 task breakdown and close-out checklist.
 - **`scripts/update_ledger.py`** — deterministic schedule heartbeat writer; skills invoke it instead of hand-editing YAML.
 - **`policies/actions.policy.md`** — template for non-reply actions (calendar holds, tasks, forms) with detect→confirm→codify loop.
 - **Inbox action taxonomy** — per-thread action types, two-pass scan (delta + lingerers), and action proposals in triage.
@@ -15,6 +19,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- **Corpus minimum** — 39 threads (`MIN_THREADS`); profile fixture adds co-parent VIP and eToll auto-archive.
+- **Competitor rating** — inbox triage row → **Strong** (MA12 landed).
+- **Rubric** — §8 action type and lingerers scoring for live edge fixtures.
 - **Schedule split** — `inbox-triage-am` (08:00 triage with drafts) and `inbox-sweep` (12:00/16:00 light sweep); triage still writes `sweep-*.md` for morning brief handoff.
 - **Connector pre-check** — email-drafting and inbox-triage surface permission failures; fallback markdown labelled explicitly; `partial` ledger status when degraded.
 - **Packaged prompts** — schedule-setup prompts include `update_ledger.py` invocation and completion self-check.

@@ -27,7 +27,7 @@ Runs **triage** weekday mornings (drafts replies + action proposals) and **sweep
 1. Follow `skills/inbox-triage/SKILL.md` in **sweep** mode — no reply drafts except Tier 1 VIP urgency.
 2. Save `sweep-YYYY-MM-DD-{slot}.md` and run `scripts/update_ledger.py --job-id inbox-sweep`.
 
-Both runs: summarise long threads; emit digest of drafts, action proposals, and archive candidates.
+Both runs: summarise long threads; use batch digest tables when FYI or marketing count ≥ 3; emit digest of drafts, action proposals, and archive candidates.
 
 ## Guardrails
 

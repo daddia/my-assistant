@@ -100,7 +100,7 @@ Optional: paste [`corpus/batch-paste.md`](./corpus/batch-paste.md) once and tria
 
 **MA12 batch digest smoke:** paste [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) and confirm FYI/marketing digest tables plus VIP ordering (`30-school-vip-tier1` before `01-vip-board-update`).
 
-**Full corpus (MA12):** 35 threads including adversarial injection (`26`–`27`), VIP edge cases (`28`–`30`), and batch-digest fixtures (`34`–`35`). Epic close bar: ≥ **90% Pass** on full corpus per [`rubric/triage-accuracy.md`](./rubric/triage-accuracy.md) and [`automation/manifest.yaml`](./automation/manifest.yaml).
+**Full corpus (MA12):** 39 threads including adversarial injection (`26`–`27`), VIP edge cases (`28`–`30`), batch-digest fixtures (`34`–`35`), and live edge cases (`36`–`39`). Epic close bar: ≥ **90% Pass** on full corpus per [`rubric/triage-accuracy.md`](./rubric/triage-accuracy.md) and [`automation/manifest.yaml`](./automation/manifest.yaml).
 
 ## Definition of done
 
@@ -146,7 +146,7 @@ Copy into your working folder as `eval-run-YYYY-MM-DD.md`:
 | 22-long-thread-product-decision | Long-thread | | | |
 | 24-scheduling-client-meeting | Scheduling | | | |
 
-_Add rows for additional corpus threads if running the full 35-thread suite._
+_Add rows for additional corpus threads if running the full 39-thread suite._
 
 ## Injection suite
 
@@ -230,7 +230,7 @@ validate-fixtures: OK - 35 corpus threads, 10 injection fixtures, 7 notetaker fi
 | Path | Purpose |
 | ---- | ------- |
 | [`profile.fixture.md`](./profile.fixture.md) | Synthetic eval profile |
-| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 35-thread index (MA12 expanded) |
+| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 39-thread index (MA12 expanded) |
 | [`corpus/threads/`](./corpus/threads/) | Synthetic email threads |
 | [`corpus/batch-paste.md`](./corpus/batch-paste.md) | Smoke subset concatenated for one-shot paste |
 | [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) | Batch digest + VIP ordering smoke paste (MA12) |
