@@ -33,7 +33,8 @@ Walk this during `/assistant:schedules` or when a job keeps missing.
    | Job | `job_id` | Reliability upgrade |
    | --- | -------- | ------------------- |
    | Morning briefing | `morning-briefing` | **Critical** — recommend `managed` (`managed-agents/morning-briefing/agent.yaml`) or `cloud-code` |
-   | Inbox sweep | `inbox-sweep` | `managed` (`managed-agents/inbox-triage/agent.yaml`) or `cloud-code` |
+   | Inbox triage (08:00) | `inbox-triage-am` | `managed` (`managed-agents/inbox-triage/agent.yaml`) or `cloud-code` |
+   | Inbox sweep (12:00/16:00) | `inbox-sweep` | `managed` (`managed-agents/inbox-triage/agent.yaml`) or `cloud-code` |
    | Follow-up watcher | `follow-up-watcher` | `managed` (`managed-agents/follow-up-watcher/agent.yaml`) or `cloud-code` |
    | Meeting-prep watcher | `meeting-prep-watcher` | `cloud-code` only (no managed cookbook yet) |
    | Weekly review | `weekly-review` | `cloud-code` only (no managed cookbook yet) |
@@ -50,6 +51,8 @@ Walk this during `/assistant:schedules` or when a job keeps missing.
 After setup, `/assistant:schedules` creates one YAML file per job under `scheduled/` in your **working folder** (never inside the plugin directory).
 
 Each scheduled run writes a heartbeat: last run time, success/partial/failed status, and whether expected artefacts (e.g. `brief-YYYY-MM-DD.md`) exist.
+
+Skills invoke **`scripts/update_ledger.py`** deterministically at run end — do not hand-edit ledger files. If `last_run_at` is null but a matching dated artefact exists, health checks and the morning brief flag **ledger out of sync** and use the artefact timestamp as an implied last run.
 
 ## Miss detection
 

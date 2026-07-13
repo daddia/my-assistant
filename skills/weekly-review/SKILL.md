@@ -55,12 +55,17 @@ Next week
 
 Runs well as a Friday 4pm scheduled task; save to `review-YYYY-MM-DD.md`. See `skills/schedule-setup/SKILL.md`.
 
-**Heartbeat:** at end of a scheduled run, update `scheduled/weekly-review.yaml`:
+**Heartbeat:** at end of a scheduled run, update the ledger via bash (required):
 
-- `last_run_at`: now
-- `last_run_status`: `success` if `review-{today}.md` was written; else `partial` or `failed`
-- `expected_artifact`: `review-{today}.md`
-- `artifact_present`: true/false
+```bash
+python3 scripts/update_ledger.py \
+  --job-id weekly-review \
+  --status {success|partial|failed} \
+  --artifact review-{today}.md \
+  --working-folder {working-folder}
+```
+
+Before ending, confirm `last_run_at` in `scheduled/weekly-review.yaml` matches this run.
 
 ## Rules
 

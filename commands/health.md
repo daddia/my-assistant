@@ -130,6 +130,7 @@ If `profile-exists` **fails**, skip policy checks with "Profile missing — skip
 | `policies-dir-exists` | `{policiesPath}/` or `{assistantPath}/policies/` directory exists | **warn** — suggest `/assistant:setup` |
 | `policies-email-present` | `email.policy.md` exists and is readable | **warn** |
 | `policies-calendar-present` | `calendar.policy.md` exists and is readable | **warn** |
+| `policies-actions-present` | `actions.policy.md` exists and is readable | **warn** — copy from plugin `policies/actions.policy.md` or re-run `/assistant:setup` |
 | `policies-sections-complete` | VIP tiers + reply threshold in email policy; working hours in calendar policy | **warn** |
 | `profile-legacy-policy-sections` | `profile.md` does **not** still contain `## 5. VIP tiers`, `## 6. Email policy`, or `## 7. Calendar policy` | **warn** — offer split via `/assistant:setup` |
 
@@ -164,6 +165,7 @@ When the directory **exists** with one or more job files:
 | `schedule-ledger-present` | At least one `scheduled/{job_id}.yaml` exists | **pass** |
 | `schedule-health-valid` | Each file shape matches `scheduled/schedules.schema.yaml` (version, job_id, updated_at, surface, cadence, last_run_status, miss_count_7d); filename matches `job_id` | **warn** if corrupt — "Re-run `/assistant:schedules` to recreate ledger." |
 | `schedule-catalog-jobs-match` | Every `job_id` in `scheduled/` exists in `scheduled/schedules.yaml` | **warn** |
+| `schedule-ledger-out-of-sync` | For inbox jobs (`inbox-triage-am`, `inbox-sweep`): when `last_run_at` is null/missing but a matching `sweep-YYYY-MM-DD-{slot}.md` exists today, **warn** "ledger out of sync — artefact implies a run; re-run `scripts/update_ledger.py` or wait for next scheduled job" | **warn** |
 | `schedule-critical-local-misses` | No `morning-briefing.yaml` with `surface: local` and `miss_count_7d >= 2` | **warn** with fix_ref `docs/guide/07-always-on-reliability.md#decision-tree` — mirror escalation table; do **not** increment counters or duplicate `daily-brief` miss-block logic |
 
 #### Connectors (advisory)

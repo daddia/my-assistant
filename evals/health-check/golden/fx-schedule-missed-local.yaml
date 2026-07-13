@@ -5,7 +5,7 @@ platform_hint: cowork
 working_folder: evals/health-check/fixtures/fx-schedule-missed-local/working
 profile_path: evals/health-check/fixtures/profiles/fx-full-profile.md
 summary:
-  pass: 3
+  pass: 4
   warn: 1
   fail: 0
   skip: 0
@@ -22,6 +22,10 @@ results:
     category: always-on
     status: pass
     message: All job_ids exist in catalog
+  - check_id: schedule-ledger-out-of-sync
+    category: always-on
+    status: pass
+    message: Inbox ledgers aligned with sweep artefacts
   - check_id: schedule-critical-local-misses
     category: always-on
     status: warn

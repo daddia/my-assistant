@@ -118,6 +118,11 @@ checks:
     default_severity_on_fail: warn
     fix_ref: /assistant:setup
 
+  - id: policies-actions-present
+    category: policies
+    default_severity_on_fail: warn
+    fix_ref: /assistant:setup
+
   - id: policies-sections-complete
     category: policies
     default_severity_on_fail: warn
@@ -179,6 +184,11 @@ checks:
     category: always-on
     default_severity_on_fail: warn
     fix_ref: /assistant:schedules
+
+  - id: schedule-ledger-out-of-sync
+    category: always-on
+    default_severity_on_fail: warn
+    fix_ref: scripts/update_ledger.py
 
   - id: schedule-critical-local-misses
     category: always-on

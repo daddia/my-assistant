@@ -7,9 +7,9 @@ config_path: evals/health-check/fixtures/fx-full-profile/working/config/my-assis
 profile_path: evals/health-check/fixtures/fx-full-profile/working/config/profile.md
 summary:
   pass: 25
-  warn: 6
+  warn: 7
   fail: 0
-  skip: 8
+  skip: 9
 results:
   - check_id: plugin-manifest-present
     category: plugin
@@ -87,6 +87,11 @@ results:
     status: warn
     message: calendar.policy.md not found
     fix_ref: /assistant:setup
+  - check_id: policies-actions-present
+    category: policies
+    status: warn
+    message: actions.policy.md not found
+    fix_ref: /assistant:setup
   - check_id: policies-sections-complete
     category: policies
     status: warn
@@ -135,6 +140,10 @@ results:
     status: skip
     message: No schedule ledger — skipped
   - check_id: schedule-catalog-jobs-match
+    category: always-on
+    status: skip
+    message: No schedule ledger — skipped
+  - check_id: schedule-ledger-out-of-sync
     category: always-on
     status: skip
     message: No schedule ledger — skipped

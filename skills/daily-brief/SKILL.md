@@ -62,7 +62,15 @@ Before scanning live mail for priority unread:
 3. Pull VIP and needs-reply lines from that file into **Before noon** / **Priority unread** — do not re-run full inbox triage when a fresh sweep exists.
 4. If no sweep file within 12h, note one line: `No sweep artefact since {last sweep date or "today"} — using live unread.` Then use `~~email` or ask for paste.
 
-Sweep files are written by scheduled `/assistant:inbox sweep` per `skills/inbox-triage/SKILL.md`.
+Sweep files are written by scheduled `/assistant:inbox triage` (08:00) and `/assistant:inbox sweep` (12:00/16:00) per `skills/inbox-triage/SKILL.md`. The 08:00 **triage** run writes the same `sweep-YYYY-MM-DD-0800.md` artefact shape the brief consumes.
+
+### Ledger out-of-sync fallback
+
+When loading sweep context or checking inbox schedule health:
+
+1. If `{working-folder}/scheduled/inbox-triage-am.yaml` or `inbox-sweep.yaml` has `last_run_at: null` (or missing) **but** a matching `sweep-YYYY-MM-DD-{slot}.md` exists for today, treat the artefact file's modification time as the implied last run.
+2. Flag **ledger out of sync** in the brief or health output — do not report "no prior sweep on record."
+3. Suggest re-running the ledger command from `skills/inbox-triage/SKILL.md` or the next scheduled job to repair the heartbeat.
 
 ## Output shape
 
@@ -93,13 +101,17 @@ Quiet otherwise. Have a good one.
 
 When run as a scheduled task, save output to `brief-YYYY-MM-DD.md` in the working folder so there's a history. See `skills/schedule-setup/SKILL.md` for the packaged 8am prompt.
 
-**Heartbeat:** at end of a scheduled run, update `scheduled/morning-briefing.yaml`:
+**Heartbeat:** at end of a scheduled run, update the ledger via bash (required):
 
-- `last_run_at`: now
-- `last_run_status`: `success` if `brief-{today}.md` was written; else `partial` or `failed`
-- `expected_artifact`: `brief-{today}.md`
-- `artifact_present`: true/false
-- `updated_at` on the job file
+```bash
+python3 scripts/update_ledger.py \
+  --job-id morning-briefing \
+  --status {success|partial|failed} \
+  --artifact brief-{today}.md \
+  --working-folder {working-folder}
+```
+
+Before ending, confirm `last_run_at` in `scheduled/morning-briefing.yaml` matches this run.
 
 ## Standalone
 
