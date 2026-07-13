@@ -31,6 +31,10 @@ LANG=en_US.UTF-8 ./evals/scripts/validate-fixtures.sh
 | `fb-05-heavy-rewrite-banned` | heavy-rewrite | [golden](./golden/fb-05-heavy-rewrite-banned.yaml) |
 | `fb-07-injection-profile` | injection | [golden](./golden/fb-07-injection-profile.yaml) |
 
+## Profile-diff golden depth (MA13)
+
+At least **3** feedback goldens must assert full hunk contracts with `hunk_specs`: **`fb-03`**, **`fb-04`**, **`fb-05`**. CI validates via `score_feedback.py --validate-goldens`.
+
 ## Run-log section
 
 Add a **Feedback loop** table to `eval-run-YYYY-MM-DD.md`:

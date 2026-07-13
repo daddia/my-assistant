@@ -2,7 +2,7 @@
 
 Manual scoring guide for comparing email-feedback output against `evals/feedback/golden/*.yaml`, `evals/profile.fixture.md`, and `config/feedback.yaml`.
 
-**Scope:** Correct class handling, diff quality, profile safety, queue integration, and no silent writes. Extends MA01 draft-quality dimensions for rationale vocabulary.
+**Scope:** Correct class handling, diff quality, profile safety, queue integration, and no silent writes. Extends MA01 draft-quality dimensions (including **§6 Grounding**) for rationale vocabulary.
 
 ## Overall result per fixture
 
@@ -34,7 +34,7 @@ Do proposed hunks match golden `must_include_patterns` with evidence?
 
 | Score | Criteria |
 | ----- | -------- |
-| **Pass** | Hunk count within golden min/max; sections are voice and/or anti-style only; rationale cites rubric dimension and edit pattern with quote from diff |
+| **Pass** | Hunk count within golden min/max; sections are voice and/or anti-style only; rationale cites rubric dimension (voice, brevity, grounding) and edit pattern with quote from diff; `hunk_specs` satisfied for fb-03, fb-04, fb-05 |
 | **Partial** | Correct direction but weak evidence quote, or one hunk more than golden max while still safe |
 | **Fail** | Wrong patterns; hunks without rationale; touches forbidden sections |
 
@@ -54,7 +54,7 @@ Do proposed hunks match golden `must_include_patterns` with evidence?
 
 | Score | Criteria |
 | ----- | -------- |
-| **Pass** | `profile-diff` items when golden expects; `source_skill: email-feedback`; `source_path` under `pending-profile/`; approval frame footer present |
+| **Pass** | `profile-diff` items when golden expects; `source_skill: email-feedback`; `source_path` under `pending-profile/`; `related_ids` to source `reply-draft` when known; approval frame footer present |
 | **Partial** | Queue item correct but missing `related_ids` or weak approval_prompt |
 | **Fail** | Missing queue when golden requires diff; wrong queue type; wrote under plugin dir |
 

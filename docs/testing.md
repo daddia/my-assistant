@@ -10,8 +10,8 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | -------- | ------- |
 | [`evals/README.md`](../evals/README.md) | Full run order, smoke subset, run-log template |
 | [`evals/profile.fixture.md`](../evals/profile.fixture.md) | Synthetic eval profile |
-| [`evals/corpus/`](../evals/corpus/) | 39 synthetic email threads (MA12 expanded + live edge cases) |
-| [`evals/automation/`](../evals/automation/) | Inbox domain registry for MA11 scorer (≥ 90% pass threshold) |
+| [`evals/corpus/`](../evals/corpus/) | 44 synthetic email threads (MA12 + MA13 draft edge) |
+| [`evals/automation/`](../evals/automation/) | Inbox, draft, and feedback domain registry (≥ 90% draft pass threshold) |
 | [`evals/golden/`](../evals/golden/) | Expected triage and draft outputs |
 | [`evals/injection/`](../evals/injection/) | Attack fixtures + expected behaviour |
 | [`evals/notetaker/`](../evals/notetaker/) | Notetaker import fixtures + golden extractions |
@@ -28,11 +28,13 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 python3 scripts/validate_fixtures.py
 ```
 
-This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent (39 inbox threads minimum).
+This runs automatically on every pull request via GitHub Actions. Exit code `0` means manifests, golden files, and fixtures are structurally consistent (44 inbox threads minimum, 18 draft goldens minimum).
 
 **Smoke regression** (manual, ~30 minutes): five corpus threads plus the full injection suite. See [`evals/README.md`](../evals/README.md#smoke-subset).
 
-**Inbox excellence (MA12, manual):** full 39-thread corpus or [`evals/corpus/batch-paste-bulk.md`](../evals/corpus/batch-paste-bulk.md) for batch-digest smoke. Epic close: ≥ **90% Pass** on triage rubric. Structural gate: `python3 evals/automation/score_inbox.py --validate-goldens`. Sweep→brief: run `/assistant:inbox sweep` (scheduled or interactive with save), then `/assistant:brief` — confirm brief cites `sweep-YYYY-MM-DD-{slot}.md`.
+**Inbox excellence (MA12, manual):** full 44-thread corpus or [`evals/corpus/batch-paste-bulk.md`](../evals/corpus/batch-paste-bulk.md) for batch-digest smoke. Epic close: ≥ **90% Pass** on triage rubric. Structural gate: `python3 evals/automation/score_inbox.py --validate-goldens`. Sweep→brief: run `/assistant:inbox sweep` (scheduled or interactive with save), then `/assistant:brief` — confirm brief cites `sweep-YYYY-MM-DD-{slot}.md`.
+
+**Draft excellence (MA13, manual):** draft smoke threads `01`, `22`, `24`, `40`, `41`, `42` via `/assistant:email draft`; score against [`evals/rubric/draft-quality.md`](../evals/rubric/draft-quality.md) including §6 Grounding. Connector honesty: simulate disconnected run on `06-needs-reply-budget-approval` (`connector_mode: fallback-degraded`). Variant smoke: `--variant shorter` on `41-dual-path-committee-invite`. CI: `python3 evals/automation/score_draft.py --validate-goldens`. Epic close: ≥ **90% Pass** on all `draft_required` threads.
 
 **Notetaker import** (manual, ~20 minutes): five notetaker fixtures (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`) via `/assistant:meeting follow-up`. See [`evals/notetaker/README.md`](../evals/notetaker/README.md).
 
@@ -40,7 +42,7 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Schedule health** (manual, ~10 minutes): copy `sh-02-missed-morning-brief` fixture to a test working folder, run `/assistant:brief` after 09:30 on a weekday — confirm miss block appears. Repeat with `sh-01-healthy-weekday` — no block. See [`evals/schedule-health/README.md`](../evals/schedule-health/README.md).
 
-**Feedback loop** (manual, ~20 minutes): five smoke fixtures (`fb-01`, `fb-02`, `fb-03`, `fb-05`, `fb-07`) via `/assistant:email feedback`. See [`evals/feedback/README.md`](../evals/feedback/README.md).
+**Feedback loop** (manual, ~20 minutes): five smoke fixtures (`fb-01`, `fb-02`, `fb-03`, `fb-05`, `fb-07`) via `/assistant:email feedback`. Profile-diff depth: `fb-03`, `fb-04`, `fb-05` must pass with full hunk specs. CI: `python3 evals/automation/score_feedback.py --validate-goldens`. See [`evals/feedback/README.md`](../evals/feedback/README.md).
 
 **Connector smoke** (manual, ~30 minutes): six paste fixtures (`conn-email-paste` … `conn-tasks-paste`) — one per `~~category`; smoke subset minimum: email, calendar, chat. See [`docs/guide/connector-smoke-tests.md`](./guide/connector-smoke-tests.md) and [`evals/connectors/README.md`](../evals/connectors/README.md).
 
@@ -65,4 +67,5 @@ For skill or rule changes:
 - [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
 - [Trust artefacts design](../.agency/work/trust-artefacts/design.md) — MA08 epic; connector corpus at [`evals/connectors/`](../evals/connectors/)
 - [Onboarding polish design](../.agency/work/onboarding-polish/design.md) — MA10 epic; health-check corpus at [`evals/health-check/`](../evals/health-check/)
-- [Eval automation (MA11)](../evals/automation/README.md) — inbox domain registered; scorer pending MA11
+- [Eval automation (MA11)](../evals/automation/README.md) — inbox, draft, and feedback domains registered
+- [Draft excellence design](../.agency/work/draft-excellence/design.md) — MA13 epic

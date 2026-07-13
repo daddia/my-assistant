@@ -100,7 +100,9 @@ Optional: paste [`corpus/batch-paste.md`](./corpus/batch-paste.md) once and tria
 
 **MA12 batch digest smoke:** paste [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) and confirm FYI/marketing digest tables plus VIP ordering (`30-school-vip-tier1` before `01-vip-board-update`).
 
-**Full corpus (MA12):** 39 threads including adversarial injection (`26`–`27`), VIP edge cases (`28`–`30`), batch-digest fixtures (`34`–`35`), and live edge cases (`36`–`39`). Epic close bar: ≥ **90% Pass** on full corpus per [`rubric/triage-accuracy.md`](./rubric/triage-accuracy.md) and [`automation/manifest.yaml`](./automation/manifest.yaml).
+**Full corpus (MA12):** 44 threads including adversarial injection (`26`–`27`), VIP edge cases (`28`–`30`), batch-digest fixtures (`34`–`35`), live edge cases (`36`–`39`), and MA13 draft edge fixtures (`40`–`44`). Epic close bar: ≥ **90% Pass** on full corpus per [`rubric/triage-accuracy.md`](./rubric/triage-accuracy.md) and [`automation/manifest.yaml`](./automation/manifest.yaml).
+
+**Draft excellence (MA13):** 18 draft goldens minimum; five new edge categories (attachment, dual-path variant, injection-in-reply, personal ICP school tone, long-thread distill). Standalone drafts require grounding checklist + `Draft surface:` mode. CI runs `score_draft.py` and `score_feedback.py --validate-goldens`. Epic close: ≥ **90% Pass** on all `draft_required` threads per [`rubric/draft-quality.md`](./rubric/draft-quality.md) §6 Grounding included.
 
 ## Definition of done
 
@@ -230,18 +232,18 @@ validate-fixtures: OK - 35 corpus threads, 10 injection fixtures, 7 notetaker fi
 | Path | Purpose |
 | ---- | ------- |
 | [`profile.fixture.md`](./profile.fixture.md) | Synthetic eval profile |
-| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 39-thread index (MA12 expanded) |
+| [`corpus/manifest.yaml`](./corpus/manifest.yaml) | 44-thread index (MA12 expanded + MA13 draft edge) |
 | [`corpus/threads/`](./corpus/threads/) | Synthetic email threads |
 | [`corpus/batch-paste.md`](./corpus/batch-paste.md) | Smoke subset concatenated for one-shot paste |
 | [`corpus/batch-paste-bulk.md`](./corpus/batch-paste-bulk.md) | Batch digest + VIP ordering smoke paste (MA12) |
 | [`golden/triage/`](./golden/triage/) | Expected triage outputs |
-| [`golden/drafts/`](./golden/drafts/) | Expected draft constraints |
+| [`golden/drafts/`](./golden/drafts/) | Expected draft constraints (≥ 18 goldens, MA13) |
 | [`rubric/`](./rubric/) | Scoring rubrics |
 | [`injection/`](./injection/) | Attack fixtures + expected behaviour |
 | [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
 | [`calendar/`](./calendar/) | Time protection fixtures + golden block proposals (MA05) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
-| [`automation/`](./automation/) | Domain registry for MA11 rule-based scorer (inbox registered MA12) |
+| [`automation/`](./automation/) | Domain registry for MA11 rule-based scorer (inbox, draft, feedback) |
 | [`scripts/validate_fixtures.py`](../scripts/validate_fixtures.py) | Structural validation (Python) |
 
 ## Related docs
@@ -251,3 +253,4 @@ validate-fixtures: OK - 35 corpus threads, 10 injection fixtures, 7 notetaker fi
 - [`rules/untrusted-content.md`](../rules/untrusted-content.md) — injection defence model
 - [Contributing — Testing](../CONTRIBUTING.md#testing)
 - [Testing guide](../docs/testing.md) — contributor entry point
+- [Draft excellence design](../.agency/work/draft-excellence/design.md) — MA13 epic
