@@ -27,10 +27,25 @@ And avoid every banned tell: no "I hope this finds you well", no "just wanted to
 3. Write the draft in the user's voice, as short as it can be while complete.
 4. Match formality to the contact's VIP tier and relationship.
 
+## Connector pre-check
+
+When the intended surface is `~~email` (inbox triage, scheduled sweep/triage, or an explicit connected draft request):
+
+1. Verify the email connector is connected and authorised before drafting.
+2. If **available:** proceed to **Where the draft goes** — connected path.
+3. If **missing or unauthorised:**
+   - Say so explicitly in the report **What I found**: `Email connector not connected/authorised — could not create an in-system draft.`
+   - Write fallback content to `drafts/reply-*.md` with header line: `STATUS: FALLBACK — connector unavailable, not a sendable draft`
+   - In **What needs your approval**, state: `Authorise the Gmail connector, then re-run /assistant:inbox triage to create the real draft.`
+   - Do **not** describe the markdown file as a ready draft or imply it exists in Gmail.
+
+Standalone/paste-only runs skip this block — there is no expected connector.
+
 ## Where the draft goes
 
-- **Connected (`~~email`):** create a Gmail draft on the thread (draft-only connector — this is exactly right). Confirm the draft is in place.
+- **Connected (`~~email`):** create a Gmail draft on the thread (draft-only connector — this is exactly right). Confirm the draft is in place and record the draft id in `external_ref`.
 - **Standalone:** return the draft text in a code block for the user to copy, plus a one-line note of any gaps.
+- **Degraded (connector expected but unavailable):** fallback markdown only — labelled plainly, never presented as an in-system draft.
 
 ## Output shape
 
@@ -52,6 +67,7 @@ Gaps to fill: attach the deck.
 ## Rules
 
 - **Draft only.** Never send, even at Tier 3.
+- If the intended surface is `~~email` and the connector is unavailable, say so explicitly in the report. Never present a markdown fallback as though it were an in-system draft.
 - One draft per thread; if there are several plausible responses (accept vs decline), offer the two shortest options rather than one long hedge.
 - Don't over-explain or pad. A three-line reply that lands beats a paragraph that hedges.
 - Flag anything that commits the user (a deadline, a spend, a promise) so they notice before sending.

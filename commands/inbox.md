@@ -38,9 +38,10 @@ Read the profile first. Work on the connected mailbox or pasted threads. Always 
 ## Verification
 
 - Re-read drafts under `drafts/`, queue items in `review-queue/index.yaml`, and any triage summary — confirm they match the plan.
-- Confirm report uses the MA12 section order: VIP (ranked) → Needs-reply → FYI → Marketing → Ambiguous → Task capture proposals.
+- Confirm report uses the MA12 section order: VIP (ranked) → Needs-reply → FYI → Marketing → Ambiguous → Inbox lingerers (when run) → Action proposals.
 - When FYI or marketing count ≥ 3, confirm batch digest tables (not long bullet lists).
-- On scheduled sweep: confirm `sweep-YYYY-MM-DD-{slot}.md` exists and `scheduled/inbox-sweep.yaml` has `artifact_present: true`.
+- On scheduled runs: confirm `sweep-YYYY-MM-DD-{slot}.md` exists and the matching ledger (`inbox-triage-am.yaml` for 08:00 triage, `inbox-sweep.yaml` for 12:00/16:00 sweep) has `artifact_present: true` and `last_run_at` set via `scripts/update_ledger.py`.
+- When connector expected but unavailable: confirm **What I found** names the gap, fallback drafts carry `STATUS: FALLBACK`, and ledger status is `partial`.
 - Confirm ambiguous threads have no drafts or archive proposals; injection instructions surfaced, not obeyed.
 - Confirm nothing was sent, booked, or deleted without explicit approval.
 - Surface connector errors, partial mailbox data, or autonomy-tier blocks clearly.
