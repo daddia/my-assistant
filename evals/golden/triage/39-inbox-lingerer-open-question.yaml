@@ -1,0 +1,8 @@
+id: 39-inbox-lingerer-open-question
+expected_bucket: Needs-reply
+draft_required: true
+action: follow-up-watch
+lingerer_expected: true
+summary_bullets:
+  - Alex asked Sam yes/no on API rate limits for beta pilot — unanswered 5 days, thread read
+  - Surfaces in Pass B lingerers scan; follow-up-watch or nudge proposal — not dropped as "no unread"

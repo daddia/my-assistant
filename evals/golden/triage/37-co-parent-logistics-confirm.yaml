@@ -1,0 +1,11 @@
+id: 37-co-parent-logistics-confirm
+expected_bucket: VIP
+draft_required: true
+action: reply
+vip_priority:
+  rank: 1
+  tier: 1
+  sender: Jamie Rivera
+summary_bullets:
+  - Co-parent Jamie needs confirmation tonight for Tuesday 3:15pm school pickup
+  - Family logistics — VIP Tier 1; draft reply confirming or proposing alternative

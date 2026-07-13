@@ -60,6 +60,7 @@
 - Jordan Kim -- jordan.kim@northwind-eval.test (CEO, co-founder)
 - Morgan Lee -- morgan.lee@northwind-eval.test (board chair)
 - Family: alex.rivera.personal@example-eval.test (personal account, forwarded to work)
+- Jamie Rivera -- co-parent (Tier 1) -- jamie.rivera.personal@example-eval.test
 
 ### Tier 2 -- high priority, draft fastest
 
@@ -82,6 +83,7 @@
   | newsletters@substack.com | Archive + label @ToRead |
   | promo@saas-vendor-eval.test | Archive + mark read |
   | events@conference-eval.test | Archive + mark read |
+  | noreply@etoll-eval.test | Archive + mark read |
 
 - **Labels:** @ToRead, @VIP, @WaitingOn, Auto-Archive
 - **Newsletter platforms** → @ToRead: substack.com, beehiiv.com, mailchimp.com

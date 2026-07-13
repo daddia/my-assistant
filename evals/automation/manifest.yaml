@@ -32,6 +32,8 @@ domains:
       - 30-school-vip-tier1
       - 34-fyi-bulk-receipts
       - 35-marketing-bulk-promos
+      - 36-utility-meter-access
+      - 39-inbox-lingerer-open-question
     batch_paste_fixtures:
       - corpus/batch-paste.md
       - corpus/batch-paste-bulk.md

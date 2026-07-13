@@ -29,7 +29,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 EVALS_DIR = ROOT / "evals"
 
-MIN_THREADS = 35
+MIN_THREADS = 39
 MIN_INJECTION = 10
 
 REQUIRED_DIRS = [

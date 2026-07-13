@@ -1,0 +1,13 @@
+id: 38-toll-receipt-automated
+expected_bucket: Marketing
+draft_required: false
+action: archive
+archive_proposal:
+  sender: noreply@etoll-eval.test
+  action: archive
+  mark_read: true
+  label: null
+  rationale: Automated toll receipt — exact-sender match in profile auto-archive list
+summary_bullets:
+  - eToll receipt AUD 8.42 for M2 Motorway 5 Jul — informational, no reply
+  - Propose archive at Tier 1; auto-archive at Tier 2+ per profile exact-sender list

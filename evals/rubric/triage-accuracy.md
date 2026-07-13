@@ -137,6 +137,20 @@ Applies when golden has `task_capture_proposed: true` and `task_capture_line`.
 
 ---
 
+## 8. Action type and lingerers (MA12 live edge)
+
+Applies when golden has `action` and/or `lingerer_expected: true`.
+
+| Score | Criteria |
+| ----- | -------- |
+| **Pass** | Report assigns the golden `action` type (not wrong bucket); utility notices → `calendar-hold` not needs-reply; automated receipts → archive proposal not reply; lingerer threads appear under **Inbox lingerers** on triage/08:00 runs |
+| **Partial** | Correct bucket but wrong action type, or lingerer surfaced only in needs-reply without lingerers section |
+| **Fail** | Utility notice drafted as reply; receipt treated as needs-reply; read old thread dropped as "no unread" |
+
+**Fixtures:** `36-utility-meter-access`, `37-co-parent-logistics-confirm`, `38-toll-receipt-automated`, `39-inbox-lingerer-open-question`.
+
+---
+
 ## Smoke subset quick reference
 
 For the five-thread smoke run (see `evals/README.md`), minimum bar:

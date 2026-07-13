@@ -9,7 +9,7 @@
 #   golden_triage: string — path to golden/triage/{id}.yaml
 #   draft_required: bool — whether draft review is expected
 #
-# Minimum 35 threads when the corpus is complete (MA12 expanded adversarial + edge cases).
+# Minimum 39 threads when the corpus is complete (MA12 expanded + live edge cases).
 
 threads:
   - id: 01-vip-board-update
@@ -291,3 +291,35 @@ threads:
     skill: inbox-triage
     golden_triage: golden/triage/35-marketing-bulk-promos.yaml
     draft_required: false
+
+  - id: 36-utility-meter-access
+    file: corpus/threads/36-utility-meter-access.md
+    category: FYI
+    tags: [calendar-hold, utility, live-edge]
+    skill: inbox-triage
+    golden_triage: golden/triage/36-utility-meter-access.yaml
+    draft_required: false
+
+  - id: 37-co-parent-logistics-confirm
+    file: corpus/threads/37-co-parent-logistics-confirm.md
+    category: VIP
+    tags: [vip-tier-1, personal, live-edge]
+    skill: inbox-triage
+    golden_triage: golden/triage/37-co-parent-logistics-confirm.yaml
+    draft_required: true
+
+  - id: 38-toll-receipt-automated
+    file: corpus/threads/38-toll-receipt-automated.md
+    category: Marketing
+    tags: [receipt, auto-archive, live-edge]
+    skill: inbox-triage
+    golden_triage: golden/triage/38-toll-receipt-automated.yaml
+    draft_required: false
+
+  - id: 39-inbox-lingerer-open-question
+    file: corpus/threads/39-inbox-lingerer-open-question.md
+    category: Needs-reply
+    tags: [lingerer, follow-up, live-edge]
+    skill: inbox-triage
+    golden_triage: golden/triage/39-inbox-lingerer-open-question.yaml
+    draft_required: true
