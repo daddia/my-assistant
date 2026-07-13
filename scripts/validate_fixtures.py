@@ -96,6 +96,7 @@ VIOLATION_TYPES = frozenset({"buffer", "prep", "follow-up", "focus-intrusion"})
 
 EXPECTED_JOB_IDS = [
     "morning-briefing",
+    "inbox-triage-am",
     "inbox-sweep",
     "meeting-prep-watcher",
     "follow-up-watcher",

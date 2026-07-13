@@ -27,11 +27,33 @@ jobs:
         required: true
     reliability_tier: critical
 
+  - job_id: inbox-triage-am
+    title: "Inbox triage (morning)"
+    skill: inbox-triage
+    command: "/assistant:inbox triage"
+    cron: "0 8 * * 1-5"
+    packaged_prompt_ref: skills/schedule-setup/SKILL.md#inbox-triage-am
+    surfaces:
+      local:
+        platform: cowork-scheduled
+        caveats: [machine-awake, pre-approve-tools, quota]
+      cloud-code:
+        platform: claude-code-scheduled
+        url_hint: "claude.ai/code/scheduled"
+      managed:
+        cookbook: managed-agents/inbox-triage/agent.yaml
+        platform: managed-agents-2026-04-01
+    expected_artifacts:
+      - path_pattern: "sweep-{date}-{slot}.md"
+        slot_values: ["0800"]
+        required: true
+    reliability_tier: standard
+
   - job_id: inbox-sweep
-    title: "Inbox sweep"
+    title: "Inbox sweep (midday/afternoon)"
     skill: inbox-triage
     command: "/assistant:inbox sweep"
-    cron: "0 8,12,16 * * 1-5"
+    cron: "0 12,16 * * 1-5"
     packaged_prompt_ref: skills/schedule-setup/SKILL.md#inbox-sweep
     surfaces:
       local:
@@ -45,7 +67,7 @@ jobs:
         platform: managed-agents-2026-04-01
     expected_artifacts:
       - path_pattern: "sweep-{date}-{slot}.md"
-        slot_values: ["0800", "1200", "1600"]
+        slot_values: ["1200", "1600"]
         required: true
     reliability_tier: standard
 

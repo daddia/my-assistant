@@ -34,7 +34,7 @@ Read `scheduled/schedules.yaml` and walk the user through surface selection **pe
 2. If **no** — recommend `local` (Cowork scheduled tasks) for all chosen jobs. State the machine-awake caveat once.
 3. If **yes** — for each job they want always-on:
    - **`reliability_tier: critical`** (`morning-briefing`): explicitly recommend `managed` (`managed-agents/morning-briefing/agent.yaml`) or `cloud-code` when sleep is common. Do not imply the whole setup must move — only this job.
-   - **Jobs with a managed cookbook** (`inbox-sweep`, `follow-up-watcher`): offer `managed` or `cloud-code` as the reliability upgrade.
+   - **Jobs with a managed cookbook** (`inbox-triage-am`, `inbox-sweep`, `follow-up-watcher`): offer `managed` or `cloud-code` as the reliability upgrade.
    - **Jobs without a managed cookbook** (`meeting-prep-watcher`, `weekly-review`): recommend `cloud-code` (Claude Code scheduled tasks at claude.ai/code/scheduled) — same packaged prompt, Anthropic infra, no new cookbook required.
 4. When recommending `managed`, include the cost caveat from `managed-agents/README.md` (~$0.08/session-hour runtime; burst schedules are cheap; 24/7 polling is not).
 5. Never imply My Assistant hosts schedules — the user deploys Cowork, Claude Code, or managed-agent cookbooks themselves.
@@ -83,19 +83,42 @@ profile per rules/paths.md first. Run
 ```
 Cron: `0 8 * * 1-5`
 
-### Inbox sweep {#inbox-sweep}
+### Inbox triage (morning) {#inbox-triage-am}
 
-Weekdays 8:00am, 12:00pm, 4:00pm · `job_id: inbox-sweep`
+Weekdays 8:00am · `job_id: inbox-triage-am`
 
 ```
-Triage new mail since the last sweep into needs-reply / FYI / marketing /
+Full triage of new mail since the last sweep: bucket into needs-reply / FYI /
+marketing / VIP using /assistant:inbox triage and my profile. Draft replies
+for needs-reply + VIP via email-drafting (Gmail drafts when connected).
+Extract non-reply actions per actions.policy.md (calendar holds, tasks).
+Summarise long threads. Use batch digest tables when FYI or marketing count >= 3.
+Run Pass B lingerers scan (read mail older than 3 days with action heuristics).
+Save the report as sweep-YYYY-MM-DD-0800.md in my working folder.
+Run: python3 scripts/update_ledger.py --job-id inbox-triage-am --status success
+  --artifact sweep-YYYY-MM-DD-0800.md --working-folder {working-folder}
+Before ending, confirm last_run_at in scheduled/inbox-triage-am.yaml matches
+this run. List what you propose archiving.
+```
+Cron: `0 8 * * 1-5`
+
+### Inbox sweep (midday/afternoon) {#inbox-sweep}
+
+Weekdays 12:00pm, 4:00pm · `job_id: inbox-sweep`
+
+```
+Light sweep of new mail since the last run into needs-reply / FYI / marketing /
 VIP using /assistant:inbox sweep and my profile. Summarise long threads.
-Use batch digest tables when FYI or marketing count >= 3.
+Use batch digest tables when FYI or marketing count >= 3. Skip reply drafting
+except Tier 1 VIP needing immediate attention. Skip Pass B lingerers unless asked.
 Save the report as sweep-YYYY-MM-DD-{slot}.md in my working folder
-(slot 0800, 1200, or 1600 by local time). Update scheduled/inbox-sweep.yaml.
+(slot 1200 or 1600 by local time). Run: python3 scripts/update_ledger.py
+  --job-id inbox-sweep --status success --artifact sweep-YYYY-MM-DD-{slot}.md
+  --working-folder {working-folder}
+Before ending, confirm last_run_at in scheduled/inbox-sweep.yaml matches this run.
 List what you propose archiving.
 ```
-Cron: `0 8,12,16 * * 1-5`
+Cron: `0 12,16 * * 1-5`
 
 ### Meeting-prep watcher {#meeting-prep-watcher}
 
@@ -137,14 +160,25 @@ If the user wants a minimal setup, recommend just two: **Morning briefing** and 
 
 ## Health recording on scheduled runs
 
-When a scheduled run completes (any surface), the target skill updates `scheduled/{job_id}.yaml` for its job:
+When a scheduled run completes (any surface), the target skill updates `scheduled/{job_id}.yaml` for its job via **`scripts/update_ledger.py`** — do not hand-edit the ledger:
 
-- Set `last_run_at` to now (ISO-8601).
-- Set `last_run_status` to `success` only when required artefacts exist or the skill's completion criteria are met; otherwise `partial` or `failed`.
-- Set `expected_artifact` and `artifact_present` when the catalog defines a dated file.
-- Update `updated_at` on the job file.
+```bash
+python3 scripts/update_ledger.py \
+  --job-id {job_id} \
+  --status {success|partial|failed} \
+  --artifact {artefact-path-if-any} \
+  --working-folder {working-folder} \
+  [--notes "optional context"]
+```
 
-Interactive runs do not reset `miss_count_7d` unless they complete the scheduled job's artefact contract.
+The script sets:
+
+- `last_run_at` to now (ISO-8601)
+- `last_run_status` to `success` only when required artefacts exist or the skill's completion criteria are met; otherwise `partial` or `failed`
+- `expected_artifact` and `artifact_present` when an artefact path is supplied
+- `updated_at` on the job file
+
+Preserves existing `surface`, `cadence`, and `miss_count_7d`. Interactive runs do not reset `miss_count_7d` unless they complete the scheduled job's artefact contract.
 
 ## Handoff
 

@@ -2,7 +2,7 @@ version: "0.1"
 job_id: inbox-sweep
 updated_at: "2026-07-08T12:10:00+10:00"
 surface: managed
-cadence: "0 8,12,16 * * 1-5"
+cadence: "0 12,16 * * 1-5"
 last_run_at: "2026-07-08T12:01:00+00:00"
 last_run_status: success
 expected_artifact: null

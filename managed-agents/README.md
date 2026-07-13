@@ -27,7 +27,8 @@ Aligned with `scheduled/schedules.yaml`:
 
 | `job_id` | Cookbook | Cadence | Job |
 |----------|----------|---------|-----|
-| `inbox-sweep` | `inbox-triage/agent.yaml` | burst (8/12/16 wkdays) | Bucket mail, draft replies, post a digest |
+| `inbox-triage-am` | `inbox-triage/agent.yaml` | weekday 8am | Full triage — draft replies + action proposals |
+| `inbox-sweep` | `inbox-triage/agent.yaml` | burst (12/16 wkdays) | Light sweep — bucket, summarise, propose archives |
 | `follow-up-watcher` | `follow-up-watcher/agent.yaml` | daily 5pm | Draft nudges for cold threads, escalate VIP silences |
 | `morning-briefing` | `morning-briefing/agent.yaml` | weekday 8am | Assemble and deliver the daily brief |
 
@@ -37,4 +38,4 @@ All three cookbooks are **draft-only**: they never send, book, or spend.
 
 ## Health ledger
 
-Managed runs should update `{working-folder}/scheduled/{job_id}.yaml` with `surface: managed` and heartbeat fields per `scheduled/schedules.schema.yaml`.
+Managed runs should update `{working-folder}/scheduled/{job_id}.yaml` with `surface: managed` and heartbeat fields via `scripts/update_ledger.py` per `scheduled/schedules.schema.yaml`.
