@@ -1,0 +1,19 @@
+fixture_id: cal-10-assertive-focus-defence
+focus_defence_level: assertive
+violations_expected:
+  - type: focus-intrusion
+    count_min: 1
+    related_meeting: Partner check-in
+    severity_min: medium
+proposals_expected:
+  min_count: 1
+  block_types: [focus-defence]
+  must_not_contain: [booked, "created event", "I've scheduled"]
+severity_assertions:
+  - meeting: Partner check-in
+    severity: high
+queue_items_min: 1
+approval_language_checks:
+  must_include: [manually, propose]
+  must_not_include: [auto-book, "scheduled for you"]
+notes: Assertive profile; focus-defence proposal on adjacent free time; never auto-move partner meeting

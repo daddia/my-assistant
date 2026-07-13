@@ -1,10 +1,11 @@
-# Calendar eval manifest — index of time-protection fixtures.
+# Calendar eval manifest — protect + schedule fixtures.
 #
 # Schema (per fixture entry):
 #   id: string           — unique fixture id (e.g. "cal-01-back-to-back-day")
 #   file: string          — path relative to evals/ (e.g. calendar/fixtures/cal-01-….md)
 #   golden: string       — path to golden YAML relative to evals/
 #   smoke: boolean        — include in smoke subset when true
+#   mode: protect | schedule — optional; default protect
 #   tags: [string]        — optional labels (e.g. "buffer", "injection")
 
 fixtures:
@@ -12,34 +13,75 @@ fixtures:
     file: calendar/fixtures/cal-01-back-to-back-day.md
     golden: calendar/golden/cal-01-back-to-back-day.yaml
     smoke: true
+    mode: protect
     tags: [buffer, back-to-back]
 
   - id: cal-02-external-no-prep
     file: calendar/fixtures/cal-02-external-no-prep.md
     golden: calendar/golden/cal-02-external-no-prep.yaml
     smoke: false
+    mode: protect
     tags: [prep, external, vip]
 
   - id: cal-03-focus-intrusion
     file: calendar/fixtures/cal-03-focus-intrusion.md
     golden: calendar/golden/cal-03-focus-intrusion.yaml
     smoke: true
+    mode: protect
     tags: [focus, intrusion]
 
   - id: cal-04-healthy-day
     file: calendar/fixtures/cal-04-healthy-day.md
     golden: calendar/golden/cal-04-healthy-day.yaml
     smoke: true
+    mode: protect
     tags: [healthy, baseline]
 
   - id: cal-05-mixed-week
     file: calendar/fixtures/cal-05-mixed-week.md
     golden: calendar/golden/cal-05-mixed-week.yaml
     smoke: false
+    mode: protect
     tags: [mixed, week, prep, buffer, follow-up]
 
   - id: cal-06-invite-injection
     file: calendar/fixtures/cal-06-invite-injection.md
     golden: calendar/golden/cal-06-invite-injection.yaml
     smoke: true
+    mode: protect
     tags: [injection, invite]
+
+  - id: cal-07-schedule-slot-offer
+    file: calendar/fixtures/cal-07-schedule-slot-offer.md
+    golden: calendar/golden/cal-07-schedule-slot-offer.yaml
+    smoke: false
+    mode: schedule
+    tags: [schedule, slots, tier-2]
+
+  - id: cal-08-schedule-conflicts
+    file: calendar/fixtures/cal-08-schedule-conflicts.md
+    golden: calendar/golden/cal-08-schedule-conflicts.yaml
+    smoke: true
+    mode: schedule
+    tags: [schedule, conflicts, rejected-slots]
+
+  - id: cal-09-habit-gap
+    file: calendar/fixtures/cal-09-habit-gap.md
+    golden: calendar/golden/cal-09-habit-gap.yaml
+    smoke: false
+    mode: protect
+    tags: [habit, protect]
+
+  - id: cal-10-assertive-focus-defence
+    file: calendar/fixtures/cal-10-assertive-focus-defence.md
+    golden: calendar/golden/cal-10-assertive-focus-defence.yaml
+    smoke: false
+    mode: protect
+    tags: [focus-defence, assertive]
+
+  - id: cal-11-schedule-timezone
+    file: calendar/fixtures/cal-11-schedule-timezone.md
+    golden: calendar/golden/cal-11-schedule-timezone.yaml
+    smoke: false
+    mode: schedule
+    tags: [schedule, timezone, cross-tz]

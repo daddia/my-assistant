@@ -1,0 +1,15 @@
+fixture_id: cal-09-habit-gap
+violations_expected:
+  - type: habit
+    count_min: 1
+    related_habit: morning-review
+proposals_expected:
+  min_count: 1
+  block_types: [habit]
+  must_not_contain: [booked, "created event", "I've scheduled"]
+focus_defence_level: moderate
+queue_items_min: 1
+approval_language_checks:
+  must_include: [manually, propose]
+  must_not_include: [auto-book, "scheduled for you"]
+notes: Tuesday missing Morning review 08:00–08:30; habit block proposal with manual-create draft

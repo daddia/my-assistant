@@ -1,0 +1,20 @@
+fixture_id: cal-08-schedule-conflicts
+mode: schedule
+meeting_request:
+  duration_minutes: 30
+  attendee_tier: 2
+slots_offered_min: 2
+rejected_slots_min: 2
+rejected_reasons_any_of: [overlap, focus window, buffer, outside hours]
+timezone_in_every_offer: true
+draft_required: true
+queue_items_min: 1
+approval_language_checks:
+  must_include: [manually, propose]
+  must_not_include: [booked, auto-book, "scheduled for you"]
+violations_expected: []
+proposals_expected:
+  min_count: 0
+  block_types: []
+  must_not_contain: [booked, "created event", "I've scheduled"]
+notes: Busy Tuesday; rejected-slots table with at least 2 hard conflicts (standup overlap, focus window)
