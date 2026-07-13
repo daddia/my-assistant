@@ -15,7 +15,7 @@ The **proof harness** lives at [`evals/`](../evals/). It exercises inbox triage,
 | [`evals/golden/`](../evals/golden/) | Expected triage and draft outputs |
 | [`evals/injection/`](../evals/injection/) | Attack fixtures + expected behaviour |
 | [`evals/notetaker/`](../evals/notetaker/) | Notetaker import fixtures + golden extractions |
-| [`evals/calendar/`](../evals/calendar/) | Time protection fixtures + golden block proposals |
+| [`evals/calendar/`](../evals/calendar/) | Protect + schedule fixtures, habit blocks, rejected-slots goldens (11 fixtures) |
 | [`evals/schedule-health/`](../evals/schedule-health/) | Schedule health ledger fixtures + miss-detection golden |
 | [`evals/feedback/`](../evals/feedback/) | Draft feedback fixtures + golden profile diffs |
 | [`evals/connectors/`](../evals/connectors/) | Connector category paste fixtures + golden smoke expectations |
@@ -38,7 +38,9 @@ This runs automatically on every pull request via GitHub Actions. Exit code `0` 
 
 **Notetaker import** (manual, ~20 minutes): five notetaker fixtures (`nt-01`, `nt-03`, `nt-05`, `nt-06`, `nt-07`) via `/assistant:meeting follow-up`. See [`evals/notetaker/README.md`](../evals/notetaker/README.md).
 
-**Time protection** (manual, ~15 minutes): four calendar smoke fixtures (`cal-01`, `cal-03`, `cal-04`, `cal-06`) via `/assistant:calendar protect`. See [`evals/calendar/README.md`](../evals/calendar/README.md).
+**Calendar depth (MA14, manual):** 11 calendar fixtures — protect smoke (`cal-01`, `cal-03`, `cal-04`, `cal-06`) plus schedule smoke (`cal-08`). Protect via `/assistant:calendar protect`; schedule via `/assistant:calendar schedule`. Score protect against [`evals/calendar/rubric/time-protection.md`](../evals/calendar/rubric/time-protection.md) and schedule against [`evals/calendar/rubric/scheduling-accuracy.md`](../evals/calendar/rubric/scheduling-accuracy.md). Epic close: ≥ **90% Pass** on both rubrics. See [`evals/calendar/README.md`](../evals/calendar/README.md) and [MA14 design](../.agency/work/calendar-depth/design.md).
+
+**Time protection (MA05, manual):** subset of MA14 protect corpus — four smoke fixtures via `/assistant:calendar protect`.
 
 **Schedule health** (manual, ~10 minutes): copy `sh-02-missed-morning-brief` fixture to a test working folder, run `/assistant:brief` after 09:30 on a weekday — confirm miss block appears. Repeat with `sh-01-healthy-weekday` — no block. See [`evals/schedule-health/README.md`](../evals/schedule-health/README.md).
 
@@ -62,7 +64,8 @@ For skill or rule changes:
 - [Proof harness design](../.agency/work/proof-harness/design.md) — MA01 epic
 - [Review queue design](../.agency/work/review-queue/design.md) — MA02 epic; fixtures at [`evals/review-queue/`](../evals/review-queue/)
 - [Notetaker import design](../.agency/work/notetaker-import/design.md) — MA04 epic; corpus at [`evals/notetaker/`](../evals/notetaker/)
-- [Time protection design](../.agency/work/time-protection/design.md) — MA05 epic; corpus at [`evals/calendar/`](../evals/calendar/)
+- [Calendar depth design](../.agency/work/calendar-depth/design.md) — MA14 epic; corpus at [`evals/calendar/`](../evals/calendar/)
+- [Time protection design](../.agency/work/time-protection/design.md) — MA05 epic; protect subset in [`evals/calendar/`](../evals/calendar/)
 - [Always-on reliability design](../.agency/work/always-on/design.md) — MA06 epic; fixtures at [`evals/schedule-health/`](../evals/schedule-health/)
 - [Feedback loop design](../.agency/work/feedback-loop/design.md) — MA07 epic; corpus at [`evals/feedback/`](../evals/feedback/)
 - [Trust artefacts design](../.agency/work/trust-artefacts/design.md) — MA08 epic; connector corpus at [`evals/connectors/`](../evals/connectors/)

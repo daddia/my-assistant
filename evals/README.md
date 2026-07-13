@@ -74,13 +74,15 @@ Exercise the meeting-follow-up import corpus per [`notetaker/README.md`](./notet
 2. Score against [`notetaker/golden/`](./notetaker/golden/) using [`notetaker/rubric/follow-up-extraction.md`](./notetaker/rubric/follow-up-extraction.md).
 3. Re-run `inj-08` after `nt-07-injection-heavy` to confirm transcript injection behaviour is unchanged.
 
-### 8. Time protection (optional — MA05)
+### 8. Calendar — time protection + scheduling (MA05 + MA14)
 
-Exercise the calendar protect corpus per [`calendar/README.md`](./calendar/README.md):
+Exercise the calendar corpus per [`calendar/README.md`](./calendar/README.md):
 
-1. For each smoke fixture (`cal-01`, `cal-03`, `cal-04`, `cal-06`), paste the fixture and invoke `/assistant:calendar protect`.
-2. Score against [`calendar/golden/`](./calendar/golden/) using [`calendar/rubric/time-protection.md`](./calendar/rubric/time-protection.md).
-3. Confirm propose-only language — no auto-book phrasing in drafts or queue items.
+**Protect** — for smoke fixtures (`cal-01`, `cal-03`, `cal-04`, `cal-06`) and full protect set, paste the fixture and invoke `/assistant:calendar protect`. Score against [`calendar/golden/`](./calendar/golden/) using [`calendar/rubric/time-protection.md`](./calendar/rubric/time-protection.md).
+
+**Schedule** — for schedule fixtures (`cal-07`, `cal-08`, `cal-11`), paste and invoke `/assistant:calendar schedule`. Score using [`calendar/rubric/scheduling-accuracy.md`](./calendar/rubric/scheduling-accuracy.md).
+
+Confirm propose-only language — no auto-book phrasing in drafts or queue items. Epic close: ≥ **90% Pass** on protect + schedule rubrics (11 fixtures total).
 
 ## Smoke subset
 
@@ -187,6 +189,16 @@ _Free-text notes for ambiguous scoring, VIP ordering disputes, or draft voice sl
 | cal-03-focus-intrusion | | | | n/a | |
 | cal-04-healthy-day | | | | n/a | |
 | cal-06-invite-injection | | | | pass / fail | |
+| cal-09-habit-gap | | | | n/a | |
+| cal-10-assertive-focus-defence | | | | n/a | |
+
+## Scheduling
+
+| Fixture id | Slots | Rejected | Draft | Queue | Notes |
+| ---------- | ----- | -------- | ----- | ----- | ----- |
+| cal-07-schedule-slot-offer | pass / partial / fail | n/a | pass / partial / fail | pass / fail | |
+| cal-08-schedule-conflicts | | | | | |
+| cal-11-schedule-timezone | | | | | |
 
 ## Sign-off
 
@@ -241,7 +253,7 @@ validate-fixtures: OK - 35 corpus threads, 10 injection fixtures, 7 notetaker fi
 | [`rubric/`](./rubric/) | Scoring rubrics |
 | [`injection/`](./injection/) | Attack fixtures + expected behaviour |
 | [`notetaker/`](./notetaker/) | Notetaker import fixtures + golden extractions (MA04) |
-| [`calendar/`](./calendar/) | Time protection fixtures + golden block proposals (MA05) |
+| [`calendar/`](./calendar/) | Protect + schedule fixtures, golden expectations, dual rubrics (MA05 + MA14) |
 | [`demo/first-run-script.md`](./demo/first-run-script.md) | 3-minute visitor demo |
 | [`automation/`](./automation/) | Domain registry for MA11 rule-based scorer (inbox, draft, feedback) |
 | [`scripts/validate_fixtures.py`](../scripts/validate_fixtures.py) | Structural validation (Python) |

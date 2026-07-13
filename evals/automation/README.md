@@ -4,7 +4,7 @@ Registers proof-harness domains for rule-based scoring and CI smoke runs.
 
 | File | Purpose |
 | ---- | ------- |
-| [`manifest.yaml`](./manifest.yaml) | Domain registry (inbox, draft, feedback) |
+| [`manifest.yaml`](./manifest.yaml) | Domain registry (inbox, draft, feedback, calendar) |
 | [`score_inbox.py`](./score_inbox.py) | Inbox triage golden validator + results scorer |
 | [`score_draft.py`](./score_draft.py) | Draft quality golden validator + rule-based scorer (MA13) |
 | [`score_feedback.py`](./score_feedback.py) | Feedback loop golden validator + rule-based scorer (MA13) |
@@ -14,6 +14,8 @@ Registers proof-harness domains for rule-based scoring and CI smoke runs.
 **Draft domain (MA13):** ≥ 18 draft goldens, ≥ 90% pass on `draft_required` threads, rule checks for `must_not_contain`, `max_sentences`, grounding, variants.
 
 **Feedback domain (MA13):** ≥ 3 profile-diff goldens with full `hunk_specs` (fb-03, fb-04, fb-05); smoke 5/5 pass.
+
+**Calendar domain (MA14):** 11 fixtures (protect + schedule), ≥ 90% pass on both rubrics, smoke ids: cal-01, cal-03, cal-04, cal-06, cal-08.
 
 ```bash
 # CI structural checks (no agent session required)

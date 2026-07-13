@@ -82,6 +82,8 @@ Smoke subset: five corpus threads (VIP, marketing, ambiguous, long-thread, sched
 
 **MA13 draft excellence:** 18 draft goldens minimum; draft rubric ≥ **90% Pass** on `draft_required` threads including §6 Grounding. CI runs `score_draft.py` and `score_feedback.py --validate-goldens`. Feedback smoke 5/5; profile-diff goldens `fb-03`, `fb-04`, `fb-05` must pass.
 
+**MA14 calendar depth:** 11 calendar fixtures minimum (6 protect + 5 new protect/schedule); protect rubric + [`evals/calendar/rubric/scheduling-accuracy.md`](./evals/calendar/rubric/scheduling-accuracy.md) each ≥ **90% Pass** for manual sign-off. CI smoke: `cal-01`, `cal-03`, `cal-04`, `cal-06`, `cal-08`. Domain registered in [`evals/automation/manifest.yaml`](./evals/automation/manifest.yaml).
+
 ### Skill and behaviour checks
 
 Validate in an agent session, not a unit-test runner:

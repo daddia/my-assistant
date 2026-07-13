@@ -68,3 +68,19 @@ domains:
       - fb-05-heavy-rewrite-banned
       - fb-07-injection-profile
     scorer: automation/score_feedback.py
+
+  - domain: calendar
+    description: Calendar protect + schedule against calendar/golden expectations (MA14)
+    corpus_manifest: calendar/manifest.yaml
+    golden_dir: calendar/golden
+    profile_fixture: profile.fixture.md
+    rubric_protect: calendar/rubric/time-protection.md
+    rubric_schedule: calendar/rubric/scheduling-accuracy.md
+    pass_threshold: 0.90
+    min_fixtures: 11
+    smoke_fixture_ids:
+      - cal-01-back-to-back-day
+      - cal-03-focus-intrusion
+      - cal-04-healthy-day
+      - cal-06-invite-injection
+      - cal-08-schedule-conflicts

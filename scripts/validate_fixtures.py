@@ -32,6 +32,7 @@ EVALS_DIR = ROOT / "evals"
 MIN_THREADS = 44
 MIN_INJECTION = 10
 MIN_DRAFT_GOLDENS = 18
+MIN_CALENDAR_FIXTURES = 11
 
 REQUIRED_DIRS = [
     EVALS_DIR / "corpus/threads",
@@ -92,8 +93,9 @@ NOTETAKER_FORMAT_IDS = frozenset({"granola", "fireflies", "otter", "google-meet"
 DRAFT_TYPES = frozenset({"recap", "doc-delivery", "next-step"})
 OWNER_VALUES = frozenset({"self", "other", "unknown"})
 
-CALENDAR_BLOCK_TYPES = frozenset({"buffer", "prep", "follow-up", "focus-defence"})
-VIOLATION_TYPES = frozenset({"buffer", "prep", "follow-up", "focus-intrusion"})
+CALENDAR_BLOCK_TYPES = frozenset({"buffer", "prep", "follow-up", "focus-defence", "habit"})
+VIOLATION_TYPES = frozenset({"buffer", "prep", "follow-up", "focus-intrusion", "habit"})
+SCHEDULE_REJECTED_REASONS = frozenset({"overlap", "focus window", "buffer", "outside hours"})
 
 EXPECTED_JOB_IDS = [
     "morning-briefing",
@@ -532,6 +534,37 @@ def validate_calendar(errors: list[str]) -> list:
                 f"'{golden.get('fixture_id')}' does not match manifest id '{fid}'"
             )
 
+        mode = golden.get("mode", "protect")
+        if mode not in ("protect", "schedule"):
+            errors.append(
+                f"calendar golden {Path(gpath).name} invalid mode '{mode}'"
+            )
+
+        if mode == "schedule":
+            for field in ("slots_offered_min", "timezone_in_every_offer", "draft_required"):
+                if field not in golden:
+                    errors.append(
+                        f"calendar golden {Path(gpath).name} schedule mode missing '{field}'"
+                    )
+            reasons = golden.get("rejected_reasons_any_of")
+            if reasons is not None:
+                if not isinstance(reasons, list):
+                    errors.append(
+                        f"calendar golden {Path(gpath).name} rejected_reasons_any_of must be a list"
+                    )
+                else:
+                    for r in reasons:
+                        if r not in SCHEDULE_REJECTED_REASONS:
+                            errors.append(
+                                f"calendar golden {Path(gpath).name} invalid rejected reason '{r}'"
+                            )
+
+        severity_assertions = golden.get("severity_assertions")
+        if severity_assertions is not None and not isinstance(severity_assertions, list):
+            errors.append(
+                f"calendar golden {Path(gpath).name} severity_assertions must be a list"
+            )
+
         violations = golden.get("violations_expected")
         if not isinstance(violations, list):
             errors.append(
@@ -590,6 +623,12 @@ def validate_calendar(errors: list[str]) -> list:
                         errors.append(
                             f"calendar golden {Path(gpath).name} {section}.{key} must be a list"
                         )
+
+    if len(cal_fixtures) < MIN_CALENDAR_FIXTURES:
+        errors.append(
+            f"calendar/manifest.yaml must list at least {MIN_CALENDAR_FIXTURES} fixtures; "
+            f"got {len(cal_fixtures)}"
+        )
 
     return cal_fixtures
 
