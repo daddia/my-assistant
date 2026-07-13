@@ -47,7 +47,7 @@ Max one health block per chat turn.
 
 Pull from whatever is connected; degrade gracefully when something's missing.
 
-1. **Today's calendar** — meetings with times and attendees; flag anything external or VIP; note gaps and any conflict/no-buffer issues. When back-to-back meetings or missing buffers are detected, append one line: "Run `/assistant:calendar protect` to draft buffer blocks." Optionally footnote: `calendar: N buffer gaps`. Hand scheduling detail to `calendar-scheduling` protect mode when the user confirms — default is offer, not silent inline scan (keeps brief under ~400 words).
+1. **Today's calendar** — meetings with times and attendees; flag anything external or VIP; note gaps and any conflict/no-buffer issues. When back-to-back meetings or missing buffers are detected, append one line: "Run `/assistant:calendar protect` to draft buffer blocks." When habits are configured in `calendar.policy.md` and a pasted agenda is already loaded for the calendar section, optionally footnote: `habit: N gaps this week` (cheap scan only — no extra connector round-trip). Optionally footnote: `calendar: N buffer gaps`. Hand scheduling detail to `calendar-scheduling` protect mode when the user confirms — default is offer, not silent inline scan (keeps brief under ~400 words).
 2. **Priority unread** — prefer today's sweep artefact over a live re-triage (see **Sweep handoff** below). Fall back to `~~email`/`~~chat` top items or pasted unread when no recent sweep exists. VIP-first; only what matters before noon.
 3. **Follow-ups going cold** — from `follow-up-tracking`: what's silent past threshold.
 4. **Due tasks** — from `TASKS.md`: due or overdue today (via `task-management`).

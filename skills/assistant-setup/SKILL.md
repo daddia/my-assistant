@@ -124,7 +124,7 @@ Ask conversationally, one section at a time. Confirm and write after each. Don't
 
 6. **VIP tiers** → `email.policy.md` — who must surface first and never be auto-touched (Tier 1); who to draft fastest for (Tier 2).
 7. **Email policy** → `email.policy.md` — reply threshold (which categories to draft for vs summarise vs archive); exact-sender auto-archive list (start conservative); labels they use.
-8. **Calendar policy** → `calendar.policy.md` — working hours; meeting-length defaults and buffers; focus-time defence level; what may be auto-proposed vs must-always-ask.
+8. **Calendar policy** → `calendar.policy.md` — working hours; meeting-length defaults and buffers; focus-time defence level; **0–3 habit blocks** (day, start time, duration, title — e.g. Mon–Fri 08:00 "Morning review"); what may be auto-proposed vs must-always-ask.
 9. **Actions policy** → `actions.policy.md` — optional at setup; copy the template. Non-reply actions (calendar holds, tasks, forms) are added as the user confirms rules during triage.
 
 ## Writing the files
