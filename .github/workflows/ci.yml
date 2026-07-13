@@ -24,3 +24,9 @@ jobs:
 
       - name: Validate eval fixtures
         run: python3 scripts/validate_fixtures.py
+
+      - name: Validate inbox golden structure (MA12)
+        run: python3 evals/automation/score_inbox.py --validate-goldens
+
+      - name: Test update_ledger.py
+        run: python3 scripts/test_update_ledger.py
