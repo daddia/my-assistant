@@ -8,23 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+### Changed
+
+### Fixed
+
+## [1.7.0] - 2026-07-13
+
+### Added
+
 - **Draft edge corpus (40–44)** — attachment grounding, dual-path variant, injection-in-reply, personal school ICP, long-thread vendor distill; 18 draft goldens total (MA13).
 - **`evals/automation/score_draft.py`** and **`score_feedback.py`** — rule-based golden validators and manual results scorers; wired into CI.
 - **Grounding checklist** — thread-local pre-output checks surfaced in draft output and approval frame (MA13 §4.1).
 - **Tone/length variants** — optional Variant B on standalone draft with `--variant` or dual-path threads.
 - **Feedback hunk specs** — full profile-diff contracts on `fb-03`, `fb-04`, `fb-05`; new edit patterns in `config/feedback.yaml`.
-
-### Changed
-
-- **Email drafting skill** — connector mode enum (`connected` / `paste-only` / `fallback-degraded`), FALLBACK file header, grounding block, variant rules, sweep `notes:` propagation on partial.
-- **Email feedback skill** — tighter diff evidence quotes, `related_ids` linkage, corpus thread id in rationale.
-- **Corpus minimum** — 44 threads (`MIN_THREADS`); `MIN_DRAFT_GOLDENS` ≥ 18.
-- **Competitor rating** — reply drafting in voice row → **Strong** (MA13 landed).
-- **Draft rubric** — §6 Grounding checklist dimension added.
-- **Eval automation manifest** — `domain: draft` and `domain: feedback` registered.
-
-### Added
-
 - **Live edge case corpus (36–39)** — utility calendar-hold, co-parent VIP reply, toll auto-archive, inbox lingerer; locks expectations from live sweep review.
 - **`evals/automation/score_inbox.py`** — rule-based golden validator and manual results scorer; wired into CI.
 - **`scripts/test_update_ledger.py`** — unit tests for deterministic schedule heartbeat writer.
@@ -36,8 +32,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- **Corpus minimum** — 39 threads (`MIN_THREADS`); profile fixture adds co-parent VIP and eToll auto-archive.
-- **Competitor rating** — inbox triage row → **Strong** (MA12 landed).
+- **Email drafting skill** — connector mode enum (`connected` / `paste-only` / `fallback-degraded`), FALLBACK file header, grounding block, variant rules, sweep `notes:` propagation on partial.
+- **Email feedback skill** — tighter diff evidence quotes, `related_ids` linkage, corpus thread id in rationale.
+- **Corpus minimum** — 44 threads (`MIN_THREADS`); `MIN_DRAFT_GOLDENS` ≥ 18.
+- **Competitor rating** — reply drafting in voice row → **Strong** (MA13 landed); inbox triage row → **Strong** (MA12 landed).
+- **Draft rubric** — §6 Grounding checklist dimension added.
+- **Eval automation manifest** — `domain: draft` and `domain: feedback` registered.
 - **Rubric** — §8 action type and lingerers scoring for live edge fixtures.
 - **Schedule split** — `inbox-triage-am` (08:00 triage with drafts) and `inbox-sweep` (12:00/16:00 light sweep); triage still writes `sweep-*.md` for morning brief handoff.
 - **Connector pre-check** — email-drafting and inbox-triage surface permission failures; fallback markdown labelled explicitly; `partial` ledger status when degraded.
