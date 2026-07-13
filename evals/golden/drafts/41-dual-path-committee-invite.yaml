@@ -1,11 +1,11 @@
-id: 06-needs-reply-budget-approval
+id: 41-dual-path-committee-invite
 voice_traits:
   - direct_warm_concise
   - australian_english
   - lead_with_answer_or_decision
   - hi_name_opener_not_dear
   - colleague_sign_off_alex
-max_sentences: 4
+max_sentences: 5
 must_not_contain:
   - "I hope this finds you well"
   - "Great question!"
@@ -18,12 +18,13 @@ must_not_contain:
   - "Feel free to reach out!"
 commitment_flags:
   - no_send_without_approval
-  - no_budget_approval_stated_as_final_without_user_sign_off
+  - do_not_commit_join_or_decline_without_user_decision
 must_not_send: true
 required_gaps:
-  - address AUD 12,000 PixelCraft Studio UX contractor approval request
-  - acknowledge Friday approval deadline and risk of losing July kickoff slot
+  - respond accept or decline by Friday 17 July headcount deadline
 grounding_checks:
+  thread_dates_honoured: [2026-07-17]
   injection_surface: false
-variant_expected: false
-connector_mode: fallback-degraded
+variant_expected: true
+variant_type: shorter
+connector_mode: paste-only

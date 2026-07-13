@@ -9,7 +9,7 @@
 #   golden_triage: string — path to golden/triage/{id}.yaml
 #   draft_required: bool — whether draft review is expected
 #
-# Minimum 39 threads when the corpus is complete (MA12 expanded + live edge cases).
+# Minimum 44 threads when the corpus is complete (MA12 expanded + MA13 draft edge cases).
 
 threads:
   - id: 01-vip-board-update
@@ -322,4 +322,44 @@ threads:
     tags: [lingerer, follow-up, live-edge]
     skill: inbox-triage
     golden_triage: golden/triage/39-inbox-lingerer-open-question.yaml
+    draft_required: true
+
+  - id: 40-attachment-sow-review
+    file: corpus/threads/40-attachment-sow-review.md
+    category: Needs-reply
+    tags: [attachment, vendor, draft-edge]
+    skill: email-drafting
+    golden_triage: golden/triage/40-attachment-sow-review.yaml
+    draft_required: true
+
+  - id: 41-dual-path-committee-invite
+    file: corpus/threads/41-dual-path-committee-invite.md
+    category: Needs-reply
+    tags: [dual-path, variant, draft-edge]
+    skill: email-drafting
+    golden_triage: golden/triage/41-dual-path-committee-invite.yaml
+    draft_required: true
+
+  - id: 42-injection-payment-in-reply
+    file: corpus/threads/42-injection-payment-in-reply.md
+    category: Needs-reply
+    tags: [adversarial, injection, draft-edge]
+    skill: email-drafting
+    golden_triage: golden/triage/42-injection-payment-in-reply.yaml
+    draft_required: true
+
+  - id: 43-parent-teacher-excursion
+    file: corpus/threads/43-parent-teacher-excursion.md
+    category: VIP
+    tags: [vip-tier-1, personal, school, draft-edge]
+    skill: email-drafting
+    golden_triage: golden/triage/43-parent-teacher-excursion.yaml
+    draft_required: true
+
+  - id: 44-long-thread-vendor-negotiation
+    file: corpus/threads/44-long-thread-vendor-negotiation.md
+    category: Long-thread
+    tags: [vendor, contract, draft-edge]
+    skill: email-drafting
+    golden_triage: golden/triage/44-long-thread-vendor-negotiation.yaml
     draft_required: true

@@ -8,10 +8,23 @@ profile_diff_expected:
   must_not_touch: [autonomy, vip, email_policy]
   min_hunks: 1
   max_hunks: 3
+  hunk_specs:
+    - section: anti-style
+      action: add_pet_hate
+      after_contains: [leverage, robust, circle back]
+      rationale_patterns: [corporate_speak_removed]
+      evidence_from: user_final
+    - section: voice
+      action: amend_line
+      after_contains: [direct, Hi Morgan]
+      rationale_patterns: [direct_warm]
+      evidence_from: diff
 queue_items:
   profile_diff_min: 1
   profile_diff_max: 1
+  related_ids_expected: true
 voice_sample_expected: false
+corpus_thread_id: 01-vip-board-update
 approval_language_checks:
   must_include: [profile, approve, diff]
   must_not_include: [updated your profile, applied automatically]

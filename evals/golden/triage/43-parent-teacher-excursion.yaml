@@ -1,0 +1,10 @@
+id: 43-parent-teacher-excursion
+expected_bucket: VIP
+draft_required: true
+vip_priority:
+  rank: 1
+  tier: 1
+  sender: rachel.chen@school-eval.test
+summary_bullets:
+  - School (Ms Rachel Chen) — Year 6 science excursion Thu 24 Jul; Sam's permission slip due Wed 16 Jul
+  - Personal/family ICP — casual colleague tone, first-name sign-off

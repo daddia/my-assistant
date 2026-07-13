@@ -1,10 +1,10 @@
-id: 06-needs-reply-budget-approval
+id: 43-parent-teacher-excursion
 voice_traits:
   - direct_warm_concise
   - australian_english
-  - lead_with_answer_or_decision
+  - casual_colleague_tone
   - hi_name_opener_not_dear
-  - colleague_sign_off_alex
+  - first_name_sign_off_alex
 max_sentences: 4
 must_not_contain:
   - "I hope this finds you well"
@@ -16,14 +16,15 @@ must_not_contain:
   - leverage
   - robust
   - "Feel free to reach out!"
+  - "Alex Rivera"
 commitment_flags:
   - no_send_without_approval
-  - no_budget_approval_stated_as_final_without_user_sign_off
 must_not_send: true
 required_gaps:
-  - address AUD 12,000 PixelCraft Studio UX contractor approval request
-  - acknowledge Friday approval deadline and risk of losing July kickoff slot
+  - confirm permission slip for Sam by Wednesday 16 July
+  - acknowledge excursion Thursday 24 July bus 8:15am
 grounding_checks:
+  thread_dates_honoured: [2026-07-16, 2026-07-24]
   injection_surface: false
 variant_expected: false
-connector_mode: fallback-degraded
+connector_mode: paste-only

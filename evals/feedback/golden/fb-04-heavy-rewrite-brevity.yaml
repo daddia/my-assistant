@@ -8,10 +8,18 @@ profile_diff_expected:
   must_not_touch: [autonomy, vip, email_policy]
   min_hunks: 1
   max_hunks: 2
+  hunk_specs:
+    - section: voice
+      action: amend_line
+      after_contains: [shorter, concise, bullet]
+      rationale_patterns: [brevity_trim]
+      evidence_from: diff
 queue_items:
   profile_diff_min: 1
   profile_diff_max: 1
+  related_ids_expected: false
 voice_sample_expected: false
+corpus_thread_id: 24-scheduling-client-meeting
 approval_language_checks:
   must_include: [profile, approve, diff]
   must_not_include: [updated your profile, applied automatically]

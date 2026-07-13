@@ -1,0 +1,7 @@
+id: 40-attachment-sow-review
+expected_bucket: Needs-reply
+draft_required: true
+action: reply
+summary_bullets:
+  - Dana Okonkwo (VendorCo) sent SOW v2 with Phase 2 on 18 Aug, support cap, exit clause
+  - Acknowledge SOW-v2.pdf and confirm review by Friday 18 July for 21 Jul steering committee

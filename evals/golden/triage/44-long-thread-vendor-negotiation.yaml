@@ -1,0 +1,7 @@
+id: 44-long-thread-vendor-negotiation
+expected_bucket: Needs-reply
+draft_required: true
+action: reply
+summary_bullets:
+  - StackWatch renewal — finance approved 2-year at 6% uplift if SLA fixed to 99.95%
+  - Quinn needs decision before 15 July EOD; distill nine-message thread without restating full history
