@@ -83,3 +83,27 @@ edit_patterns:
     rubric_dimensions: [voice]
     typical_sections: [anti-style]
     confidence_when: phrase listed in profile banned openers/words appears in draft only
+
+  - pattern_id: variant_preference
+    description: User consistently chose a shorter/longer or formal/casual variant over primary draft
+    rubric_dimensions: [voice, brevity]
+    typical_sections: [voice]
+    confidence_when: user sent variant B style or requested variant type on multiple threads
+    profile_action: narrow_tweak
+
+  - pattern_id: length_trim_request
+    description: User cut draft length substantially — repeatable brevity preference
+    rubric_dimensions: [brevity]
+    typical_sections: [voice]
+    confidence_when: user_final sentence count ≥40% below draft without factual additions
+    profile_action: voice_and_anti_style
+
+  - pattern_id: formality_shift
+    description: User shifted formality (more casual or more formal) for relationship type
+    rubric_dimensions: [voice]
+    typical_sections: [voice]
+    confidence_when: sign-off or opener formality changed to match relationship in user_final
+    profile_action: narrow_tweak
+
+# Grounding-related edits (attachment gaps, date fixes) are situational — map to gap_fill_only;
+# do not propose profile hunks unless the user explicitly asks to change voice rules for gaps.

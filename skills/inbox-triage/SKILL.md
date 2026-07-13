@@ -214,9 +214,12 @@ draft_paths:
 calendar_draft_paths:
   - drafts/calendar-red-energy-hold.md
 connector_status: ok | degraded
+notes: ""  # populated by email-drafting on connector partial (MA13); e.g. "Email connector unavailable — 2 fallback drafts"
 ```
 
 4. Body: same section structure as the chat report (digest tables allowed).
+
+When `email-drafting` returns `fallback-degraded` on a handoff, set `connector_status: degraded`, populate `notes:` with a plain summary of which drafts are fallback-only, and use ledger status `partial`. See `skills/email-drafting/SKILL.md` **Connector pre-check**.
 5. **Ledger write (required):** run via bash — do not hand-edit YAML:
 
 ```bash
