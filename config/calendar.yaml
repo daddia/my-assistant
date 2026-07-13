@@ -45,6 +45,17 @@ block_types:
     default_duration_source: profile.protected_focus_window
     trigger_heuristics:
       - Meeting overlaps protected focus window
-      - Severity scales with focus-time defence level (gentle = report only; moderate = propose buffers; assertive = propose focus-defence blocks)
+      - Severity scales with focus-time defence level (gentle = report only; moderate = report intrusions; assertive = propose focus-defence blocks on adjacent free time)
+    calendar_mark: Focus time
+    merge_with: []
+
+  - block_type: habit
+    display_name: Habit block
+    purpose: Recurring personal or focus habit missing from the calendar
+    default_duration_source: policy.habit_blocks.duration_minutes
+    trigger_heuristics:
+      - Recurring habit defined in calendar.policy.md Habit blocks table
+      - Habit day intersects scan horizon
+      - No event covers at least 80% of the habit window (existing event titled like the habit counts as satisfied)
     calendar_mark: Focus time
     merge_with: []

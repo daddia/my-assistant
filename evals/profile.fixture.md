@@ -100,6 +100,11 @@
 - **May auto-propose:** Times within working hours to Tier 2+ contacts (draft only)
 - **Must always ask:** Any booking, move, or decline
 - **Scheduling replies:** Offer 2-3 specific slots with timezone; match formality to VIP tier
+- **Habit blocks:**
+
+  | habit_id | title | days | start_time | duration_minutes | calendar_mark |
+  | -------- | ----- | ---- | ---------- | ---------------- | ------------- |
+  | morning-review | Morning review | mon, tue, wed, thu, fri | 08:00 | 30 | Focus time |
 
 ## 8. Goals & priorities (eval context)
 

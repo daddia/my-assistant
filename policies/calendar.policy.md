@@ -35,6 +35,16 @@ Scheduling, buffers, and focus-time defence. Setup writes this to `{assistantPat
 
 Any booking, move, or decline outside pre-approved rules.
 
+## Habit blocks
+
+Recurring personal or focus habits the protect scan expects on the calendar. If a habit day falls in the scan horizon and no event covers ≥ 80% of the window, protect mode emits a `habit` violation and block proposal.
+
+| habit_id | title | days | start_time | duration_minutes | calendar_mark |
+| -------- | ----- | ---- | ---------- | ---------------- | ------------- |
+| morning-review | Morning review | mon, tue, wed, thu, fri | 08:00 | 30 | Focus time |
+
+Add rows during setup (0–3 habits typical). Remove rows to disable habit scanning for that pattern.
+
 ## Scheduling replies
 
 Offer 2–3 specific slots with timezone; match formality to the contact's VIP tier (see `email.policy.md`).
