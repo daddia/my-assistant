@@ -29,8 +29,9 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 EVALS_DIR = ROOT / "evals"
 
-MIN_THREADS = 39
+MIN_THREADS = 44
 MIN_INJECTION = 10
+MIN_DRAFT_GOLDENS = 18
 
 REQUIRED_DIRS = [
     EVALS_DIR / "corpus/threads",
@@ -120,6 +121,8 @@ BLOCKED_PERSONAL_DOMAINS = frozenset({
     "icloud.com", "me.com", "aol.com", "live.com",
 })
 
+CONNECTOR_MODES = frozenset({"connected", "paste-only", "fallback-degraded"})
+VARIANT_TYPES = frozenset({"shorter", "longer", "formal", "casual"})
 HEALTH_CHECK_STATUSES = frozenset({"pass", "warn", "fail", "skip"})
 HEALTH_CHECK_PLATFORMS = frozenset({"cowork", "cursor", "claude-code", "unknown"})
 MIN_HEALTH_CHECKS = 20
@@ -222,6 +225,67 @@ def validate_corpus(errors: list[str]) -> tuple[set[str], list]:
         )
 
     return thread_ids, threads
+
+
+def validate_draft_goldens(errors: list[str], thread_ids: set[str]) -> list:
+    golden_drafts_dir = EVALS_DIR / "golden/drafts"
+    draft_paths = sorted(golden_drafts_dir.glob("*.yaml"))
+
+    if len(draft_paths) < MIN_DRAFT_GOLDENS:
+        errors.append(
+            f"golden/drafts lists {len(draft_paths)} files; minimum is {MIN_DRAFT_GOLDENS}"
+        )
+
+    draft_ids: set[str] = set()
+    for path in draft_paths:
+        golden = load_yaml(path)
+        gid = golden.get("id")
+        if not gid:
+            errors.append(f"draft golden {path.name} missing 'id'")
+            continue
+        if gid in draft_ids:
+            errors.append(f"draft golden duplicate id '{gid}'")
+        else:
+            draft_ids.add(gid)
+        if gid not in thread_ids:
+            errors.append(f"draft golden {path.name} id '{gid}' not in corpus manifest")
+
+        if "max_sentences" not in golden:
+            errors.append(f"draft golden {gid} missing max_sentences")
+        if not isinstance(golden.get("must_not_contain"), list):
+            errors.append(f"draft golden {gid} must_not_contain must be a list")
+        if not isinstance(golden.get("must_not_send"), bool):
+            errors.append(f"draft golden {gid} missing must_not_send boolean")
+
+        mode = golden.get("connector_mode")
+        if mode and mode not in CONNECTOR_MODES:
+            errors.append(f"draft golden {gid} invalid connector_mode '{mode}'")
+
+        vtype = golden.get("variant_type")
+        if vtype and vtype not in VARIANT_TYPES:
+            errors.append(f"draft golden {gid} invalid variant_type '{vtype}'")
+
+        grounding = golden.get("grounding_checks")
+        if grounding is not None:
+            if not isinstance(grounding, dict):
+                errors.append(f"draft golden {gid} grounding_checks must be a mapping")
+            else:
+                for key in ("attachment_refs", "thread_dates_honoured"):
+                    val = grounding.get(key)
+                    if val is not None and not isinstance(val, list):
+                        errors.append(
+                            f"draft golden {gid} grounding_checks.{key} must be a list"
+                        )
+                inj = grounding.get("injection_surface")
+                if inj is not None and not isinstance(inj, bool):
+                    errors.append(
+                        f"draft golden {gid} grounding_checks.injection_surface must be bool"
+                    )
+
+        if "variant_expected" in golden and not isinstance(golden["variant_expected"], bool):
+            errors.append(f"draft golden {gid} variant_expected must be boolean")
+
+    return draft_paths
 
 
 def validate_injection(errors: list[str]) -> list:
@@ -781,6 +845,28 @@ def validate_feedback(errors: list[str]) -> list:
         if "voice_sample_expected" not in golden:
             errors.append(f"feedback golden {Path(gpath).name} missing voice_sample_expected")
 
+        pdiff = golden.get("profile_diff_expected") or {}
+        if pdiff.get("required") and (pdiff.get("min_hunks") or 0) >= 1:
+            specs = pdiff.get("hunk_specs")
+            fid_base = golden.get("fixture_id", fid)
+            if fid_base in ("fb-03-heavy-rewrite-tone", "fb-04-heavy-rewrite-brevity", "fb-05-heavy-rewrite-banned"):
+                if not isinstance(specs, list) or not specs:
+                    errors.append(
+                        f"feedback golden {Path(gpath).name} requires non-empty hunk_specs"
+                    )
+                else:
+                    for j, spec in enumerate(specs):
+                        if not isinstance(spec, dict):
+                            errors.append(
+                                f"feedback golden {Path(gpath).name} hunk_specs[{j}] must be mapping"
+                            )
+                            continue
+                        for key in ("section", "action", "rationale_patterns"):
+                            if key not in spec:
+                                errors.append(
+                                    f"feedback golden {Path(gpath).name} hunk_specs[{j}] missing '{key}'"
+                                )
+
         for section, keys in (
             ("approval_language_checks", ("must_include", "must_not_include")),
             ("injection_checks", ("must_surface", "must_refuse", "must_not_write")),
@@ -1252,6 +1338,7 @@ def main() -> int:
     require_paths(errors)
 
     thread_ids, threads = validate_corpus(errors)
+    validate_draft_goldens(errors, thread_ids)
     fixtures = validate_injection(errors)
     nt_fixtures = validate_notetaker(errors)
     cal_fixtures = validate_calendar(errors)

@@ -28,5 +28,11 @@ jobs:
       - name: Validate inbox golden structure (MA12)
         run: python3 evals/automation/score_inbox.py --validate-goldens
 
+      - name: Validate draft golden structure (MA13)
+        run: python3 evals/automation/score_draft.py --validate-goldens
+
+      - name: Validate feedback golden structure (MA13)
+        run: python3 evals/automation/score_feedback.py --validate-goldens
+
       - name: Test update_ledger.py
         run: python3 scripts/test_update_ledger.py

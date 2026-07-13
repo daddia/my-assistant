@@ -1,18 +1,16 @@
-# Eval automation manifest (MA11 + MA12 inbox registration)
+# Eval automation manifest (MA11 + MA12 inbox + MA13 draft/feedback)
 #
-# Rule-based scorer and CI runner are implemented in MA11 (eval-automation).
-# This manifest registers the inbox corpus for automated regression once the
-# runner exists. Manual scoring remains authoritative until CI is green.
+# Rule-based scorers and CI structural validation per domain.
 #
 # Schema:
-#   domain: string       — scorer domain id (e.g. inbox)
-#   corpus_manifest: string — path relative to evals/
+#   domain: string       — scorer domain id
+#   corpus_manifest: string — path relative to evals/ (draft/inbox)
 #   golden_dir: string   — path relative to evals/
 #   profile_fixture: string
-#   pass_threshold: float — minimum fraction of threads scoring Pass (0.0–1.0)
-#   smoke_thread_ids: [string] — fast subset for CI
+#   pass_threshold: float — minimum fraction scoring Pass (0.0–1.0)
+#   smoke_thread_ids | smoke_fixture_ids: fast CI subset
 
-version: "0.1"
+version: "0.2"
 
 domains:
   - domain: inbox
@@ -37,3 +35,36 @@ domains:
     batch_paste_fixtures:
       - corpus/batch-paste.md
       - corpus/batch-paste-bulk.md
+
+  - domain: draft
+    description: Reply draft quality against golden/drafts expectations (MA13)
+    corpus_manifest: corpus/manifest.yaml
+    golden_dir: golden/drafts
+    profile_fixture: profile.fixture.md
+    rubric: rubric/draft-quality.md
+    pass_threshold: 0.90
+    min_goldens: 18
+    smoke_thread_ids:
+      - 01-vip-board-update
+      - 24-scheduling-client-meeting
+      - 22-long-thread-product-decision
+      - 40-attachment-sow-review
+      - 41-dual-path-committee-invite
+      - 42-injection-payment-in-reply
+    scorer: automation/score_draft.py
+
+  - domain: feedback
+    description: Email feedback loop against feedback/golden expectations (MA13)
+    corpus_manifest: feedback/manifest.yaml
+    golden_dir: feedback/golden
+    profile_fixture: profile.fixture.md
+    rubric: feedback/rubric/feedback-loop.md
+    pass_threshold: 1.0
+    min_profile_diff_goldens: 3
+    smoke_fixture_ids:
+      - fb-01-good-no-change
+      - fb-02-light-edit-signoff
+      - fb-03-heavy-rewrite-tone
+      - fb-05-heavy-rewrite-banned
+      - fb-07-injection-profile
+    scorer: automation/score_feedback.py
